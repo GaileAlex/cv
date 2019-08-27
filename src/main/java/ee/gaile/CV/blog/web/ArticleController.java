@@ -1,10 +1,10 @@
-package ee.gaile.CV.Blog.web;
+package ee.gaile.CV.blog.web;
 
-import ee.gaile.CV.Blog.model.Blog;
-import ee.gaile.CV.Blog.model.Comments;
-import ee.gaile.CV.Blog.model.User;
-import ee.gaile.CV.Blog.postgresql.BlogRepository;
-import ee.gaile.CV.Blog.postgresql.CommentsRepository;
+import ee.gaile.CV.blog.model.Blog;
+import ee.gaile.CV.blog.model.Comments;
+import ee.gaile.CV.blog.model.User;
+import ee.gaile.CV.blog.postgresql.BlogRepository;
+import ee.gaile.CV.blog.postgresql.CommentsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

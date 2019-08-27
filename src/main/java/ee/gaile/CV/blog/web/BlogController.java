@@ -1,22 +1,14 @@
-package ee.gaile.CV.Blog.web;
+package ee.gaile.CV.blog.web;
 
-import ee.gaile.CV.Blog.model.Blog;
-import ee.gaile.CV.Blog.model.Comments;
-import ee.gaile.CV.Blog.model.User;
-import ee.gaile.CV.Blog.postgresql.BlogRepository;
-import ee.gaile.CV.Blog.postgresql.CommentsRepository;
+import ee.gaile.CV.blog.model.Blog;
+import ee.gaile.CV.blog.postgresql.BlogRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 

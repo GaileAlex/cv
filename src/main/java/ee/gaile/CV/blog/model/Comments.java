@@ -1,4 +1,4 @@
-package ee.gaile.CV.Blog.model;
+package ee.gaile.CV.blog.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

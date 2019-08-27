@@ -1,7 +1,7 @@
-package ee.gaile.CV.Blog.postgresql;
+package ee.gaile.CV.blog.postgresql;
 
 
-import ee.gaile.CV.Blog.model.User;
+import ee.gaile.CV.blog.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {

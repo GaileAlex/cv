@@ -1,6 +1,6 @@
 package ee.gaile.CV.security;
 
-import ee.gaile.CV.Blog.model.User;
+import ee.gaile.CV.blog.model.User;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
