@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en">
+
+<div th:include="page-templates/header"></div>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<!-- Header -->
+<header id="header">
+    <div class="intro">
+        <div class="container">
+            <div class="row">
+                <div class="intro-text">
+                    <h1>Привет, я <span class="name">Алексей Гайле</span></h1>
+                    <p>Java Developer</p>
+                    <a href="#about" class="btn btn-default btn-lg page-scroll">Узнать больше</a></div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Navigation -->
+<div id="nav">
+    <nav class="navbar navbar-custom">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i></button>
+                <a class="navbar-brand page-scroll" href="#page-top">Алексей Гайле</a></div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden"><a href="#page-top"></a></li>
+                    <li><a class="page-scroll" href="#about">Обо мне</a></li>
+                    <li><a class="page-scroll" href="#portfolio">Портфолио</a></li>
+                    <li><a class="page-scroll" href="#resume">Опыт</a></li>
+                    <li><a class="page-scroll" th:href="@{/blog}">Блог</a></li>
+                    <li class="dropdown"><a href="#" class="hvr-underline-from-center  dropdown-toggle"
+                                            data-toggle="dropdown">Spring проекты<span class="caret"></span></a>
+                        <ul class="dropdown-menu  multi-level" role="menu" aria-labelledby="dropdownMenu"
+                            style="background-color: rgba(0,0,0,0.96);">
+                            <li><a th:href="@{/blog}" class="hvr-underline-from-center"
+                                   style="color: #58c1ff; margin-bottom: 5px;">Блог</a></li>
+                            <li><a th:href="@{/mindly/home}" class="hvr-underline-from-center"
+                                   style="color: #58c1ff; margin-bottom: 5px;">Тестовое задание "Crypto Portfolio"</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="page-scroll" href="#contact">Контакты</a></li>
+                    <li><a th:href="@{/}"
+                    ><img th:src="@{/img/eng.png}" alt="about-image"></a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" role="button" class="btn btn-inverse"
+                                                              data-toggle="modal"
+                                                              style="color: #58c1ff;">Login</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/login}" role="button" class="btn btn-inverse"
+                                                             data-toggle="modal"
+                                                             style="color: #58c1ff;"><p sec:authentication="name"></p>
+                    </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin-blog}" role="button"
+                                                                 class="btn btn-inverse"
+                                                                 data-toggle="modal"
+                                                                 style="color: #58c1ff;"><p>Admin panel</p>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- About Section -->
+<div id="about">
+    <div class="container">
+        <div class="section-title text-center center">
+            <h2>Обо мне</h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center"><img th:src="@{/img/about.jpg}" class="img-responsive"></div>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="about-text">
+                    <p>
+                        Навыки:<br>
+                        HTML, CSS, MySQL, PostgreSQL, Maven,
+                        JUnit, Java SE, JavaFX, Spring boot, Spring Security, Thymeleaf, GitHub, Agile Methodologies,
+                        Интегрированная среда
+                        разработки - Intellij IDEA.<br><br>
+
+                        Разработал:<br><br>
+                        - Этот сайт, были использованы следующие технологии: HTML, CSS, Spring boot, Spring Security,
+                        Thymeleaf, Hibernate, PostgreSQL, Maven (блоки - "Блог" и "Spring проекты"). Сайт расположен на
+                        собственном хостинге под управлением
+                        сервера Tomcat.<br><br>
+
+                        - Тестовое задание "Crypto Portfolio".<br>
+                        Backend написан на Java с использованием среды Spring Boot,<br>
+                        База данных для хранения данных портфеля - PostgreSQL.<br>
+                        Backend обслуживает все сервисы через микросервис JSON.<br>
+                        Frontend слой использует PrimeNG и AngularJS и связывается с backend, вызывая сервисы rest JSON.<br>
+                        <a class="btn-link" href="https://github.com/GaileAlex/mindly"
+                           target="blank">https://github.com/GaileAlex/mindly.</a><br><br>
+
+                        Эти приложения и код можно посмотреть - <a class="btn-link" href="https://github.com/GaileAlex"
+                                                                   target="blank">https://github.com/GaileAlex.</a>
+                        <br><br>
+
+                        Коммуникабелен, быстро обучаюсь, пунктуален. Все свободное время посвящаю самообучению.
+                    </p>
+
+                    <p class="text-center"><a class="btn btn-primary" th:href="@{/img/CV Aleksei Gaile.pdf}"
+                                              target="_blank"><i class="fa fa-download"></i>Download Resume</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog Section -->
+<div id="portfolio">
+    <div class="container">
+        <div class="section-title text-center center">
+            <h2>Портфолио</h2>
+            <hr>
+        </div>
+        <div class="categories">
+            <ul class="cat">
+                <li>
+                    <ol class="type">
+                        <li><a href="#" data-filter="*" class="active">Все</a></li>
+                        <li><a href="#" data-filter=".web">Веб разработка</a></li>
+                        <li><a href="#" data-filter=".app">Разработка приложений</a></li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+            <div class="portfolio-items">
+                <div class="col-sm-6 col-md-4 col-lg-4 web">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/01-large.jpg}" title="Создание сайта"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>Создание сайта</h4>
+                                <small>Веб разработка</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/01-small.jpg}" class="img-responsive" alt="Создание сайта">
+                        </a>
+                        </div>
+                    </div>
+                    <p class="text-center">Создание сайта. Практика 2018 г.</p>
+                    <p class="text-center"><a class="btn btn-port" href="http://ivkoolitus.ee/"
+                                              target="_blank">Перейти на сайт</a></p>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 app">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/bullsAndCows.png}"
+                                                 title="Bulls and Cows game"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>Bulls and Cows game</h4>
+                                <small>App Development</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/bullsAndCows-small.png}" class="img-responsive"
+                                 alt="Bulls and Cows game">
+                        </a>
+                        </div>
+                    </div>
+                    <p class="text-center">Игра "Быки и коровы". Учеба 2017 г.</p>
+                    <p class="text-center"><a class="btn btn-port" th:href="@{/img/Bulls_and_Cows.jar}"
+                                              target="_blank">Скачать</a></p>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 app">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/05-large.jpg}" title="Мини игра для дочки"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>Мини игра для дочки</h4>
+                                <small>App Development</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/05-small.jpg}" class="img-responsive"
+                                 alt="Мини игра для дочки"> </a>
+                        </div>
+                    </div>
+                    <p class="text-center">Игра "Учимся считать". 2018 г.</p>
+                    <p class="text-center"><a class="btn btn-port" th:href="@{/img/Arithmetic.jar}"
+                                              target="_blank">Скачать</a></p>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 app">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/06-large.jpg}"
+                                                 title="ShopEmulation application"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>Shop Emulation</h4>
+                                <small>App Development</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/06-small.jpg}" class="img-responsive"
+                                 alt="ShopEmulation application">
+                        </a>
+                        </div>
+                    </div>
+                    <p class="text-center">Разработка автоматизированного тестового скрипта.<br>
+
+                        Графическая часть - JavaFX, данные хранятся в файле data.csv, а также в базе MySQL,
+                        есть возможность переключения между вариантами хранения данных..</p>
+                    <p class="text-center"><a class="btn btn-port" th:href="@{/img/ShopEmulation.zip}"
+                                              target="_blank">Скачать</a></p>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 web">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/08-large.jpg}" title="Создание сайта"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>Создание сайта</h4>
+                                <small>Веб разработка</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/08-small.jpg}" class="img-responsive" alt="Создание сайта">
+                        </a>
+                        </div>
+                    </div>
+                    <p class="text-center">Тестовое задание "Crypto Portfolio".<br>
+                        Spring boot, Thymeleaf, PostgreSQL, Json. 2019 г.</p>
+                    <p class="text-center"><a class="btn btn-port" th:href="@{/mindly/home}"
+                                              target="_blank">Смотреть</a></p>
+                </div>
+                <div class="col-sm-6 col-md-3 col-lg-3 app">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/04-large.jpg}" title="GoSwift"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>GoSwift</h4>
+                                <small>App Development</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/04-small.jpg}" class="img-responsive" alt="GoSwift"> </a>
+                        </div>
+                    </div>
+                    <p class="text-center">GoSwift - приложение для отслеживание живой очереди на границе Эстонии. Вы
+                        можете
+                        задать свои условия по очереди автомашин или времени ожидания, при достижении которых приложение
+                        подаст вам сигнал. Приложение собирает данные с сайта https://www.estonianborder.eu/.
+                        Используется библиотека Jsoup. Создано с помощью JavaFx.<br> 2018 г.</p>
+                    <p class="text-center"><a class="btn btn-port" th:href="@{/img/GoSwift.jar}"
+                                              target="_blank">Скачать</a></p><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Resume Section -->
+<div id="resume" class="text-center">
+    <div class="container">
+        <div class="section-title center">
+            <h2>Опыт</h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline">
+                    <li class="timeline">
+                        <div class="timeline-image">
+                            <h4>2016<br>
+                                - <br>
+                                2017 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>ООО «АЛЬЯНС»</h4>
+                                <h4 class="subheading">Web developer</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-left"><br>
+                                    - Верстка сайтов.<br>
+                                    - Взаимодействие с заказчиками.<br>
+                                    <br>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>2012 <br>
+                                - <br>
+                                2016 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>ООО "Импульс" </h4>
+                                <h4 class="subheading">Заместитель директора</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-left"><br>
+                                    Строительная компания<br><br>
+                                    - Самостоятельно создал сайт компании.<br>
+                                    - Наладил сеть и электронный документооборот.<br>
+                                    - Увеличил выручку компании более чем в четыре раза.<br>
+                                    - Наладил связи с поставщиками.<br>
+                                    - Увеличил количество постоянных клиентов.<br><br>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline">
+                        <div class="timeline-image">
+                            <h4>2001<br>
+                                - <br>
+                                2012 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>ЗАО "ПСК "Русь" </h4>
+                                <h4 class="subheading">Генеральный директор</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-left"><br>
+                                    Строительная компания<br><br>
+                                    - Основал компанию.<br>
+                                    - Собрал талантливую команду профессионалов.<br>
+                                    - Наладил связи с поставщиками.<br>
+                                    - Собрал портфель заказов.<br>
+                                    - Нашел крупных корпоративных клиентов.<br><br>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="section-title center">
+            <h2>Образование</h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline">
+
+                    <!-- Education Section-->
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>2017 <br>
+                                - <br>
+                                2019 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Ida-Virumaa Kutsehariduskeskus</h4>
+                                <h4 class="subheading">Среднее образование</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Разработчик программного обеспечения.<br><br>
+
+                                    Во время обучения я изучал следующие технологии - HTML, CSS, MySQL, PostgreSQL,
+                                    Hibernate, Maven, JUnit, Java SE, JavaFX, Spring boot, Spring Security, Thymeleaf,
+                                    GitHub, Agile Methodologies.<br><br>
+
+                                    Разработал:<br><br>
+
+                                    - Приложение для отслеживание живой очереди на границе. JavaFX, Jsoup (программа
+                                    парсит данные с
+                                    сайта <a class="btn-link" href="https://www.estonianborder.eu/"
+                                             target="blank">https://www.estonianborder.eu/</a>.) -
+                                    <a class="btn-link" href="https://github.com/GaileAlex/GoSwift"
+                                       target="blank">https://github.com/GaileAlex/GoSwift.</a><br><br>
+
+                                    - Приложение эмулирует работу магазина (тестовое задание найденное в интернете).
+                                    JavaFx, MySQL -
+                                    <a class="btn-link" href="https://github.com/GaileAlex/Shop-Emulation"
+                                       target="blank">https://github.com/GaileAlex/Shop-Emulation.</a><br><br>
+                                    Дипломная работа:<br>
+                                    - Создание сайта CV, используются следующие технологии: HTML, CSS, Spring
+                                    Boot, Spring Security, Thymeleaf, Hibernate, PostgreSQL, Maven. Сайт размещен
+                                    на собственном хостинге, управляемом сервером Tomcat.
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <h4>2015 <br>
+                                - <br>
+                                2015 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Курсы</h4>
+                                <h4 class="subheading">"Обучающий центр "Коннессанс"</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Сметное дело в строительстве.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>2010 <br>
+                                - <br>
+                                2010 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Курсы</h4>
+                                <h4 class="subheading">"СТАТУС"</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Администратор сети (Windows Server)</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <h4>1990 <br>
+                                - <br>
+                                1996 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>БГТУ "ВОЕНМЕХ" им. Д. Ф. Устинова</h4>
+                                <h4 class="subheading">Высшее образование</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Степень магистра. Инженер-механик ракетных двигателей.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Section -->
+<div th:include="page-templates/footer"></div>
+
+</body>
+</html>

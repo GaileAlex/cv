@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en">
+
+<div th:include="page-templates/header"></div>
+<body id="page-top">
+
+<!-- Header -->
+
+<!-- Navigation -->
+<div th:include="page-templates/menu"></div>
+
+
+<!--================Blog Main Area =================-->
+
+<section class="blog_main_area p_100">
+    <div class="container jumbotron">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="blog_main_inner">
+                    <div class="blog_main_item">
+                        <div class="blog_img mx-auto text-center">
+                            <img class="img-thumbnail mx-auto d-block"
+                                 th:src="@{'data:image/jpeg;base64,'+${images.get(blog.getId())}}" alt=""/>
+
+                            <div class="blog_date">
+                                <h4 th:text="${#dates.format(blog.getDate(), 'dd')}">29</h4>
+                                <h5 th:text="${#dates.format(blog.getDate(), 'MMMM, yyyy')}">October, 2017</h5>
+                            </div>
+
+                        </div>
+                        <div class="blog_text">
+
+                            <a><h4 class="text-center" th:text="${blog.getHeadline()}">Headline.</h4></a>
+                            <p th:utext="${blog.getArticle()}">Article.</p>
+
+                            <br><br>
+                            <!-- ================Comments Blog Main Area================-->
+                            <div >
+                                <form sec:authorize="isAuthenticated()" th:object="${comments}" method="POST" th:action="@{/article}"
+                                      role="form">
+                                    <h2>Comments</h2>
+                                    <div class="form-group">
+                                        <label for="comment">Write a comment
+                                            <span>*</span></label>
+
+                                        <textarea th:field="*{comment}" class="form-control " rows="3"
+                                                  sec:authorize="isAuthenticated()"
+                                                  id="comment"></textarea>
+                                    </div>
+                                      <span class="validationError"
+                                          th:if="${#fields.hasErrors('comment')}"
+                                          th:errors="*{comment}"></span>
+                                    <div>
+                                        <input type="hidden" name="articleId" id="blog" th:value="${blog.getId()}"/>
+                                        <button type="submit" class="btn btn-port">Send</button>
+                                        <br><br>
+                                    </div>
+                                </form>
+                                <div sec:authorize="!isAuthenticated()">
+                                    <h2>Comments</h2>
+                                    <div class="form-group">
+                                        <label for="comment">Only authorized users
+                                            can comment.
+                                            <span>*</span></label>
+                                        <textarea class="form-control " rows="3"
+                                                  readonly
+                                        ></textarea>
+                                    </div>
+                                </div>
+
+                                <th:block th:each="comment : ${blog.getItems()}">
+                                    <div class="tab-pane fade in " id="Reviews" style="background-color: #F9F9F9;">
+
+                                        <div class="clearfix">
+                                            <div>
+                                                <strong th:text="${comment.getUsername()}">Bob</strong>
+                                                <em th:text="${#dates.format(comment.getDate(), 'dd MMMM yyyy - HH:mm')}">30/12/2013
+                                                    - 07:37</em>
+                                                <div data-rateit-value="5"></div>
+                                            </div>
+                                            <div>
+                                                <p th:utext="${comment.getComment()}">Sed velit quam, auctor id
+                                                    semper a, hendrerit eget justo. Cum sociis
+                                                    natoque penatibus et magnis dis parturient montes, nascetur
+                                                    ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in
+                                                    orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies
+                                                    tristique, enim mauris bibendum orci, a sodales lectus purus ut
+                                                    lorem.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                            <!-- ================End Blog Main Area =================-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Contact Section -->
+<div th:include="page-templates/footer"></div>
+
+</body>
+</html>

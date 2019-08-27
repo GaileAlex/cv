@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en">
+
+<div th:include="page-templates/header"></div>
+
+<body id="page-top">
+
+<!-- Header -->
+
+<!-- Navigation -->
+<div th:include="page-templates/menu"></div>
+
+
+<div class="blog_main_area p_100 text-center">
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Add new article</h3>
+            <form method="POST" th:action="@{/admin-blog}" th:object="${blog}" enctype="multipart/form-data" novalidate>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input th:field="*{headline}" type="text" class="form-control" placeholder="Headline"
+                                   required="required">
+                            <span class="validationError"
+                                  th:if="${#fields.hasErrors('headline')}"
+                                  th:errors="*{headline}"></span>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea th:field="*{article}" class="form-control" rows="4" placeholder="The text of the article:"
+                              required></textarea>
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('article')}"
+                          th:errors="*{article}"></span>
+                    <p class="help-block text-danger"></p>
+                </div>
+                <input accept=".jpg, .png, .gif, .tiff" type="file" class="form-control-file" th:field="*{image}">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('image')}"
+                >Image is required</span>
+                <div></div><br>
+                <button type="submit" class="btn btn-port">Create article</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:each="item : ${listBlog}">
+    <section class="blog_main_area p_100">
+        <div class="container jumbotron ">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="blog_main_inner">
+                        <div class="blog_main_item">
+                            <div class="blog_img mx-auto text-center">
+                                <img class="img-thumbnail mx-auto d-block"
+                                     th:src="@{'data:image/jpeg;base64,'+${image.get(item.getId())}}" alt=""/>
+                                <div class="blog_date">
+                                    <h4 th:text="${#dates.format(item.getDate(), 'dd')}">29</h4>
+                                    <h5 th:text="${#dates.format(item.getDate(), 'MMMM, yyyy')}">October, 2017</h5>
+                                </div>
+                            </div>
+                            <div class="blog_text">
+                                <a><h4 th:text="${item.getHeadline()}">Headline</h4></a>
+                                <p th:utext="${item.getArticle()}">Article.</p>
+                                <form method="POST" th:action="@{/admin-blog/delete-blog}">
+                                    <input type="hidden" name="deleteBlog" th:value="${item.id}"/>
+                                    <button type="submit" class="btn btn-danger pull-right">Delete Blog</button>
+                                </form>
+                                <a class="btn-port  page-scroll" th:href="@{'#'+${item.id}}">Next news</a>
+
+                                <!-- ================Comments Blog Main Area================-->
+                                <div>
+
+
+                                    <th:block th:each="comment : ${item.getItems()}">
+                                        <div class="tab-pane fade in " id="Reviews" style="background-color: #F9F9F9;">
+
+                                            <div class="clearfix">
+                                                <div>
+                                                    <strong th:text="${comment.getUsername()}">Bob</strong>
+                                                    <em th:text="${#dates.format(comment.getDate(), 'dd MMMM yyyy - HH:mm')}">30/12/2013
+                                                        - 07:37</em>
+                                                    <form method="POST" th:action="@{/admin-blog/delete-comment}">
+                                                        <input type="hidden" name="deleteComment"  th:value="${comment.id}"/>
+                                                        <button type="submit" class="btn btn-danger pull-right">Delete Comment</button>
+                                                    </form>
+                                                    <div data-rateit-value="5"></div>
+                                                </div>
+
+                                                <div>
+                                                    <p th:text="${comment.getComment()}">Sed velit quam, auctor id
+                                                        semper a, hendrerit eget justo. Cum sociis
+                                                        natoque penatibus et magnis dis parturient montes, nascetur
+                                                        ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in
+                                                        orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies
+                                                        tristique, enim mauris bibendum orci, a sodales lectus purus ut
+                                                        lorem.</p>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </th:block>
+                                </div>
+                                <!-- ================End Blog Main Area =================-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <div th:id="${item.id}" data-spy="scroll"></div>
+
+</th:block>
+
+
+<!--================End Blog Main Area =================-->
+
+<!-- Contact Section -->
+<div th:include="page-templates/footer"></div>
+
+</body>
+</html>
