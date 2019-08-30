@@ -1,4 +1,4 @@
-package ee.gaile.CV.mindly;
+package ee.gaile.CV;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
