@@ -1226,49 +1226,7 @@ div.validationError {
 span.validationError {
     color: #ff6259;
 }
-/*
-.btn-port {
-    background-color: #7bc3d1;
-    border: none;
-    color: #ffffff;
-    outline: none;
-    padding: 12px 40px 10px;
-    position: relative;
-    border-radius:6px;
-}
-.btn-port:before,
-.btn-port:after {
-    border: 0 solid transparent;
-    transition: all 0.25s;
-    content: '';
-    height: 24px;
-    position: absolute;
-    width: 24px;
-}
-.btn-port:before {
-    border-top: 2px solid #7bc3d1;
-    left: 0px;
-    top: -5px;
-}
-.btn-port:after {
-    border-bottom: 2px solid #7bc3d1;
-    bottom: -5px;
-    right: 0px;
-}
-.btn-port:hover {
-    background-color: #7bc3d1;
-}
-.btn-port:hover:before,
-.btn-port:hover:after {
-    height: 100%;
-    width: 100%;
-}
-.btn-port:active {
-    position:relative;
-    top:1px;
-}
 
-*/
 .btn-port {
     color: #57909e !important;
     text-transform: uppercase;
@@ -1285,11 +1243,6 @@ span.validationError {
     border-color: #494949 !important;
     transition: all 0.3s ease 0s;
 }
-
-
-
-
-
 
 .post-single:after {
     content: "";
@@ -1367,3 +1320,4 @@ span.validationError {
     font-family: 'Linearicons-Free';
     margin-left: 5px;
 }
+
