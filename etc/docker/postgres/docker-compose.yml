@@ -1,0 +1,20 @@
+version: "3.4"
+services:
+  postgres:
+    image: postgres:latest
+    network_mode: bridge
+    container_name: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=cv
+      - POSTGRES_USER=cv
+      - POSTGRES_DB=cv
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
