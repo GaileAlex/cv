@@ -6,14 +6,21 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorViewResolve
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collections;
 
+@PropertySource(value = "file:config/cv-api.properties", ignoreResourceNotFound = true)
 @SpringBootApplication
 public class CVApplication extends SpringBootServletInitializer {
 
+    /**
+     * Program entry point.
+     *
+     * @param args arguments
+     */
     public static void main(String[] args) {
         SpringApplication.run(CVApplication.class, args);
 
