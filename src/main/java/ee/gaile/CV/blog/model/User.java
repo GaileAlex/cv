@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -19,25 +21,20 @@ import java.util.Collection;
 @Table(name = "users")
 public class User implements UserDetails {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "users_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid2")
+    @Type(type = "uuid-char")
+    private UUID id;
 
-    @Column(unique = true)
+    @Column(name = "users_username", length = 30, unique = true)
     private final String username;
 
+    @Column(name = "users_password")
     private final String password;
 
-    @Column(unique = true)
+    @Column(name = "users_email", unique = true)
     private final String email;
-/*
-    @OneToMany (mappedBy="role", fetch=FetchType.EAGER, orphanRemoval=true)
-    private List<Role> role = new ArrayList<>();
-
-*/
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

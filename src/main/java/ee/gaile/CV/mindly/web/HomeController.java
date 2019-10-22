@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -98,7 +95,7 @@ public class HomeController {
      * @return home.html
      */
     @PostMapping("/delete-item")
-    public String delete(@RequestParam Long deleteItem) {
+    public String delete(@RequestParam UUID deleteItem) {
 
         portfolioRepository.deleteById(deleteItem);
 

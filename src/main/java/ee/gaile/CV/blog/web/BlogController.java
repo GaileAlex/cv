@@ -31,7 +31,7 @@ public class BlogController {
     public String goToBlog(Model model) {
 
         List<Blog> listBlog;
-         Map<Long, String> imageMap;
+         Map<UUID, String> imageMap;
 
         listBlog = (List<Blog>) blogRepository.findAll();
         Collections.reverse(listBlog);

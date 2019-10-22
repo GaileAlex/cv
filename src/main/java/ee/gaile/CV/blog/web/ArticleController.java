@@ -27,7 +27,7 @@ public class ArticleController {
     private final CommentsRepository commentsRepository;
 
     private List<Comments> listComments;
-    private Map<Long, String> imageMap;
+    private Map<UUID, String> imageMap;
     private Blog blog;
 
     @Autowired
@@ -37,7 +37,7 @@ public class ArticleController {
     }
 
     @GetMapping("/article-blog/{articleId}")
-    public String goToArticle(@PathVariable Long articleId, Model model) {
+    public String goToArticle(@PathVariable UUID articleId, Model model) {
 
         listComments = (List<Comments>) commentsRepository.findAll();
 

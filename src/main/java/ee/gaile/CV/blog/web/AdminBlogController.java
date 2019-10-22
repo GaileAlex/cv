@@ -44,7 +44,7 @@ public class AdminBlogController {
         List<Blog> listBlog = (List<Blog>) blogRepository.findAll();
         Collections.reverse(listBlog);
 
-        Map<Long, String> imageMap=new HashMap<>();
+        Map<UUID, String> imageMap=new HashMap<>();
         byte[] encode;
 
         for (Blog blog : listBlog) {
@@ -82,13 +82,13 @@ public class AdminBlogController {
 
     }
     @PostMapping("/delete-blog")
-    public String deleteBlog(@RequestParam Long deleteBlog){
+    public String deleteBlog(@RequestParam UUID deleteBlog){
         blogRepository.deleteById(deleteBlog);
         return "redirect:/admin-blog";
     }
 
     @PostMapping("/delete-comment")
-    public String deleteComment(@RequestParam Long deleteComment){
+    public String deleteComment(@RequestParam UUID deleteComment){
         commentsRepository.deleteById(deleteComment);
         return "redirect:/admin-blog";
     }
