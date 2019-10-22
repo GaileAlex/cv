@@ -5,6 +5,8 @@ import ee.gaile.CV.blog.model.Comments;
 import ee.gaile.CV.blog.postgresql.BlogRepository;
 import ee.gaile.CV.blog.postgresql.CommentsRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/admin-blog")
 public class AdminBlogController {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminBlogController.class);
     private final BlogRepository blogRepository;
     private final CommentsRepository commentsRepository;
 
@@ -44,13 +46,13 @@ public class AdminBlogController {
         List<Blog> listBlog = (List<Blog>) blogRepository.findAll();
         Collections.reverse(listBlog);
 
-        Map<UUID, String> imageMap=new HashMap<>();
+        Map<UUID, String> imageMap = new HashMap<>();
         byte[] encode;
 
         for (Blog blog : listBlog) {
 
             encode = Base64.getEncoder().encode(blog.getImage());
-            String getImage=new String(encode, StandardCharsets.UTF_8);
+            String getImage = new String(encode, StandardCharsets.UTF_8);
             imageMap.put(blog.getId(), getImage);
         }
 
@@ -62,7 +64,7 @@ public class AdminBlogController {
     }
 
     @PostMapping
-    public String addBlog(@RequestParam("image") MultipartFile image,@Valid Blog blog, Errors errors) throws IOException {
+    public String addBlog(@RequestParam("image") MultipartFile image, @Valid Blog blog, Errors errors) throws IOException {
 
         byte[] bytes = image.getBytes();
         blog.setImage(bytes);
@@ -70,10 +72,10 @@ public class AdminBlogController {
         blog.setDate(new Date());
 
         if (errors.hasErrors()) {
-            if(blog.getHeadline().isEmpty()||blog.getArticle().isEmpty()){
-
+            if (blog.getHeadline().isEmpty() || blog.getArticle().isEmpty()) {
+                LOGGER.warn("no header or article");
                 return "blog/admin-blog";
-            }else
+            } else
 
                 blogRepository.save(blog);
         }
@@ -81,18 +83,18 @@ public class AdminBlogController {
         return "redirect:/admin-blog";
 
     }
+
     @PostMapping("/delete-blog")
-    public String deleteBlog(@RequestParam UUID deleteBlog){
+    public String deleteBlog(@RequestParam UUID deleteBlog) {
         blogRepository.deleteById(deleteBlog);
         return "redirect:/admin-blog";
     }
 
     @PostMapping("/delete-comment")
-    public String deleteComment(@RequestParam UUID deleteComment){
+    public String deleteComment(@RequestParam UUID deleteComment) {
         commentsRepository.deleteById(deleteComment);
         return "redirect:/admin-blog";
     }
-
 
 
 }

@@ -6,6 +6,8 @@ import ee.gaile.CV.blog.model.User;
 import ee.gaile.CV.blog.postgresql.BlogRepository;
 import ee.gaile.CV.blog.postgresql.CommentsRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -21,9 +23,8 @@ import java.util.*;
 @Controller
 @RequestMapping
 public class ArticleController {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(ArticleController.class);
     private final BlogRepository blogRepository;
-
     private final CommentsRepository commentsRepository;
 
     private List<Comments> listComments;
@@ -65,6 +66,7 @@ public class ArticleController {
 
         if (errors.hasErrors()) {
             if (comments.getComment().isEmpty()) {
+                LOGGER.warn("no comments");
                 model.addAttribute("listComments", listComments);
                 model.addAttribute("images", imageMap);
                 model.addAttribute("blog", blog);

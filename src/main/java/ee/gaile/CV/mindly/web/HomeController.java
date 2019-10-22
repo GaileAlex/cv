@@ -1,9 +1,12 @@
 package ee.gaile.CV.mindly.web;
 
+import ee.gaile.CV.blog.web.AdminBlogController;
 import ee.gaile.CV.mindly.bitfinex.BitfinexAccess;
 import ee.gaile.CV.mindly.models.Portfolio;
 import ee.gaile.CV.mindly.postgresql.PortfolioRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/mindly")
 public class HomeController {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
     private final PortfolioRepository portfolioRepository;
     private String mistake = null;
     private Portfolio portfolio = new Portfolio();
@@ -39,8 +42,7 @@ public class HomeController {
      */
     @GetMapping("/home")
     public String home(Model model) {
-
-        List<Portfolio> getPortfolio = (List<Portfolio>) portfolioRepository.findAll();
+              List<Portfolio> getPortfolio = (List<Portfolio>) portfolioRepository.findAll();
 
         try {
 
@@ -49,7 +51,7 @@ public class HomeController {
             currencyValue.put("Ripple", new BitfinexAccess("Ripple").getPrice());
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info("No response received from Bitfinex: {}", e.getMessage());
 
             currencyValue.put("Bitcoin", new BigDecimal(0));
             currencyValue.put("Ethereum", new BigDecimal(0));
@@ -76,6 +78,8 @@ public class HomeController {
     public String addPortfolioItem(@Valid Portfolio portfolio, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
+            LOGGER.warn("Invalid user form data");
+
             List<Portfolio> getPortfolio = (List<Portfolio>) portfolioRepository.findAll();
             model.addAttribute("currencyValue", currencyValue);
             model.addAttribute("getPortfolio", getPortfolio);
