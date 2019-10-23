@@ -2,4 +2,4 @@
 
 - The site is hosted on its own hosting managed by the Tomcat server.
 
-- //Link - https://gaile.ee
+- <!--  Link - https://gaile.ee   -->
