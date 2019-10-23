@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en">
+
+<div th:include="page-templates/header"></div>
+<body id="page-top">
+
+<!-- Header -->
+
+<div th:include="page-templates/menu"></div>
+
+
+<div class="blog_main_area p_100 text-center">
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <h3 sec:authorize="!isAuthenticated()">Log in</h3>
+            <div sec:authorize="isAuthenticated()">
+                <h3>Log out</h3>
+                <br> <br> <br> <br> <br>
+            </div>
+            <div th:if="${error}">
+                Unable to login. Check your username and password.
+            </div>
+            <form sec:authorize="!isAuthenticated()" method="POST" th:action="@{/login}" id="loginForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Name" name="username">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" name="password">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a th:href="@{/register}" class="btn btn-port">Registration</a>
+                    <button type="submit" class="btn btn-port" value="Login">Login
+                    </button>
+
+
+                </div>
+            </form>
+            <form sec:authorize="isAuthenticated()" method="POST" th:action="@{/logout}" id="logoutForm">
+
+                <input class="btn btn-port" type="submit" value="Logout"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--================End Blog Main Area =================-->
+<div th:include="page-templates/footer"></div>
+
+
+
+</body>
+</html>

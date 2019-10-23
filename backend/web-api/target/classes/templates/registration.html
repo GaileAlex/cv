@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en">
+
+<div th:include="page-templates/header"></div>
+
+<body id="page-top">
+
+<!-- Header -->
+
+<!-- Navigation -->
+<div th:include="page-templates/menu"></div>
+
+
+<div class="blog_main_area p_100 text-center">
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Registration</h3>
+            <form method="POST" th:action="@{/register}" id="registerForm" >
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="text"  class="form-control" placeholder="Name"
+                                   required="required" name="username">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="email"  class="form-control" placeholder="Email" required="required"  name="email">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="password"  class="form-control" placeholder="Password"  name="password"
+                                   required="required">
+
+                        </div>
+                    </div>
+                </div>
+                <div  class="text-center validationError">
+                    <p class="validationError" th:text="${mistakeValid}"></p>
+                </div>
+
+                <button type="submit" class="btn btn-port">Registration</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--================End Blog Main Area =================-->
+
+<!-- Contact Section -->
+<div th:include="page-templates/footer"></div>
+
+</body>
+</html>
