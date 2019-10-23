@@ -3,6 +3,7 @@ package ee.gaile.controller;
 import ee.gaile.configuration.security.RegistrationForm;
 import ee.gaile.repository.blog.UserRepository;
 import ee.gaile.repository.entity.blog.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ public class RegistrationController {
     private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
     public RegistrationController(UserRepository userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
