@@ -1,0 +1,419 @@
+{
+  "login.button": "Logi sisse",
+  "logout.button": "Logi välja",
+  "http.error": {
+    "sso": "SSO viga"
+  },
+  "menu": {
+    "post-login": "Sisselogitud",
+    "position": "Roli valik",
+    "startPage": "Avaleht",
+    "landowner": "Maaomanik",
+    "landowner.toleration-application": "Minu taotlused",
+    "landowner.toleration-application.add": "Lisa uus taotlus",
+    "landowner.contact-data-add": "Kontaktandmed",
+    "specialist": "Maateenuste spetsialist",
+    "specialist.toleration-application": "Talumistasud",
+    "network-client": "Võrguklient",
+    "network-client.bills": "Minu arved",
+    "network-client.contracts": "Minu lepingud ja tarbimiskohad",
+    "rights": "Õigused",
+    "admin": "Admin",
+    "admin.rights": "Õigused",
+    "choosePosition": "Vali, keda esindad",
+    "refreshData": "Värskenda andmed"
+  },
+  "start.page": {
+    "login.button.header": "Logi sisse",
+    "eleringLinkLabel": "e-elering",
+    "left": {
+      "header": "Elering - Eesti energiasüsteemi selgroog",
+      "text": "Elering is an independent electricity and gas transmission system operator with the primary task of ensuring a high-quality energy supply to Estonian consumers."
+    },
+    "right": {
+      "title": "ELERING MTV",
+      "subtitle": "Uued võimalused -",
+      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "list1": "Contrary to popular belief, Lorem Ipsum is not simply random text",
+      "list2": "There are many variations of passages of Lorem Ipsum available",
+      "list3": "Various versions have evolved over the years, sometimes by accident",
+      "list4": "The standard chunk of Lorem Ipsum used since the 1500s"
+    },
+    "footer": {
+      "title": "Elering AS",
+      "address": "Kadaka tee 42, 12915, Tallinn",
+      "phone": "715 1222",
+      "email": "info@elering.ee"
+    }
+  },
+  "common": {
+    "next": "Edasi",
+    "back": "Tagasi",
+    "delete": "Kustuta",
+    "add": "Lisa",
+    "close": "Sulge",
+    "edit": "Muuda",
+    "view": "Vaata",
+    "cancel": "Tühista",
+    "save": "Salvesta",
+    "total": "Kokku",
+    "not.found": "Midagi ei leitud",
+    "choose.file": "Vali fail",
+    "please.wait": "Palun oodake...",
+    "form": {
+      "date": {
+        "from": "Algus",
+        "to": "Lõpp"
+      },
+      "select": {
+        "placeholder": {
+          "default": "Vali...",
+          "settlement": "Linn, vald, küla, alevik...",
+          "address": "Tänav, maja nr või talu nimi..."
+        }
+      },
+      "error": {
+        "required": "Väli on kohustuslik",
+        "maxlength": "Maksimaalne pikkus on {0}",
+        "minlength": "Minimaalne pikkus on {0}",
+        "pattern": "Väärtus vales formaadis",
+        "personalcode": "Isikukood vales formaadis",
+        "iban": "IBAN on valesti sisestatud",
+        "number": "Väärtus peab olema arv",
+        "integer": "Väärtus peab olema täisarv",
+        "minimumborder": "Minimaalne lubatud väärtus on {0}",
+        "maximumborder": "Maksimaalne lubatud väärtus on {0}",
+        "filesize": "Maksimaalne lubatud suurus on {0} bitid",
+        "fileextension": "Format ei ole lubatud"
+      },
+      "requiredField": "See väli on kohustuslik",
+      "required": "Kohustuslik"
+    }
+  },
+  "filter": {
+    "search": "Otsi",
+    "showMore": "Näita rohkem",
+    "showLess": "Näita vähem"
+  },
+  "table": {
+    "selectAll": "Vali kõik",
+    "noResults": "Midagi ei leitud",
+    "perPageOptions": "Kuvan korraga",
+    "paging": {
+      "previous": "Tagasi",
+      "next": "Edasi",
+      "perPage": "Kuvan korraga"
+    }
+  },
+  "label": {
+    "additionalInfo": "Lisainfo"
+  },
+  "networkClient": {
+    "startView": {
+      "myConsumption": "Minu tarbimine",
+      "currentWeek": "Jooksev nädal",
+      "myInvoices": {
+        "title": "Minu viimased arved",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus.",
+        "viewAll": "Vaata kõik arveid"
+      },
+      "myAgreements": {
+        "title": "Minu viimased arved\n",
+        "text": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.",
+        "viewAll": "Vaata kõik lepinguid"
+      }
+    }
+  },
+  "tolerationApplication": {
+    "applyFor.error.required": "Valige, kas taotlete talumistasu ainult enda osa kohta või kõigi eest",
+    "download.csv": "Laen alla .csv",
+    "isCoownership": "Tegemist on kaasomandiga",
+    "isJointOwnership": "Tegemist on ühisomandiga",
+    "applyForOwnPart": "Taotlen talumistasu enda osa kohta",
+    "applyForAllParts": "Taotlen talumistasu kõigi eest volitusega",
+    "basisForRepresentation": "Esindusõiguse alus",
+    "confirmationCultivatedLand1": "Kinnitan, et EI KASUTA",
+    "confirmationCultivatedLand2": "maatulundusmaa",
+    "confirmationCultivatedLand3": "sihtotstarbega maad tehnorajatise kaitsevööndi alal sihtotstarbeliselt",
+    "confirmationCultivatedLandTooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "coownershipPartNumerator": "Kaasomandi osa suurus - lugeja",
+    "coownershipPartNumerator.error": "Peab olema väiksem kui nimetaja",
+    "coownershipPartDenominator": "Kaasomandi osa suurus - nimetaja",
+    "coownershipPartDenominator.error": "Peab olema suurem kui lugeja",
+    "coownershipBasisOfRepresentation": "Esindusõiguse alus",
+    "status": {
+      "NEW": "Edastatud",
+      "IN_PROGRESS": "Kinnitamisel",
+      "REJECTED": "Tagasilükatud",
+      "NAV_IN_PROGRESS": "NAVi edastamisel",
+      "NAV_FAILED": "NAVi edastamine ebaõnnestus",
+      "APPROVED": "Kinnitatud"
+    },
+    "ownershipType": {
+      "SINGLE_OWNERSHIP": "ainuomand",
+      "CO_OWNERSHIP": "kaasomand",
+      "JOINT_OWNERSHIP": "ühisomand"
+    },
+    "category": {
+      "ELECTRICITY": "elekter",
+      "GAS": "gaas",
+      "GAS_EL": "gaas-e",
+      "TELECOM": "side"
+    },
+    "add": {
+      "step1": "Kinnisasja omaniku andmed",
+      "step2": "Kinnisasja andmed",
+      "step3": "Valmis!",
+      "submit": "Edastan",
+      "title": "Uus taotlus",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
+      "success": {
+        "title": "Taotlus on edastatud!",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "back": "Tagasi töölauale"
+      }
+    },
+    "search": {
+      "title": "Minu talumistasude taotlused",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
+      "calculate.title": "Arvuta oma talumistasude suurus",
+      "calculate.description": "Talumistasude suurust saad arvutada Maaameti talumistasude kalkulaatori abil, et teada ligikaudset suurusjärku makstavast talumistasust",
+      "calculate": "Talumistasude kalkulaator",
+      "add": "Lisa uus taotlus",
+      "notification.description": "Talumistasude suurust saad arvutada <strong>Maaameti talumistasude kalkulaatori</strong> abil, et teada ligikaudset suurusjärku makstavast talumistasust",
+      "notification.calculate": "Arvuta tasu suurus siin",
+      "notification.close": "Sulge teade",
+      "mobile.search": "Otsi taotlust"
+    },
+    "filter": {
+      "userName": "Nimi",
+      "creationDate": "Sisestamise kuupäev",
+      "status": "Staatus",
+      "realEstateRegistryPartNumber": "Kinnisasja registriosa number",
+      "address": "Aadress",
+      "ownershipType": "Omandi tüüp",
+      "cadastralNumber": "Katastritunnus"
+    },
+    "column": {
+      "createdTime": "Sisestamise kuupäev",
+      "createdTime.mobile": "Sisestamise kp.",
+      "realEstateRegistryPartNumber": "Kinnisasja registriosa number",
+      "realEstateRegistryPartNumber.mobile": "Kinnisasja reg. nr.",
+      "cadastralNumber": "Katastritunnus",
+      "realEstateNameAddress": "Aadress",
+      "ownershipType": "Omandi tüüp",
+      "status": "Staatus",
+      "createdByName": "Looja",
+      "representedPersonName": "Sisestaja nimi"
+    },
+    "representative": {
+      "title": "Omaniku esindaja andmed",
+      "personalCodeCountry": "Isikukoodi riik",
+      "name": "Ees- ja perekonnanimi",
+      "personalCode": "Isikukood",
+      "contactCountry": "Riik",
+      "contactCounty": "Maakond",
+      "settlement": "Asula",
+      "addressText": "Aadress",
+      "zipcode": "Sihtnumber",
+      "representationBase": "Esindusõiguse alus",
+      "phone": "Telefon",
+      "email": "Tagasiside e-post"
+    },
+    "landowner": {
+      "title": "Kinnisasja omaniku andmed",
+      "name": "Ees- ja perekonnanimi",
+      "personalCode": "Isikukood",
+      "contactCountry": "Riik",
+      "contactCounty": "Maakond",
+      "settlement": "Asula",
+      "addressText": "Aadress",
+      "zipcode": "Sihtnumber",
+      "phone": "Telefon",
+      "email": "Tagasiside e-post",
+      "iban": "IBAN (pangakonto)",
+      "notIbanOwner": "Mina ei ole pangakonto omanik",
+      "ibanOwner": "Pangakonto omanik",
+      "ibanOwnerCode": "Pangakonto omaniku isikukood / registrikood",
+      "represent": {
+        "name": "Ees- ja perekonnanimi / Asutuse nimi",
+        "personalCode": "Isikukood / Reg. kood"
+      }
+    },
+    "realEstate": {
+      "registryPartNumber": "Kinnisasja registriosa number",
+      "cadastralNumber": "Katastritunnus",
+      "nameAddress": "Kinnisasja nimi, aadress",
+      "purchaseDate": "Kinnisasja omandamise aeg",
+      "isCoownership": "Tegemist on kaasomandiga",
+      "coownershipPartNumerator": "Kaasomandi osa suurus - lugeja",
+      "coownershipPartNumerator.error": "Peab olema väiksem kui nimetaja",
+      "coownershipPartDenominator": "Kaasomandi osa suurus - nimetaja",
+      "coownershipPartDenominator.error": "Peab olema suurem kui lugeja",
+      "applyForOwnPart": "Taotlen talusmistasu enda nimel",
+      "applyForAllParts": "Esindan volituse alusel",
+      "representationBase": "Esindusõiguse alus",
+      "isJointOwnership": "Tegemist on ühisomandiga",
+      "confirmationCultivatedLand": "Kinnitan, et ei kasuta maatulundusmaa...",
+      "additionalInformation": "Lisainfo"
+    },
+    "cadastralNumbersDetails": {
+      "cadastralNumber": "Katastritunnus",
+      "realEstateNameAddress": "Kinnisasja nimi, aadress",
+      "realEstatePurchaseDate": "Kinnisasja omandamise aeg",
+      "addNew": "Lisa uus katastritunnus",
+      "registryPartNumberExplanation": "Sisestada saab ainult antud registriosa numbriga seotud katastritunnused"
+    },
+    "position": {
+      "title": "Vali, keda portaalis esindad",
+      "description": "Peale esindatava valimist tegutsed e-eleringi portaalis esindatava nimel.",
+      "representing": {
+        "self": "Esindan ennast:",
+        "businessRegistries": "Esindan juriidilist isikut:",
+        "mandates": "Esindan kolmandat isikut:",
+        "elering": "Esindan Elering:"
+      }
+    },
+    "privacyPolicy": {
+      "text": "Esitatud isikuandmeid töötleb Elering asjaõigusseaduse rakendamise seaduses nimetatud talumistasude taotluse menetlemiseks ning seaduses ettenähtud juhul talumistasu väljamakse tegemiseks. Elering töötleb Teie andmeid nii kaua, kui see on vajalik seadusest tulenevate kohustuste täitmiseks. Täpsemat teavet isikuandmete tööltemisest Eleringi poolt leiate Eleringi kodulehelt rubriigist",
+      "link": "“Isikuandmete töötlemine”"
+    },
+    "information": {
+      "title1": "Kinnisasja omaniku andmed",
+      "title2": "Kinnisasja andmed",
+      "cancellationTitle": "Taotlus on tühistatud",
+      "cancellationSubTitle": "Eleringi kommentaar:",
+      "categorySelect": "Vali taotluse tüüp",
+      "applyForOwnPart": "Taotlen talumistasu enda nimel",
+      "applyForOwnPartAsSpecialist": "Taotlen talumistasu enda nimelt",
+      "applyForAllParts": "Esindan volituse alusel",
+      "applyForAllPartsAsSpecialist": "Esindan volituse alusel",
+      "name": "Ees- ja perekonnanimi",
+      "personalCode": "Isikukood:",
+      "phone": "Telefon:",
+      "email": "E-post:",
+      "addressText": "Kontaktaadress:",
+      "zipCode": "Sihtnumber",
+      "iban": "IBAN (pangakonto)",
+      "addAttatchment": "Lisa manus",
+      "confirm": "Kinnita",
+      "saveAndConfirm": "Salvesta ja kinnita",
+      "return": "Saada tagasi",
+      "startAgain": "Alusta sama taotlust uuesti",
+      "relatedTitle": "Seotud taotlused"
+    }
+  },
+  "startView": {
+    "subtitle": "Uued võimalused -",
+    "title": "ELERING MTV",
+    "text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
+    "text2": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.<br>Vestibulum tempor, velit ac tincidunt tristique"
+  },
+  "landowner": {
+    "startView": {
+      "subtitle": "Uued võimalused -",
+      "title": "ELERING MTV",
+      "text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
+      "text2": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.<br>Vestibulum tempor, velit ac tincidunt tristique",
+      "button": "Alusta taotlemist siit"
+    }
+  },
+  "network-client": {
+    "startView": {
+      "subtitle": "Võrguklient -",
+      "title": "ELERING MTV",
+      "text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
+      "text2": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.<br>Vestibulum tempor, velit ac tincidunt tristique"
+    }
+  },
+  "specialist": {
+    "startView": {
+      "subtitle": "Maateenuste spetsialist -",
+      "title": "ELERING MTV",
+      "text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
+      "text2": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.<br>Vestibulum tempor, velit ac tincidunt tristique"
+    },
+    "tolerationApplication": {
+      "title": "Talumistasud",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
+      "filter": {
+        "personName": "Sisestaja nimi",
+        "userName": "Looja"
+      }
+    }
+  },
+  "admin": {
+    "startView": {
+      "subtitle": "Admin -",
+      "title": "ELERING MTV",
+      "text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
+      "text2": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.<br>Vestibulum tempor, velit ac tincidunt tristique"
+    }
+  },
+  "contact": {
+    "fullName": "Ees- ja perekonnanimi",
+    "code": "Isikukood",
+    "country": "Riik",
+    "county": "Maakond",
+    "settlement": "Asula",
+    "addressText": "Aadress",
+    "zipCode": "Sihtnumber",
+    "phone": "Telefon",
+    "email": "E-post",
+    "IBAN": "Pangakonto (IBAN)",
+    "represent": {
+      "fullName": "Ees- ja perekonnanimi / Asutuse nimi",
+      "code": "Isikukood / Reg. kood"
+    },
+    "contactData": {
+      "title": "Kontaktandmed",
+      "subTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
+      "save.success": "Andmed on edukalt salvestatud"
+    }
+  },
+  "mandates": {
+    "title": "Õigused",
+    "description": "Siin saad anda esindusõigusi teistele isikutele Sinu nimel e-eleringi kliendiportaalis tegutsemiseks. Iga mõõtepunkti kohta saad all määratleda õiguste ulatuse ja kehtivusperioodi.",
+    "add": {
+      "title": "Lisa esindusõigus",
+      "step1": "ESINDUSÕIGUSE SAAJA",
+      "step2": "KEHTIVUSPERIOOD JA ÕIGUSTE ULATUS",
+      "representative.country": "Vali isikukoodi välja andnud riik:",
+      "representative.code": "Esindusõiguse saaja isikukood:",
+      "representative.email": "Esindusõiguse saaja e-mail:",
+      "addMore": "Lisa veel esindusõiguse saajaid",
+      "representativeHasPrivileges": "Kasutaja võib:",
+      "representativePrivilegesPeriod": "Esindusõiguse kehtuvusperiood:",
+      "removeRepresentative": "Kustuta esindusõiguste saaja",
+      "finish": "Lisa esindusõigused"
+    },
+    "viewRepresentatives": {
+      "title": "Vaata esindusõiguseid",
+      "representative": "Kasutaja",
+      "representativeHasPrivileges": "Kasutaja võib",
+      "representativePrivilegesPeriod": "Esindusõiguse kehtuvusperiood:",
+      "representativeStatus": "Staatus",
+      "status.active": "Kehtiv",
+      "status.expired": "Lõppenud"
+    },
+    "viewOwnPrivileges": {
+      "title": "Vaata mulle antud esindusõigus",
+      "representee": "Esindatav",
+      "grantedBy": "Esindusõiguse andja",
+      "representeeHasPrivileges": "Esindaja võib",
+      "representeePrivilegesPeriod": "Esindusõiguse kehtuvusperiood:",
+      "representeeStatus": "Staatus",
+      "registration": "Reg:"
+    },
+    "list": {
+      "view": "Vaadata mõõteandmeid",
+      "grantRepresentationPrivileges": "Edasi anda õigust Sinu esindusõiguste jagamiseks",
+      "grantViewingPrivileges": "Edasi anda õigust Sinu mõõteandmete vaatamiseks",
+      "grantSharingPrivileges": "Edasi anda õigust Sinu mõõteandmete jagamiseks"
+    },
+    "statuses": {
+      "0": "Lõppenud",
+      "1": "Kehtiv"
+    }
+  }
+}

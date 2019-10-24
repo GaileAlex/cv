@@ -24,9 +24,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/bootstrap.css",
+              "src/styles/prettyPhoto.css",
+              "src/styles/style.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/jquery.1.11.1.js",
+              "src/assets/js/bootstrap.js",
+              "src/assets/js/jquery.prettyPhoto.js",
+              "src/assets/js/main.js",
+              "src/assets/js/jquery.isotope.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -120,6 +128,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "frontend"
 }
