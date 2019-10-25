@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
+declare function main(): any;
 
 @Component({
   selector: 'app-start-page',
   templateUrl: './start-page.component.html',
-  styleUrls: ['./start-page.component.css']
+  styleUrls: ['./start-page.component.css'],
+
 })
 export class StartPageComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
+main()
   }
 
 }
