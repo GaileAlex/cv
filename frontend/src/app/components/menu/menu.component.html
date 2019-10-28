@@ -13,20 +13,20 @@
           <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
           <li class="hidden"><a href="/"></a></li>
           <li><a class="page-scroll" href="#about" (click)="getLanguage()">{{'menu.about' | translate}}</a></li>
-          <li><a class="page-scroll" href="#portfolio">Portfolio</a></li>
-          <li><a class="page-scroll" href="#resume">Experience</a></li>
-          <li><a class="page-scroll" href="/blog">Blog</a></li>
+          <li><a class="page-scroll" href="#portfolio">{{'menu.portfolio' | translate}}</a></li>
+          <li><a class="page-scroll" href="#resume">{{'menu.experience' | translate}}</a></li>
+          <li><a class="page-scroll" href="/blog">{{'menu.blog' | translate}}</a></li>
           <li class="dropdown"><a href="#" class="hvr-underline-from-center  dropdown-toggle"
-                                  data-toggle="dropdown">Spring projects<span class="caret"></span></a>
+                                  data-toggle="dropdown">{{'menu.spring.projects' | translate}}<span class="caret"></span></a>
             <ul class="dropdown-menu  multi-level" role="menu" aria-labelledby="dropdownMenu"
                 style="background-color: rgba(0,0,0,0.96);">
               <li><a href="/blog" class="hvr-underline-from-center "
-                     style="color: #58c1ff; margin-bottom: 5px;">Blog</a></li>
+                     style="color: #58c1ff; margin-bottom: 5px;">{{'menu.blog' | translate}}</a></li>
               <li><a href="/mindly/home" class="hvr-underline-from-center "
-                     style="color: #58c1ff; margin-bottom: 5px;">Test task "Crypto Portfolio"</a></li>
+                     style="color: #58c1ff; margin-bottom: 5px;">{{'menu.test.crypto' | translate}}</a></li>
             </ul>
           </li>
-          <li><a class="page-scroll" href="#contact">Contact</a></li>
+          <li><a class="page-scroll" href="#contact">{{'menu.contact' | translate}}</a></li>
           <li><a *ngIf="getLanguage()=='en'" [routerLink]="" (click)="useLanguage('ru')"
           ><img src="assets/img/rus.png" alt="about-image"></a>
           </li>

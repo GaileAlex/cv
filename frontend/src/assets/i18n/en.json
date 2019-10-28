@@ -6,26 +6,21 @@
   },
   "menu": {
     "about": "about",
-    "position": "Roli valik",
-    "startPage": "Avaleht",
-    "landowner": "Maaomanik",
-    "landowner.toleration-application": "Minu taotlused",
-    "landowner.toleration-application.add": "Lisa uus taotlus",
-    "landowner.contact-data-add": "Kontaktandmed",
-    "specialist": "Maateenuste spetsialist",
-    "specialist.toleration-application": "Talumistasud",
-    "network-client": "Võrguklient",
-    "network-client.bills": "Minu arved",
-    "network-client.contracts": "Minu lepingud ja tarbimiskohad",
-    "rights": "Õigused",
-    "admin": "Admin",
-    "admin.rights": "Õigused",
-    "choosePosition": "Vali, keda esindad",
-    "refreshData": "Värskenda andmed"
+    "portfolio": "portfolio",
+    "experience": "experience",
+    "blog": "blog",
+    "spring.projects": "spring projects",
+    "test.crypto": "Test task \"Crypto Portfolio\"",
+    "contact": "contact",
+    "aleksei.gaile": "Aleksei Gaile"
   },
   "start.page": {
-    "login.button.header": "Logi sisse",
-    "eleringLinkLabel": "e-elering",
+    "greeting": "<h1>Hello, I'm <span class=\"name\">Aleksei Gaile</span></h1>",
+    "button.more": "Learn More",
+    "about": {
+      "me": "About Me",
+      "description": " Skills: <br>HTML, CSS, MySQL, PostgreSQL, Maven, JUnit,\n            Java SE,\n            JavaFX, Java EE, Spring boot, Spring Security, Thymeleaf, GitHub, Agile Methodologies,\n            Integrated Development\n            Environment -\n            Intellij IDEA.<br><br>\n\n            Developed:<br><br>\n\n            - Creating a search engine. Search for books in the library according to the specified criteria.<br>\n            Spring, Angular.<br>\n            <a class=\"btn-link\" href=\"https://github.com/GaileAlex/librarian\"\n               target=\"blank\">https://github.com/GaileAlex/librarian.</a><br><br>\n\n            - This site, the following technologies are used HTML, CSS, Spring boot, Spring Security,\n            Thymeleaf, Hibernate, PostgreSQL, Maven (blocks - \"Blog\" and \"Spring projects\"). The site is\n            hosted on its own hosting managed by the\n            Tomcat server.<br>\n            <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n               target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br>\n\n            - Test task \"Crypto Portfolio\".<br>\n            Backend system is written in Java using Spring Boot framework,<br>\n            Database to store the portfolio data is PostgreSQL.<br>\n            Backend system serves all the services via JSON microservice.<br>\n            Frontend layer uses PrimeNG and AngularJS and communicates with backend by calling JSON rest services.<br>\n            Link - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/mindly\"\n                      target=\"blank\">https://github.com/GaileAlex/mindly.</a><br><br>\n\n            These applications and code can be viewed\n            <a class=\"btn-link\" href=\"https://github.com/GaileAlex\"\n               target=\"blank\">https://github.com/GaileAlex.</a>\n            <br><br>\n            Sociable, fast learning, punctual. I devote all my free time to self-study."
+    },
     "left": {
       "header": "Elering - Eesti energiasüsteemi selgroog",
       "text": "Elering is an independent electricity and gas transmission system operator with the primary task of ensuring a high-quality energy supply to Estonian consumers."

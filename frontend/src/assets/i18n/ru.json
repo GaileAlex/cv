@@ -6,26 +6,21 @@
   },
   "menu": {
     "about": "обо мне",
-    "position": "Roli valik",
-    "startPage": "Avaleht",
-    "landowner": "Maaomanik",
-    "landowner.toleration-application": "Minu taotlused",
-    "landowner.toleration-application.add": "Lisa uus taotlus",
-    "landowner.contact-data-add": "Kontaktandmed",
-    "specialist": "Maateenuste spetsialist",
-    "specialist.toleration-application": "Talumistasud",
-    "network-client": "Võrguklient",
-    "network-client.bills": "Minu arved",
-    "network-client.contracts": "Minu lepingud ja tarbimiskohad",
-    "rights": "Õigused",
-    "admin": "Admin",
-    "admin.rights": "Õigused",
-    "choosePosition": "Vali, keda esindad",
-    "refreshData": "Värskenda andmed"
+    "portfolio": "портфолио",
+    "experience": "опыт",
+    "blog": "блог",
+    "spring.projects": "spring проекты",
+    "test.crypto": "Тестовое задание \"Crypto Portfolio\"",
+    "contact": "Контакты",
+    "aleksei.gaile": "Алексей Гайле"
   },
   "start.page": {
-    "login.button.header": "Logi sisse",
-    "eleringLinkLabel": "e-elering",
+    "greeting": "<h1>Привет, Я <span class=\"name\">Алексей Гайле</span></h1>",
+    "button.more": "Узнать больше",
+    "about": {
+      "me": "Обо мне",
+      "description": "Навыки:<br>\n                        HTML, CSS, MySQL, PostgreSQL, Maven,\n                        JUnit, Java SE, JavaFX, Spring boot, Spring Security, Thymeleaf, GitHub, Agile Methodologies,\n                        Интегрированная среда\n                        разработки - Intellij IDEA.<br><br>\n\n                        Разработал:<br><br>\n\n                        - Создание поисковой системы. Поиск книг в библиотеке по заданным критериям.<br>\n                        Spring, Angular.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/librarian\"\n                           target=\"blank\">https://github.com/GaileAlex/librarian.</a><br><br>\n\n                        - Этот сайт, были использованы следующие технологии: HTML, CSS, Spring boot, Spring Security,\n                        Thymeleaf, Hibernate, PostgreSQL, Maven (блоки - \"Блог\" и \"Spring проекты\"). Сайт расположен на\n                        собственном хостинге под управлением\n                        сервера Tomcat.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n                           target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br>\n\n                        - Тестовое задание \"Crypto Portfolio\".<br>\n                        Backend написан на Java с использованием среды Spring Boot,<br>\n                        База данных для хранения данных портфеля - PostgreSQL.<br>\n                        Backend обслуживает все сервисы через микросервис JSON.<br>\n                        Frontend слой использует PrimeNG и AngularJS и связывается с backend, вызывая сервисы rest JSON.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/mindly\"\n                           target=\"blank\">https://github.com/GaileAlex/mindly.</a><br><br>\n\n                        Эти приложения и код можно посмотреть - <a class=\"btn-link\" href=\"https://github.com/GaileAlex\"\n                                                                   target=\"blank\">https://github.com/GaileAlex.</a>\n                        <br><br>\n\n                        Коммуникабелен, быстро обучаюсь, пунктуален. Все свободное время посвящаю самообучению."
+    },
     "left": {
       "header": "Elering - Eesti energiasüsteemi selgroog",
       "text": "Elering is an independent electricity and gas transmission system operator with the primary task of ensuring a high-quality energy supply to Estonian consumers."

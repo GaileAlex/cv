@@ -19,7 +19,11 @@ export class MenuComponent implements OnInit {
   }
 
   getLanguage(){
-    return this.translate;
+    return this.languageService.getLanguage();
+  }
+
+  useLanguage(language: string){
+    this.languageService.setLanguage(language);
   }
 
 }

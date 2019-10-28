@@ -4,9 +4,9 @@
     <div class="container">
       <div class="row">
         <div class="intro-text">
-          <h1>Hello, I'm <span class="name">Aleksei Gaile</span></h1>
+          <span [innerHTML]="'start.page.greeting'|translate"></span>
           <p>Java Developer</p>
-          <a pageScroll href="#about" class="btn btn-default btn-lg page-scroll">Learn More</a></div>
+          <a pageScroll href="#about" class="btn btn-default btn-lg page-scroll">{{'start.page.button.more'|translate}}</a></div>
       </div>
     </div>
   </div>
@@ -17,49 +17,15 @@
 <div id="about">
   <div class="container">
     <div class="section-title text-center center">
-      <h2>About Me</h2>
+      <h2>{{'start.page.about.me' | translate}}</h2>
       <hr>
     </div>
     <div class="row">
       <div class="col-md-12 text-center"><img src="assets/img/about.jpg" class="img-responsive"></div>
       <div class="col-md-8 col-md-offset-2">
         <div class="about-text">
-          <p>
-
-            Skills: <br>HTML, CSS, MySQL, PostgreSQL, Maven, JUnit,
-            Java SE,
-            JavaFX, Java EE, Spring boot, Spring Security, Thymeleaf, GitHub, Agile Methodologies,
-            Integrated Development
-            Environment -
-            Intellij IDEA.<br><br>
-
-            Developed:<br><br>
-
-            - Creating a search engine. Search for books in the library according to the specified criteria.<br>
-            Spring, Angular.<br>
-            <a class="btn-link" href="https://github.com/GaileAlex/librarian"
-               target="blank">https://github.com/GaileAlex/librarian.</a><br><br>
-
-            - This site, the following technologies are used HTML, CSS, Spring boot, Spring Security,
-            Thymeleaf, Hibernate, PostgreSQL, Maven (blocks - "Blog" and "Spring projects"). The site is
-            hosted on its own hosting managed by the
-            Tomcat server.<br>
-            <a class="btn-link" href="https://github.com/GaileAlex/cv"
-               target="blank">https://github.com/GaileAlex/cv.</a><br><br>
-
-            - Test task "Crypto Portfolio".<br>
-            Backend system is written in Java using Spring Boot framework,<br>
-            Database to store the portfolio data is PostgreSQL.<br>
-            Backend system serves all the services via JSON microservice.<br>
-            Frontend layer uses PrimeNG and AngularJS and communicates with backend by calling JSON rest services.<br>
-            Link - <a class="btn-link" href="https://github.com/GaileAlex/mindly"
-                      target="blank">https://github.com/GaileAlex/mindly.</a><br><br>
-
-            These applications and code can be viewed
-            <a class="btn-link" href="https://github.com/GaileAlex"
-               target="blank">https://github.com/GaileAlex.</a>
-            <br><br>
-            Sociable, fast learning, punctual. I devote all my free time to self-study.</p>
+          <p [innerHTML]="'start.page.about.description'|translate">
+           </p>
 
           <p class="text-center"><a class="btn btn-primary" href="assets/img/CV Aleksei Gaile.pdf"
                                     target="_blank"><i class="fa fa-download"></i>Download Resume</a></p>
