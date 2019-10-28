@@ -220,20 +220,7 @@ hr {
     -o-background-size: cover;
 }
 
-.section-title.center {
-    padding: 25px 0 45px 0;
 
-}
-
-.section-title.descr {
-    padding: 350px 0 250px 0;
-
-}
-
-.section-title.service {
-    padding: 150px 0 250px 0;
-
-}
 
 /* About Section */
 #about {
@@ -311,85 +298,6 @@ hr {
     font-size: .8em;
 }
 
-/* Blog Section */
-#portfolio {
-    padding: 80px 0;
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(top, #ffffff 0%, #f4f5f6 49%, #ffffff 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(49%, #f4f5f6), color-stop(100%, #ffffff)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #ffffff 0%, #f4f5f6 49%, #ffffff 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #ffffff 0%, #f4f5f6 49%, #ffffff 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #ffffff 0%, #f4f5f6 49%, #ffffff 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #ffffff 0%, #f4f5f6 49%, #ffffff 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0); /* IE6-9 */
-}
-
-.categories {
-    padding-bottom: 30px;
-    text-align: center;
-}
-
-ul.cat li {
-    display: inline-block;
-}
-
-ol.type li {
-    display: inline-block;
-    margin-left: 20px;
-}
-
-ol.type li a {
-    background: #7bc3d1;
-    color: #fff;
-    padding: 6px 14px;
-}
-
-ol.type li a.active {
-    background: #121d1f;
-    color: #fff;
-}
-
-ol.type li a:hover {
-    background: #121d1f;
-    color: #fff;
-}
-
-.isotope-item {
-    z-index: 2
-}
-
-.isotope-hidden.isotope-item {
-    z-index: 1
-}
-
-.isotope, .isotope .isotope-item {
-    /* change duration value to whatever you like */
-    -webkit-transition-duration: 0.8s;
-    -moz-transition-duration: 0.8s;
-    transition-duration: 0.8s;
-}
-
-.isotope-item {
-    margin-right: -1px;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-.isotope {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transition-property: height, width;
-    -moz-transition-property: height, width;
-    transition-property: height, width;
-}
-
-.isotope .isotope-item {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transition-property: -webkit-transform, opacity;
-    -moz-transition-property: -moz-transform, opacity;
-    transition-property: transform, opacity;
-}
 
 /* Achivements Section */
 #achievements {
