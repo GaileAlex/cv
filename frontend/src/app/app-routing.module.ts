@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {StartPageComponent} from "./components/start-page/start-page.component";
+import {StartPageComponent} from "./modules/start-page/start-page.component";
 
 
 const routes: Routes = [
