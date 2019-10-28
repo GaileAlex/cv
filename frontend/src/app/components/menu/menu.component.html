@@ -12,7 +12,7 @@
         <ul class="nav navbar-nav">
           <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
           <li class="hidden"><a href="/"></a></li>
-          <li><a class="page-scroll" href="#about">About</a></li>
+          <li><a class="page-scroll" href="#about" (click)="getLanguage()">{{'menu.about' | translate}}</a></li>
           <li><a class="page-scroll" href="#portfolio">Portfolio</a></li>
           <li><a class="page-scroll" href="#resume">Experience</a></li>
           <li><a class="page-scroll" href="/blog">Blog</a></li>
@@ -27,8 +27,11 @@
             </ul>
           </li>
           <li><a class="page-scroll" href="#contact">Contact</a></li>
-          <li><a href="/ru"
+          <li><a *ngIf="getLanguage()=='en'" [routerLink]="" (click)="useLanguage('ru')"
           ><img src="assets/img/rus.png" alt="about-image"></a>
+          </li>
+          <li><a *ngIf="getLanguage()=='ru'" [routerLink]="" (click)="useLanguage('en')"
+          ><img src="assets/img/eng.png" alt="about-image"></a>
           </li>
           <li ><a href="/login" role="button" class="btn btn-inverse"
                                                     data-toggle="modal"
@@ -37,10 +40,10 @@
                                                    data-toggle="modal"
                                                    style="color: #58c1ff;"><p ></p>
           </a></li>
-          <li ><a href="/admin-blog" role="button" class="btn btn-inverse"
+        <!--  <li ><a href="/admin-blog" role="button" class="btn btn-inverse"
                                                         data-toggle="modal"
                                                         style="color: #58c1ff;"><p>Admin panel</p>
-          </a></li>
+          </a></li>-->
         </ul>
       </div>
     </div>

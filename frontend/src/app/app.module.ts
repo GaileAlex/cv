@@ -8,6 +8,11 @@ import { FooterComponent } from './components/footer/footer.component';
 import { StartPageComponent } from './modules/start-page/start-page.component';
 import { MenuComponent } from './components/menu/menu.component';
 import {LightboxModule} from "ngx-lightbox";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+
 
 @NgModule({
   declarations: [
@@ -19,10 +24,21 @@ import {LightboxModule} from "ngx-lightbox";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
-    LightboxModule
+    LightboxModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);}
