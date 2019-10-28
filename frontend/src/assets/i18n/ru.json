@@ -21,6 +21,21 @@
       "me": "Обо мне",
       "description": "Навыки:<br>\n                        HTML, CSS, MySQL, PostgreSQL, Maven,\n                        JUnit, Java SE, JavaFX, Spring boot, Spring Security, Thymeleaf, GitHub, Agile Methodologies,\n                        Интегрированная среда\n                        разработки - Intellij IDEA.<br><br>\n\n                        Разработал:<br><br>\n\n                        - Создание поисковой системы. Поиск книг в библиотеке по заданным критериям.<br>\n                        Spring, Angular.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/librarian\"\n                           target=\"blank\">https://github.com/GaileAlex/librarian.</a><br><br>\n\n                        - Этот сайт, были использованы следующие технологии: HTML, CSS, Spring boot, Spring Security,\n                        Thymeleaf, Hibernate, PostgreSQL, Maven (блоки - \"Блог\" и \"Spring проекты\"). Сайт расположен на\n                        собственном хостинге под управлением\n                        сервера Tomcat.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n                           target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br>\n\n                        - Тестовое задание \"Crypto Portfolio\".<br>\n                        Backend написан на Java с использованием среды Spring Boot,<br>\n                        База данных для хранения данных портфеля - PostgreSQL.<br>\n                        Backend обслуживает все сервисы через микросервис JSON.<br>\n                        Frontend слой использует PrimeNG и AngularJS и связывается с backend, вызывая сервисы rest JSON.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/mindly\"\n                           target=\"blank\">https://github.com/GaileAlex/mindly.</a><br><br>\n\n                        Эти приложения и код можно посмотреть - <a class=\"btn-link\" href=\"https://github.com/GaileAlex\"\n                                                                   target=\"blank\">https://github.com/GaileAlex.</a>\n                        <br><br>\n\n                        Коммуникабелен, быстро обучаюсь, пунктуален. Все свободное время посвящаю самообучению."
     },
+    "portfolio": {
+      "portfolio": "Портфолио",
+      "button.all": "Все",
+      "button.web": "Веб разработка",
+      "button.app": "Разработка приложений",
+      "button.goto": "Перейти на сайт",
+      "button.view": "Смотреть",
+      "button.download": "Скачать",
+      "description1": "Создание сайта. Практика 2018 г.",
+      "description2": "Разработка поисковой системы. 2019 г.",
+      "description3": "Игра \"Учимся считать\". 2018 г.",
+      "description4": "Разработка автоматизированного тестового скрипта.<br>\n\n                        Графическая часть - JavaFX, данные хранятся в файле data.csv, а также в базе MySQL,\n                        есть возможность переключения между вариантами хранения данных.",
+      "description5": "Тестовое задание \"Crypto Portfolio\".<br>\n                        Spring boot, Thymeleaf, PostgreSQL, Json. 2019 г.",
+      "description6": "GoSwift - приложение для отслеживание живой очереди на границе Эстонии. Вы\n                        можете\n                        задать свои условия по очереди автомашин или времени ожидания, при достижении которых приложение\n                        подаст вам сигнал. Приложение собирает данные с сайта https://www.estonianborder.eu/.\n                        Используется библиотека Jsoup. Создано с помощью JavaFx.<br> 2018 г."
+    },
     "left": {
       "header": "Elering - Eesti energiasüsteemi selgroog",
       "text": "Elering is an independent electricity and gas transmission system operator with the primary task of ensuring a high-quality energy supply to Estonian consumers."

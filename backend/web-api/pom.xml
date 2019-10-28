@@ -61,9 +61,7 @@
         </dependency>
     </dependencies>
 
-
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -73,7 +71,6 @@
                     <mainClass>ee.gaile.CVApplication</mainClass>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>

@@ -21,6 +21,21 @@
       "me": "About Me",
       "description": " Skills: <br>HTML, CSS, MySQL, PostgreSQL, Maven, JUnit,\n            Java SE,\n            JavaFX, Java EE, Spring boot, Spring Security, Thymeleaf, GitHub, Agile Methodologies,\n            Integrated Development\n            Environment -\n            Intellij IDEA.<br><br>\n\n            Developed:<br><br>\n\n            - Creating a search engine. Search for books in the library according to the specified criteria.<br>\n            Spring, Angular.<br>\n            <a class=\"btn-link\" href=\"https://github.com/GaileAlex/librarian\"\n               target=\"blank\">https://github.com/GaileAlex/librarian.</a><br><br>\n\n            - This site, the following technologies are used HTML, CSS, Spring boot, Spring Security,\n            Thymeleaf, Hibernate, PostgreSQL, Maven (blocks - \"Blog\" and \"Spring projects\"). The site is\n            hosted on its own hosting managed by the\n            Tomcat server.<br>\n            <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n               target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br>\n\n            - Test task \"Crypto Portfolio\".<br>\n            Backend system is written in Java using Spring Boot framework,<br>\n            Database to store the portfolio data is PostgreSQL.<br>\n            Backend system serves all the services via JSON microservice.<br>\n            Frontend layer uses PrimeNG and AngularJS and communicates with backend by calling JSON rest services.<br>\n            Link - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/mindly\"\n                      target=\"blank\">https://github.com/GaileAlex/mindly.</a><br><br>\n\n            These applications and code can be viewed\n            <a class=\"btn-link\" href=\"https://github.com/GaileAlex\"\n               target=\"blank\">https://github.com/GaileAlex.</a>\n            <br><br>\n            Sociable, fast learning, punctual. I devote all my free time to self-study."
     },
+    "portfolio": {
+      "portfolio": "Portfolio",
+      "button.all": "All",
+      "button.web": "Web Development",
+      "button.app": "App Development",
+      "button.goto": "Go To The Site",
+      "button.view": "View",
+      "button.download": "Download",
+      "description1": "Website creation. Practice 2018.",
+      "description2": "Creating a search engine. 2019 г.",
+      "description3": "\"Learning to Count\" game. 2018.",
+      "description4": "Development of an automated test script.<br>\n\n                        The graphic part is JavaFX, data is stored in the data.csv file, as well as in the MySQL\n                        database,\n                        it is possible to switch between data storage options.<br>2019.",
+      "description5": "Test task \"Crypto Portfolio\".<br>Spring boot, Thymeleaf, PostgreSQL, Json.\n                        <br>2019",
+      "description6": "GoSwift - application for tracking the live queue on the border of Estonia.\n                        You can\n                        specify your conditions in the queue of vehicles or waiting time, at which point the application\n                        will give you a signal. The application collects data from the site\n                        https://www.estonianborder.eu/. The Jsoup library is used. Created by JavaFx.<br> 2018."
+    },
     "left": {
       "header": "Elering - Eesti energiasüsteemi selgroog",
       "text": "Elering is an independent electricity and gas transmission system operator with the primary task of ensuring a high-quality energy supply to Estonian consumers."

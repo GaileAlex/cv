@@ -41,16 +41,16 @@
 <div id="portfolio">
   <div class="container">
     <div class="section-title text-center center">
-      <h2>Portfolio</h2>
+      <h2>{{'start.page.portfolio.portfolio'|translate}}</h2>
       <hr>
     </div>
     <div class="categories">
       <ul class="cat">
         <li>
           <ol class="type">
-            <li><a href="#" data-filter="*" class="active">All</a></li>
-            <li><a href="#" data-filter=".web">Web Design</a></li>
-            <li><a href="#" data-filter=".app">App Development</a></li>
+            <li><a href="#" data-filter="*" class="active">{{'start.page.portfolio.button.all'|translate}}</a></li>
+            <li><a href="#" data-filter=".web">{{'start.page.portfolio.button.web'|translate}}</a></li>
+            <li><a href="#" data-filter=".app">{{'start.page.portfolio.button.app'|translate}}</a></li>
           </ol>
         </li>
       </ul>
@@ -70,10 +70,10 @@
             </a>
             </div>
           </div>
-          <p class="text-center">Website creation. Practice 2018.
+          <p class="text-center">{{'start.page.portfolio.description1'|translate}}
           </p>
           <p class="text-center"><a class="btn btn-port" href="https://ivkoolitus.ee/"
-                                    target="_blank">Go to the site</a></p>
+                                    target="_blank">{{'start.page.portfolio.button.goto'|translate}}</a></p>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-4 web">
           <div class="portfolio-item">
@@ -89,9 +89,9 @@
             </a>
             </div>
           </div>
-          <p class="text-center">Creating a search engine. 2019 г.
+          <p class="text-center">{{'start.page.portfolio.description2'|translate}}</p>
           <p class="text-center"><a class="btn btn-port" href="https://github.com/GaileAlex/librarian"
-                                    target="_blank">View code</a></p>
+                                    target="_blank">{{'start.page.portfolio.button.view'|translate}}</a></p>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-4 app">
           <div class="portfolio-item">
@@ -105,9 +105,9 @@
                    alt="Mini game for the daughter"> </a>
             </div>
           </div>
-          <p class="text-center">"Learning to Count" game. 2018.</p>
+          <p class="text-center">{{'start.page.portfolio.description3'|translate}}</p>
           <p class="text-center"><a class="btn btn-port" href="assets/img/Arithmetic.jar"
-                                    target="_blank">Download</a></p>
+                                    target="_blank">{{'start.page.portfolio.button.download'|translate}}</a></p>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-4 app">
           <div class="portfolio-item">
@@ -123,13 +123,9 @@
             </a>
             </div>
           </div>
-          <p class="text-center">Development of an automated test script.<br>
-
-            The graphic part is JavaFX, data is stored in the data.csv file, as well as in the MySQL
-            database,
-            it is possible to switch between data storage options.<br>2019.</p>
+          <p class="text-center" [innerHTML]="'start.page.portfolio.description4'|translate"></p>
           <p class="text-center"><a class="btn btn-port" href="assets/img/ShopEmulation.zip"
-                                    target="_blank">Download</a></p>
+                                    target="_blank">{{'start.page.portfolio.button.download'|translate}}</a></p>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-4 web">
           <div class="portfolio-item">
@@ -143,11 +139,10 @@
             </a>
             </div>
           </div>
-          <p class="text-center">Test task "Crypto Portfolio".<br>Spring boot, Thymeleaf, PostgreSQL, Json.
-            <br>2019
+          <p class="text-center" [innerHTML]="'start.page.portfolio.description5'|translate">
           </p>
           <p class="text-center"><a class="btn btn-port" href="mindly/home"
-                                    target="_blank">View</a></p>
+                                    target="_blank">{{'start.page.portfolio.button.view'|translate}}</a></p>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-4 app">
           <div class="portfolio-item">
@@ -161,13 +156,9 @@
                    alt="GoSwift application"> </a>
             </div>
           </div>
-          <p class="text-center">GoSwift - application for tracking the live queue on the border of Estonia.
-            You can
-            specify your conditions in the queue of vehicles or waiting time, at which point the application
-            will give you a signal. The application collects data from the site
-            https://www.estonianborder.eu/. The Jsoup library is used. Created by JavaFx.<br> 2018.</p>
+          <p class="text-center" [innerHTML]="'start.page.portfolio.description6'|translate"></p>
           <p class="text-center"><a class="btn btn-port" href="assets/img/GoSwift.jar"
-                                    target="_blank">Download</a></p><br>
+                                    target="_blank">{{'start.page.portfolio.button.download'|translate}}</a></p><br>
         </div>
       </div>
     </div>
