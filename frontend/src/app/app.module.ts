@@ -12,6 +12,18 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { NotFoundComponent } from './modules/not-found/not-found.component';
+import { MindlyComponent } from './modules/mindly/mindly.component';
+import {FormControlValidationMsgDirective} from "./components/form-validation/formcontrol-validation-msg.directive";
+import {FormSubmitValidationMsgDirective} from "./components/form-validation/formsubmit-validation-msg.directive";
+import {ConfirmationService} from "primeng/api";
+import {PortfolioService} from "./service/portfolio.service";
+import {ValidationMsgService} from "./components/form-validation/validation-msg.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ButtonModule} from "primeng/button";
+import {TableModule} from "primeng/table";
+import {InputMaskModule} from "primeng/inputmask";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -20,7 +32,10 @@ import { NotFoundComponent } from './modules/not-found/not-found.component';
     FooterComponent,
     StartPageComponent,
     MenuComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    MindlyComponent,
+    FormControlValidationMsgDirective,
+    FormSubmitValidationMsgDirective
   ],
   imports: [
     BrowserModule,
@@ -34,8 +49,15 @@ import { NotFoundComponent } from './modules/not-found/not-found.component';
         deps: [HttpClient]
       }
     }),
+    ReactiveFormsModule,
+    FormsModule,
+    ButtonModule,
+    TableModule,
+    InputMaskModule,
+    ConfirmDialogModule,
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [ConfirmationService, PortfolioService, ValidationMsgService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

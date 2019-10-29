@@ -41,4 +41,7 @@ public class Portfolio {
     @NotBlank(message = "Wallet location is required")
     @Column(name = "mindly_walletLocation", length = 100)
     private String walletLocation;
+
+    @Transient
+    BigDecimal currentMarketValue;
 }

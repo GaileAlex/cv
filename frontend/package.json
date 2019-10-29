@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^8.2.12",
+    "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.2.12",
     "@angular/compiler": "^8.2.12",
     "@angular/core": "^8.2.12",
@@ -21,11 +22,14 @@
     "@angular/router": "^8.2.12",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
+    "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "ngx-image-zoom": "^0.4.1",
     "ngx-lightbox": "^2.1.1",
     "ngx-page-scroll": "^7.0.0",
     "ngx-page-scroll-core": "^7.0.0",
+    "primeicons": "^2.0.0",
+    "primeng": "^8.1.1",
     "rxjs": "^6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
