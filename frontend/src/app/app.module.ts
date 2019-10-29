@@ -11,6 +11,7 @@ import {LightboxModule} from "ngx-lightbox";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { NotFoundComponent } from './modules/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
     HeaderComponent,
     FooterComponent,
     StartPageComponent,
-    MenuComponent
+    MenuComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
