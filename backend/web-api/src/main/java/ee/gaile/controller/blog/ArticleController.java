@@ -22,6 +22,7 @@ import java.util.*;
 @Slf4j
 @Controller
 @RequestMapping
+@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class ArticleController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ArticleController.class);
     private final BlogRepository blogRepository;

@@ -19,7 +19,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path = "/mindly-data",
         produces = "application/json")
-@CrossOrigin(origins = "*")
+@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class MindlyController {
     private final PortfolioRepository portfolioRepository;
 

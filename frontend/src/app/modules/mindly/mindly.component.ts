@@ -1,9 +1,9 @@
 import {ActivatedRoute, Router} from "@angular/router";
 import {Component, OnInit} from "@angular/core";
 import {ConfirmationService, Message} from "primeng/api";
-import {PortfolioService} from "../../service/portfolio.service";
-import {Portfolio} from "../../models/portfolio";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Portfolio} from "../../models/portfolio";
+import {PortfolioService} from "../../service/portfolio.service";
 
 @Component({
   selector: 'mindly',

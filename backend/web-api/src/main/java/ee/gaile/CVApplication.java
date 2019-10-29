@@ -29,11 +29,4 @@ public class CVApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(CVApplication.class);
     }
-
-    @Bean
-    ErrorViewResolver supportPathBasedLocationStrategyWithoutHashes() {
-        return (request, status, model) -> status == HttpStatus.NOT_FOUND
-                ? new ModelAndView("404.html", Collections.emptyMap(), HttpStatus.OK)
-                : null;
-    }
 }
