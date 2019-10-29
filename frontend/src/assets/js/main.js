@@ -3,7 +3,7 @@ function main() {
 
   (function () {
     'use strict';
-
+/*
     $('a.page-scroll').click(function() {
       if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
         var target = $(this.hash);
@@ -15,7 +15,7 @@ function main() {
           return false;
         }
       }
-    });
+    });*/
 
     // affix the navbar after scroll below header
     $('#nav').affix({

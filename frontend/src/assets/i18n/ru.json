@@ -19,7 +19,7 @@
     "button.more": "Узнать больше",
     "about": {
       "me": "Обо мне",
-      "description": "Навыки:<br>\n                        HTML, CSS, MySQL, PostgreSQL, Maven,\n                        JUnit, Java SE, JavaFX, Spring boot, Spring Security, Thymeleaf, GitHub, Agile Methodologies,\n                        Интегрированная среда\n                        разработки - Intellij IDEA.<br><br>\n\n                        Разработал:<br><br>\n\n                        - Создание поисковой системы. Поиск книг в библиотеке по заданным критериям.<br>\n                        Spring, Angular.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/librarian\"\n                           target=\"blank\">https://github.com/GaileAlex/librarian.</a><br><br>\n\n                        - Этот сайт, были использованы следующие технологии: HTML, CSS, Spring boot, Spring Security,\n                        Thymeleaf, Hibernate, PostgreSQL, Maven (блоки - \"Блог\" и \"Spring проекты\"). Сайт расположен на\n                        собственном хостинге под управлением\n                        сервера Tomcat.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n                           target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br>\n\n                        - Тестовое задание \"Crypto Portfolio\".<br>\n                        Backend написан на Java с использованием среды Spring Boot,<br>\n                        База данных для хранения данных портфеля - PostgreSQL.<br>\n                        Backend обслуживает все сервисы через микросервис JSON.<br>\n                        Frontend слой использует PrimeNG и AngularJS и связывается с backend, вызывая сервисы rest JSON.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/mindly\"\n                           target=\"blank\">https://github.com/GaileAlex/mindly.</a><br><br>\n\n                        Эти приложения и код можно посмотреть - <a class=\"btn-link\" href=\"https://github.com/GaileAlex\"\n                                                                   target=\"blank\">https://github.com/GaileAlex.</a>\n                        <br><br>\n\n                        Коммуникабелен, быстро обучаюсь, пунктуален. Все свободное время посвящаю самообучению."
+      "description": "Навыки:<br>\n                        HTML, CSS, MySQL, PostgreSQL, Docker, Maven,\n                        JUnit, Java SE, JavaFX, Spring boot, Spring Security, Thymeleaf, GitHub, Agile Methodologies,\n                        Интегрированная среда\n                        разработки - Intellij IDEA.<br><br>\n\n                        Разработал:<br><br>\n\n                        - Создание поисковой системы. Поиск книг в библиотеке по заданным критериям.<br>\n                        Spring, Angular.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/librarian\"\n                           target=\"blank\">https://github.com/GaileAlex/librarian.</a><br><br>\n\n                        - Этот сайт, были использованы следующие технологии: HTML, CSS, Spring boot, Spring Security,\n                        Thymeleaf, Hibernate, PostgreSQL, Maven (блоки - \"Блог\" и \"Spring проекты\"). Сайт расположен на\n                        собственном хостинге под управлением\n                        сервера Tomcat.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n                           target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br>\n\n                        - Тестовое задание \"Crypto Portfolio\".<br>\n                        Backend написан на Java с использованием среды Spring Boot,<br>\n                        База данных для хранения данных портфеля - PostgreSQL.<br>\n                        Backend обслуживает все сервисы через микросервис JSON.<br>\n                        Frontend слой использует PrimeNG и AngularJS и связывается с backend, вызывая сервисы rest JSON.<br>\n                        <a class=\"btn-link\" href=\"https://github.com/GaileAlex/mindly\"\n                           target=\"blank\">https://github.com/GaileAlex/mindly.</a><br><br>\n\n                        Эти приложения и код можно посмотреть - <a class=\"btn-link\" href=\"https://github.com/GaileAlex\"\n                                                                   target=\"blank\">https://github.com/GaileAlex.</a>\n                        <br><br>\n\n                        Коммуникабелен, быстро обучаюсь, пунктуален. Все свободное время посвящаю самообучению."
     },
     "portfolio": {
       "portfolio": "Портфолио",
@@ -36,24 +36,28 @@
       "description5": "Тестовое задание \"Crypto Portfolio\".<br>\n                        Spring boot, Thymeleaf, PostgreSQL, Json. 2019 г.",
       "description6": "GoSwift - приложение для отслеживание живой очереди на границе Эстонии. Вы\n                        можете\n                        задать свои условия по очереди автомашин или времени ожидания, при достижении которых приложение\n                        подаст вам сигнал. Приложение собирает данные с сайта https://www.estonianborder.eu/.\n                        Используется библиотека Jsoup. Создано с помощью JavaFx.<br> 2018 г."
     },
-    "left": {
-      "header": "Elering - Eesti energiasüsteemi selgroog",
-      "text": "Elering is an independent electricity and gas transmission system operator with the primary task of ensuring a high-quality energy supply to Estonian consumers."
+    "experience": {
+      "experience": "Опыт",
+      "job-1": " <h4>ООО «АЛЬЯНС»</h4>\n                                <h4 class=\"subheading\">Web developer</h4>",
+      "job-1.description": "<br>\n                                    - Верстка сайтов.<br>\n                                    - Взаимодействие с заказчиками.<br>\n                                    <br>",
+      "job-2": "<h4>ООО \"Импульс\" </h4>\n                                <h4 class=\"subheading\">Заместитель директора</h4>",
+      "job-2.description": "<br>\n                                    Строительная компания<br><br>\n                                    - Самостоятельно создал сайт компании.<br>\n                                    - Наладил сеть и электронный документооборот.<br>\n                                    - Увеличил выручку компании более чем в четыре раза.<br>\n                                    - Наладил связи с поставщиками.<br>\n                                    - Увеличил количество постоянных клиентов.<br><br>",
+      "job-3": "<h4>ЗАО \"ПСК \"Русь\" </h4>\n                                <h4 class=\"subheading\">Генеральный директор</h4>",
+      "job-3.description": "<br>\n                                    Строительная компания<br><br>\n                                    - Основал компанию.<br>\n                                    - Собрал талантливую команду профессионалов.<br>\n                                    - Наладил связи с поставщиками.<br>\n                                    - Собрал портфель заказов.<br>\n                                    - Нашел крупных корпоративных клиентов.<br><br>"
     },
-    "right": {
-      "title": "ELERING MTV",
-      "subtitle": "Uued võimalused -",
-      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "list1": "Contrary to popular belief, Lorem Ipsum is not simply random text",
-      "list2": "There are many variations of passages of Lorem Ipsum available",
-      "list3": "Various versions have evolved over the years, sometimes by accident",
-      "list4": "The standard chunk of Lorem Ipsum used since the 1500s"
+    "education": {
+      "education": "Образование",
+      "education-1": "<h4>Ida-Virumaa Kutsehariduskeskus</h4>\n                                <h4 class=\"subheading\">Среднее образование</h4>",
+      "education-1.description": "Разработчик программного обеспечения.<br><br>\n\n                                    Во время обучения я изучал следующие технологии - HTML, CSS, MySQL, PostgreSQL,\n                                    Hibernate, Maven, JUnit, Java SE, JavaFX, Spring boot, Spring Security, Thymeleaf,\n                                    GitHub, Agile Methodologies.<br><br>\n\n                                    Разработал:<br><br>\n\n                                    - Приложение для отслеживание живой очереди на границе. JavaFX, Jsoup (программа\n                                    парсит данные с\n                                    сайта <a class=\"btn-link\" href=\"https://www.estonianborder.eu/\"\n                                             target=\"blank\">https://www.estonianborder.eu/</a>.) -\n                                    <a class=\"btn-link\" href=\"https://github.com/GaileAlex/GoSwift\"\n                                       target=\"blank\">https://github.com/GaileAlex/GoSwift.</a><br><br>\n\n                                    - Приложение эмулирует работу магазина (тестовое задание найденное в интернете).\n                                    JavaFx, MySQL -\n                                    <a class=\"btn-link\" href=\"https://github.com/GaileAlex/Shop-Emulation\"\n                                       target=\"blank\">https://github.com/GaileAlex/Shop-Emulation.</a><br><br>\n                                    Дипломная работа:<br>\n                                    - Создание сайта CV, используются следующие технологии: HTML, CSS, Spring\n                                    Boot, Spring Security, Thymeleaf, Hibernate, PostgreSQL, Maven. Сайт размещен\n                                    на собственном хостинге, управляемом сервером Tomcat.",
+      "education-2": " <h4>Курсы</h4>\n                                <h4 class=\"subheading\">\"Обучающий центр \"Коннессанс\"</h4>",
+      "education-2.description": "Сметное дело в строительстве.",
+      "education-3": "<h4>Курсы</h4>\n                                <h4 class=\"subheading\">\"СТАТУС\"</h4>",
+      "education-3.description": "Администратор сети (Windows Server).",
+      "education-4": "<h4>БГТУ \"ВОЕНМЕХ\" им. Д. Ф. Устинова</h4>\n                                <h4 class=\"subheading\">Высшее образование</h4>",
+      "education-4.description": "Степень магистра. Инженер-механик ракетных двигателей."
     },
     "footer": {
-      "title": "Elering AS",
-      "address": "Kadaka tee 42, 12915, Tallinn",
-      "phone": "715 1222",
-      "email": "info@elering.ee"
+      "contact": "Контакты"
     }
   },
   "common": {
@@ -132,298 +136,6 @@
         "text": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.",
         "viewAll": "Vaata kõik lepinguid"
       }
-    }
-  },
-  "tolerationApplication": {
-    "applyFor.error.required": "Valige, kas taotlete talumistasu ainult enda osa kohta või kõigi eest",
-    "download.csv": "Laen alla .csv",
-    "isCoownership": "Tegemist on kaasomandiga",
-    "isJointOwnership": "Tegemist on ühisomandiga",
-    "applyForOwnPart": "Taotlen talumistasu enda osa kohta",
-    "applyForAllParts": "Taotlen talumistasu kõigi eest volitusega",
-    "basisForRepresentation": "Esindusõiguse alus",
-    "confirmationCultivatedLand1": "Kinnitan, et EI KASUTA",
-    "confirmationCultivatedLand2": "maatulundusmaa",
-    "confirmationCultivatedLand3": "sihtotstarbega maad tehnorajatise kaitsevööndi alal sihtotstarbeliselt",
-    "confirmationCultivatedLandTooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "coownershipPartNumerator": "Kaasomandi osa suurus - lugeja",
-    "coownershipPartNumerator.error": "Peab olema väiksem kui nimetaja",
-    "coownershipPartDenominator": "Kaasomandi osa suurus - nimetaja",
-    "coownershipPartDenominator.error": "Peab olema suurem kui lugeja",
-    "coownershipBasisOfRepresentation": "Esindusõiguse alus",
-    "status": {
-      "NEW": "Edastatud",
-      "IN_PROGRESS": "Kinnitamisel",
-      "REJECTED": "Tagasilükatud",
-      "NAV_IN_PROGRESS": "NAVi edastamisel",
-      "NAV_FAILED": "NAVi edastamine ebaõnnestus",
-      "APPROVED": "Kinnitatud"
-    },
-    "ownershipType": {
-      "SINGLE_OWNERSHIP": "ainuomand",
-      "CO_OWNERSHIP": "kaasomand",
-      "JOINT_OWNERSHIP": "ühisomand"
-    },
-    "category": {
-      "ELECTRICITY": "elekter",
-      "GAS": "gaas",
-      "GAS_EL": "gaas-e",
-      "TELECOM": "side"
-    },
-    "add": {
-      "step1": "Kinnisasja omaniku andmed",
-      "step2": "Kinnisasja andmed",
-      "step3": "Valmis!",
-      "submit": "Edastan",
-      "title": "Uus taotlus",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
-      "success": {
-        "title": "Taotlus on edastatud!",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "back": "Tagasi töölauale"
-      }
-    },
-    "search": {
-      "title": "Minu talumistasude taotlused",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
-      "calculate.title": "Arvuta oma talumistasude suurus",
-      "calculate.description": "Talumistasude suurust saad arvutada Maaameti talumistasude kalkulaatori abil, et teada ligikaudset suurusjärku makstavast talumistasust",
-      "calculate": "Talumistasude kalkulaator",
-      "add": "Lisa uus taotlus",
-      "notification.description": "Talumistasude suurust saad arvutada <strong>Maaameti talumistasude kalkulaatori</strong> abil, et teada ligikaudset suurusjärku makstavast talumistasust",
-      "notification.calculate": "Arvuta tasu suurus siin",
-      "notification.close": "Sulge teade",
-      "mobile.search": "Otsi taotlust"
-    },
-    "filter": {
-      "userName": "Nimi",
-      "creationDate": "Sisestamise kuupäev",
-      "status": "Staatus",
-      "realEstateRegistryPartNumber": "Kinnisasja registriosa number",
-      "address": "Aadress",
-      "ownershipType": "Omandi tüüp",
-      "cadastralNumber": "Katastritunnus"
-    },
-    "column": {
-      "createdTime": "Sisestamise kuupäev",
-      "createdTime.mobile": "Sisestamise kp.",
-      "realEstateRegistryPartNumber": "Kinnisasja registriosa number",
-      "realEstateRegistryPartNumber.mobile": "Kinnisasja reg. nr.",
-      "cadastralNumber": "Katastritunnus",
-      "realEstateNameAddress": "Aadress",
-      "ownershipType": "Omandi tüüp",
-      "status": "Staatus",
-      "createdByName": "Looja",
-      "representedPersonName": "Sisestaja nimi"
-    },
-    "representative": {
-      "title": "Omaniku esindaja andmed",
-      "personalCodeCountry": "Isikukoodi riik",
-      "name": "Ees- ja perekonnanimi",
-      "personalCode": "Isikukood",
-      "contactCountry": "Riik",
-      "contactCounty": "Maakond",
-      "settlement": "Asula",
-      "addressText": "Aadress",
-      "zipcode": "Sihtnumber",
-      "representationBase": "Esindusõiguse alus",
-      "phone": "Telefon",
-      "email": "Tagasiside e-post"
-    },
-    "landowner": {
-      "title": "Kinnisasja omaniku andmed",
-      "name": "Ees- ja perekonnanimi",
-      "personalCode": "Isikukood",
-      "contactCountry": "Riik",
-      "contactCounty": "Maakond",
-      "settlement": "Asula",
-      "addressText": "Aadress",
-      "zipcode": "Sihtnumber",
-      "phone": "Telefon",
-      "email": "Tagasiside e-post",
-      "iban": "IBAN (pangakonto)",
-      "notIbanOwner": "Mina ei ole pangakonto omanik",
-      "ibanOwner": "Pangakonto omanik",
-      "ibanOwnerCode": "Pangakonto omaniku isikukood / registrikood",
-      "represent": {
-        "name": "Ees- ja perekonnanimi / Asutuse nimi",
-        "personalCode": "Isikukood / Reg. kood"
-      }
-    },
-    "realEstate": {
-      "registryPartNumber": "Kinnisasja registriosa number",
-      "cadastralNumber": "Katastritunnus",
-      "nameAddress": "Kinnisasja nimi, aadress",
-      "purchaseDate": "Kinnisasja omandamise aeg",
-      "isCoownership": "Tegemist on kaasomandiga",
-      "coownershipPartNumerator": "Kaasomandi osa suurus - lugeja",
-      "coownershipPartNumerator.error": "Peab olema väiksem kui nimetaja",
-      "coownershipPartDenominator": "Kaasomandi osa suurus - nimetaja",
-      "coownershipPartDenominator.error": "Peab olema suurem kui lugeja",
-      "applyForOwnPart": "Taotlen talusmistasu enda nimel",
-      "applyForAllParts": "Esindan volituse alusel",
-      "representationBase": "Esindusõiguse alus",
-      "isJointOwnership": "Tegemist on ühisomandiga",
-      "confirmationCultivatedLand": "Kinnitan, et ei kasuta maatulundusmaa...",
-      "additionalInformation": "Lisainfo"
-    },
-    "cadastralNumbersDetails": {
-      "cadastralNumber": "Katastritunnus",
-      "realEstateNameAddress": "Kinnisasja nimi, aadress",
-      "realEstatePurchaseDate": "Kinnisasja omandamise aeg",
-      "addNew": "Lisa uus katastritunnus",
-      "registryPartNumberExplanation": "Sisestada saab ainult antud registriosa numbriga seotud katastritunnused"
-    },
-    "position": {
-      "title": "Vali, keda portaalis esindad",
-      "description": "Peale esindatava valimist tegutsed e-eleringi portaalis esindatava nimel.",
-      "representing": {
-        "self": "Esindan ennast:",
-        "businessRegistries": "Esindan juriidilist isikut:",
-        "mandates": "Esindan kolmandat isikut:",
-        "elering": "Esindan Elering:"
-      }
-    },
-    "privacyPolicy": {
-      "text": "Esitatud isikuandmeid töötleb Elering asjaõigusseaduse rakendamise seaduses nimetatud talumistasude taotluse menetlemiseks ning seaduses ettenähtud juhul talumistasu väljamakse tegemiseks. Elering töötleb Teie andmeid nii kaua, kui see on vajalik seadusest tulenevate kohustuste täitmiseks. Täpsemat teavet isikuandmete tööltemisest Eleringi poolt leiate Eleringi kodulehelt rubriigist",
-      "link": "“Isikuandmete töötlemine”"
-    },
-    "information": {
-      "title1": "Kinnisasja omaniku andmed",
-      "title2": "Kinnisasja andmed",
-      "cancellationTitle": "Taotlus on tühistatud",
-      "cancellationSubTitle": "Eleringi kommentaar:",
-      "categorySelect": "Vali taotluse tüüp",
-      "applyForOwnPart": "Taotlen talumistasu enda nimel",
-      "applyForOwnPartAsSpecialist": "Taotlen talumistasu enda nimelt",
-      "applyForAllParts": "Esindan volituse alusel",
-      "applyForAllPartsAsSpecialist": "Esindan volituse alusel",
-      "name": "Ees- ja perekonnanimi",
-      "personalCode": "Isikukood:",
-      "phone": "Telefon:",
-      "email": "E-post:",
-      "addressText": "Kontaktaadress:",
-      "zipCode": "Sihtnumber",
-      "iban": "IBAN (pangakonto)",
-      "addAttatchment": "Lisa manus",
-      "confirm": "Kinnita",
-      "saveAndConfirm": "Salvesta ja kinnita",
-      "return": "Saada tagasi",
-      "startAgain": "Alusta sama taotlust uuesti",
-      "relatedTitle": "Seotud taotlused"
-    }
-  },
-  "startView": {
-    "subtitle": "Uued võimalused -",
-    "title": "ELERING MTV",
-    "text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
-    "text2": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.<br>Vestibulum tempor, velit ac tincidunt tristique"
-  },
-  "landowner": {
-    "startView": {
-      "subtitle": "Uued võimalused -",
-      "title": "ELERING MTV",
-      "text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
-      "text2": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.<br>Vestibulum tempor, velit ac tincidunt tristique",
-      "button": "Alusta taotlemist siit"
-    }
-  },
-  "network-client": {
-    "startView": {
-      "subtitle": "Võrguklient -",
-      "title": "ELERING MTV",
-      "text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
-      "text2": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.<br>Vestibulum tempor, velit ac tincidunt tristique"
-    }
-  },
-  "specialist": {
-    "startView": {
-      "subtitle": "Maateenuste spetsialist -",
-      "title": "ELERING MTV",
-      "text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
-      "text2": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.<br>Vestibulum tempor, velit ac tincidunt tristique"
-    },
-    "tolerationApplication": {
-      "title": "Talumistasud",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
-      "filter": {
-        "personName": "Sisestaja nimi",
-        "userName": "Looja"
-      }
-    }
-  },
-  "admin": {
-    "startView": {
-      "subtitle": "Admin -",
-      "title": "ELERING MTV",
-      "text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
-      "text2": "Aenean eget neque non nisi fermentum iaculis.<br>Nunc in sodales mauris, at sollicitudin ipsum.<br>Proin mauris nisl, egestas non lorem et, faucibus gravida orci.<br>Vestibulum tempor, velit ac tincidunt tristique"
-    }
-  },
-  "contact": {
-    "fullName": "Ees- ja perekonnanimi",
-    "code": "Isikukood",
-    "country": "Riik",
-    "county": "Maakond",
-    "settlement": "Asula",
-    "addressText": "Aadress",
-    "zipCode": "Sihtnumber",
-    "phone": "Telefon",
-    "email": "E-post",
-    "IBAN": "Pangakonto (IBAN)",
-    "represent": {
-      "fullName": "Ees- ja perekonnanimi / Asutuse nimi",
-      "code": "Isikukood / Reg. kood"
-    },
-    "contactData": {
-      "title": "Kontaktandmed",
-      "subTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus nisl, pharetra nec tristique ac, aliquam nec lectus. Duis feugiat aliquam turpis quis imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eu eros ac erat tincidunt congue lobortis ut est.",
-      "save.success": "Andmed on edukalt salvestatud"
-    }
-  },
-  "mandates": {
-    "title": "Õigused",
-    "description": "Siin saad anda esindusõigusi teistele isikutele Sinu nimel e-eleringi kliendiportaalis tegutsemiseks. Iga mõõtepunkti kohta saad all määratleda õiguste ulatuse ja kehtivusperioodi.",
-    "add": {
-      "title": "Lisa esindusõigus",
-      "step1": "ESINDUSÕIGUSE SAAJA",
-      "step2": "KEHTIVUSPERIOOD JA ÕIGUSTE ULATUS",
-      "representative.country": "Vali isikukoodi välja andnud riik:",
-      "representative.code": "Esindusõiguse saaja isikukood:",
-      "representative.email": "Esindusõiguse saaja e-mail:",
-      "addMore": "Lisa veel esindusõiguse saajaid",
-      "representativeHasPrivileges": "Kasutaja võib:",
-      "representativePrivilegesPeriod": "Esindusõiguse kehtuvusperiood:",
-      "removeRepresentative": "Kustuta esindusõiguste saaja",
-      "finish": "Lisa esindusõigused"
-    },
-    "viewRepresentatives": {
-      "title": "Vaata esindusõiguseid",
-      "representative": "Kasutaja",
-      "representativeHasPrivileges": "Kasutaja võib",
-      "representativePrivilegesPeriod": "Esindusõiguse kehtuvusperiood:",
-      "representativeStatus": "Staatus",
-      "status.active": "Kehtiv",
-      "status.expired": "Lõppenud"
-    },
-    "viewOwnPrivileges": {
-      "title": "Vaata mulle antud esindusõigus",
-      "representee": "Esindatav",
-      "grantedBy": "Esindusõiguse andja",
-      "representeeHasPrivileges": "Esindaja võib",
-      "representeePrivilegesPeriod": "Esindusõiguse kehtuvusperiood:",
-      "representeeStatus": "Staatus",
-      "registration": "Reg:"
-    },
-    "list": {
-      "view": "Vaadata mõõteandmeid",
-      "grantRepresentationPrivileges": "Edasi anda õigust Sinu esindusõiguste jagamiseks",
-      "grantViewingPrivileges": "Edasi anda õigust Sinu mõõteandmete vaatamiseks",
-      "grantSharingPrivileges": "Edasi anda õigust Sinu mõõteandmete jagamiseks"
-    },
-    "statuses": {
-      "0": "Lõppenud",
-      "1": "Kehtiv"
     }
   }
 }
