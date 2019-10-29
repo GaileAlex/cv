@@ -23,7 +23,6 @@ public class CVApplication extends SpringBootServletInitializer {
      */
     public static void main(String[] args) {
         SpringApplication.run(CVApplication.class, args);
-
     }
 
     @Override
