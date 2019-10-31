@@ -41,7 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .logout()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+
+                .and()
+                .csrf()
+                .ignoringAntMatchers("/mindly-data","/mindly-data/**");
     }
 
     @Bean

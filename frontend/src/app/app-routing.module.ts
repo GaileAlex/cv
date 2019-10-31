@@ -8,7 +8,7 @@ import {MindlyComponent} from "./modules/mindly/mindly.component";
 const routes: Routes = [
   {path: '', component: StartPageComponent},
   { path: 'mindly',  component: MindlyComponent,},
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({

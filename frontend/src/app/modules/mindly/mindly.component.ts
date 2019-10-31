@@ -5,6 +5,8 @@ import {PortfolioService} from "../../service/portfolio.service";
 import {Portfolio} from "../../models/portfolio";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
+declare function main(): any;
+
 @Component({
   selector: 'mindly',
   templateUrl: './mindly.component.html',
@@ -25,6 +27,7 @@ export class MindlyComponent implements OnInit {
   }
 
   ngOnInit() {
+    main();
     this.portfolioService.findAll().subscribe(data => {
       this.portfolio = data;
     });

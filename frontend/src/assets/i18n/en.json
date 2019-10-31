@@ -52,9 +52,9 @@
       "education-3.description": "Network administrator (Windows Server).",
       "education-4": "<h4>Baltic State Technical University \"Voenmeh\" D.F.Ustinov</h4>\n                                <h4 class=\"subheading\">Higher education</h4>",
       "education-4.description": "Master's degree. Rocket Engine Mechanical Engineer."
-    },
-    "footer": {
-      "contact": "Contact"
     }
+  },
+  "footer": {
+    "contact": "Contact"
   }
 }

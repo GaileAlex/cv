@@ -1,5 +1,9 @@
+@import '../../node_modules/primeicons/primeicons.css';
+@import '../../node_modules/primeng/resources/themes/nova-light/theme.css';
+@import '../../node_modules/primeng/resources/primeng.min.css';
 @import "bootstrap.css";
 @import "prettyPhoto.css";
+
 
 
 body, html {
@@ -736,7 +740,6 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
     .timeline > li.timeline-inverted > .timeline-panel {
         padding: 10px 100px 20px 20px;
     }
-
 }
 p.validationError {
     color: #ff6259;
@@ -765,31 +768,7 @@ div.validationError {
     opacity: 1;
 }
 
-.service_feature .feature_inner .feature_item .more_btn {
-    opacity: 1;
-    background: transparent;
-    border-color: transparent;
-    background-image: -webkit-gradient(linear, left top, right top, from(#6ebdfe), to(#9b8aff));
-    background-image: -webkit-linear-gradient(left, #6ebdfe, #9b8aff);
-    background-image: -o-linear-gradient(left, #6ebdfe, #9b8aff);
-    background-image: linear-gradient(left, #6ebdfe, #9b8aff);
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-transition: all 400ms linear 0s;
-    -o-transition: all 400ms linear 0s;
-    transition: all 400ms linear 0s;
-    background-size: 200% auto;
-}
-.service_feature .feature_inner .feature_item:hover .more_btn {
-    color: #fff;
-    background-image: -webkit-gradient(linear, left top, right top, from(#70bafe), color-stop(51%, #998dff), to(#70bafe));
-    background-image: -webkit-linear-gradient(left, #70bafe 0%, #998dff 51%, #70bafe 100%);
-    background-image: -o-linear-gradient(left, #70bafe 0%, #998dff 51%, #70bafe 100%);
-    background-image: linear-gradient(to right, #70bafe 0%, #998dff 51%, #70bafe 100%);
-    border-color: rgba(204, 241, 255, 0.5);
-    background-clip: inherit;
-}
+
 
 
 .p_200 {
@@ -808,26 +787,7 @@ div.validationError {
     padding-top: 100px;
 }
 
-.more_btn {
-    padding: 0px 46px;
-    background-image: -webkit-gradient(linear, left top, right top, from(#6fbcfe), color-stop(51%, #998dff), to(#6fbcfe));
-    background-image: -webkit-linear-gradient(left, #6fbcfe 0%, #998dff 51%, #6fbcfe 100%);
-    background-image: -o-linear-gradient(left, #6fbcfe 0%, #998dff 51%, #6fbcfe 100%);
-    background-image: linear-gradient(to right, #6fbcfe 0%, #998dff 51%, #6fbcfe 100%);
-    background-size: 200% auto;
-    z-index: 2;
-    display: inline-block;
-    -webkit-transition: all 400ms ease-out;
-    -o-transition: all 400ms ease-out;
-    transition: all 400ms ease-out;
-    text-align: center;
-    color: #fff;
-    font-size: 15px;
-    font-family: "Roboto", sans-serif;
-    line-height: 55px;
-    border: 6px solid rgba(204, 241, 255, 0.5);
-    border-radius: 33px;
-}
+
 
 .more_btn:hover {
     background-position: right center;
