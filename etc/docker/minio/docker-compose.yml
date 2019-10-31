@@ -1,0 +1,31 @@
+version: "3.4"
+services:
+  minio_test:
+    container_name: minio_test
+    env_file:
+      - ./minio.env
+    image: minio/minio
+    ports:
+      - "9000:9000"
+    volumes:
+        - ./data:/data
+    command: server /data
+
+  mc:
+    image: minio/mc
+    depends_on:
+      - minio_test
+    container_name: mc_test
+    env_file:
+      - ./minio.env
+    entrypoint: >
+      /bin/sh -c "
+      echo /usr/bin/mc config host add minio_test http://minio_test:9000 $${MINIO_ACCESS_KEY} $${MINIO_SECRET_KEY};
+      /usr/bin/mc rm -r --force minio_test/temp;
+      /usr/bin/mc rm -r --force minio_test/approved;
+      /usr/bin/mc rm -r --force minio_test/rejected;
+      /usr/bin/mc mb minio_test/temp;
+      /usr/bin/mc mb minio_test/approved;
+      /usr/bin/mc mb minio_test/rejected;
+      /usr/bin/mc policy set upload minio_test/temp;
+      "
