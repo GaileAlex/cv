@@ -22,7 +22,7 @@ import java.util.*;
 @Slf4j
 @Controller
 @RequestMapping("/admin-blog")
-@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
+@CrossOrigin(maxAge = 3600)
 public class AdminBlogController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminBlogController.class);
     private final BlogRepository blogRepository;

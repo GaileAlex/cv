@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/register")
-@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
+@CrossOrigin(maxAge = 3600)
 public class RegistrationController {
     private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;

@@ -29,5 +29,6 @@
         <module>backend/persistence</module>
         <module>backend/services</module>
         <module>backend/web-api</module>
+        <module>frontend</module>
     </modules>
 </project>

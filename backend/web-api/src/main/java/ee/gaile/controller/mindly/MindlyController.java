@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Slf4j
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping(path = "/mindly-data",
         produces = "application/json")
-@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class MindlyController {
     private final PortfolioRepository portfolioRepository;
 
@@ -57,6 +57,7 @@ public class MindlyController {
         if (portfolio.getDateOfPurchase() == null) {
             portfolio.setDateOfPurchase(new Date());
         }
+        System.out.println("hjfbvgkjdfbvkj");
         return portfolioRepository.save(portfolio);
     }
 
@@ -67,6 +68,7 @@ public class MindlyController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID deleteItem) {
         try {
+            System.out.println("hjfbvgkjdfbvkj");
             portfolioRepository.deleteById(deleteItem);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
