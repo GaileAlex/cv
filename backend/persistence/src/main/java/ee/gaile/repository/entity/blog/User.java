@@ -14,10 +14,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
 
-@Entity
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
+@Entity
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
