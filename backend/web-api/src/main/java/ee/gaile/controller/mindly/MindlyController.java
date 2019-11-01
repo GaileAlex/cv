@@ -68,7 +68,6 @@ public class MindlyController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID deleteItem) {
         try {
-            System.out.println("hjfbvgkjdfbvkj");
             portfolioRepository.deleteById(deleteItem);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();

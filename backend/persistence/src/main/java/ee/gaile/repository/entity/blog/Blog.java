@@ -1,8 +1,6 @@
 package ee.gaile.repository.entity.blog;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -45,6 +43,7 @@ public class Blog {
     private Date date;
 
     @OneToMany(mappedBy = "blog", fetch = FetchType.EAGER, orphanRemoval = true)
+    @Singular
     private List<Comments> items = new ArrayList<>();
 
 }
