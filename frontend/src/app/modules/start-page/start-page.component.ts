@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 declare function main(): any;
 
@@ -10,7 +11,7 @@ declare function main(): any;
 })
 export class StartPageComponent implements OnInit {
 
-  constructor() {
+  constructor(private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {

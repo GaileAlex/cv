@@ -2,15 +2,9 @@ package ee.gaile;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorViewResolver;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Collections;
 
 @PropertySource(value = "file:config/cv-api.properties", ignoreResourceNotFound = true)
 @SpringBootApplication

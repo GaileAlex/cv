@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * receiving and parsing requests with Bitfinex
@@ -35,6 +37,9 @@ public class BitfinexAccess {
                 break;
             case ("Ripple"):
                 currency = "XRPUSD";
+                break;
+            default:
+                currency = "BTCEUR";
                 break;
         }
         String urlBitfinex = "https://api.bitfinex.com/v1/book/" + currency;
@@ -63,7 +68,7 @@ public class BitfinexAccess {
         request.connect();
 
         JsonParser jp = new JsonParser();
-        JsonElement element = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+        JsonElement element = jp.parse(new InputStreamReader((InputStream) request.getContent(), StandardCharsets.UTF_8));
         JsonObject obj = element.getAsJsonObject();
 
         return obj.toString();

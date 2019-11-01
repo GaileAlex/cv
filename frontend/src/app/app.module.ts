@@ -24,6 +24,13 @@ import {TableModule} from "primeng/table";
 import {InputMaskModule} from "primeng/inputmask";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {defineLocale, enGbLocale, ruLocale} from 'ngx-bootstrap/chronos';
+
+defineLocale('ru', ruLocale);
+defineLocale('en', enGbLocale);
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);}
 
 @NgModule({
   declarations: [
@@ -62,5 +69,4 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 })
 export class AppModule { }
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);}
+

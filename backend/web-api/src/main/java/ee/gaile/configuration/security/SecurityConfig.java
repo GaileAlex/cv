@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
+    private static final int STRENGHT_OF_PASSWORD_ENCODER = 4;
 
     @Autowired
     public SecurityConfig(@Qualifier("userRepositoryUserDetailsService") UserDetailsService userDetailsService) {
@@ -45,12 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .csrf()
-                .ignoringAntMatchers("/mindly-data","/mindly-data/**");
+                .ignoringAntMatchers("/mindly-data", "/mindly-data/**");
     }
 
     @Bean
     public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(4);
+        return new BCryptPasswordEncoder(STRENGHT_OF_PASSWORD_ENCODER);
     }
 
     @Override

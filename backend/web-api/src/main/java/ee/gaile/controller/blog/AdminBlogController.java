@@ -66,8 +66,9 @@ public class AdminBlogController {
             if (blog.getHeadline().isEmpty() || blog.getArticle().isEmpty()) {
                 LOGGER.warn("no header or article");
                 return "blog/admin-blog";
-            } else
+            } else {
                 blogRepository.save(blog);
+            }
         }
 
         return "redirect:/admin-blog";
