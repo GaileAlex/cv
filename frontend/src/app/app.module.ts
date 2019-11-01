@@ -25,6 +25,8 @@ import {InputMaskModule} from "primeng/inputmask";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {defineLocale, enGbLocale, ruLocale} from 'ngx-bootstrap/chronos';
+import { BooksComponent } from './modules/books/books.component';
+import { LibrarianComponent } from './modules/librarian/librarian.component';
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -42,7 +44,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotFoundComponent,
     MindlyComponent,
     FormControlValidationMsgDirective,
-    FormSubmitValidationMsgDirective
+    FormSubmitValidationMsgDirective,
+    BooksComponent,
+    LibrarianComponent
   ],
   imports: [
     BrowserModule,

@@ -3,12 +3,16 @@ import {Routes, RouterModule} from '@angular/router';
 import {StartPageComponent} from "./modules/start-page/start-page.component";
 import {NotFoundComponent} from "./modules/not-found/not-found.component";
 import {MindlyComponent} from "./modules/mindly/mindly.component";
+import {LibrarianComponent} from "./modules/librarian/librarian.component";
+import {BooksComponent} from "./modules/books/books.component";
 
 
 const routes: Routes = [
   {path: '', component: StartPageComponent},
   {path: 'mindly', component: MindlyComponent,},
-  {path: '**', component: NotFoundComponent}
+  {path: '**', component: NotFoundComponent},
+  {path: 'librarian', component: LibrarianComponent},
+  {path: 'books', component: BooksComponent},
 ];
 
 @NgModule({
