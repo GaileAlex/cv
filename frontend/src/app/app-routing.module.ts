@@ -10,9 +10,9 @@ import {BooksComponent} from "./modules/books/books.component";
 const routes: Routes = [
   {path: '', component: StartPageComponent},
   {path: 'mindly', component: MindlyComponent,},
-  {path: '**', component: NotFoundComponent},
   {path: 'librarian', component: LibrarianComponent},
   {path: 'books', component: BooksComponent},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
