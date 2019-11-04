@@ -27,6 +27,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {defineLocale, enGbLocale, ruLocale} from 'ngx-bootstrap/chronos';
 import { BooksComponent } from './modules/books/books.component';
 import { LibrarianComponent } from './modules/librarian/librarian.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { ComboBoxComponent } from './components/combo-box/combo-box.component';
+import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -46,7 +49,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormControlValidationMsgDirective,
     FormSubmitValidationMsgDirective,
     BooksComponent,
-    LibrarianComponent
+    LibrarianComponent,
+    ComboBoxComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +72,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     InputMaskModule,
     ConfirmDialogModule,
     BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [ConfirmationService, PortfolioService, ValidationMsgService],
   bootstrap: [AppComponent]

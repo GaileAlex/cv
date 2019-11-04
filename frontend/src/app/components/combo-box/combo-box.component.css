@@ -1,0 +1,49 @@
+select.soflow {
+  -webkit-appearance: button;
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-padding-end: 10px;
+  -webkit-padding-start: 2px;
+  -webkit-user-select: none;
+  background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+  background-position: 97% center;
+  background-repeat: no-repeat;
+  border: 1px solid #AAA;
+  color: #555;
+  font-size: inherit;
+  margin: 5px;
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  width: 150px;
+  height: 25px;
+}
+
+.box-text {
+  height: 22px;
+  margin: 5px;
+  width: 210px;
+}
+
+.mat-button {
+  margin: 5px;
+  height: 28px;
+  width: 28px;
+  border-radius: 6px;
+}
+
+.day {
+  max-width: 55px;
+}
+
+.month {
+  max-width: 55px;
+}
+
+.year {
+  max-width: 70px;
+}
+.name {
+  height: 25px;
+  max-width: 200px;
+}
