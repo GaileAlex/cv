@@ -7,7 +7,7 @@ import {LibrarianComponent} from "./modules/librarian/librarian.component";
 import {BooksComponent} from "./modules/books/books.component";
 
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: '', component: StartPageComponent},
   {path: 'mindly', component: MindlyComponent,},
   {path: 'librarian', component: LibrarianComponent},

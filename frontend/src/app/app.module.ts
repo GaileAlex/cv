@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {AppRoutingModule} from './app-routing.module';
+import {AppRoutingModule, routes} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -38,6 +38,12 @@ import {
   MatInputModule,
   MatNativeDateModule
 } from "@angular/material";
+import {DialogModule} from "primeng/dialog";
+import {InputTextModule} from "primeng/inputtext";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {MessagesModule} from "primeng/messages";
+import {MessageModule} from "primeng/message";
+import {RouterModule} from "@angular/router";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -86,7 +92,23 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    DialogModule,
+    InputTextModule,
+    InputTextareaModule,
+    MessagesModule,
+    MessageModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes),
+    NgbModule
   ],
   providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal],
   bootstrap: [AppComponent],
