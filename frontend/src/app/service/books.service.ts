@@ -21,6 +21,6 @@ export class BooksService {
 
   public save(filters, condition) {
 
-    return this.http.post<any>(this.booksUrl + `/${condition}`, filters)
+    return this.http.post<any>(`${this.booksUrl}/${condition}`, filters)
   }
 }
