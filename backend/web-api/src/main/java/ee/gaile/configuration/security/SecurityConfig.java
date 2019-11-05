@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .csrf()
-                .ignoringAntMatchers("/mindly-data", "/mindly-data/**");
+                .ignoringAntMatchers("/mindly-data", "/mindly-data/**", "/librarian", "/librarian/**");
     }
 
     @Bean
