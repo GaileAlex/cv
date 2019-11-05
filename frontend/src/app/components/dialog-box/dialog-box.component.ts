@@ -17,7 +17,7 @@ export class DialogBoxComponent implements OnInit {
               private router: Router, private activeModal: NgbActiveModal) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {console.log("dialog")
     this.formFilter = this.formBuilder.group({});
 
     this.formFilter.addControl('condition', new FormControl('allConditions'));

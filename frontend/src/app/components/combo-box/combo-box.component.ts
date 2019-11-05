@@ -23,7 +23,7 @@ export class ComboboxComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {console.log("combo")
     this.formReady.emit(this.filterForm);
     this.addFilter();
     ComboboxComponent.createDateArray(this.days, 1, 31);
