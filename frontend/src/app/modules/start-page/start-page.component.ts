@@ -15,7 +15,7 @@ export class StartPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    main()
+
 
   }
 

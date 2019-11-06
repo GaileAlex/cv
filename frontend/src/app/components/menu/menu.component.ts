@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {LanguageService} from "../../service/language.service";
 
+declare function main(): any;
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -14,6 +16,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    main();
     this.translate.setDefaultLang(this.languageService.getLanguage());
 
   }

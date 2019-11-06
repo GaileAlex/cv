@@ -27,7 +27,7 @@ export class MindlyComponent implements OnInit {
   }
 
   ngOnInit() {
-    main();
+
     console.log("mindly");
     this.portfolioService.findAll().subscribe(data => {
       this.portfolio = data;
