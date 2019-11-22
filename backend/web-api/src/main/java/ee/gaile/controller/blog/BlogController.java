@@ -16,7 +16,7 @@ import java.util.*;
 @Slf4j
 @Controller
 @RequestMapping("/blog")
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class BlogController {
     private final BlogRepository blogRepository;
 

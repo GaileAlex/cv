@@ -22,7 +22,7 @@ import java.util.*;
 @Slf4j
 @Controller
 @RequestMapping("/admin-blog")
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class AdminBlogController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminBlogController.class);
     private final BlogRepository blogRepository;
@@ -66,9 +66,8 @@ public class AdminBlogController {
             if (blog.getHeadline().isEmpty() || blog.getArticle().isEmpty()) {
                 LOGGER.warn("no header or article");
                 return "blog/admin-blog";
-            } else {
+            } else
                 blogRepository.save(blog);
-            }
         }
 
         return "redirect:/admin-blog";
