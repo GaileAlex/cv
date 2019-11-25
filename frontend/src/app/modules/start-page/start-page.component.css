@@ -154,9 +154,6 @@ ol.type li a:hover {
   color: #E87E04;
 }
 
-
-
-
 .section-title.center {
   padding: 25px 0 45px 0;
 
@@ -169,7 +166,8 @@ ol.type li a:hover {
 
 .section-title.service {
   padding: 150px 0 250px 0;
-
 }
 
-
+.text-14{
+  font-size: 14px;
+}

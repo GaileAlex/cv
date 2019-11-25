@@ -37,47 +37,36 @@
   </div>
 </div>
 
-
 <!-- Blog Section -->
-
 <div id="portfolio">
   <div class="container">
     <div class="section-title text-center center">
       <h2>{{'start.page.portfolio.portfolio'|translate}}</h2>
       <hr>
     </div>
-    <div class="categories">
-      <ul class="cat">
-        <li>
-          <ol class="type">
-            <li><a href="#" data-filter="*" class="active">{{'start.page.portfolio.button.all'|translate}}</a></li>
-            <li><a href="#" data-filter=".web">{{'start.page.portfolio.button.web'|translate}}</a></li>
-            <li><a href="#" data-filter=".app">{{'start.page.portfolio.button.app'|translate}}</a></li>
-          </ol>
-        </li>
-      </ul>
-      <div class="clearfix"></div>
-    </div>
+
     <div class="row">
-      <div class="portfolio-items">
-        <div class="col-sm-6 col-md-4 col-lg-4 web">
-          <div class="portfolio-item">
-            <div class="hover-bg"><a href="assets/img/portfolio/01-large.jpg" title="Website creation"
-                                     rel="prettyPhoto">
-              <div class="hover-text">
-                <h4>Website creation</h4>
-                <small>Web Design</small>
-              </div>
-              <img src="assets/img/portfolio/01-small.jpg" class="img-responsive" alt="Website creation">
-            </a>
+
+      <div class="col-sm-6 col-md-4 col-lg-4 a">
+        <div class="portfolio-item">
+          <div class="hover-bg"><a href="assets/img/portfolio/01-large.jpg"
+                                   title="Librarian"
+                                   rel="prettyPhoto">
+            <div class="hover-text">
+              <h4>Librarian</h4>
+              <small>Web Development</small>
             </div>
+            <img src="assets/img/portfolio/01-small.jpg" class="img-responsive"
+                 alt="Librarian">
+          </a>
           </div>
-          <p class="text-center">{{'start.page.portfolio.description1'|translate}}
+        </div>
+          <p class="text-center text-14">{{'start.page.portfolio.description1'|translate}}
           </p>
           <p class="text-center"><a class="btn btn-port" href="https://ivkoolitus.ee/"
                                     target="_blank">{{'start.page.portfolio.button.goto'|translate}}</a></p>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-4 web">
+        <div class="col-sm-6 col-md-4 col-lg-4 a">
           <div class="portfolio-item">
             <div class="hover-bg"><a href="assets/img/portfolio/librarian.png"
                                      title="Librarian"
@@ -91,11 +80,11 @@
             </a>
             </div>
           </div>
-          <p class="text-center">{{'start.page.portfolio.description2'|translate}}</p>
+          <p class="text-center text-14">{{'start.page.portfolio.description2'|translate}}</p>
           <p class="text-center"><a class="btn btn-port" href="https://github.com/GaileAlex/librarian"
                                     target="_blank">{{'start.page.portfolio.button.view'|translate}}</a></p>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-4 app">
+        <div class="col-sm-6 col-md-4 col-lg-4 a">
           <div class="portfolio-item">
             <div class="hover-bg"><a href="assets/img/portfolio/05-large.jpg" title="Мини игра для дочки"
                                      rel="prettyPhoto">
@@ -107,7 +96,7 @@
                    alt="Mini game for the daughter"> </a>
             </div>
           </div>
-          <p class="text-center">{{'start.page.portfolio.description3'|translate}}</p>
+          <p class="text-center text-14">{{'start.page.portfolio.description3'|translate}}</p>
           <p class="text-center"><a class="btn btn-port" href="assets/img/Arithmetic.jar"
                                     target="_blank">{{'start.page.portfolio.button.download'|translate}}</a></p>
         </div>
@@ -125,7 +114,7 @@
             </a>
             </div>
           </div>
-          <p class="text-center" [innerHTML]="'start.page.portfolio.description4'|translate"></p>
+          <p class="text-center text-14" [innerHTML]="'start.page.portfolio.description4'|translate"></p>
           <p class="text-center"><a class="btn btn-port" href="assets/img/ShopEmulation.zip"
                                     target="_blank">{{'start.page.portfolio.button.download'|translate}}</a></p>
         </div>
@@ -141,7 +130,7 @@
             </a>
             </div>
           </div>
-          <p class="text-center" [innerHTML]="'start.page.portfolio.description5'|translate">
+          <p class="text-center text-14" [innerHTML]="'start.page.portfolio.description5'|translate">
           </p>
           <p class="text-center"><a class="btn btn-port" href="mindly/home"
                                     target="_blank">{{'start.page.portfolio.button.view'|translate}}</a></p>
@@ -158,14 +147,14 @@
                    alt="GoSwift application"> </a>
             </div>
           </div>
-          <p class="text-center" [innerHTML]="'start.page.portfolio.description6'|translate"></p>
+          <p class="text-center text-14" [innerHTML]="'start.page.portfolio.description6'|translate"></p>
           <p class="text-center"><a class="btn btn-port" href="assets/img/GoSwift.jar"
                                     target="_blank">{{'start.page.portfolio.button.download'|translate}}</a></p><br>
         </div>
       </div>
     </div>
   </div>
-</div>
+
 <!-- Resume Section -->
 <div id="resume" class="text-center">
   <div class="container">
@@ -187,7 +176,7 @@
                 <span [innerHTML]="'start.page.experience.job-1'|translate"></span>
               </div>
               <div class="timeline-body">
-                <p class="text-right" [innerHTML]="'start.page.experience.job-1.description'|translate"></p>
+                <p class="text-right text-14" [innerHTML]="'start.page.experience.job-1.description'|translate"></p>
               </div>
             </div>
           </li>
@@ -202,7 +191,7 @@
                 <span [innerHTML]="'start.page.experience.job-2'|translate"></span>
               </div>
               <div class="timeline-body">
-                <p class="text-left" [innerHTML]="'start.page.experience.job-2.description'|translate"></p>
+                <p class="text-left text-14" [innerHTML]="'start.page.experience.job-2.description'|translate"></p>
               </div>
             </div>
           </li>
@@ -217,7 +206,7 @@
                 <span [innerHTML]="'start.page.experience.job-3'|translate"></span>
               </div>
               <div class="timeline-body">
-                <p class="text-right" [innerHTML]="'start.page.experience.job-3.description'|translate"></p>
+                <p class="text-right text-14" [innerHTML]="'start.page.experience.job-3.description'|translate"></p>
               </div>
             </div>
           </li>
@@ -245,7 +234,7 @@
               <div class="timeline-heading">
                 <span [innerHTML]="'start.page.education.education-1'|translate"></span>
               </div>
-              <div class="timeline-body">
+              <div class="timeline-body text-14">
                 <p [innerHTML]="'start.page.education.education-1.description'|translate">
                 </p>
               </div>
@@ -261,7 +250,7 @@
               <div class="timeline-heading">
                 <span [innerHTML]="'start.page.education.education-2'|translate"></span>
               </div>
-              <div class="timeline-body">
+              <div class="timeline-body text-14">
                 <p [innerHTML]="'start.page.education.education-2.description'|translate"></p>
               </div>
             </div>
@@ -276,7 +265,7 @@
               <div class="timeline-heading">
                 <span [innerHTML]="'start.page.education.education-3'|translate"></span>
               </div>
-              <div class="timeline-body">
+              <div class="timeline-body text-14">
                 <p [innerHTML]="'start.page.education.education-3.description'|translate"></p>
               </div>
             </div>
@@ -291,7 +280,7 @@
               <div class="timeline-heading">
                 <span [innerHTML]="'start.page.education.education-4'|translate"></span>
               </div>
-              <div class="timeline-body">
+              <div class="timeline-body text-14">
                 <p [innerHTML]="'start.page.education.education-4.description'|translate"></p>
               </div>
             </div>
