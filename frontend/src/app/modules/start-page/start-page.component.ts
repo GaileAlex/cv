@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-declare function main(): any;
+
 
 @Component({
   selector: 'app-start-page',
@@ -14,6 +14,6 @@ export class StartPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    main();
+
   }
 }

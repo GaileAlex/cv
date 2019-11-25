@@ -3,6 +3,13 @@
   position: relative;
 }
 
+.nav-link{
+  color: #58c1ff !important;
+  font-size: 15px;
+}
+
+
+
 .navbar-collapse ul li a.nav-link:before {
   position: absolute;
   bottom: -5px;
@@ -49,4 +56,8 @@
   position: fixed;
   top: 0;
   width: 100%
+}
+
+.p_100_left{
+  padding-left: 100px;
 }
