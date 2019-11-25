@@ -26,13 +26,13 @@
   -webkit-transform: translateY(0px);
   transform: translateY(0px);
   bottom: 0px;
-  background: #dd4343;
+  background: #007ad9;
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
   color: #000000;
   text-decoration: none;
-  background-color: #dd4343;
+  background-color: #007ad9;
 }
 
 .dropdown-menu {
@@ -41,3 +41,12 @@
 }
 
 
+#nav {
+  z-index: 9999;
+}
+
+#nav.affix {
+  position: fixed;
+  top: 0;
+  width: 100%
+}

@@ -43,6 +43,7 @@ import {MessagesModule} from "primeng/messages";
 import {MessageModule} from "primeng/message";
 import {RouterModule} from "@angular/router";
 import {LightboxModule} from "primeng/lightbox";
+import {ScrollSpyModule} from "ngx-scrollspy";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -106,8 +107,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     NgbModule,
-    LightboxModule
-
+    LightboxModule,
+    ScrollSpyModule.forRoot()
   ],
   providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal],
   bootstrap: [AppComponent],
