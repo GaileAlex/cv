@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+
+declare function main(): any;
 
 @Component({
   selector: 'app-start-page',
@@ -8,7 +9,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 })
 
-export class StartPageComponent {
-  constructor(private route: ActivatedRoute, private router: Router) {
+export class StartPageComponent implements OnInit {
+  constructor() {
+  }
+
+  ngOnInit() {
+    main();
   }
 }
