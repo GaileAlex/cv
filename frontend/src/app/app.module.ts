@@ -3,11 +3,9 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule, routes} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {StartPageComponent} from './modules/start-page/start-page.component';
 import {MenuComponent} from './components/menu/menu.component';
-import {LightboxModule} from "ngx-lightbox";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
@@ -44,6 +42,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {MessagesModule} from "primeng/messages";
 import {MessageModule} from "primeng/message";
 import {RouterModule} from "@angular/router";
+import {LightboxModule} from "primeng/lightbox";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -55,7 +54,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     FooterComponent,
     StartPageComponent,
     MenuComponent,
@@ -72,7 +70,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    LightboxModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -108,7 +105,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatNativeDateModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
-    NgbModule
+    NgbModule,
+    LightboxModule
+
   ],
   providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal],
   bootstrap: [AppComponent],

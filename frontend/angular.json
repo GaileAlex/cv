@@ -25,7 +25,6 @@
               "src/.htaccess"
             ],
             "styles": [
-              "src/styles/bootstrap.css",
               "src/styles/prettyPhoto.css",
               "src/styles/style.css"
             ],

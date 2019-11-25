@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {LanguageService} from "../../service/language.service";
 
@@ -9,7 +9,7 @@ import {LanguageService} from "../../service/language.service";
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private translate: TranslateService, private languageService: LanguageService){
+  constructor(private translate: TranslateService, private languageService: LanguageService) {
 
   }
 
@@ -18,11 +18,11 @@ export class MenuComponent implements OnInit {
 
   }
 
-  getLanguage(){
+  getLanguage() {
     return this.languageService.getLanguage();
   }
 
-  useLanguage(language: string){
+  useLanguage(language: string) {
     this.languageService.setLanguage(language);
   }
 
