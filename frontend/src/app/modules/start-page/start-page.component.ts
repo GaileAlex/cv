@@ -6,7 +6,6 @@ declare function main(): any;
   selector: 'app-start-page',
   templateUrl: './start-page.component.html',
   styleUrls: ['./start-page.component.css'],
-
 })
 export class StartPageComponent implements OnInit {
 
@@ -14,8 +13,7 @@ export class StartPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    main()
-
+    main();
   }
 
 }
