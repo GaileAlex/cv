@@ -30,20 +30,14 @@
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
-  color: #ffffff;
+  color: #000000;
   text-decoration: none;
   background-color: #dd4343;
 }
 
 .dropdown-menu {
   border: 0px;
+  background-color: rgba(0,0,0,0.96);
 }
 
-/* General Styles*/
-body {
-  background-image: url(https://images.pexels.com/photos/373974/pexels-photo-373974.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-}
+
