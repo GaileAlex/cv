@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {LanguageService} from "../../service/language.service";
+import {Router} from "@angular/router";
 
 declare function main(): any;
 
@@ -11,11 +12,15 @@ declare function main(): any;
 })
 
 export class MenuComponent implements OnInit {
-  constructor(private translate: TranslateService, private languageService: LanguageService) {
+  pageId: string;
+
+  constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router) {
   }
 
   ngOnInit() {
     main();
+    this.pageId = this.router.routerState.snapshot.url;
+
     this.translate.setDefaultLang(this.languageService.getLanguage());
 
   }
@@ -27,5 +32,4 @@ export class MenuComponent implements OnInit {
   useLanguage(language: string) {
     this.languageService.setLanguage(language);
   }
-
 }

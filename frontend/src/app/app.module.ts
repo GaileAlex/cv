@@ -41,7 +41,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {MessagesModule} from "primeng/messages";
 import {MessageModule} from "primeng/message";
-import {RouterModule} from "@angular/router";
+import {ExtraOptions, RouterModule} from "@angular/router";
 import {LightboxModule} from "primeng/lightbox";
 
 defineLocale('ru', ruLocale);
@@ -50,6 +50,13 @@ defineLocale('en', enGbLocale);
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+const routerOptions: ExtraOptions = {
+  useHash: false,
+  scrollPositionRestoration: 'enabled',
+  anchorScrolling: 'enabled',
+  // ...any other options you'd like to use
+};
 
 @NgModule({
   declarations: [
