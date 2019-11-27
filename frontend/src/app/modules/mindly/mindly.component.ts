@@ -25,6 +25,7 @@ export class MindlyComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.portfolioService.findAll().subscribe(data => {
       this.portfolio = data;
     });

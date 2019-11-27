@@ -11,7 +11,7 @@ export class BooksService {
   private readonly booksUrl: string;
 
   constructor(private http: HttpClient) {
-    this.booksUrl = 'http://localhost:8080/librarian/';
+    this.booksUrl = 'http://localhost:8080/librarian';
   }
 
   public findAll(): Observable<Books[]> {

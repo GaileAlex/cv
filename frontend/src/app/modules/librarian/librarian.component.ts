@@ -7,12 +7,18 @@ import {DialogBoxComponent} from "../../components/dialog-box/dialog-box.compone
   templateUrl: './librarian.component.html',
   styleUrls: ['./librarian.component.css']
 })
-export class LibrarianComponent  {
+export class LibrarianComponent  implements OnInit{
 
   constructor(private modalService: NgbModal) {
   }
 
-  openDialog() {
-    this.modalService.open(DialogBoxComponent, {size: 'xl'});
+  ngOnInit(): void {
+    window.scrollTo(0, 0);
   }
+
+  openDialog() {
+        this.modalService.open(DialogBoxComponent, {size: 'xl'});
+  }
+
+
 }

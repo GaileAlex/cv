@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/librarian",
-        produces = "application/json")
-@CrossOrigin(origins = "*")
+@RequestMapping(path = "/librarian")
+@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class LibrarianController {
 
     private SearchService searchService;
@@ -26,19 +25,15 @@ public class LibrarianController {
         this.booksRepository = booksRepository;
     }
 
-    @GetMapping(produces = "application/json")
+    @GetMapping
     public List<Books> getSearchResults() throws java.text.ParseException {
-
         return searchService.filterOut();
     }
 
-    @PostMapping(path = "/{condition}",
-            produces = "application/json")
+    @PostMapping(path = "/{condition}")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity getJson(@RequestBody String filters, @PathVariable String condition) throws ParseException {
-
         searchService = new SearchService(booksRepository, new JsonParse(filters).parse(), condition);
-
         return new ResponseEntity(HttpStatus.OK);
     }
 }
