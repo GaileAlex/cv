@@ -43,6 +43,11 @@ import {MessagesModule} from "primeng/messages";
 import {MessageModule} from "primeng/message";
 import {ExtraOptions, RouterModule} from "@angular/router";
 import {LightboxModule} from "primeng/lightbox";
+import { LoginComponent } from './modules/login/login.component';
+import { RegistrationComponent } from './modules/registration/registration.component';
+import { BlogArticleComponent } from './modules/blog-article/blog-article.component';
+import { BlogComponent } from './modules/blog/blog.component';
+import { BlogAdminComponent } from './modules/blog-admin/blog-admin.component';
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -71,7 +76,12 @@ const routerOptions: ExtraOptions = {
     BooksComponent,
     LibrarianComponent,
     DialogBoxComponent,
-    ComboboxComponent
+    ComboboxComponent,
+    LoginComponent,
+    RegistrationComponent,
+    BlogArticleComponent,
+    BlogComponent,
+    BlogAdminComponent
   ],
   imports: [
     BrowserModule,

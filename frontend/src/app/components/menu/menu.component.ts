@@ -20,9 +20,10 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     main();
     this.pageId = this.router.routerState.snapshot.url;
-
+   if(this.router.routerState.snapshot.url.startsWith("/#")){
+     this.pageId="";
+   }
     this.translate.setDefaultLang(this.languageService.getLanguage());
-
   }
 
   getLanguage() {
