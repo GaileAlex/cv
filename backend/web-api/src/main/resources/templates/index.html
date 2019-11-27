@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="en">
+
+<div th:include="page-templates/header"></div>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<!-- Header -->
+<header id="header">
+    <div class="intro">
+        <div class="container">
+            <div class="row">
+                <div class="intro-text">
+                    <h1>Hello, I'm <span class="name">Aleksei Gaile</span></h1>
+                    <p>Java Developer</p>
+                    <a href="#about" class="btn btn-default btn-lg page-scroll">Learn More</a></div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Navigation -->
+
+<div id="nav">
+    <nav class="navbar navbar-custom">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i></button>
+                <a class="navbar-brand page-scroll" href="#page-top">Aleksei Gaile</a></div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden"><a href="#page-top"></a></li>
+                    <li><a class="page-scroll" href="#about">About</a></li>
+                    <li><a class="page-scroll" href="#portfolio">Portfolio</a></li>
+                    <li><a class="page-scroll" href="#resume">Experience</a></li>
+                    <li><a class="page-scroll" th:href="@{/blog}">Blog</a></li>
+                    <li class="dropdown"><a href="#" class="hvr-underline-from-center  dropdown-toggle"
+                                            data-toggle="dropdown">Spring projects<span class="caret"></span></a>
+                        <ul class="dropdown-menu  multi-level" role="menu" aria-labelledby="dropdownMenu"
+                            style="background-color: rgba(0,0,0,0.96);">
+                            <li><a th:href="@{/blog}" class="hvr-underline-from-center "
+                                   style="color: #58c1ff; margin-bottom: 5px;">Blog</a></li>
+                            <li><a th:href="@{/mindly/home}" class="hvr-underline-from-center "
+                                   style="color: #58c1ff; margin-bottom: 5px;">Test task "Crypto Portfolio"</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="page-scroll" href="#contact">Contact</a></li>
+                    <li><a th:href="@{/ru}"
+                    ><img th:src="@{/img/rus.png}" alt="about-image"></a>
+                    </li>
+                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" role="button" class="btn btn-inverse"
+                                                              data-toggle="modal"
+                                                              style="color: #58c1ff;">Login</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/login}" role="button" class="btn btn-inverse"
+                                                             data-toggle="modal"
+                                                             style="color: #58c1ff;"><p sec:authentication="name"></p>
+                    </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin-blog}" role="button"
+                                                                 class="btn btn-inverse"
+                                                                 data-toggle="modal"
+                                                                 style="color: #58c1ff;"><p>Admin panel</p>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- About Section -->
+<div id="about">
+    <div class="container">
+        <div class="section-title text-center center">
+            <h2>About Me</h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center"><img th:src="@{/img/about.jpg}" class="img-responsive"></div>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="about-text">
+                    <p>
+
+                        Skills: <br>HTML, CSS, MySQL, PostgreSQL, Maven, JUnit,
+                        Java SE,
+                        JavaFX, Java EE, Spring boot, Spring Security, Thymeleaf, GitHub, Agile Methodologies,
+                        Integrated Development
+                        Environment -
+                        Intellij IDEA.<br><br>
+
+                        Developed:<br><br>
+
+                        - Creating a search engine. Search for books in the library according to the specified criteria.<br>
+                        Spring, Angular.<br>
+                        <a class="btn-link" href="https://github.com/GaileAlex/librarian"
+                           target="blank">https://github.com/GaileAlex/librarian.</a><br><br>
+
+                        - This site, the following technologies are used HTML, CSS, Spring boot, Spring Security,
+                        Thymeleaf, Hibernate, PostgreSQL, Maven (blocks - "Blog" and "Spring projects"). The site is
+                        hosted on its own hosting managed by the
+                        Tomcat server.<br>
+                        <a class="btn-link" href="https://github.com/GaileAlex/cv"
+                           target="blank">https://github.com/GaileAlex/cv.</a><br><br>
+
+                        - Test task "Crypto Portfolio".<br>
+                        Backend system is written in Java using Spring Boot framework,<br>
+                        Database to store the portfolio data is PostgreSQL.<br>
+                        Backend system serves all the services via JSON microservice.<br>
+                        Frontend layer uses PrimeNG and AngularJS and communicates with backend by calling JSON rest
+                        services.<br>
+                        Link - <a class="btn-link" href="https://github.com/GaileAlex/mindly"
+                                  target="blank">https://github.com/GaileAlex/mindly.</a><br><br>
+
+                        These applications and code can be viewed
+                        <a class="btn-link" href="https://github.com/GaileAlex"
+                           target="blank">https://github.com/GaileAlex.</a>
+                        <br><br>
+                        Sociable, fast learning, punctual. I devote all my free time to self-study.</p>
+
+                    <p class="text-center"><a class="btn btn-primary" th:href="@{/img/CV Aleksei Gaile.pdf}"
+                                              target="_blank"><i class="fa fa-download"></i>Download Resume</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Section -->
+
+<div id="portfolio">
+    <div class="container">
+        <div class="section-title text-center center">
+            <h2>Portfolio</h2>
+            <hr>
+        </div>
+        <div class="categories">
+            <ul class="cat">
+                <li>
+                    <ol class="type">
+                        <li><a href="#" data-filter="*" class="active">All</a></li>
+                        <li><a href="#" data-filter=".web">Web Design</a></li>
+                        <li><a href="#" data-filter=".app">App Development</a></li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+            <div class="portfolio-items">
+                <div class="col-sm-6 col-md-4 col-lg-4 web">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/01-large.jpg}" title="Website creation"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>Website creation</h4>
+                                <small>Web Design</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/01-small.jpg}" class="img-responsive" alt="Website creation">
+                        </a>
+                        </div>
+                    </div>
+                    <p class="text-center">Website creation. Practice 2018.
+                    </p>
+                    <p class="text-center"><a class="btn btn-port" href="https://ivkoolitus.ee/"
+                                              target="_blank">Go to the site</a></p>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 web">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/librarian.png}"
+                                                 title="Librarian"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>Librarian</h4>
+                                <small>Web Development</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/librarian-small.png}" class="img-responsive"
+                                 alt="Librarian">
+                        </a>
+                        </div>
+                    </div>
+                    <p class="text-center">Creating a search engine. 2019 г.
+                    <p class="text-center"><a class="btn btn-port" href="https://github.com/GaileAlex/librarian"
+                                              target="_blank">View code</a></p>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 app">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/05-large.jpg}" title="Мини игра для дочки"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>Mini game for the daughter</h4>
+                                <small>App Development</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/05-small.jpg}" class="img-responsive"
+                                 alt="Mini game for the daughter"> </a>
+                        </div>
+                    </div>
+                    <p class="text-center">"Learning to Count" game. 2018.</p>
+                    <p class="text-center"><a class="btn btn-port" th:href="@{/img/Arithmetic.jar}"
+                                              target="_blank">Download</a></p>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 app">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/06-large.jpg}"
+                                                 title="ShopEmulation application"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>Shop Emulation</h4>
+                                <small>App Development</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/06-small.jpg}" class="img-responsive"
+                                 alt="ShopEmulation application">
+                        </a>
+                        </div>
+                    </div>
+                    <p class="text-center">Development of an automated test script.<br>
+
+                        The graphic part is JavaFX, data is stored in the data.csv file, as well as in the MySQL
+                        database,
+                        it is possible to switch between data storage options.<br>2019.</p>
+                    <p class="text-center"><a class="btn btn-port" th:href="@{/img/ShopEmulation.zip}"
+                                              target="_blank">Download</a></p>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 web">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/08-large.jpg}" title="Website creation"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>Website creation</h4>
+                                <small>Web Design</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/08-small.jpg}" class="img-responsive" alt="Website creation">
+                        </a>
+                        </div>
+                    </div>
+                    <p class="text-center">Test task "Crypto Portfolio".<br>Spring boot, Thymeleaf, PostgreSQL, Json.
+                        <br>2019
+                    </p>
+                    <p class="text-center"><a class="btn btn-port" th:href="@{/mindly/home}"
+                                              target="_blank">View</a></p>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 app">
+                    <div class="portfolio-item">
+                        <div class="hover-bg"><a th:href="@{/img/portfolio/04-large.jpg}" title="GoSwift"
+                                                 rel="prettyPhoto">
+                            <div class="hover-text">
+                                <h4>GoSwift</h4>
+                                <small>App Development</small>
+                            </div>
+                            <img th:src="@{/img/portfolio/04-small.jpg}" class="img-responsive"
+                                 alt="GoSwift application"> </a>
+                        </div>
+                    </div>
+                    <p class="text-center">GoSwift - application for tracking the live queue on the border of Estonia.
+                        You can
+                        specify your conditions in the queue of vehicles or waiting time, at which point the application
+                        will give you a signal. The application collects data from the site
+                        https://www.estonianborder.eu/. The Jsoup library is used. Created by JavaFx.<br> 2018.</p>
+                    <p class="text-center"><a class="btn btn-port" th:href="@{/img/GoSwift.jar}"
+                                              target="_blank">Download</a></p><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Resume Section -->
+<div id="resume" class="text-center">
+    <div class="container">
+        <div class="section-title center">
+            <h2>Experience</h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline">
+                    <li class="timeline">
+                        <div class="timeline-image">
+                            <h4>2016<br>
+                                - <br>
+                                2017 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>LLC «ALLIANCE»</h4>
+                                <h4 class="subheading">Web developer</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-left"><br>
+                                    - Sites markup.<br>
+                                    - Customer interaction.<br>
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>2012 <br>
+                                - <br>
+                                2016 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>LLC "Impulse"</h4>
+                                <h4 class="subheading">Deputy Director</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-left"><br>
+                                    Construction company<br><br>
+                                    - Independently created a company website.<br>
+                                    - Created a network and electronic document management.<br>
+                                    - Increased the company's revenue more than four times.<br>
+                                    - Established relationships with suppliers.<br>
+                                    - Increased the number of regular customers.<br><br>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline">
+                        <div class="timeline-image">
+                            <h4>2001<br>
+                                - <br>
+                                2012 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>ZAO "PSK "Rus"</h4>
+                                <h4 class="subheading">CEO</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-left"><br>
+                                    Construction company<br><br>
+                                    - Founded the company.<br>
+                                    - Assembled a talented team of professionals.<br>
+                                    - Established relationships with suppliers.<br>
+                                    - Collected a portfolio of orders.<br>
+                                    - Found large corporate clients.<br><br>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section-title center">
+            <h2>Education</h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline">
+
+                    <!-- Education Section-->
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>2017 <br>
+                                - <br>
+                                2019 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Ida-Virumaa Kutsehariduskeskus</h4>
+                                <h4 class="subheading">Secondary education</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Software Developer.<br><br>
+                                    During my studies I studied the following technologies - HTML, CSS, MySQL,
+                                    PostgreSQL, Hibernate, Maven, JUnit, Java SE, JavaFX, Spring boot, Spring Security,
+                                    Thymeleaf, GitHub, Agile Methodologies.<br><br>
+
+                                    Developed:<br><br>
+
+                                    - Application for tracking live queues at the border. JavaFX, Jsoup (the program
+                                    parses the data from the site <a class="btn-link"
+                                                                     href="https://www.estonianborder.eu"
+                                                                     target="blank">https://www.estonianborder.eu.</a>)
+                                    -
+                                    <a class="btn-link" href="https://github.com/GaileAlex/GoSwift"
+                                       target="blank">https://github.com/GaileAlex/GoSwift.</a><br><br>
+
+                                    - The application emulates the store operation (test task found on the
+                                    Internet).JavaFx, MySQL - <a class="btn-link"
+                                                                 href="https://github.com/GaileAlex/Shop-Emulation"
+                                                                 target="blank">https://github.com/GaileAlex/Shop-Emulation</a><br><br>
+
+                                    Thesis:<br>
+                                    - CV website creation, the following technologies are used: HTML, CSS, Spring boot,
+                                    Spring Security, Thymeleaf, Hibernate, PostgreSQL, Maven. The site is hosted on its
+                                    own hosting managed by the Tomcat server.
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <h4>2015 <br>
+                                - <br>
+                                2015 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Сourses</h4>
+                                <h4 class="subheading">"Training Center "Connesance"</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Estimated business in construction.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>2010 <br>
+                                - <br>
+                                2010 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Сourses</h4>
+                                <h4 class="subheading">"Status"</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Network administrator (Windows Server).</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <h4>1990 <br>
+                                - <br>
+                                1996 </h4>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Baltic State Technical University "Voenmeh" D.F.Ustinov</h4>
+                                <h4 class="subheading">Higher education</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Master's degree. Rocket Engine Mechanical Engineer.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:include="page-templates/footer"></div>
+
+</body>
+</html>
