@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/librarian")
+@RequestMapping("/librarian")
 @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class LibrarianController {
 
@@ -28,6 +28,12 @@ public class LibrarianController {
     @GetMapping
     public List<Books> getSearchResults() throws java.text.ParseException {
         return searchService.filterOut();
+    }
+
+    @GetMapping("/find-all")
+    public ResponseEntity<List<Books>> findAll() {
+        List<Books> books= (List<Books>) booksRepository.findAll();
+        return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
     @PostMapping(path = "/{condition}")

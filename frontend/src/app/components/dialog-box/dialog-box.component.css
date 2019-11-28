@@ -1,9 +1,10 @@
+
 .mat-dialog-container {
   overflow: hidden;
   height: 470px;
   width: 1000px;
   padding: -0px !important;
-  position: relative;
+  position: center;
 }
 
 .modal-header {
@@ -11,7 +12,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   display: block;
   height: 60px;
-}
+  }
 
 .modal-header h4 {
   margin: 0;

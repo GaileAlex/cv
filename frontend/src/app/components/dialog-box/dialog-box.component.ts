@@ -10,7 +10,6 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./dialog-box.component.css']
 })
 export class DialogBoxComponent implements OnInit {
-
   formFilter: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private bookService: BooksService,
@@ -32,14 +31,27 @@ export class DialogBoxComponent implements OnInit {
     this.bookService.save(this.formFilter.controls['filterForm'].value, this.formFilter.controls['condition'].value)
       .subscribe(
         () => {
-          this.router.navigate(['books']);
+          this.router.navigate(['/books', "filter"]);
           this.closeClick();
         },
         () => {
-          this.router.navigate(['books']);
+          this.router.navigate(['/books', "filter"]);
           this.closeClick();
         });
   }
+
+  findAll() {
+    this.bookService.findAll().subscribe(
+      () => {
+        this.router.navigate(['books', "all"]);
+        this.closeClick();
+      },
+      () => {
+        this.router.navigate(['books', "all"]);
+        this.closeClick();
+      });
+  }
+
 
   closeClick(): void {
     this.activeModal.close();

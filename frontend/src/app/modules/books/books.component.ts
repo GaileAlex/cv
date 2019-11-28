@@ -16,8 +16,19 @@ export class BooksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.booksService.findAll().subscribe(data => {
-      this.books = data;
+    this.route.params.subscribe(params=>{
+      if(params.param==="filter"){
+        this.booksService.findForFilter().subscribe(data => {
+          this.books = data;
+        });
+      }
+      if(params.param==="all"){
+        this.booksService.findAll().subscribe(data => {
+          this.books = data;
+        });
+      }
     });
+
+
   }
 }

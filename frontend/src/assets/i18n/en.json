@@ -55,6 +55,25 @@
       "education-4.description": "Master's degree. Rocket Engine Mechanical Engineer."
     }
   },
+  "mindly": {
+    "add.new": "Add a new portfolio item",
+    "choose.cryptocurrency": "Choose cryptocurrency",
+    "amount": "Amount",
+    "date": "Date of purchase",
+    "wallet.location": "Wallet location",
+    "portfolio": "Portfolio",
+    "cryptocurrency": "Cryptocurrency",
+    "current": "Current market value (EUR)",
+    "option": "Option",
+    "description": "Test task description can be found here"
+  },
+  "librarian": {
+    "welcome": "Welcome",
+    "click.text": "Click the button and select a filter to search.",
+    "search": "Search",
+    "unfortunately": "Unfortunately",
+    "no.result": "No results were found for your search."
+  },
   "footer": {
     "contact": "Contact"
   }

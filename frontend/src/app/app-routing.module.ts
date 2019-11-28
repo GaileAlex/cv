@@ -11,7 +11,7 @@ export const routes: Routes = [
   {path: '', component: StartPageComponent},
   {path: 'mindly', component: MindlyComponent,},
   {path: 'librarian', component: LibrarianComponent},
-  {path: 'books', component: BooksComponent},
+  {path: 'books/:param', component: BooksComponent},
   {path: '**', component: NotFoundComponent}
 ];
 
