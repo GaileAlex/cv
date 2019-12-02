@@ -8,12 +8,14 @@ import ee.gaile.repository.librarian.BooksRepository;
 import ee.gaile.service.librarian.search.date.DateSearchList;
 import ee.gaile.service.librarian.search.date.DateSearchRepository;
 import ee.gaile.service.librarian.search.text.SearchByAuthorOrTitle;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 public class SearchService {
 
