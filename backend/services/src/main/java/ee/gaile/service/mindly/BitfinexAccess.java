@@ -1,4 +1,4 @@
-package ee.gaile.service;
+package ee.gaile.service.mindly;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

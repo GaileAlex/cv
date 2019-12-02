@@ -2,7 +2,7 @@ package ee.gaile.controller.mindly;
 
 import ee.gaile.repository.entity.mindly.Portfolio;
 import ee.gaile.repository.mindly.PortfolioRepository;
-import ee.gaile.service.BitfinexAccess;
+import ee.gaile.service.mindly.BitfinexAccess;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
