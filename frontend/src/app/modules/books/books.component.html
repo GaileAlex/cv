@@ -14,7 +14,7 @@
   <div class="container p_100_top" *ngIf="books!=undefined&&books.length === 0">
     <div class="row mt-5">
       <div class="col-lg-12">
-        <h3><b>Unfortunately.</b></h3>
+        <h3><b>{{'librarian.unfortunately'|translate}}</b></h3>
         <h3 class="p_50"><b>{{'librarian.no.result'|translate}}</b></h3>
       </div>
     </div>
@@ -41,7 +41,7 @@
   </div>
 
   <div class="p_50">
-    <button pButton label="Back" class="ui-button-raised" [routerLink]="['/librarian']"></button>
+    <button pButton label="{{'librarian.back'|translate}}" class="ui-button-raised" [routerLink]="['/librarian']"></button>
   </div>
 </div>
 

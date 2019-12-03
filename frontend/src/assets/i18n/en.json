@@ -72,7 +72,8 @@
     "click.text": "Click the button and select a filter to search.",
     "search": "Search",
     "unfortunately": "Unfortunately",
-    "no.result": "No results were found for your search."
+    "no.result": "No results were found for your search.",
+    "back": "Back"
   },
   "footer": {
     "contact": "Contact"
