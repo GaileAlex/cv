@@ -1113,8 +1113,9 @@ span.validationError {
   margin-left: 5px;
 }
 
-
-
+.modal.fade .modal-dialog {
+  transform: translate(0, 50px);
+}
 
 
 
