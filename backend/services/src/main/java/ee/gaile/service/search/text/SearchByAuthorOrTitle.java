@@ -1,4 +1,4 @@
-package ee.gaile.service.librarian.search.text;
+package ee.gaile.service.search.text;
 
 
 

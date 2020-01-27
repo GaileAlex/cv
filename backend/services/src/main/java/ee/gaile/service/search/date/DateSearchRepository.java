@@ -1,6 +1,4 @@
-package ee.gaile.service.librarian.search.date;
-
-
+package ee.gaile.service.search.date;
 
 import ee.gaile.repository.entity.models.Books;
 import ee.gaile.repository.entity.models.SelectedFilter;
@@ -12,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DateSearchRepository {
-
     private SelectedFilter selectedFilter;
     private final BooksRepository booksRepository;
 
@@ -28,7 +25,6 @@ public class DateSearchRepository {
      * @throws ParseException
      */
     public List<Books> search() throws ParseException {
-
         List<Books> foundBooks = new ArrayList<>();
 
         switch (selectedFilter.getConditionOption()) {
@@ -36,7 +32,6 @@ public class DateSearchRepository {
                 foundBooks = booksRepository.findAllByReleaseDate(new SimpleDateFormat("yyyy").
                         parse(selectedFilter.getYear()));
                 break;
-
             case "Begin with":
                 foundBooks = booksRepository.findAllWithReleaseDateBefore(new SimpleDateFormat("yyyy").
                         parse(selectedFilter.getYear()));

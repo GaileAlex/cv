@@ -1,6 +1,4 @@
-package ee.gaile.service.librarian;
-
-
+package ee.gaile.service;
 
 import ee.gaile.repository.entity.models.SelectedFilter;
 import org.json.simple.JSONArray;
@@ -12,9 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonParse {
-
     private final String json;
-
     public JsonParse(String json) {
         this.json = json;
     }
@@ -26,22 +22,16 @@ public class JsonParse {
      * @throws ParseException
      */
     public List<SelectedFilter> parse() throws ParseException {
-
         List<SelectedFilter> selectedFilterList = new ArrayList<>();
-
         Object obj = new JSONParser().parse(json);
-
         JSONObject jo = (JSONObject) obj;
-
         JSONArray searchOptions = (JSONArray) jo.get("selectedFilter");
 
         for (Object searchOption : searchOptions) {
             JSONObject body = (JSONObject) searchOption;
-
             if (body.get("textRequest").toString().isEmpty() && !body.get("searchArea").toString().equals("Date")) {
                 continue;
             }
-
             selectedFilterList.add(new SelectedFilter(
                     body.get("searchArea").toString(),
                     body.get("conditionOption").toString(),

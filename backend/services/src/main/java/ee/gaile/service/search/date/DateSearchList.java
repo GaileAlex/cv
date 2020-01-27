@@ -1,5 +1,4 @@
-package ee.gaile.service.librarian.search.date;
-
+package ee.gaile.service.search.date;
 
 import ee.gaile.repository.entity.models.Books;
 import ee.gaile.repository.entity.models.SelectedFilter;
@@ -11,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 public class DateSearchList {
-
     private List<Books> booksListForSearch;
     private SelectedFilter selectedFilter;
 
@@ -27,11 +25,9 @@ public class DateSearchList {
      * @throws ParseException
      */
     public List<Books> search() throws ParseException {
-
         List<Books> foundBooks = new ArrayList<>();
 
         switch (selectedFilter.getConditionOption()) {
-
             case "Contains":
                 for (Books books : booksListForSearch) {
 
@@ -41,7 +37,6 @@ public class DateSearchList {
                     }
                 }
                 break;
-
             case "Begin with":
                 for (Books books : booksListForSearch) {
                     Date filterDate = new SimpleDateFormat("yyyy").parse(selectedFilter.getYear());

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {DialogBoxComponent} from "../../components/dialog-box/dialog-box.component";
 
@@ -7,7 +7,7 @@ import {DialogBoxComponent} from "../../components/dialog-box/dialog-box.compone
   templateUrl: './librarian.component.html',
   styleUrls: ['./librarian.component.css']
 })
-export class LibrarianComponent  implements OnInit{
+export class LibrarianComponent implements OnInit {
 
   constructor(private modalService: NgbModal) {
   }
@@ -17,8 +17,6 @@ export class LibrarianComponent  implements OnInit{
   }
 
   openDialog() {
-        this.modalService.open(DialogBoxComponent, {size: 'xl'});
+    this.modalService.open(DialogBoxComponent, {size: 'xl'});
   }
-
-
 }

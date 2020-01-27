@@ -14,15 +14,11 @@ export class BooksService {
     this.booksUrl = 'http://localhost:8080/librarian';
   }
 
-  public findForFilter(): Observable<Books[]> {
-    return this.http.get<Books[]>(this.booksUrl);
-  }
-
   public findAll(): Observable<Books[]> {
     return this.http.get<Books[]>(this.booksUrl + '/find-all');
   }
 
-  public save(filters, condition) {
-    return this.http.post<any>(`${this.booksUrl}/${condition}`, filters)
+  public applyFilter(filters, condition) {
+    return this.http.post<Books[]>(`${this.booksUrl}/${condition}`, filters)
   }
 }

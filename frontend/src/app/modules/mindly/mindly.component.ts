@@ -75,7 +75,6 @@ export class MindlyComponent implements OnInit {
     this.portfolioObject = this.inputForm.value;
     if (this.inputForm.valid) {
       this.portfolioService.save(this.portfolioObject).subscribe(result => this.ngOnInit());
-      console.log('form submitted');
     }
   }
 }

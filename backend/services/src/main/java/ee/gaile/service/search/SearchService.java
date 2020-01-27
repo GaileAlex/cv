@@ -1,11 +1,12 @@
-package ee.gaile.service.librarian.search;
+package ee.gaile.service.search;
 
 import ee.gaile.repository.entity.models.Books;
 import ee.gaile.repository.entity.models.SelectedFilter;
 import ee.gaile.repository.librarian.BooksRepository;
-import ee.gaile.service.librarian.search.date.DateSearchList;
-import ee.gaile.service.librarian.search.date.DateSearchRepository;
-import ee.gaile.service.librarian.search.text.SearchByAuthorOrTitle;
+import ee.gaile.service.search.date.DateSearchList;
+import ee.gaile.service.search.date.DateSearchRepository;
+import ee.gaile.service.search.text.SearchByAuthorOrTitle;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -13,16 +14,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class SearchService {
-
     private final BooksRepository booksRepository;
-    private List<SelectedFilter> selectedFilterList;
-    private final String condition;
 
-    public SearchService(BooksRepository booksRepository, List<SelectedFilter> selectedFilterList, String condition) {
+    public SearchService(BooksRepository booksRepository) {
         this.booksRepository = booksRepository;
-        this.selectedFilterList = selectedFilterList;
-        this.condition = condition;
     }
 
     /**
@@ -31,9 +28,8 @@ public class SearchService {
      * @return a list of books based on all filters.
      * @throws ParseException
      */
-    public List<Books> filterOut() throws ParseException {
-
-        List<Books> booksList = (List<Books>) booksRepository.findAll();
+    public List<Books> filterOut(List<SelectedFilter> selectedFilterList, String condition) throws ParseException {
+        List<Books> booksList = booksRepository.findAll();
 
         if (selectedFilterList.isEmpty()) {
             booksList.clear();
@@ -41,11 +37,9 @@ public class SearchService {
         }
 
         if (condition.equals("allConditions") || condition.equals("noneOfTheCondition")) {
-
             List<Books> tempList = new ArrayList<>(booksList);
 
             for (SelectedFilter selectedFilter : selectedFilterList) {
-
                 switch (selectedFilter.getSearchArea()) {
                     case "Author":
                     case "Title":
@@ -63,11 +57,9 @@ public class SearchService {
                 booksList.addAll(tempList);
             }
         } else {
-
             Set<Books> temp = new HashSet<>();
 
             for (SelectedFilter selectedFilter : selectedFilterList) {
-
                 switch (selectedFilter.getSearchArea()) {
                     case "Author":
                     case "Title":
