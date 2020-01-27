@@ -1,6 +1,7 @@
 package ee.gaile.repository.librarian;
 
 import ee.gaile.repository.entity.models.Books;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface BooksRepository extends CrudRepository<Books, Long> {
+public interface BooksRepository extends JpaRepository<Books, Long> {
 
     List<Books> findAllByReleaseDate(Date releaseDate);
 

@@ -35,7 +35,7 @@ public class RegistrationController {
     @PostMapping
     public String processRegistration(RegistrationForm form, Model model) {
         String mistakeValid;
-        List<User> userList = (List<User>) userRepo.findAll();
+        List<User> userList = userRepo.findAll();
 
         for (User user : userList) {
             if (user.getUsername().equals(form.getUsername())) {

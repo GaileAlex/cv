@@ -3,8 +3,8 @@ package ee.gaile.controller.mindly;
 import ee.gaile.repository.entity.mindly.Portfolio;
 import ee.gaile.repository.mindly.PortfolioRepository;
 import ee.gaile.service.mindly.BitfinexAccess;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +19,11 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path = "/mindly-data",
         produces = "application/json")
-@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
+@CrossOrigin(exposedHeaders = "Access-Control-Allow-Origin")
+@AllArgsConstructor
 public class MindlyController {
     private final PortfolioRepository portfolioRepository;
-
-    @Autowired
-    public MindlyController(PortfolioRepository portfolioRepository) {
-        this.portfolioRepository = portfolioRepository;
-    }
+    private final BitfinexAccess bitfinexAccess;
 
     /**
      * getting data from the database, calculating the value of the currency
@@ -36,12 +33,12 @@ public class MindlyController {
      */
     @GetMapping(produces = "application/json")
     public ResponseEntity<List<Portfolio>> getPortfolio() throws IOException {
-        List<Portfolio> portfolioList = (List<Portfolio>) portfolioRepository.findAll();
-
+        List<Portfolio> portfolioList = portfolioRepository.findAll();
         for (Portfolio portfolio : portfolioList) {
             portfolio.setCurrentMarketValue(portfolio.getAmount()
-                    .multiply(new BitfinexAccess(portfolio.getCryptocurrency()).getPrice()));
+                    .multiply(bitfinexAccess.getCurrency(portfolio.getCryptocurrency())));
         }
+
         return new ResponseEntity<>(portfolioList, HttpStatus.OK);
     }
 
@@ -57,6 +54,7 @@ public class MindlyController {
         if (portfolio.getDateOfPurchase() == null) {
             portfolio.setDateOfPurchase(new Date());
         }
+
         return portfolioRepository.save(portfolio);
     }
 

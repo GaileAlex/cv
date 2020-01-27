@@ -32,7 +32,7 @@ public class LibrarianController {
 
     @GetMapping("/find-all")
     public ResponseEntity<List<Books>> findAll() {
-        List<Books> books= (List<Books>) booksRepository.findAll();
+        List<Books> books= booksRepository.findAll();
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
@@ -40,6 +40,6 @@ public class LibrarianController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity getJson(@RequestBody String filters, @PathVariable String condition) throws ParseException {
         searchService = new SearchService(booksRepository, new JsonParse(filters).parse(), condition);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }
