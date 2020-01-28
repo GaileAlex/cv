@@ -1,7 +1,7 @@
 package ee.gaile.controller.mindly;
 
 import ee.gaile.repository.entity.mindly.Portfolio;
-import ee.gaile.service.BitfinexAccess;
+import ee.gaile.service.BitfinexAccessService;
 import ee.gaile.service.RepositoryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class MindlyController {
 
-    private final BitfinexAccess bitfinexAccess;
+    private final BitfinexAccessService bitfinexAccessService;
     private RepositoryService repositoryService;
 
     /**
@@ -37,7 +37,7 @@ public class MindlyController {
         List<Portfolio> portfolioList = repositoryService.getAllPortfolio();
         for (Portfolio portfolio : portfolioList) {
             portfolio.setCurrentMarketValue(portfolio.getAmount()
-                    .multiply(bitfinexAccess.getCurrency(portfolio.getCryptocurrency())));
+                    .multiply(bitfinexAccessService.getCurrency(portfolio.getCryptocurrency())));
         }
 
         return portfolioList;

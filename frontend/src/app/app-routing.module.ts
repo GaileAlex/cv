@@ -5,12 +5,14 @@ import {NotFoundComponent} from "./modules/not-found/not-found.component";
 import {MindlyComponent} from "./modules/mindly/mindly.component";
 import {LibrarianComponent} from "./modules/librarian/librarian.component";
 import {BooksComponent} from "./modules/books/books.component";
+import {BlogComponent} from "./modules/blog/blog.component";
 
 
 export const routes: Routes = [
   {path: '', component: StartPageComponent},
   {path: 'mindly', component: MindlyComponent,},
   {path: 'librarian', component: LibrarianComponent},
+  {path: 'blog', component: BlogComponent},
   {path: 'books/:param', component: BooksComponent},
   {path: '**', component: NotFoundComponent}
 ];

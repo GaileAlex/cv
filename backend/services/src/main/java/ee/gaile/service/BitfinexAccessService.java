@@ -21,7 +21,7 @@ import java.util.HashMap;
  */
 @Service
 @EnableScheduling
-public class BitfinexAccess {
+public class BitfinexAccessService {
     private HashMap<String, BigDecimal> currencyMap = new HashMap<>();
 
     /**

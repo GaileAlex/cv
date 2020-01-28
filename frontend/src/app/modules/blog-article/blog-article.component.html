@@ -1,1 +1,94 @@
-<p>blog-article works!</p>
+<!--
+<app-menu></app-menu>
+&lt;!&ndash;================Blog Main Area =================&ndash;&gt;
+
+<section class="blog_main_area p_100">
+  <div class="container jumbotron">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="blog_main_inner">
+          <div class="blog_main_item">
+            <div class="blog_img mx-auto text-center">
+              <img class="img-thumbnail mx-auto d-block"
+                   src="@{'data:image/jpeg;base64,'+${images.get(blog.getId())}}" alt=""/>
+
+              <div class="blog_date">
+                <h4 text="${#dates.format(blog.getDate(), 'dd')}">29</h4>
+                <h5 text="${#dates.format(blog.getDate(), 'MMMM, yyyy')}">October, 2017</h5>
+              </div>
+
+            </div>
+            <div class="blog_text">
+
+              <a><h4 class="text-center" text="${blog.getHeadline()}">Headline.</h4></a>
+              <p text="${blog.getArticle()}">Article.</p>
+
+              <br><br>
+              &lt;!&ndash; ================Comments Blog Main Area================&ndash;&gt;
+              <div >
+                <form object="${comments}" method="POST" action="@{/article}"
+                      role="form">
+                  <h2>Comments</h2>
+                  <div class="form-group">
+                    <label for="comment">Write a comment
+                      <span>*</span></label>
+
+                    <textarea field="*{comment}" class="form-control " rows="3"
+
+                              id="comment"></textarea>
+                  </div>
+                  <span class="validationError"
+                        if="${#fields.hasErrors('comment')}"
+                        errors="*{comment}"></span>
+                  <div>
+                    <input type="hidden" name="articleId" id="blog" value="${blog.getId()}"/>
+                    <button type="submit" class="btn btn-port">Send</button>
+                    <br><br>
+                  </div>
+                </form>
+                <div authorize="!isAuthenticated()">
+                  <h2>Comments</h2>
+                  <div class="form-group">
+                    <label for="comment">Only authorized users
+                      can comment.
+                      <span>*</span></label>
+                    <textarea class="form-control " rows="3"
+                              readonly
+                    ></textarea>
+                  </div>
+                </div>
+
+                <block each="comment : ${blog.getItems()}">
+                  <div class="tab-pane fade in " id="Reviews" style="background-color: #F9F9F9;">
+
+                    <div class="clearfix">
+                      <div>
+                        <strong text="${comment.getUsername()}">Bob</strong>
+                        <em text="${#dates.format(comment.getDate(), 'dd MMMM yyyy - HH:mm')}">30/12/2013
+                          - 07:37</em>
+                        <div data-rateit-value="5"></div>
+                      </div>
+                      <div>
+                        <p utext="${comment.getComment()}">Sed velit quam, auctor id
+                          semper a, hendrerit eget justo. Cum sociis
+                          natoque penatibus et magnis dis parturient montes, nascetur
+                          ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in
+                          orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies
+                          tristique, enim mauris bibendum orci, a sodales lectus purus ut
+                          lorem.</p>
+                      </div>
+                    </div>
+                  </div>
+                </block>
+              </div>
+              &lt;!&ndash; ================End Blog Main Area =================&ndash;&gt;
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>
+-->
