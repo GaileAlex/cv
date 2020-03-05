@@ -1,13 +1,10 @@
 {
-  "login.button": "Logi sisse",
-  "logout.button": "Logi välja",
-  "http.error": {
-    "sso": "SSO viga"
-  },
+  "login.button": "Login",
+  "logout.button": "Logout",
   "menu": {
     "about": "обо мне",
-    "portfolio": "портфолио",
     "experience": "опыт",
+    "education": "Образование",
     "blog": "блог",
     "spring.projects": "spring проекты",
     "test.crypto": "Тестовое задание \"Crypto Portfolio\"",
@@ -39,8 +36,8 @@
     },
     "experience": {
       "experience": "Опыт",
-      "job-1": " <h4>ООО «АЛЬЯНС»</h4>\n                                <h4 class=\"subheading\">Web developer</h4>",
-      "job-1.description": "<br>\n                                    - Верстка сайтов.<br>\n                                    - Взаимодействие с заказчиками.<br>\n                                    <br>",
+      "job-1": " <h4>WISERCAT SOFTWARE OÜ</h4>\n                                <h4 class=\"subheading\">Junior Software Developer</h4>",
+      "job-1.description": "<br>\n                                    - Разработка программного обеспечения с использованием новейших технологий.<br>\n                   - Разработка новых функций для существующих проектов.<br>\n        - Улучшение, рефакторинг и поддержка существующей кодовой базы.<br><br> Серверная часть: Java, Spring Boot, Hibernate, PostgreSQL, Git, Docker.<br> Фронтенд: Angular, React.",
       "job-2": "<h4>ООО \"Импульс\" </h4>\n                                <h4 class=\"subheading\">Заместитель директора</h4>",
       "job-2.description": "<br>\n                                    Строительная компания<br><br>\n                                    - Самостоятельно создал сайт компании.<br>\n                                    - Наладил сеть и электронный документооборот.<br>\n                                    - Увеличил выручку компании более чем в четыре раза.<br>\n                                    - Наладил связи с поставщиками.<br>\n                                    - Увеличил количество постоянных клиентов.<br><br>",
       "job-3": "<h4>ЗАО \"ПСК \"Русь\" </h4>\n                                <h4 class=\"subheading\">Генеральный директор</h4>",

@@ -31,9 +31,7 @@
             "scripts": [
               "src/assets/js/jquery.1.11.1.js",
               "src/assets/js/bootstrap.js",
-              "src/assets/js/jquery.prettyPhoto.js",
               "src/assets/js/main.js",
-              "src/assets/js/jquery.isotope.js"
             ]
           },
           "configurations": {
