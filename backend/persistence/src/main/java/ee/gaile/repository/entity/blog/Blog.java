@@ -1,5 +1,6 @@
 package ee.gaile.repository.entity.blog;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -44,6 +45,7 @@ public class Blog {
 
     @OneToMany(mappedBy = "blog", fetch = FetchType.EAGER, orphanRemoval = true)
     @Singular
+    @JsonIgnore
     private List<Comments> items = new ArrayList<>();
 
 }

@@ -1,5 +1,6 @@
 package ee.gaile.repository.entity.blog;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Comments implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "comment_blog")
+    @JsonIgnore
     private Blog blog;
 
     @NotBlank(message = "Comment is required")
