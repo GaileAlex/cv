@@ -1,7 +1,7 @@
 --liquibase formatted sql
---changeset gaile:v0001_table_book
+--changeset gaile:v0002_table_books
 
-create table book (
+create table books (
     id bigint not null,
     book_title character varying(200),
     book_article character varying(200),
