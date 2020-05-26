@@ -1,4 +1,3 @@
-/*
 package ee.gaile.repository.entity.mindly;
 
 import lombok.AllArgsConstructor;
@@ -30,7 +29,6 @@ public class Portfolio {
     @Column(name = "mindly_crypto_currency")
     private String cryptocurrency;
 
-    @NotNull(message = "Amount name is required")
     @NumberFormat
     @Column(name = "mindly_amount", length = 20)
     private BigDecimal amount;
@@ -39,11 +37,9 @@ public class Portfolio {
     @Column(name = "mindly_date_of_purchase")
     private Date dateOfPurchase;
 
-    @NotBlank(message = "Wallet location is required")
     @Column(name = "mindly_walletLocation", length = 100)
     private String walletLocation;
 
     @Transient
     BigDecimal currentMarketValue;
 }
-*/

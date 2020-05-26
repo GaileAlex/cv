@@ -1,4 +1,3 @@
-/*
 package ee.gaile.service.search.text;
 
 
@@ -19,13 +18,11 @@ public class SearchByAuthorOrTitle {
         this.selectedFilter = selectedFilter;
     }
 
-    */
-/**
+    /**
      * Searches for books in the list in accordance with the terms of the user by author and title
      *
      * @return a list of books according to search terms
-     *//*
-
+     */
     public List<Books> search() {
 
         List<Books> foundBooks = new ArrayList<>();
@@ -69,4 +66,3 @@ public class SearchByAuthorOrTitle {
         return foundBooks;
     }
 }
-*/

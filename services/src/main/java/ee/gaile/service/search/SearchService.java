@@ -1,4 +1,3 @@
-/*
 package ee.gaile.service.search;
 
 import ee.gaile.repository.entity.models.Books;
@@ -23,14 +22,12 @@ public class SearchService {
         this.booksRepository = booksRepository;
     }
 
-    */
-/**
+    /**
      * Performs filtering based on user selected conditions.
      *
      * @return a list of books based on all filters.
      * @throws ParseException
-     *//*
-
+     */
     public List<Books> filterOut(List<SelectedFilter> selectedFilterList, String condition) throws ParseException {
         List<Books> booksList = booksRepository.findAll();
 
@@ -80,4 +77,3 @@ public class SearchService {
         return booksList;
     }
 }
-*/

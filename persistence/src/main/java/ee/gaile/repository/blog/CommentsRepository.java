@@ -1,4 +1,3 @@
-/*
 package ee.gaile.repository.blog;
 
 import ee.gaile.repository.entity.blog.Comments;
@@ -11,4 +10,3 @@ import java.util.UUID;
 @Repository
 public interface CommentsRepository extends JpaRepository<Comments, UUID> {
 }
-*/

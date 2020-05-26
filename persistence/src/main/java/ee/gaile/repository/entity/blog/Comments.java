@@ -1,4 +1,3 @@
-/*
 package ee.gaile.repository.entity.blog;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,7 +31,6 @@ public class Comments implements Serializable {
     @JsonIgnore
     private Blog blog;
 
-    @NotBlank(message = "Comment is required")
     @Column(name = "blog_comment", length = 2000)
     private String comment;
 
@@ -48,4 +46,3 @@ public class Comments implements Serializable {
         this.date = new Date();
     }
 }
-*/

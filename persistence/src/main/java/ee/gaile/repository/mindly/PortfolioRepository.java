@@ -1,4 +1,3 @@
-/*
 package ee.gaile.repository.mindly;
 
 import ee.gaile.repository.entity.mindly.Portfolio;
@@ -11,4 +10,3 @@ import java.util.UUID;
 @Repository
 public interface PortfolioRepository extends JpaRepository<Portfolio, UUID> {
 }
-*/

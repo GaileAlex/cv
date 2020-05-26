@@ -1,4 +1,3 @@
-/*
 package ee.gaile.repository.entity.blog;
 
 import lombok.*;
@@ -58,4 +57,3 @@ public class User implements UserDetails {
         return true;
     }
 }
-*/

@@ -1,4 +1,3 @@
-/*
 package ee.gaile.service.search.date;
 
 import ee.gaile.repository.entity.models.Books;
@@ -19,14 +18,12 @@ public class DateSearchRepository {
         this.selectedFilter = selectedFilter;
     }
 
-    */
-/**
+    /**
      * Searches for books in the repository according to user conditions
      *
      * @return a list of books based on a date selected by the user
      * @throws ParseException
-     *//*
-
+     */
     public List<Books> search() throws ParseException {
         List<Books> foundBooks = new ArrayList<>();
 
@@ -43,4 +40,3 @@ public class DateSearchRepository {
         return foundBooks;
     }
 }
-*/

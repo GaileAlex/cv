@@ -1,4 +1,3 @@
-/*
 package ee.gaile.service;
 
 import ee.gaile.repository.entity.mindly.Portfolio;
@@ -35,4 +34,3 @@ public class RepositoryService {
         portfolioRepository.deleteById(deleteItem);
     }
 }
-*/
