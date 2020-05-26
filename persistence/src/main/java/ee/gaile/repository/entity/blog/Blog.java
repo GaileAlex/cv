@@ -1,14 +1,16 @@
 package ee.gaile.repository.entity.blog;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
+import lombok.Singular;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,10 +20,9 @@ import java.util.UUID;
 public class Blog {
 
     @Id
-    @Column(name = "blog_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid2")
-    @Type(type = "uuid-char")
-    private UUID id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "blog_headline", length = 2000)
     private String headline;
@@ -37,9 +38,9 @@ public class Blog {
     @Column(name = "blog_date")
     private Date date;
 
-    /*@OneToMany(mappedBy = "blog", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "blog", fetch = FetchType.EAGER, orphanRemoval = true)
     @Singular
     @JsonIgnore
-    private List<Comments> items = new ArrayList<>();*/
+    private List<Comments> items = new ArrayList<>();
 
 }

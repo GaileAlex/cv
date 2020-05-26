@@ -1,3 +1,4 @@
+/*
 package ee.gaile.repository.blog;
 
 import ee.gaile.repository.entity.blog.User;
@@ -11,3 +12,4 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
     User findByUsername(String username);
 }
+*/

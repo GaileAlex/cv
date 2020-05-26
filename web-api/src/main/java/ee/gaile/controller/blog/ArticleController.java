@@ -29,7 +29,7 @@ public class ArticleController {
     private final BlogRepository blogRepository;
     private final CommentsRepository commentsRepository;
     private List<Comments> listComments;
-    private Map<UUID, String> imageMap;
+    private Map<Long, String> imageMap;
     private Blog blog;
 
     @Autowired

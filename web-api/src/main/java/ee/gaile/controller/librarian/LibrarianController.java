@@ -1,4 +1,3 @@
-/*
 package ee.gaile.controller.librarian;
 
 import ee.gaile.repository.entity.models.Books;
@@ -34,4 +33,3 @@ public class LibrarianController {
         return searchService.filterOut(new JsonParse(filters).parse(), condition);
     }
 }
-*/

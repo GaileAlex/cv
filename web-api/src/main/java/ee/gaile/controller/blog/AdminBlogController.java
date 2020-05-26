@@ -41,7 +41,7 @@ public class AdminBlogController {
         listComments = (List<Comments>) commentsRepository.findAll();
         List<Blog> listBlog = (List<Blog>) blogRepository.findAll();
         Collections.reverse(listBlog);
-        Map<UUID, String> imageMap = new HashMap<>();
+        Map<Long, String> imageMap = new HashMap<>();
         byte[] encode;
 
         for (Blog blog : listBlog) {

@@ -30,7 +30,7 @@ public class RepositoryService {
         return portfolioRepository.save(portfolio);
     }
 
-    public void deletePortfolioById(UUID deleteItem) {
+    public void deletePortfolioById(Long deleteItem) {
         portfolioRepository.deleteById(deleteItem);
     }
 }

@@ -1,7 +1,11 @@
+/*
 package ee.gaile.repository.entity.blog;
 
-import lombok.*;
-import org.hibernate.annotations.Type;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
@@ -18,10 +21,10 @@ import java.util.UUID;
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
-    @Column(name = "users_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid2")
-    @Type(type = "uuid-char")
-    private UUID id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private Long id;
 
     @Column(name = "users_username", length = 30, unique = true)
     private final String username;
@@ -57,3 +60,4 @@ public class User implements UserDetails {
         return true;
     }
 }
+*/

@@ -1,4 +1,4 @@
-package ee.gaile.configuration;
+/*package ee.gaile.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,4 +18,4 @@ public class WebConfig implements WebMvcConfigurer {
     public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
-}
+}*/

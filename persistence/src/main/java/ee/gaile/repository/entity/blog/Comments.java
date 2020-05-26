@@ -4,14 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -21,10 +18,9 @@ import java.util.UUID;
 public class Comments implements Serializable {
 
     @Id
-    @Column(name = "comments_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid2")
-    @Type(type = "uuid-char")
-    private UUID id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "comment_blog")

@@ -29,8 +29,8 @@ public class BlogController {
     @GetMapping
     public String goToBlog(Model model) {
         List<Blog> listBlog;
-        Map<UUID, String> imageMap;
-        listBlog = (List<Blog>) blogRepository.findAll();
+        Map<Long, String> imageMap;
+        listBlog = blogRepository.findAll();
         Collections.reverse(listBlog);
 
         imageMap = new HashMap<>();

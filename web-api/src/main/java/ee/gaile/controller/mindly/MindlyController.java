@@ -1,4 +1,3 @@
-/*
 package ee.gaile.controller.mindly;
 
 import ee.gaile.repository.entity.mindly.Portfolio;
@@ -24,19 +23,16 @@ import java.util.UUID;
 public class MindlyController {
 
     private final BitfinexAccessService bitfinexAccessService;
-    private RepositoryService repositoryService;
+    private final RepositoryService repositoryService;
 
-    */
-/**
+    /**
      * getting data from the database, calculating the value of the currency
      *
      * @return List<Portfolio>
-     * @throws IOException
-     *//*
-
+     */
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<Portfolio> getPortfolio() throws IOException {
+    public List<Portfolio> getPortfolio() {
         List<Portfolio> portfolioList = repositoryService.getAllPortfolio();
         for (Portfolio portfolio : portfolioList) {
             portfolio.setCurrentMarketValue(portfolio.getAmount()
@@ -46,14 +42,12 @@ public class MindlyController {
         return portfolioList;
     }
 
-    */
-/**
+    /**
      * saving object to database
      *
      * @param portfolio get object
      * @return save to DB
-     *//*
-
+     */
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public Portfolio addPortfolioItem(@RequestBody Portfolio portfolio) {
@@ -64,14 +58,12 @@ public class MindlyController {
         return repositoryService.savePortfolio(portfolio);
     }
 
-    */
-/**
+    /**
      * @param deleteItem id portfolio
-     *//*
-
+     */
     @DeleteMapping("/{deleteItem}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID deleteItem) {
+    public void delete(@PathVariable Long deleteItem) {
         try {
             repositoryService.deletePortfolioById(deleteItem);
         } catch (EmptyResultDataAccessException e) {
@@ -79,4 +71,3 @@ public class MindlyController {
         }
     }
 }
-*/

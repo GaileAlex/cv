@@ -32,18 +32,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>3.8.6</version>
         </dependency>
     </dependencies>
 
@@ -54,15 +53,10 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.8.4</version>
                 <configuration>
-                    <propertyFile>${basedir}/src/main/resources/liquibase.properties</propertyFile>
+                    <propertyFile>${basedir}/src/main/resources/db/changelog/liquibase.properties</propertyFile>
                     <changeLogFile>${basedir}/src/main/resources/db/changelog/changelog-master.xml</changeLogFile>
                 </configuration>
                 <dependencies>
-                    <dependency>
-                        <groupId>org.liquibase</groupId>
-                        <artifactId>liquibase-core</artifactId>
-                        <version>3.8.6</version>
-                    </dependency>
                     <dependency>
                         <groupId>org.liquibase.ext</groupId>
                         <artifactId>liquibase-hibernate5</artifactId>
@@ -71,7 +65,22 @@
                     <dependency>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-starter-data-jpa</artifactId>
-                        <version>2.2.0.RELEASE</version>
+                        <version>2.1.5.RELEASE</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>javax.validation</groupId>
+                        <artifactId>validation-api</artifactId>
+                        <version>2.0.1.Final</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                        <version>3.24.0-GA</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.yaml</groupId>
+                        <artifactId>snakeyaml</artifactId>
+                        <version>1.12</version>
                     </dependency>
                 </dependencies>
             </plugin>

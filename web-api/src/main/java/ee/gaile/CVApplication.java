@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.PropertySource;
 
-@PropertySource(value = "file:config/cv-api.properties", ignoreResourceNotFound = true)
 @SpringBootApplication
 @EntityScan({"ee.gaile.repository.entity"})
 public class CVApplication extends SpringBootServletInitializer {
