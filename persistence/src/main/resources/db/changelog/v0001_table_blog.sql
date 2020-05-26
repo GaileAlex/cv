@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset gaile:v0001_table_blog
+--changeset gaile:v0001_table_blog.sql
 
 create table blog (
     id uuid not null,
