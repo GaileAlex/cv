@@ -8,8 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -17,16 +17,25 @@ import java.util.UUID;
 public class RepositoryService {
     private final BooksRepository booksRepository;
     private final PortfolioRepository portfolioRepository;
+    private final BitfinexAccessService bitfinexAccessService;
 
     public List<Books> getAllBooks() {
         return booksRepository.findAll();
     }
 
     public List<Portfolio> getAllPortfolio() {
-        return portfolioRepository.findAll();
+        List<Portfolio> portfolioList = portfolioRepository.findAll();
+        for (Portfolio portfolio : portfolioList) {
+            portfolio.setCurrentMarketValue(portfolio.getAmount()
+                    .multiply(bitfinexAccessService.getCurrency(portfolio.getCryptocurrency())));
+        }
+        return portfolioList;
     }
 
     public Portfolio savePortfolio(Portfolio portfolio) {
+        if (portfolio.getDateOfPurchase() == null) {
+            portfolio.setDateOfPurchase(new Date());
+        }
         return portfolioRepository.save(portfolio);
     }
 

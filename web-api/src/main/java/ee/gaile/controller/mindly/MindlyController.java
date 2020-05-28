@@ -1,7 +1,6 @@
 package ee.gaile.controller.mindly;
 
 import ee.gaile.repository.entity.mindly.Portfolio;
-import ee.gaile.service.BitfinexAccessService;
 import ee.gaile.service.RepositoryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,10 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -21,8 +17,6 @@ import java.util.UUID;
 @CrossOrigin(exposedHeaders = "Access-Control-Allow-Origin")
 @AllArgsConstructor
 public class MindlyController {
-
-    private final BitfinexAccessService bitfinexAccessService;
     private final RepositoryService repositoryService;
 
     /**
@@ -33,13 +27,8 @@ public class MindlyController {
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<Portfolio> getPortfolio() {
-        List<Portfolio> portfolioList = repositoryService.getAllPortfolio();
-        for (Portfolio portfolio : portfolioList) {
-            portfolio.setCurrentMarketValue(portfolio.getAmount()
-                    .multiply(bitfinexAccessService.getCurrency(portfolio.getCryptocurrency())));
-        }
 
-        return portfolioList;
+        return repositoryService.getAllPortfolio();
     }
 
     /**
@@ -51,9 +40,6 @@ public class MindlyController {
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public Portfolio addPortfolioItem(@RequestBody Portfolio portfolio) {
-        if (portfolio.getDateOfPurchase() == null) {
-            portfolio.setDateOfPurchase(new Date());
-        }
 
         return repositoryService.savePortfolio(portfolio);
     }
