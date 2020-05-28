@@ -8,7 +8,7 @@ Portfolio website, the following technologies used Spring boot, Spring Security,
 ## Prerequisites
 The following technologies required:
   * Java 8 (OpenJDK)
-  * Postgres 9.6+
+  * Postgres 11.8+
 
 ## Building & setup
 
