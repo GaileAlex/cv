@@ -1,5 +1,38 @@
-- Portfolio website creation, the following technologies are used HTML, CSS, Spring boot, Spring Security, Thymeleaf, Hibernate, PostgreSQL, Docker, Maven. 
+# **CV**
 
-- The site is hosted on its own hosting managed by the Tomcat server.
+![logo](frontend/src/assets/img/about.jpg)
 
-- <!--  Link - https://gaile.ee   -->
+## Introduction
+Portfolio website, the following technologies used Spring boot, Spring Security, Hibernate, PostgreSQL, Docker, Liquibase, Maven. 
+
+## Prerequisites
+The following technologies required:
+  * Java 8 (OpenJDK)
+  * Postgres 9.6+
+
+## Building & setup
+
+TODO: here describe whole build process
+
+Before you start developing a project, you need to make sure that you have installed a maven and the PostgreSQL database
+
+Follow the steps below:
+1. Check database version postgresql
+2. Create user postgres with password cv
+
+## Development
+
+Start docker containers with test databases
+```
+docker-compose up
+```
+
+Start UI dev server
+```
+cd frontend/
+npm install
+npm start
+
+```
+
+
