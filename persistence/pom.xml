@@ -17,10 +17,6 @@
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMdd-HHmmssSSS</maven.build.timestamp.format>
-
-            <lombok.version>1.18.12</lombok.version>
-            <spring-boot-starter-data-jpa.version>2.2.0.RELEASE</spring-boot-starter-data-jpa.version>
-            <postgresql.version>42.2.9</postgresql.version>
     </properties>
 
     <dependencies>
@@ -94,11 +90,6 @@
                     <logging>info</logging>
                 </configuration>
                 <dependencies>
-                    <dependency>
-                        <groupId>org.liquibase</groupId>
-                        <artifactId>liquibase-core</artifactId>
-                        <version>3.8.6</version>
-                    </dependency>
                     <dependency>
                         <groupId>org.liquibase.ext</groupId>
                         <artifactId>liquibase-hibernate5</artifactId>

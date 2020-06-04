@@ -7,7 +7,6 @@ create table blog (
     blog_article int8,
     blog_image varbit,
     blog_date timestamp
-
 );
 
 

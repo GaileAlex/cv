@@ -12,16 +12,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "Blog")
 @Table(name = "blog")
 public class Blog {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "blog_headline", length = 2000)
@@ -38,9 +38,10 @@ public class Blog {
     @Column(name = "blog_date")
     private Date date;
 
-    @OneToMany(mappedBy = "blog", fetch = FetchType.EAGER, orphanRemoval = true)
-    @Singular
-    @JsonIgnore
+    @OneToMany(targetEntity = Comments.class, cascade = {
+            CascadeType.ALL
+    })
+    @JoinColumn(name = "blog_hj")
     private List<Comments> items = new ArrayList<>();
 
 }

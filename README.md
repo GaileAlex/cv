@@ -18,7 +18,7 @@ Before you start developing a project, you need to make sure that you have insta
 
 Follow the steps below:
 1. Check database version postgresql
-2. Create user postgres with password cv
+2. Create user cv with password cv
 
 ## Development
 
