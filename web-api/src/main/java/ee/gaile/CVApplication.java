@@ -3,13 +3,10 @@ package ee.gaile;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-@SpringBootApplication(exclude = {
-        LiquibaseAutoConfiguration.class
-})
+@SpringBootApplication
 @EntityScan({"ee.gaile.repository.entity"})
 public class CVApplication extends SpringBootServletInitializer {
 
