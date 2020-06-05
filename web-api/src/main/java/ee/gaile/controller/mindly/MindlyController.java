@@ -1,7 +1,7 @@
 package ee.gaile.controller.mindly;
 
-import ee.gaile.repository.entity.mindly.Portfolio;
-import ee.gaile.service.RepositoryService;
+import ee.gaile.entity.mindly.Portfolio;
+import ee.gaile.service.MindlyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,7 +17,7 @@ import java.util.List;
 @CrossOrigin(exposedHeaders = "Access-Control-Allow-Origin")
 @AllArgsConstructor
 public class MindlyController {
-    private final RepositoryService repositoryService;
+    private final MindlyService mindlyService;
 
     /**
      * getting data from the database, calculating the value of the currency
@@ -28,7 +28,7 @@ public class MindlyController {
     @ResponseStatus(HttpStatus.OK)
     public List<Portfolio> getPortfolio() {
 
-        return repositoryService.getAllPortfolio();
+        return mindlyService.getAllPortfolio();
     }
 
     /**
@@ -41,7 +41,7 @@ public class MindlyController {
     @ResponseStatus(HttpStatus.CREATED)
     public Portfolio addPortfolioItem(@RequestBody Portfolio portfolio) {
 
-        return repositoryService.savePortfolio(portfolio);
+        return mindlyService.savePortfolio(portfolio);
     }
 
     /**
@@ -51,7 +51,7 @@ public class MindlyController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long deleteItem) {
         try {
-            repositoryService.deletePortfolioById(deleteItem);
+            mindlyService.deletePortfolioById(deleteItem);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
         }

@@ -1,4 +1,4 @@
-package ee.gaile.repository.entity.blog;
+package ee.gaile.entity.blog;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

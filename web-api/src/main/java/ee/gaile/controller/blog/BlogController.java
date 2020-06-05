@@ -1,8 +1,8 @@
 /*
 package ee.gaile.controller.blog;
 
-import ee.gaile.repository.blog.BlogRepository;
-import ee.gaile.repository.entity.blog.Blog;
+import ee.gaile.service.repository.blog.BlogRepository;
+import ee.gaile.service.repository.entity.blog.Blog;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

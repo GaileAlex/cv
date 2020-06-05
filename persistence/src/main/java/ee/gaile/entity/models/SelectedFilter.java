@@ -1,4 +1,4 @@
-package ee.gaile.repository.entity.models;
+package ee.gaile.entity.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

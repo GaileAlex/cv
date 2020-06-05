@@ -1,7 +1,7 @@
 /*
 package ee.gaile.configuration.security;
 
-import ee.gaile.repository.entity.blog.User;
+import ee.gaile.service.repository.entity.blog.User;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

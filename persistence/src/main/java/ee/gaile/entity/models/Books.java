@@ -1,6 +1,5 @@
-package ee.gaile.repository.entity.models;
+package ee.gaile.entity.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

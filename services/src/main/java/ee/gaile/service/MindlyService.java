@@ -1,9 +1,9 @@
 package ee.gaile.service;
 
-import ee.gaile.repository.entity.mindly.Portfolio;
-import ee.gaile.repository.entity.models.Books;
-import ee.gaile.repository.librarian.BooksRepository;
-import ee.gaile.repository.mindly.PortfolioRepository;
+import ee.gaile.entity.mindly.Portfolio;
+import ee.gaile.entity.models.Books;
+import ee.gaile.service.repository.librarian.BooksRepository;
+import ee.gaile.service.repository.mindly.PortfolioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 @Transactional
 @AllArgsConstructor
-public class RepositoryService {
+public class MindlyService {
     private final BooksRepository booksRepository;
     private final PortfolioRepository portfolioRepository;
     private final BitfinexAccessService bitfinexAccessService;

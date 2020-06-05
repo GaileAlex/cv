@@ -2,8 +2,8 @@
 package ee.gaile.controller;
 
 import ee.gaile.configuration.security.RegistrationForm;
-import ee.gaile.repository.blog.UserRepository;
-import ee.gaile.repository.entity.blog.User;
+import ee.gaile.service.repository.blog.UserRepository;
+import ee.gaile.service.repository.entity.blog.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

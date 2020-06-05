@@ -1,8 +1,8 @@
 package ee.gaile.service.search;
 
-import ee.gaile.repository.entity.models.Books;
-import ee.gaile.repository.entity.models.SelectedFilter;
-import ee.gaile.repository.librarian.BooksRepository;
+import ee.gaile.entity.models.Books;
+import ee.gaile.entity.models.SelectedFilter;
+import ee.gaile.service.repository.librarian.BooksRepository;
 import ee.gaile.service.search.date.DateSearchList;
 import ee.gaile.service.search.date.DateSearchRepository;
 import ee.gaile.service.search.text.SearchByAuthorOrTitle;

@@ -1,8 +1,8 @@
 package ee.gaile.service.search.date;
 
-import ee.gaile.repository.entity.models.Books;
-import ee.gaile.repository.entity.models.SelectedFilter;
-import ee.gaile.repository.librarian.BooksRepository;
+import ee.gaile.entity.models.Books;
+import ee.gaile.entity.models.SelectedFilter;
+import ee.gaile.service.repository.librarian.BooksRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

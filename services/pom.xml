@@ -38,6 +38,7 @@
             <artifactId>json-simple</artifactId>
             <version>${json-simple.version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

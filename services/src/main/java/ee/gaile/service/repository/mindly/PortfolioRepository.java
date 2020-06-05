@@ -1,6 +1,6 @@
-package ee.gaile.repository.mindly;
+package ee.gaile.service.repository.mindly;
 
-import ee.gaile.repository.entity.mindly.Portfolio;
+import ee.gaile.entity.mindly.Portfolio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

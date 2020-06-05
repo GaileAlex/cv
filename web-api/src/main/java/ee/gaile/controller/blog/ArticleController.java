@@ -1,11 +1,11 @@
 /*
 package ee.gaile.controller.blog;
 
-import ee.gaile.repository.blog.BlogRepository;
-import ee.gaile.repository.blog.CommentsRepository;
-import ee.gaile.repository.entity.blog.Blog;
-import ee.gaile.repository.entity.blog.Comments;
-import ee.gaile.repository.entity.blog.User;
+import ee.gaile.service.repository.blog.BlogRepository;
+import ee.gaile.service.repository.blog.CommentsRepository;
+import ee.gaile.service.repository.entity.blog.Blog;
+import ee.gaile.service.repository.entity.blog.Comments;
+import ee.gaile.service.repository.entity.blog.User;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

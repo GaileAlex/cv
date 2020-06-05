@@ -2,8 +2,8 @@ package ee.gaile.service.search.text;
 
 
 
-import ee.gaile.repository.entity.models.Books;
-import ee.gaile.repository.entity.models.SelectedFilter;
+import ee.gaile.entity.models.Books;
+import ee.gaile.entity.models.SelectedFilter;
 
 import java.util.ArrayList;
 import java.util.List;

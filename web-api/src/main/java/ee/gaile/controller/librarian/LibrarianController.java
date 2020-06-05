@@ -1,13 +1,12 @@
 package ee.gaile.controller.librarian;
 
-import ee.gaile.repository.entity.models.Books;
+import ee.gaile.entity.models.Books;
 import ee.gaile.service.JsonParse;
-import ee.gaile.service.RepositoryService;
+import ee.gaile.service.MindlyService;
 import ee.gaile.service.search.SearchService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LibrarianController {
     private final SearchService searchService;
-    private final RepositoryService repositoryService;
+    private final MindlyService repositoryService;
 
     @GetMapping("/find-all")
     public List<Books> findAll() {

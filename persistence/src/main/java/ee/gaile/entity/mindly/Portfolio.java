@@ -1,4 +1,4 @@
-package ee.gaile.repository.entity.mindly;
+package ee.gaile.entity.mindly;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

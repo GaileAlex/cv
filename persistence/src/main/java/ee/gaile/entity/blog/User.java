@@ -1,5 +1,5 @@
 /*
-package ee.gaile.repository.entity.blog;
+package ee.gaile.service.repository.entity.blog;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;

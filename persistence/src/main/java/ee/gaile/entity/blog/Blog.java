@@ -1,10 +1,8 @@
-package ee.gaile.repository.entity.blog;
+package ee.gaile.entity.blog;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Singular;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

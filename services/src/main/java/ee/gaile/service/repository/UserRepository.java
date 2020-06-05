@@ -1,7 +1,7 @@
 /*
-package ee.gaile.repository.blog;
+package ee.gaile.service.repository.blog;
 
-import ee.gaile.repository.entity.blog.User;
+import ee.gaile.service.repository.entity.blog.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

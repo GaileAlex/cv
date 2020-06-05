@@ -1,6 +1,6 @@
 package ee.gaile.service;
 
-import ee.gaile.repository.entity.models.SelectedFilter;
+import ee.gaile.entity.models.SelectedFilter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
