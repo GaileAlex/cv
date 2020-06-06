@@ -9,4 +9,19 @@
     <changeSet author="Gaile (generated)" id="1590702563826-3">
         <dropTable tableName="mindly"/>
     </changeSet>
+    <changeSet author="Gaile (generated)" id="1591334929835-1">
+        <dropForeignKeyConstraint baseTableName="comments" constraintName="fk9ygg35fyealdnh354ntcn7c9o"/>
+    </changeSet>
+    <changeSet author="Gaile (generated)" id="1591334929835-2">
+        <dropTable tableName="blog"/>
+    </changeSet>
+    <changeSet author="Gaile (generated)" id="1591334929835-3">
+        <dropTable tableName="books"/>
+    </changeSet>
+    <changeSet author="Gaile (generated)" id="1591334929835-4">
+        <dropTable tableName="comments"/>
+    </changeSet>
+    <changeSet author="Gaile (generated)" id="1591334929835-5">
+        <dropTable tableName="mindly"/>
+    </changeSet>
 </databaseChangeLog>
