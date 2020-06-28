@@ -15,7 +15,7 @@ services:
 
   cv-app:
     build: ./
-    container_name: cv
+    container_name: cv-app
     environment:
       - DB_SERVER=cv-postgres
       - POSTGRES_DB=db

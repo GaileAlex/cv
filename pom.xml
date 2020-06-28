@@ -25,13 +25,14 @@
         <cv.version>${project.version}</cv.version>
 
         <spring-boot-starter-data-jpa.version>2.2.0.RELEASE</spring-boot-starter-data-jpa.version>
-        <spring-boot-maven-plugin.version>2.1.9.RELEASE</spring-boot-maven-plugin.version>
+        <spring-boot-maven-plugin.version>2.2.4.RELEASE</spring-boot-maven-plugin.version>
     </properties>
 
     <modules>
-        <module>persistence</module>
-        <module>services</module>
+
         <module>web-api</module>
+        <module>services</module>
+        <module>persistence</module>
     </modules>
 
     <dependencies>
@@ -41,4 +42,6 @@
             <version>${lombok.version}</version>
         </dependency>
     </dependencies>
+
+
 </project>
