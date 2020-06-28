@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+
+  cv-postgres:
+    image: "postgres:12.3"
+    container_name: cv-postgres
+    volumes:
+      - ./cv-data:/var/lib/postgresql/data
+    ports:
+      - 5452:5432
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=cv
+      - POSTGRES_PASSWORD=cv-pass
+
+  cv-app:
+    build: ./
+    container_name: cv
+    environment:
+      - DB_SERVER=cv-postgres
+      - POSTGRES_DB=db
+      - POSTGRES_USER=cv
+      - POSTGRES_PASSWORD=cv-pass
+    ports:
+      - 8088:8088
+    links:
+      - cv-postgres
+
+  cv-ui:
+    build: ./frontend
+    container_name: cv-ui
+    ports:
+      - 4488:80
+    links:
+      - cv-app
+
+
+volumes:
+  cv-data:

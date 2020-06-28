@@ -12,7 +12,7 @@ export class PortfolioService {
 
 
   constructor(private http: HttpClient) {
-    this.portfolioUrl = 'http://localhost:8080/mindly-data';
+    this.portfolioUrl = 'http://localhost:8088/mindly-data';
   }
 
   public findAll(): Observable<Portfolio[]> {

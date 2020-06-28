@@ -32,7 +32,6 @@
         <module>persistence</module>
         <module>services</module>
         <module>web-api</module>
-        <module>frontend</module>
     </modules>
 
     <dependencies>
