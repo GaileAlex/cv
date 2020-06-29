@@ -12,4 +12,4 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 COPY cert.pem /etc/nginx/certs/cert.pem
 COPY key.pem /etc/nginx/certs/key.pem
 COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
-EXPOSE 80
+EXPOSE 80 443
