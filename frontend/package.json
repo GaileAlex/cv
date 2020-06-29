@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
+    "start": "ng serve --open --port 4405",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -21,12 +21,14 @@
     "@angular/platform-browser": "^8.2.14",
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/router": "^8.2.14",
+    "@auth0/angular-jwt": "^4.2.0",
     "@ng-bootstrap/ng-bootstrap": "^5.3.1",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "bootstrap": "^4.5.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
+    "moment-timezone": "^0.5.31",
     "ngb-modal": "^2.0.3",
     "ngx-bootstrap": "^5.6.1",
     "ngx-image-zoom": "^0.4.2",
@@ -44,7 +46,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.26",
+    "@angular-devkit/build-angular": "^0.803.27",
     "@angular/cli": "^8.3.26",
     "@angular/compiler-cli": "^8.2.14",
     "@angular/language-service": "^8.2.14",

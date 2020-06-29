@@ -1,14 +1,14 @@
-# **CV**
+# **Portfolio**
 
 ![logo](frontend/src/assets/img/about.jpg)
 
 ## Introduction
-Portfolio website, the following technologies used Spring boot, Spring Security, Hibernate, PostgreSQL, Docker, Liquibase, Maven. 
+Mindly website, the following technologies used Spring boot, Spring Security, Hibernate, PostgreSQL, Docker, Liquibase, Maven. 
 
 ## Prerequisites
 The following technologies required:
   * Java 8 (OpenJDK)
-  * Postgres 11.8+
+  * Postgres 11.2+
 
 ## Building & setup
 
@@ -18,7 +18,7 @@ Before you start developing a project, you need to make sure that you have insta
 
 Follow the steps below:
 1. Check database version postgresql
-2. Create user cv with password cv
+2. Create user cv with password pass
 
 ## Development
 

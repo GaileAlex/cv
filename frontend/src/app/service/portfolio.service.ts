@@ -1,31 +1,32 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Portfolio} from "../models/portfolio";
+import {Mindly} from "../models/mindly";
+import {Constants} from "../constants/appConstants";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class PortfolioService {
 
-  private portfolioUrl: string;
+    private readonly portfolioUrl: string;
+    private readonly deletePortfolioUrl: string;
 
+    constructor(private http: HttpClient) {
+        this.portfolioUrl = Constants.API_V1_PREFIX + '/mindly-data';
+        this.deletePortfolioUrl=this.portfolioUrl+'/delete';
+    }
 
-  constructor(private http: HttpClient) {
-    this.portfolioUrl = 'http://localhost:8080/mindly-data';
-  }
+    public findAll(): Observable<Mindly[]> {
 
-  public findAll(): Observable<Portfolio[]> {
+        return this.http.get<Mindly[]>(this.portfolioUrl);
+    }
 
-    return this.http.get<Portfolio[]>(this.portfolioUrl);
-  }
+    public save(portfolio: Mindly) {
+        return this.http.post<Mindly>(this.portfolioUrl, portfolio);
+    }
 
-  public save(portfolio: Portfolio) {
-    return this.http.post<Portfolio>(this.portfolioUrl, portfolio);
-  }
-
-  public deletePortfolio(portfolio) {
-    return this.http.delete(this.portfolioUrl + "/" + portfolio.id);
-  }
-
+    public deletePortfolio(portfolioId) {
+        return this.http.post<string>(`${this.deletePortfolioUrl}/${portfolioId}`,null);
+    }
 }

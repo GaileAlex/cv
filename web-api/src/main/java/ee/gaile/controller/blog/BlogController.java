@@ -16,7 +16,7 @@ import java.util.*;
 
 @Slf4j
 @Controller
-@RequestMapping("/blog")
+@RequestMapping(API_V1_PREFIX + "/blog")
 @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class BlogController {
     private final BlogRepository blogRepository;

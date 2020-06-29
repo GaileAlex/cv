@@ -8,8 +8,6 @@ import {LanguageService} from "./service/language.service";
   styleUrls: ['./app.component.css']
 })
 
-
-
 export class AppComponent {
   title = 'frontend';
 

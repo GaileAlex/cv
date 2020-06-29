@@ -1,9 +1,9 @@
 package ee.gaile.controller.librarian;
 
 import ee.gaile.entity.models.Books;
-import ee.gaile.service.JsonParse;
-import ee.gaile.service.MindlyService;
-import ee.gaile.service.search.SearchService;
+import ee.gaile.service.librarian.JsonParse;
+import ee.gaile.service.mindly.MindlyService;
+import ee.gaile.service.librarian.SearchService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
+
 @Slf4j
 @RestController
-@RequestMapping("/librarian")
-@CrossOrigin(exposedHeaders = "Access-Control-Allow-Origin")
+@RequestMapping(API_V1_PREFIX + "/librarian")
 @AllArgsConstructor
 public class LibrarianController {
     private final SearchService searchService;

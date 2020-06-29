@@ -61,7 +61,6 @@ const routerOptions: ExtraOptions = {
   useHash: false,
   scrollPositionRestoration: 'enabled',
   anchorScrolling: 'enabled',
-  // ...any other options you'd like to use
 };
 
 @NgModule({
@@ -126,7 +125,8 @@ const routerOptions: ExtraOptions = {
     NgbModule,
     LightboxModule,
   ],
-  providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal, BooksDataService],
+  providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal,
+    BooksDataService],
   bootstrap: [AppComponent],
   entryComponents: [DialogBoxComponent]
 })
