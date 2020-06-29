@@ -14,25 +14,11 @@ The following technologies required:
 
 TODO: here describe whole build process
 
-Before you start developing a project, you need to make sure that you have installed a maven and the PostgreSQL database
-
 Follow the steps below:
-1. Check database version postgresql
-2. Create user cv with password pass
+1. cd cv
+2. docker-compose up
+3. Go to http://localhost:4488/
 
-## Development
 
-Start docker containers with test databases
-```
-docker-compose up
-```
-
-Start UI dev server
-```
-cd frontend/
-npm install
-npm start
-
-```
 
 
