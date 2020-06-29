@@ -12,7 +12,8 @@ declare function main(): any;
 })
 
 export class MenuComponent implements OnInit {
-  pageId: string;
+    collapsed = true;
+    pageId: string;
 
   constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router) {
   }
