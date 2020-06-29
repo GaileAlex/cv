@@ -2,6 +2,7 @@ package ee.gaile.service.security;
 
 import ee.gaile.entity.models.User;
 import ee.gaile.service.repository.UserRepositoryTemp;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
-	@Autowired
     UserRepositoryTemp userRepository;
 
 	@Override
@@ -22,5 +23,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		return UserDetailsImpl.build(user);
 	}
-
 }

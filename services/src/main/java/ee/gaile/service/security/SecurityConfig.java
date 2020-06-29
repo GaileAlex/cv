@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-resources/**", "/v2/api-docs/**"
     };
 
-    private LoginService loginService;
+    private final LoginService loginService;
 
     public SecurityConfig(LoginService loginService) {
         this.loginService = loginService;

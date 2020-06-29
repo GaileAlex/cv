@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SelectedFilter {
-
     String searchArea;
 
     String conditionOption;
