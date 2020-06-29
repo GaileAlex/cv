@@ -9,5 +9,7 @@ RUN npm run build
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
 COPY default.conf /etc/nginx/conf.d/default.conf
+COPY cert.pem /etc/nginx/certs/cert.pem
+COPY key.pem /etc/nginx/certs/key.pem
 COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
 EXPOSE 80
