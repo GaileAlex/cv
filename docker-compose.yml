@@ -6,12 +6,15 @@ services:
     container_name: cv-postgres
     volumes:
       - ./cv-data:/var/lib/postgresql/data
+    expose:
+      - 5432
     ports:
-      - 5452:5432
+      - 5432:5432
     environment:
       - POSTGRES_DB=db
       - POSTGRES_USER=cv
       - POSTGRES_PASSWORD=cv-pass
+    restart: unless-stopped
 
   cv-app:
     build: ./
@@ -25,6 +28,7 @@ services:
       - 8088:8088
     links:
       - cv-postgres
+    restart: unless-stopped
 
   cv-ui:
     build: ./frontend
@@ -33,6 +37,7 @@ services:
       - 4488:80
     links:
       - cv-app
+    restart: unless-stopped
 
 
 volumes:
