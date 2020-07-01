@@ -1,4 +1,4 @@
-# **CV**
+# **Portfolio**
 
 ![logo](frontend/src/assets/img/about.jpg)
 
