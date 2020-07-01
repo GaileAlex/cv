@@ -13,9 +13,10 @@ The following technologies required:
 ## Building & setup
 
 Follow the steps below:
-1. cd cv
-2. docker-compose up
-3. Go to http://localhost:4488/
+1. install docker
+2. cd cv
+3. docker-compose up
+4. Go to http://localhost:4488/
 
 
 
