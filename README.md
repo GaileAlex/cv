@@ -3,7 +3,7 @@
 ![logo](frontend/src/assets/img/about.jpg)
 
 ## Introduction
-Portfolio website, the following technologies used Spring boot, Spring Security, Hibernate, PostgreSQL, Docker, Liquibase, Maven. 
+Portfolio website, the following technologies used Spring boot, Spring Security, Angular, Hibernate, PostgreSQL, Docker, Liquibase, Maven. 
 
 ## Prerequisites
 The following technologies required:
@@ -11,8 +11,6 @@ The following technologies required:
   * Postgres 11.8+
 
 ## Building & setup
-
-TODO: here describe whole build process
 
 Follow the steps below:
 1. cd cv
