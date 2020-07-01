@@ -33,8 +33,8 @@ public class LoginService {
     private static final String DEFAULT_LOCALE = "en-EN";
     private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
 
-    public static final String SIGN_IN_URL = "/api/auth/login";
-    public static final String SIGN_UP_URL = "/api/auth/signup";
+    public static final String LOGIN_URL = "/api/auth/login";
+    public static final String LOGOUT_URL = "/api/auth/logout";
     public static final String AUTH_REFRESH_URL = "/api/auth/refresh";
 
     public static final String HEADER_STRING = "Authorization";

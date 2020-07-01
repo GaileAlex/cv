@@ -50,10 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.POST, SIGN_IN_URL).permitAll()
-                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                .antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
+                .antMatchers(HttpMethod.POST, LOGOUT_URL).permitAll()
                 .antMatchers(HttpMethod.POST, AUTH_REFRESH_URL).permitAll()
-                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/**").authenticated()
+                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/blog").authenticated()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), loginService))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

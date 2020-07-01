@@ -13,9 +13,9 @@ import {ProtectedGuardService} from "./service/protectedGuard";
 
 export const routes: Routes = [
     {path: '', component: StartPageComponent},
-    {path: 'mindly', component: MindlyComponent, canActivate: [ProtectedGuardService]},
-    {path: 'librarian', component: LibrarianComponent, canActivate: [ProtectedGuardService]},
-    {path: 'blog', component: BlogComponent},
+    {path: 'mindly', component: MindlyComponent},
+    {path: 'librarian', component: LibrarianComponent},
+    {path: 'blog', component: BlogComponent, canActivate: [ProtectedGuardService]},
     {path: 'books/:param', component: BooksComponent},
     {path: 'login', component: LoginComponent},
     {path: 'registration', component: RegistrationComponent},

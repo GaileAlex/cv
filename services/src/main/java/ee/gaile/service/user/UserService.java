@@ -3,7 +3,6 @@ package ee.gaile.service.user;
 import ee.gaile.entity.enums.EnumRoles;
 import ee.gaile.entity.models.Role;
 import ee.gaile.entity.models.User;
-import ee.gaile.service.repository.RoleRepository;
 import ee.gaile.service.repository.UserRepositoryTemp;
 import ee.gaile.service.security.LoginService;
 import ee.gaile.service.security.request.LoginRequest;
@@ -27,7 +26,6 @@ import java.util.Set;
 public class UserService {
     private final LoginService loginService;
     private final UserRepositoryTemp userRepository;
-    private final RoleRepository roleRepository;
     private final PasswordEncoder encoder;
 
     public LoginRequest authUser(SignupRequest auth) throws ApiErrorException {

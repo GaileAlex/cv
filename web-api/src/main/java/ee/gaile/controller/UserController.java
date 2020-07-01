@@ -45,7 +45,7 @@ public class UserController {
         return userService.refreshAuth(authDTO, request);
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/logout")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         return userService.registerUser(signUpRequest);
     }
