@@ -12,6 +12,7 @@ import ee.gaile.service.repository.UserRepositoryTemp;
 import ee.gaile.service.security.settings.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
 import ee.gaile.service.user.UserService;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,9 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/auth")
+@AllArgsConstructor
 public class UserController {
-    protected Logger log = LoggerFactory.getLogger(this.getClass());
+    /*protected Logger log = LoggerFactory.getLogger(this.getClass());*/
 
     UserService userService;
 
@@ -45,7 +47,7 @@ public class UserController {
         return userService.refreshAuth(authDTO, request);
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         return userService.registerUser(signUpRequest);
     }

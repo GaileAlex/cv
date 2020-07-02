@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
   selector: 'login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private router: Router) {
+
+  constructor(private router: Router, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -25,21 +27,21 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    /*this.authService.login(this.form.username, this.form.password).subscribe(
+    this.authService.login(this.form.username, this.form.password).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
+       /* this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);*/
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
+       /* this.roles = this.tokenStorage.getUser().roles;*/
         this.reloadPage();
       },
       err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
-    );*/
+    );
   }
 
   reloadPage() {
