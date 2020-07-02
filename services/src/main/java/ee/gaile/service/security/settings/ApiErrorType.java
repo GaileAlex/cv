@@ -4,12 +4,10 @@ public enum ApiErrorType {
 
     ACCESS_TOKEN_EXPIRED("access_token_expired", "Access token expired"),
     REFRESH_TOKEN_EXPIRED("refresh_token_expired", "Refresh token expired"),
-    INVALID_CREDENTIALS("invalid_credentials", "Invalid credentials"),
-    VALIDATION_ERROR("validation_error", "Validation error"),
+    INVALID_USERNAME("invalid_username", "Invalid username"),
+    INVALID_PASSWORD("invalid_password", "Invalid password"),
     INVALID_ACCESS_TOKEN("invalid_access_token", "Invalid access token"),
-    INVALID_REFRESH_TOKEN("invalid_refresh_token", "Invalid refresh token"),
-    NOT_ALLOWED_FOR_THIS_PARTNER("not_allowed_fot_this_partner", "You are not allowed to change settings for this partner"),
-    DATA_ACCESS_EXCEPTION("data_access_exception", "Data access exception");
+    INVALID_REFRESH_TOKEN("invalid_refresh_token", "Invalid refresh token");
 
     private String code;
     private String message;

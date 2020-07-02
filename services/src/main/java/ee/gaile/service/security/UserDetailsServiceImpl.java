@@ -1,9 +1,8 @@
 package ee.gaile.service.security;
 
 import ee.gaile.entity.models.User;
-import ee.gaile.service.repository.UserRepositoryTemp;
+import ee.gaile.service.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
-    UserRepositoryTemp userRepository;
+    UserRepository userRepository;
 
 	@Override
 	@Transactional

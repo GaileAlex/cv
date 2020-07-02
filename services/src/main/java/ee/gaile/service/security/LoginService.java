@@ -1,19 +1,23 @@
 package ee.gaile.service.security;
 
+import ee.gaile.service.repository.UserRepository;
 import ee.gaile.service.security.request.LoginRequest;
 import ee.gaile.service.security.request.SignupRequest;
-
 import ee.gaile.service.security.settings.*;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -23,6 +27,7 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,28 +51,18 @@ public class LoginService {
     @Value("${security.jwt.key}")
     private String jwtSecureKeyProp;
 
-    private final SuperAdminConfig superAdminConfig;
     private final JWTTokenFactory jwtTokenFactory;
+
 
     private static final List<String> ALLOWED_LOCALES = Arrays.asList(
             "en-EN",
             "ru-RU"
     );
 
-    public LoginRequest authUser(SignupRequest auth) throws ApiErrorException {
+    public LoginRequest authUser(SignupRequest userDTO) throws ApiErrorException {
 
-        if (StringUtils.isEmpty(auth.getUsername()) || StringUtils.isEmpty(auth.getPassword())) {
-            throw new ApiErrorException(HttpStatus.FORBIDDEN, ApiErrorType.VALIDATION_ERROR);
-        }
 
-        AccountManagementModeParameters accountManagementModeParameters = new AccountManagementModeParameters();
-
-        SignupRequest userDTO = SignupRequest.builder()
-                .username(auth.getUsername())
-                .password(auth.getPassword())
-                .build();
-
-        Claims claims = getJWTClaims(userDTO, accountManagementModeParameters);
+        Claims claims = getJWTClaims(userDTO);
 
         AuthRefreshDTO authRefresh = new AuthRefreshDTO();
         authRefresh.setAccessToken(jwtTokenFactory.createAccessJwtToken(claims));
@@ -75,15 +70,13 @@ public class LoginService {
 
         LOG.info("Token was generated for userDTO name={}", userDTO.getUsername());
 
-
         return new LoginRequest(authRefresh, userDTO);
     }
 
-    private Claims getJWTClaims(SignupRequest user, AccountManagementModeParameters accountManagementModeParameters) {
+    private Claims getJWTClaims(SignupRequest user) {
         Claims claims = Jwts.claims();
         claims.setSubject(user.getUsername());
-        claims.put("roles", "userEntity");
-        claims.put("accountManagementMode", accountManagementModeParameters.getAccountManagementMode());
+        claims.put("roles", user.getRole());
 
         return claims;
     }
