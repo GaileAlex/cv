@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {LanguageService} from "../../service/language.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../../service/auth/auth.service";
 
 declare function main(): any;
 

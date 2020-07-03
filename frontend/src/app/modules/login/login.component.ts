@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-
   constructor(private router: Router, private authService: AuthService) {
   }
 
@@ -31,7 +30,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('roles', data.auth.refreshToken);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.reloadPage();
+        this.router.navigateByUrl('/blog');
       },
       err => {
         this.errorMessage = err.error.message;
@@ -42,8 +41,4 @@ export class LoginComponent implements OnInit {
 
   }
 
-  reloadPage() {
-    this.router.navigateByUrl('');
-  //  window.location.reload();
-  }
 }
