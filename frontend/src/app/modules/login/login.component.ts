@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/blog');
       },
       err => {
-        this.errorMessage = err.error.message;
+        this.errorMessage = err;
+          console.log(err)
         this.isLoginFailed = true;
         this.isLoggedIn = false;
       }
