@@ -13,17 +13,12 @@ export class BlogService {
 
   constructor(private http: HttpClient) {
     this.booksUrl = Constants.API_V1_PREFIX + '/blog';
-
   }
 
-
-
   public findAll():any {
-
-      this.http.get(this.booksUrl, {responseType: 'text'}).subscribe(result => {
+  return this.http.get(this.booksUrl, {responseType: 'text'}).subscribe(result => {
           console.log(result)
           this.blog= result;
-
       }, error => console.log(error));
   }
 }

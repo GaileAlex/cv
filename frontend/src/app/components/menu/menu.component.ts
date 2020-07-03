@@ -46,7 +46,9 @@ export class MenuComponent implements OnInit {
     }
 
     logout(){
-        this.authService.performLogout();
+      sessionStorage.setItem('user', '');
+      sessionStorage.setItem('accessToken', '');
+      sessionStorage.setItem('roles', '');
         this.router.navigate(['/']);
     }
 

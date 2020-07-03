@@ -14,7 +14,6 @@ export class RegistrationComponent implements OnInit {
   errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {
-
   }
 
   ngOnInit() {

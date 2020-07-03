@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {StartPageComponent} from './modules/start-page/start-page.component';
 import {MenuComponent} from './components/menu/menu.component';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {NotFoundComponent} from './modules/not-found/not-found.component';
@@ -49,6 +49,7 @@ import {BlogArticleComponent} from './modules/blog-article/blog-article.componen
 import {BlogComponent} from './modules/blog/blog.component';
 import {BlogAdminComponent} from './modules/blog-admin/blog-admin.component';
 import {BooksDataService} from "./service/booksData";
+import {JwtInterceptor} from "./service/auth/jwt.interceptor";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -126,7 +127,8 @@ const routerOptions: ExtraOptions = {
     LightboxModule,
   ],
   providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal,
-    BooksDataService],
+    BooksDataService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
   bootstrap: [AppComponent],
   entryComponents: [DialogBoxComponent]
 })
