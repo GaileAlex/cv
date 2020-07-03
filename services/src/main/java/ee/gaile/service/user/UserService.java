@@ -44,7 +44,6 @@ public class UserService {
                 new UsernamePasswordAuthenticationToken(signupRequest.getUsername(), signupRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         Set<String> roles = userDetails.getAuthorities().stream()

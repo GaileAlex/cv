@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static ee.gaile.service.security.LoginService.HEADER_STRING;
-import static ee.gaile.service.security.settings.JWTTokenFactory.TOKEN_TYPE;
+import static ee.gaile.service.security.settings.JwtUtils.TOKEN_TYPE;
 
 @Slf4j
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {

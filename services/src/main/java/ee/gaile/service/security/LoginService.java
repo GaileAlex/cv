@@ -1,6 +1,5 @@
 package ee.gaile.service.security;
 
-import ee.gaile.service.repository.UserRepository;
 import ee.gaile.service.security.request.LoginRequest;
 import ee.gaile.service.security.request.SignupRequest;
 import ee.gaile.service.security.settings.*;
@@ -12,12 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -27,7 +21,6 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +44,7 @@ public class LoginService {
     @Value("${security.jwt.key}")
     private String jwtSecureKeyProp;
 
-    private final JWTTokenFactory jwtTokenFactory;
+    private final JwtUtils jwtUtils;
 
 
     private static final List<String> ALLOWED_LOCALES = Arrays.asList(
@@ -60,13 +53,11 @@ public class LoginService {
     );
 
     public LoginRequest authUser(SignupRequest userDTO) throws ApiErrorException {
-
-
         Claims claims = getJWTClaims(userDTO);
 
         AuthRefreshDTO authRefresh = new AuthRefreshDTO();
-        authRefresh.setAccessToken(jwtTokenFactory.createAccessJwtToken(claims));
-        authRefresh.setRefreshToken(jwtTokenFactory.createRefreshToken(claims));
+        authRefresh.setAccessToken(jwtUtils.generateJwtToken(claims));
+        authRefresh.setRefreshToken(jwtUtils.createRefreshToken(claims));
 
         LOG.info("Token was generated for userDTO name={}", userDTO.getUsername());
 
@@ -88,8 +79,8 @@ public class LoginService {
             validateToken(refreshToken, request);
             Claims claims = Jwts.claims();
 
-            authDTO.setAccessToken(jwtTokenFactory.createAccessJwtToken(claims));
-            authDTO.setRefreshToken(jwtTokenFactory.createRefreshToken(claims));
+            authDTO.setAccessToken(jwtUtils.generateJwtToken(claims));
+            authDTO.setRefreshToken(jwtUtils.createRefreshToken(claims));
             return authDTO;
         } catch (io.jsonwebtoken.ExpiredJwtException e) {
             throw new ApiErrorException(HttpStatus.FORBIDDEN, ApiErrorType.REFRESH_TOKEN_EXPIRED);
@@ -127,11 +118,11 @@ public class LoginService {
         }
     }
 
-    public String getTestUsername() {
+    public String getUsername() {
         return testUsername;
     }
 
-    public String getTestPassword() {
+    public String getPassword() {
         return testPassword;
     }
 

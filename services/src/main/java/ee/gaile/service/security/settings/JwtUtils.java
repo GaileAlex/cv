@@ -2,58 +2,86 @@ package ee.gaile.service.security.settings;
 
 import ee.gaile.service.security.UserDetailsImpl;
 import io.jsonwebtoken.*;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.spec.SecretKeySpec;
+import java.security.Key;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Collections;
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class JwtUtils {
-	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-	@Value("${security.jwt.key}")
-	private String jwtSecret;
+    @Value("${security.jwt.key}")
+    private String jwtSecret;
 
-	@Value("${security.jwt.token.live.minutes}")
-	private int jwtExpirationMs;
+    @Value("${security.jwt.token.live.minutes}")
+    private int JWT_EXPIRATION;
 
     public static final String TOKEN_TYPE = "Bearer";
+    public static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
 
-	public String generateJwtToken(Authentication authentication) {
+    public String generateJwtToken(Claims claims) {
+        if (StringUtils.isBlank(claims.getSubject()))
+            throw new IllegalArgumentException("Cannot create JWT Token without subject");
 
-		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+        // Current time
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.systemDefault());
 
-		return Jwts.builder()
-				.setSubject((userPrincipal.getUsername()))
-				.setIssuedAt(new Date())
-				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-				.signWith(SignatureAlgorithm.HS512, jwtSecret)
-				.compact();
-	}
+        // Get expiration data
+        LocalDateTime expDateTime = currentTime.plusMinutes(JWT_EXPIRATION);
 
-	public String getUserNameFromJwtToken(String token) {
-		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
-	}
 
-	public boolean validateJwtToken(String authToken) {
-		try {
-			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
-			return true;
-		} catch (SignatureException e) {
-			logger.error("Invalid JWT signature: {}", e.getMessage());
-		} catch (MalformedJwtException e) {
-			logger.error("Invalid JWT token: {}", e.getMessage());
-		} catch (ExpiredJwtException e) {
-			logger.error("JWT token is expired: {}", e.getMessage());
-		} catch (UnsupportedJwtException e) {
-			logger.error("JWT token is unsupported: {}", e.getMessage());
-		} catch (IllegalArgumentException e) {
-			logger.error("JWT claims string is empty: {}", e.getMessage());
-		}
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuer(claims.getSubject())
+                .setIssuedAt(getDateWithZone(currentTime))
+                .setExpiration(getDateWithZone(expDateTime))
+                .signWith(SIGNATURE_ALGORITHM, getSigningKey())
+                .compact();
+    }
 
-		return false;
-	}
+    public String createRefreshToken(Claims claims) {
+        if (StringUtils.isBlank(claims.getSubject()))
+            throw new IllegalArgumentException("Cannot create JWT Token without subject");
+
+        claims.put("scopes", Collections.singletonList("ROLE_REFRESH_TOKEN"));
+
+        // Current time
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.systemDefault());
+
+        // Get expiration data
+        LocalDateTime expDateTime = currentTime.plusMinutes(JWT_EXPIRATION);
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuer(claims.getSubject())
+                .setId(UUID.randomUUID().toString())
+                .setIssuedAt(getDateWithZone(currentTime))
+                .setExpiration(getDateWithZone(expDateTime))
+                .signWith(SIGNATURE_ALGORITHM, getSigningKey())
+                .compact();
+    }
+
+    public String getUserNameFromJwtToken(String token) {
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    private Key getSigningKey() {
+        final byte[] secretBytes = jwtSecret.getBytes();
+        return new SecretKeySpec(secretBytes, SIGNATURE_ALGORITHM.getJcaName());
+    }
+
+    private Date getDateWithZone(LocalDateTime time) {
+        return Date.from(time.atZone(ZoneId.systemDefault()).toInstant());
+    }
 }

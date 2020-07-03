@@ -1,6 +1,6 @@
 package ee.gaile.service.security.settings;
 
-import static ee.gaile.service.security.settings.JWTTokenFactory.TOKEN_TYPE;
+import static ee.gaile.service.security.settings.JwtUtils.TOKEN_TYPE;
 
 public class AuthRefreshDTO {
 
