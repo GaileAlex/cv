@@ -28,7 +28,7 @@ export class RegistrationComponent implements OnInit {
         this.isSignUpFailed = false;
         setTimeout(() => {
           this.router.navigateByUrl('/login');
-        }, 3000)
+        }, 2000)
       },
       err => {
         this.errorMessage = err.error.message;
