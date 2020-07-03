@@ -1,20 +1,19 @@
 package ee.gaile.controller.mindly;
 
-import ee.gaile.entity.mindly.Portfolio;
-import ee.gaile.service.MindlyService;
+import ee.gaile.entity.mindly.Mindly;
+import ee.gaile.service.mindly.MindlyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
+
 @Slf4j
 @RestController
-@RequestMapping(path = "/mindly-data",
-        produces = "application/json")
-@CrossOrigin(exposedHeaders = "Access-Control-Allow-Origin")
+@RequestMapping(path = API_V1_PREFIX + "/mindly-data")
 @AllArgsConstructor
 public class MindlyController {
     private final MindlyService mindlyService;
@@ -22,12 +21,11 @@ public class MindlyController {
     /**
      * getting data from the database, calculating the value of the currency
      *
-     * @return List<Portfolio>
+     * @return List<Mindly>
      */
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<Portfolio> getPortfolio() {
-
+    public List<Mindly> getPortfolio() {
         return mindlyService.getAllPortfolio();
     }
 
@@ -38,22 +36,15 @@ public class MindlyController {
      * @return save to DB
      */
     @PostMapping(consumes = "application/json")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Portfolio addPortfolioItem(@RequestBody Portfolio portfolio) {
-
+    public Mindly addPortfolioItem(@RequestBody Mindly portfolio) {
         return mindlyService.savePortfolio(portfolio);
     }
 
     /**
-     * @param deleteItem id portfolio
+     * @param portfolioId id portfolio item
      */
-    @DeleteMapping("/{deleteItem}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long deleteItem) {
-        try {
-            mindlyService.deletePortfolioById(deleteItem);
-        } catch (EmptyResultDataAccessException e) {
-            e.printStackTrace();
-        }
+    @PostMapping("/delete/{portfolioId}")
+    public void delete(@PathVariable("portfolioId") Long portfolioId) {
+            mindlyService.deletePortfolioById(portfolioId);
     }
 }

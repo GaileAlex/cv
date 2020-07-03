@@ -22,7 +22,7 @@ import java.util.*;
 
 @Slf4j
 @Controller
-@RequestMapping("/admin-blog")
+@RequestMapping(API_V1_PREFIX + "/admin-blog")
 @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class AdminBlogController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminBlogController.class);
@@ -75,13 +75,13 @@ public class AdminBlogController {
 
     }
 
-    @PostMapping("/delete-blog")
+    @PostMapping(API_V1_PREFIX + "/delete-blog")
     public String deleteBlog(@RequestParam UUID deleteBlog) {
         blogRepository.deleteById(deleteBlog);
         return "redirect:/admin-blog";
     }
 
-    @PostMapping("/delete-comment")
+    @PostMapping(API_V1_PREFIX + "/delete-comment")
     public String deleteComment(@RequestParam UUID deleteComment) {
         commentsRepository.deleteById(deleteComment);
         return "redirect:/admin-blog";

@@ -2,7 +2,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Component, OnInit} from "@angular/core";
 import {ConfirmationService, Message} from "primeng/api";
 import {PortfolioService} from "../../service/portfolio.service";
-import {Portfolio} from "../../models/portfolio";
+import {Mindly} from "../../models/mindly";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -14,21 +14,23 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class MindlyComponent implements OnInit {
 
   inputForm: FormGroup;
-  portfolio: Portfolio[];
+  portfolio: Mindly[];
   msgs: Message[] = [];
-  portfolioObject: Portfolio;
+  portfolioObject: Mindly;
 
   constructor(private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService,
               private  portfolioService: PortfolioService, private formBuilder: FormBuilder) {
 
-    this.portfolioObject = new Portfolio();
+    this.portfolioObject = new Mindly();
   }
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    this.portfolioService.findAll().subscribe(data => {
-      this.portfolio = data;
-    });
+
+        this.portfolioService.findAll().subscribe(data => {
+            this.portfolio = data;
+        });
+
 
     this.inputForm = this.formBuilder.group({
       cryptocurrency: ['Bitcoin'],
@@ -42,7 +44,7 @@ export class MindlyComponent implements OnInit {
    * confirmation of deletion and delete request element Portfolio
    * @param portfolioItem
    */
-  confirm(portfolioItem: Portfolio) {
+  confirm(portfolioItem: Mindly) {
     this.confirmationService.confirm({
       message: 'Do you want to delete this record?',
       header: 'Delete Confirmation',
@@ -59,12 +61,12 @@ export class MindlyComponent implements OnInit {
 
   /**
    * delete element Portfolio
-   * @param portfolioItem
+   * @param portfolio
    */
-  deletePortfolio(portfolioItem: Portfolio): void {
-    this.portfolioService.deletePortfolio(portfolioItem)
+  deletePortfolio(portfolio: Mindly): void {
+    this.portfolioService.deletePortfolio(portfolio.id)
       .subscribe(data => {
-        this.portfolio = this.portfolio.filter(u => u !== portfolioItem);
+        this.portfolio = this.portfolio.filter(u => u !== portfolio);
       })
   };
 

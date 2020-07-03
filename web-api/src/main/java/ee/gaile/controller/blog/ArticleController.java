@@ -38,7 +38,7 @@ public class ArticleController {
         this.commentsRepository = commentsRepository;
     }
 
-    @GetMapping("/article-blog/{articleId}")
+    @GetMapping(API_V1_PREFIX + "/article-blog/{articleId}")
     public String goToArticle(@PathVariable UUID articleId, Model model) {
 
         listComments = (List<Comments>) commentsRepository.findAll();
@@ -61,7 +61,7 @@ public class ArticleController {
         return "blog/article";
     }
 
-    @PostMapping("/article")
+    @PostMapping(API_V1_PREFIX + "/article")
     public String addComment(@Valid Comments comments, Errors errors,
                              Authentication authentication, Model model) {
 

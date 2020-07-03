@@ -41,7 +41,7 @@
         </tr>
         </tbody>
       </table>
-      <button (click)="onSubmit(); " pButton label="Save" class="ui-button-raised" appFormSubmitValidationMsg
+      <button (click)="onSubmit();" pButton label="Save" class="ui-button-raised" appFormSubmitValidationMsg
               [validationControl]="inputForm"></button>
     </form>
   </div>
@@ -85,7 +85,10 @@
       {{'mindly.description'|translate}}</a></h4>
     <hr>
   </div>
+
 </div>
+
+
 <app-footer></app-footer>
 
 
