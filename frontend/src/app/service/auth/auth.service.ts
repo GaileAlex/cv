@@ -34,8 +34,11 @@ export class AuthService {
     }, httpOptions);
   }
 
-  logout(){
-
+  logout() {
+    sessionStorage.setItem('user', '');
+    sessionStorage.setItem('accessToken', '');
+    sessionStorage.setItem('roles', '');
+    this.router.navigate(['/']);
   }
 
   getUserName(): string {

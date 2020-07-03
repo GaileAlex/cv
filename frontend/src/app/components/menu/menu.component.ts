@@ -7,50 +7,47 @@ import {AuthService} from "../../service/auth/auth.service";
 declare function main(): any;
 
 @Component({
-    selector: 'app-menu',
-    templateUrl: './menu.component.html',
-    styleUrls: ['./menu.component.css']
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css']
 })
 
 export class MenuComponent implements OnInit {
-    collapsed = true;
+  collapsed = true;
 
-    pageId: string;
-    username: string;
-    isLoggedIn:boolean;
+  pageId: string;
+  username: string;
+  isLoggedIn: boolean;
 
 
-    constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
-                private authService: AuthService) {
-        this.isLoggedIn=this.authService.isAuthenticated();
+  constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
+              private authService: AuthService) {
+    this.isLoggedIn = this.authService.isAuthenticated();
 
-        this.username=authService.getUserName();
+    this.username = authService.getUserName();
+  }
+
+  ngOnInit() {
+    main();
+    this.pageId = this.router.routerState.snapshot.url;
+    if (this.router.routerState.snapshot.url.startsWith("/#")) {
+      this.pageId = "";
     }
+    this.translate.setDefaultLang(this.languageService.getLanguage());
 
-    ngOnInit() {
-        main();
-        this.pageId = this.router.routerState.snapshot.url;
-        if (this.router.routerState.snapshot.url.startsWith("/#")) {
-            this.pageId = "";
-        }
-        this.translate.setDefaultLang(this.languageService.getLanguage());
+  }
 
-    }
+  getLanguage() {
+    return this.languageService.getLanguage();
+  }
 
-    getLanguage() {
-        return this.languageService.getLanguage();
-    }
+  useLanguage(language: string) {
+    this.languageService.setLanguage(language);
+  }
 
-    useLanguage(language: string) {
-        this.languageService.setLanguage(language);
-    }
-
-    logout(){
-      sessionStorage.setItem('user', '');
-      sessionStorage.setItem('accessToken', '');
-      sessionStorage.setItem('roles', '');
-        this.router.navigate(['/']);
-    }
+  logout() {
+    this.authService.logout();
+  }
 
 
 }

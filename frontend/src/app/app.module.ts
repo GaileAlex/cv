@@ -50,6 +50,7 @@ import {BlogComponent} from './modules/blog/blog.component';
 import {BlogAdminComponent} from './modules/blog-admin/blog-admin.component';
 import {BooksDataService} from "./service/booksData";
 import {JwtInterceptor} from "./service/auth/jwt.interceptor";
+import {ErrorInterceptor} from "./service/auth/error.interceptor";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -128,7 +129,8 @@ const routerOptions: ExtraOptions = {
   ],
   providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal,
     BooksDataService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
   bootstrap: [AppComponent],
   entryComponents: [DialogBoxComponent]
 })

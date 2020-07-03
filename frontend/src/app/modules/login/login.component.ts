@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = false;
       }
     );
+    this.router.navigateByUrl('/');
   }
 
   reloadPage() {
