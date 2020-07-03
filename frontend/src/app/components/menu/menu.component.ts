@@ -12,19 +12,28 @@ declare function main(): any;
 })
 
 export class MenuComponent implements OnInit {
-    collapsed = true;
-    pageId: string;
+  collapsed = true;
 
-  constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router) {
+  pageId: string;
+  username: string;
+  isLoggedIn: boolean;
+
+
+  constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
+              private authService: AuthService) {
+    this.isLoggedIn = this.authService.isAuthenticated();
+
+    this.username = authService.getUserName();
   }
 
   ngOnInit() {
     main();
     this.pageId = this.router.routerState.snapshot.url;
-   if(this.router.routerState.snapshot.url.startsWith("/#")){
-     this.pageId="";
-   }
+    if (this.router.routerState.snapshot.url.startsWith("/#")) {
+      this.pageId = "";
+    }
     this.translate.setDefaultLang(this.languageService.getLanguage());
+
   }
 
   getLanguage() {
@@ -34,4 +43,10 @@ export class MenuComponent implements OnInit {
   useLanguage(language: string) {
     this.languageService.setLanguage(language);
   }
+
+  logout() {
+    this.authService.logout();
+  }
+
+
 }

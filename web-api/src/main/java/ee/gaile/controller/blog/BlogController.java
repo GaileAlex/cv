@@ -1,23 +1,17 @@
-/*
 package ee.gaile.controller.blog;
 
 import ee.gaile.service.repository.blog.BlogRepository;
-import ee.gaile.service.repository.entity.blog.Blog;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
 @Slf4j
-@Controller
-@RequestMapping("/blog")
-@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
+@RestController
+@RequestMapping(API_V1_PREFIX + "/blog")
 public class BlogController {
     private final BlogRepository blogRepository;
 
@@ -27,6 +21,11 @@ public class BlogController {
     }
 
     @GetMapping
+    public String findAll() {
+        return "blog response";
+    }
+
+    /*@GetMapping
     public String goToBlog(Model model) {
         List<Blog> listBlog;
         Map<Long, String> imageMap;
@@ -45,6 +44,5 @@ public class BlogController {
         model.addAttribute("listBlog", listBlog);
 
         return "blog/blog";
-    }
+    }*/
 }
-*/

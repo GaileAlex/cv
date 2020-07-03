@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BlogService} from "../../service/blog.service";
+import {Books} from "../../models/books";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-blog',
@@ -6,11 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
+  books: string;
 
-  constructor() { }
+  constructor(private blogService: BlogService) {
+  }
 
   ngOnInit() {
     window.scrollTo(0, 0);
-  }
 
+    console.log(this.blogService.findAll())
+
+
+  }
 }

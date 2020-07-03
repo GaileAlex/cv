@@ -2,13 +2,10 @@
 .nav-item {
   position: relative;
 }
-
 .nav-link{
   color: #58c1ff !important;
   font-size: 15px;
 }
-
-
 
 .navbar-collapse ul li a.nav-link:before {
   position: absolute;
@@ -46,7 +43,6 @@
   border: 0px;
   background-color: rgba(0,0,0,0.96);
 }
-
 
 #nav {
   z-index: 9999;
