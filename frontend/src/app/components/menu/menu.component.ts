@@ -23,7 +23,8 @@ export class MenuComponent implements OnInit {
     constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
                 private authService: AuthService) {
         this.isLoggedIn=this.authService.isAuthenticated();
-        this.username=this.authService.getUserData().name;
+
+        this.username=authService.getUserName();
     }
 
     ngOnInit() {

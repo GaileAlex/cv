@@ -9,6 +9,7 @@ import {AuthUserResponse} from "./auth-user-response.model";
 import {UserData} from "./user-data.model";
 
 import {Constants} from '../../constants/appConstants';
+import {User} from "../../models/user";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -38,8 +39,8 @@ export class AuthService {
     }, httpOptions);
   }
 
-  login(username, password ): Observable<any> {
-    return   this.http.post(Constants.LOGIN_URL, {
+  login(username, password): Observable<any> {
+    return this.http.post(Constants.LOGIN_URL, {
       username: username,
       password: password
     }, httpOptions);
@@ -125,7 +126,6 @@ export class AuthService {
   }
 
 
-
   performLogout() {
     let logoutUri = sessionStorage.getItem('logout_endpoint_uri');
     logoutUri += '?id_token_hint=' + sessionStorage.getItem('id_token_hint');
@@ -145,13 +145,11 @@ export class AuthService {
     this.router.navigate(['logout']);
   }
 
-  getUserData(): UserData {
+/*  getUserData(): User {
     const userString = sessionStorage.getItem('user');
-    let userData = new UserData();
+    let userData = new User();
     if (userString) {
       const user: AuthUserResponse = JSON.parse(userString);
-      userData.firstName = user.firstName;
-      userData.lastName = user.lastName;
       userData.name = [user.firstName, user.lastName].join(' ');
       userData.id = user.id;
       userData.identity = user.identity;
@@ -160,13 +158,24 @@ export class AuthService {
       userData.country = user.identityCountry;
     }
     return userData;
+  }*/
+
+  getUserName(): string{
+    const userString = sessionStorage.getItem('user');
+    let userData = new User();
+    if (userString) {
+      const user: User = JSON.parse(userString);
+      userData.username = user.username;
+
+    }
+    return userData.username;
   }
 
   isAuthenticated(): boolean {
-    return !!sessionStorage.getItem('access_token') && !!sessionStorage.getItem('user');
+    return !!sessionStorage.getItem('accessToken') && !!sessionStorage.getItem('user');
   }
 
   isTokenPresent(): boolean {
-    return !!sessionStorage.getItem('access_token');
+    return !!sessionStorage.getItem('accessToken');
   }
 }
