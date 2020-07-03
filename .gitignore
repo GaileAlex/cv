@@ -3,3 +3,5 @@
 /frontend/cv-frontend.iml
 /services/services.iml
 /persistence/persistence.iml
+/frontend/cert.pem
+/frontend/key.pem

@@ -85,8 +85,6 @@ ul, ol {
 
 ul, ol {
     padding: 0;
-    webkit-padding: 0;
-    moz-padding: 0;
 }
 
 hr {
@@ -198,21 +196,6 @@ hr {
     margin-bottom: 30px;
 }
 
-/* Skills Section */
-
-#skills h2 {
-    color: #fff;
-}
-
-#skills hr {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-#skills .skill h4 {
-    font-weight: 600;
-    color: #fff;
-}
-
 .chart canvas {
     position: absolute;
     top: 0;
@@ -231,33 +214,6 @@ hr {
     content: '%';
     margin-left: 0.1em;
     font-size: .8em;
-}
-
-
-/* Achivements Section */
-
-#achievements h2 {
-    color: #fff;
-}
-
-#achievements hr {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-.achievement-box h4 {
-    color: #fff;
-    font-size: 20px;
-    font-weight: 400;
-    margin-left: 5px;
-}
-
-.achievement-box span.count {
-    font-size: 52px;
-    font-weight: 600;
-    display: block;
-    color: #121d1f;
-    padding: 0;
-    margin: 0;
 }
 
 /* Resume Section */
@@ -534,7 +490,7 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
         display: table;
         width: 100%;
         height: auto;
-        padding: 150px 0;
+        padding: 370px 0;
         text-align: center;
         color: #fff;
         background: #7bc3d1 url(../assets/img/intro-bg.jpg) no-repeat center top;
@@ -570,8 +526,9 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
     }
 
     header .intro-text {
-        padding-top: 240px;
-        padding-bottom: 200px;
+        /*padding-top: 100px;
+        padding-bottom: 340px;*/
+        text-align: center;
     }
 
     .timeline:before {
