@@ -1,13 +1,13 @@
 ### STAGE 1: Build ###
-FROM node:12.7-alpine AS build
+FROM node:latest AS build
 WORKDIR /usr/src/app
-COPY package.json ./
+COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
 ### STAGE 2: Run ###
-FROM nginx:1.17.1-alpine
+FROM nginx:latest
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY cert.pem /etc/nginx/certs/cert.pem
 COPY key.pem /etc/nginx/certs/key.pem
