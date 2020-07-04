@@ -6,3 +6,4 @@
 /frontend/cert.pem
 /frontend/key.pem
 /cv-data/
+/etc/docker/cv_postgres/data/
