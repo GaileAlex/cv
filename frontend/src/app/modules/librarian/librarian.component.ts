@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {DialogBoxComponent} from "../../components/dialog-box/dialog-box.component";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DialogBoxComponent} from '../../components/dialog-box/dialog-box.component';
 
-declare function main(): any;
 
 @Component({
   selector: 'app-librarian',
@@ -15,7 +14,6 @@ export class LibrarianComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      main();
     window.scrollTo(0, 0);
   }
 
