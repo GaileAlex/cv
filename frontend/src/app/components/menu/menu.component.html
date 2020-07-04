@@ -13,15 +13,15 @@
                     <a href="/"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="page-scroll nav-link" [routerLink]="['']" [fragment]="'about'" >{{'menu.about' | translate}}</a>
+                    <a class="page-scroll nav-link" [routerLink] = "['']" pageScroll href="#about"  >{{'menu.about' | translate}}</a>
                 </li>
                 <li class="nav-item">
                     <a
-                            class="page-scroll nav-link" [routerLink]="['']" [fragment]="'resume'" >{{'menu.experience' | translate}}</a>
+                            class="page-scroll nav-link" [routerLink] = "['']" pageScroll href="#resume" >{{'menu.experience' | translate}}</a>
                 </li>
                 <li class="nav-item">
                     <a
-                            class="page-scroll nav-link" [routerLink]="['']" [fragment]="'education'" >{{'menu.education' | translate}}</a>
+                            class="page-scroll nav-link" [routerLink] = "['']" pageScroll href="#education" >{{'menu.education' | translate}}</a>
                 </li>
                 <li class="nav-item">
                     <a class="page-scroll nav-link" [routerLink]="['/blog']">{{'menu.blog' | translate}}</a>
@@ -39,7 +39,7 @@
                 </li>
                 <li class="nav-item">
                     <a
-                            class="page-scroll nav-link" [routerLink]="[pageId]" [fragment]="'contact'"  >{{'menu.contact' | translate}}</a>
+                            class="page-scroll nav-link"  pageScroll href="#contact" [pageScrollSpeed]="10" [pageScrollAdjustHash]="false">{{'menu.contact' | translate}}</a>
                 </li>
                 <li class="nav-item">
                     <a class="page-scroll nav-link" *ngIf="getLanguage()=='en'" [routerLink]="" (click)="useLanguage('ru')"

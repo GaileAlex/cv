@@ -52,6 +52,8 @@ import {BooksDataService} from "./service/booksData";
 import {JwtInterceptor} from "./service/auth/jwt.interceptor";
 import {ErrorInterceptor} from "./service/auth/error.interceptor";
 import {StickyNavModule} from "ng2-sticky-nav/dist";
+import { NgxPageScrollCoreModule } from "ngx-page-scroll-core";
+import { NgxPageScrollModule } from "ngx-page-scroll";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -60,7 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
 }
 
-const routerOptions: ExtraOptions = {
+const  ExtraOptions = {
     useHash: false,
     scrollPositionRestoration: 'enabled',
     anchorScrolling: 'enabled',
@@ -97,11 +99,7 @@ const routerOptions: ExtraOptions = {
                 deps: [HttpClient]
             }
         }),
-        RouterModule.forRoot(routes, {
-            useHash: false,
-            scrollPositionRestoration: 'enabled',
-            anchorScrolling: 'enabled',
-        }),
+        NgxPageScrollCoreModule,
         ReactiveFormsModule,
         FormsModule,
         ButtonModule,
@@ -132,7 +130,8 @@ const routerOptions: ExtraOptions = {
         RouterModule.forRoot(routes),
         NgbModule,
         LightboxModule,
-        StickyNavModule
+        StickyNavModule,
+        NgxPageScrollModule
     ],
     providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal,
         BooksDataService,
