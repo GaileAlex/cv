@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import {LanguageService} from './service/language.service';
+import { LanguageService } from './service/language.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 
 export class AppComponent {
-  title = 'frontend';
+    title = 'frontend';
 
-  constructor(private languageService: LanguageService){
-    languageService.setDefault();
+    constructor(private languageService: LanguageService) {
+        languageService.setDefault();
 
-  }
+    }
 
 }

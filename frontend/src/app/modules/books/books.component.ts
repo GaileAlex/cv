@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Books} from "../../models/books";
-import {BooksService} from "../../service/books.service";
-import {BooksDataService} from "../../service/booksData";
+import {ActivatedRoute, Router} from '@angular/router';
+import {Books} from '../../models/books';
+import {BooksService} from '../../service/books.service';
+import {BooksDataService} from '../../service/booksData';
 
 @Component({
-  selector: 'books',
+  selector: 'app-books',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.css']
 })
@@ -18,12 +18,12 @@ export class BooksComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      if (params.param === "filter") {
+      if (params.param === 'filter') {
         this.booksData.booksData.subscribe(data => {
           this.books = data;
         });
       }
-      if (params.param === "all") {
+      if (params.param === 'all') {
         this.booksService.findAll().subscribe(data => {
           this.books = data;
         });

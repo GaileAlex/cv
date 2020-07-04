@@ -16,7 +16,7 @@ export class FormSubmitValidationMsgDirective {
   private markAsTouched(formGroup: FormGroup): void {
     formGroup.markAsTouched();
     formGroup.updateValueAndValidity();
-    (<any>Object).values(formGroup.controls).forEach(
+    (Object as any).values(formGroup.controls).forEach(
       control => {
         control.markAsTouched();
         control.updateValueAndValidity({ onlySelf: false, emitEvent: true });

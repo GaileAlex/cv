@@ -1,7 +1,7 @@
 export class Books {
-  id: String;
-  title: String;
-  author: String;
+  id: string;
+  title: string;
+  author: string;
   releaseDate: Date;
-  bookText: String;
+  bookText: string;
 }

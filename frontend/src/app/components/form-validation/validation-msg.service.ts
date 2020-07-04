@@ -3,10 +3,6 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ValidationMsgService {
 
-    public getValidationMsg(validationId: string): string {
-        return this.errorMessages[validationId];
-    }
-
     private errorMessages = {
         'amount-required-msg' : 'Amount is a required field',
         'amount-minlength-msg' : 'Amount must have 8 characters',
@@ -18,5 +14,9 @@ export class ValidationMsgService {
 
 
     };
+
+    public getValidationMsg(validationId: string): string {
+        return this.errorMessages[validationId];
+    }
 
 }

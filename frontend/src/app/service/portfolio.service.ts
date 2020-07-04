@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Mindly} from '../models/mindly';
-import {Constants} from '../constants/appConstants';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Mindly } from '../models/mindly';
+import { Constants } from '../constants/appConstants';
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +27,6 @@ export class PortfolioService {
     }
 
     public deletePortfolio(portfolioId) {
-        return this.http.post<string>(`${this.deletePortfolioUrl}/${portfolioId}`, null);
+        return this.http.post<string>(`${ this.deletePortfolioUrl }/${ portfolioId }`, null);
     }
 }

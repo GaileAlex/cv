@@ -1,7 +1,7 @@
 import { Directive, Input, HostListener, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { NgControl, ValidationErrors } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import {ValidationMsgService} from "./validation-msg.service";
+import {ValidationMsgService} from './validation-msg.service';
 
 
 @Directive({
@@ -10,8 +10,8 @@ import {ValidationMsgService} from "./validation-msg.service";
 export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
 
   constructor(private elRef: ElementRef,
-    private control: NgControl,
-    private validationMsgService: ValidationMsgService
+              private control: NgControl,
+              private validationMsgService: ValidationMsgService
   ) { }
 
   @Input('validationMsgId') validationMsgId: string;
@@ -38,11 +38,10 @@ export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
 
   @HostListener('blur', ['$event'])
   handleBlurEvent(event) {
-    //This is needed to handle the case of clicking a required field and moving out.
-    //Rest all are handled by status change subscription
+    // This is needed to handle the case of clicking a required field and moving out.
+    // Rest all are handled by status change subscription
     if (this.control.value == null || this.control.value === '') {
-      if (this.control.errors) { this.showError(); }
-      else { this.removeError(); }
+      if (this.control.errors) { this.showError(); } else { this.removeError(); }
     }
   }
 

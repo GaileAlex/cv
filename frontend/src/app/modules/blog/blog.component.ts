@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BlogService} from "../../service/blog.service";
-import {Books} from "../../models/books";
-import {Observable} from "rxjs";
+import {BlogService} from '../../service/blog.service';
 
 @Component({
   selector: 'app-blog',
@@ -15,10 +13,6 @@ export class BlogComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
-
-    console.log(this.blogService.findAll())
-
-
+      window.scrollTo(0, 0);
   }
 }

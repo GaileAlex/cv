@@ -1,90 +1,91 @@
 <app-menu></app-menu>
 <div class="text-center p_150_top">
-  <div class="container">
-    <h2>{{'mindly.add.new'|translate}}</h2>
-    <form [formGroup]="inputForm">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th>{{'mindly.choose.cryptocurrency'|translate}}</th>
-          <th>{{'mindly.amount'|translate}}</th>
-          <th>{{'mindly.date'|translate}}</th>
-          <th>{{'mindly.wallet.location'|translate}}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>
-            <select class="form-control" formControlName="cryptocurrency">
-              <option value="Bitcoin">Bitcoin</option>
-              <option value="Ethereum">Ethereum</option>
-              <option value="Ripple">Ripple</option>
-            </select>
-          </td>
-          <td>
-            <label for="amount"></label>
-            <input type="text" class="form-control" id="amount" name="amount" appFormControlValidationMsg
-                   validationMsgId="amount" formControlName="amount"/>
+    <div class="container">
+        <h2>{{'mindly.add.new'|translate}}</h2>
+        <form [formGroup]="inputForm">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>{{'mindly.choose.cryptocurrency'|translate}}</th>
+                    <th>{{'mindly.amount'|translate}}</th>
+                    <th>{{'mindly.date'|translate}}</th>
+                    <th>{{'mindly.wallet.location'|translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <select class="form-control" formControlName="cryptocurrency">
+                            <option value="Bitcoin">Bitcoin</option>
+                            <option value="Ethereum">Ethereum</option>
+                            <option value="Ripple">Ripple</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label for="amount"></label>
+                        <input type="text" class="form-control" id="amount" name="amount" appFormControlValidationMsg
+                               validationMsgId="amount" formControlName="amount"/>
 
-          </td>
-          <td>
-            <label for="dateOfPurchase"></label>
-            <input type="date" class="form-control" formControlName="dateOfPurchase"
-                   id="dateOfPurchase" name="dateOfPurchase"></td>
-          <td>
-            <label for="walletLocation"></label>
-            <input class="form-control" id="walletLocation" name="walletLocation" appFormControlValidationMsg
-                   validationMsgId="walletLocation" formControlName="walletLocation"
-            />
+                    </td>
+                    <td>
+                        <label for="dateOfPurchase"></label>
+                        <input type="date" class="form-control" formControlName="dateOfPurchase"
+                               id="dateOfPurchase" name="dateOfPurchase"></td>
+                    <td>
+                        <label for="walletLocation"></label>
+                        <input class="form-control" id="walletLocation" name="walletLocation"
+                               appFormControlValidationMsg
+                               validationMsgId="walletLocation" formControlName="walletLocation"
+                        />
 
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <button (click)="onSubmit();" pButton label="Save" class="ui-button-raised" appFormSubmitValidationMsg
-              [validationControl]="inputForm"></button>
-    </form>
-  </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button (click)="onSubmit();" pButton label="Save" class="ui-button-raised" appFormSubmitValidationMsg
+                    [validationControl]="inputForm"></button>
+        </form>
+    </div>
 </div>
 
 <div class="text-center p_100">
-  <div class="container">
-    <h2>{{'mindly.portfolio'|translate}}</h2>
-    <div class="text-center validationError">
+    <div class="container">
+        <h2>{{'mindly.portfolio'|translate}}</h2>
+        <div class="text-center validationError">
+        </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="text-center">{{'mindly.cryptocurrency'|translate}}</th>
+                <th class="text-center">{{'mindly.amount'|translate}}</th>
+                <th class="text-center">{{'mindly.date'|translate}}</th>
+                <th class="text-center">{{'mindly.wallet.location'|translate}}</th>
+                <th class="text-center">{{'mindly.current'|translate}}</th>
+                <th class="text-center">{{'mindly.option'|translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let portfolioItem of portfolio">
+                <td>{{portfolioItem.cryptocurrency}}</td>
+                <td>{{portfolioItem.amount}}</td>
+                <td>{{portfolioItem.dateOfPurchase| date : "dd.MM.yy"}}</td>
+                <td>{{portfolioItem.walletLocation}}</td>
+                <td>{{portfolioItem.currentMarketValue}}
+                </td>
+                <td>
+                    <button pButton type="button" label="Delete" class="ui-button-secondary"
+                            (click)="confirm(portfolioItem)"></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     </div>
-    <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th class="text-center">{{'mindly.cryptocurrency'|translate}}</th>
-        <th class="text-center">{{'mindly.amount'|translate}}</th>
-        <th class="text-center">{{'mindly.date'|translate}}</th>
-        <th class="text-center">{{'mindly.wallet.location'|translate}}</th>
-        <th class="text-center">{{'mindly.current'|translate}}</th>
-        <th class="text-center">{{'mindly.option'|translate}}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let portfolioItem of portfolio">
-        <td>{{portfolioItem.cryptocurrency}}</td>
-        <td>{{portfolioItem.amount}}</td>
-        <td>{{portfolioItem.dateOfPurchase| date : "dd.MM.yy"}}</td>
-        <td>{{portfolioItem.walletLocation}}</td>
-        <td>{{portfolioItem.currentMarketValue}}
-        </td>
-        <td>
-          <button pButton type="button" label="Delete" class="ui-button-secondary"
-                  (click)="confirm(portfolioItem)"></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-  </div>
-  <div class="section-title text-center center p_50">
-    <h4><a class="btn-link" href="https://github.com/GaileAlex/mindly" target="blank">
-      {{'mindly.description'|translate}}</a></h4>
-    <hr>
-  </div>
+    <div class="section-title text-center center p_50">
+        <h4><a class="btn-link" href="https://github.com/GaileAlex/mindly" target="blank">
+            {{'mindly.description'|translate}}</a></h4>
+        <hr>
+    </div>
 
 </div>
 
