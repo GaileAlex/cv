@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
-import {LanguageService} from "../../service/language.service";
-import {Router} from "@angular/router";
-import {AuthService} from "../../service/auth/auth.service";
-
-declare function main(): any;
+import {TranslateService} from '@ngx-translate/core';
+import {LanguageService} from '../../service/language.service';
+import {Router} from '@angular/router';
+import {AuthService} from '../../service/auth/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -23,15 +21,13 @@ export class MenuComponent implements OnInit {
   constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
               private authService: AuthService) {
     this.isLoggedIn = this.authService.isAuthenticated();
-
     this.username = authService.getUserName();
   }
 
   ngOnInit() {
-    main();
     this.pageId = this.router.routerState.snapshot.url;
-    if (this.router.routerState.snapshot.url.startsWith("/#")) {
-      this.pageId = "";
+    if (this.router.routerState.snapshot.url.startsWith('/#')) {
+      this.pageId = '';
     }
     this.translate.setDefaultLang(this.languageService.getLanguage());
 
@@ -48,6 +44,4 @@ export class MenuComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-
-
 }

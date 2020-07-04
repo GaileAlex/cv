@@ -30,11 +30,11 @@ import {ComboboxComponent} from './components/combo-box/combo-box.component';
 import {DialogBoxComponent} from './components/dialog-box/dialog-box.component';
 import {BooksService} from "./service/books.service";
 import {
-  MatButtonModule,
-  MatDialogModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatNativeDateModule
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule
 } from "@angular/material";
 import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
@@ -51,88 +51,95 @@ import {BlogAdminComponent} from './modules/blog-admin/blog-admin.component';
 import {BooksDataService} from "./service/booksData";
 import {JwtInterceptor} from "./service/auth/jwt.interceptor";
 import {ErrorInterceptor} from "./service/auth/error.interceptor";
+import {StickyNavModule} from "ng2-sticky-nav/dist";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http);
 }
 
 const routerOptions: ExtraOptions = {
-  useHash: false,
-  scrollPositionRestoration: 'enabled',
-  anchorScrolling: 'enabled',
+    useHash: false,
+    scrollPositionRestoration: 'enabled',
+    anchorScrolling: 'enabled',
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    StartPageComponent,
-    MenuComponent,
-    NotFoundComponent,
-    MindlyComponent,
-    FormControlValidationMsgDirective,
-    FormSubmitValidationMsgDirective,
-    BooksComponent,
-    LibrarianComponent,
-    DialogBoxComponent,
-    ComboboxComponent,
-    LoginComponent,
-    RegistrationComponent,
-    BlogArticleComponent,
-    BlogComponent,
-    BlogAdminComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    ReactiveFormsModule,
-    FormsModule,
-    ButtonModule,
-    TableModule,
-    InputMaskModule,
-    ConfirmDialogModule,
-    BrowserAnimationsModule,
-    NgbModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatNativeDateModule,
-    DialogModule,
-    InputTextModule,
-    InputTextareaModule,
-    MessagesModule,
-    MessageModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(routes),
-    NgbModule,
-    LightboxModule,
-  ],
-  providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal,
-    BooksDataService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
-  bootstrap: [AppComponent],
-  entryComponents: [DialogBoxComponent]
+    declarations: [
+        AppComponent,
+        FooterComponent,
+        StartPageComponent,
+        MenuComponent,
+        NotFoundComponent,
+        MindlyComponent,
+        FormControlValidationMsgDirective,
+        FormSubmitValidationMsgDirective,
+        BooksComponent,
+        LibrarianComponent,
+        DialogBoxComponent,
+        ComboboxComponent,
+        LoginComponent,
+        RegistrationComponent,
+        BlogArticleComponent,
+        BlogComponent,
+        BlogAdminComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        RouterModule.forRoot(routes, {
+            useHash: false,
+            scrollPositionRestoration: 'enabled',
+            anchorScrolling: 'enabled',
+        }),
+        ReactiveFormsModule,
+        FormsModule,
+        ButtonModule,
+        TableModule,
+        InputMaskModule,
+        ConfirmDialogModule,
+        BrowserAnimationsModule,
+        NgbModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatNativeDateModule,
+        DialogModule,
+        InputTextModule,
+        InputTextareaModule,
+        MessagesModule,
+        MessageModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatNativeDateModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot(routes),
+        NgbModule,
+        LightboxModule,
+        StickyNavModule
+    ],
+    providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal,
+        BooksDataService,
+        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},],
+    bootstrap: [AppComponent],
+    entryComponents: [DialogBoxComponent]
 })
 export class AppModule {
 }

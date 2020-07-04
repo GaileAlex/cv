@@ -103,6 +103,8 @@ hr {
     background-color: rgba(0, 0, 0, 0.96);
     border-radius: 0;
     padding: 10px 0;
+    width: 100%;
+    z-index: 9999;
 }
 
 .navbar-custom .navbar-brand {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Books} from "../models/books";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Books} from '../models/books';
 import {Constants} from '../constants/appConstants';
 
 @Injectable({
