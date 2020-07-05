@@ -7,3 +7,4 @@
 /frontend/key.pem
 /cv-data/
 /etc/docker/cv_postgres/data/
+/etc/docker/cv_dev/data/
