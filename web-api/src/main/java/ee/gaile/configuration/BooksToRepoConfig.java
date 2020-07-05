@@ -1,6 +1,6 @@
 package ee.gaile.configuration;
 
-import ee.gaile.entity.models.Books;
+import ee.gaile.entity.librarian.Books;
 import ee.gaile.service.repository.librarian.LibrarianRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

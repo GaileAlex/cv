@@ -1,13 +1,13 @@
 --liquibase formatted sql
 --changeset gaile:v0002_create_table_books.sql
 
-create table books (
-    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
-    book_title character varying(200),
-    book_article character varying(200),
-    book_date timestamp,
-    book_text character varying(2000)
-
+CREATE TABLE public.books
+(
+    id           int8                        NOT NULL GENERATED ALWAYS AS IDENTITY,
+    book_title   varchar(200)                NOT NULL,
+    book_article varchar(200)                NOT NULL,
+    book_date    timestamp without time zone NOT NULL,
+    book_text    varchar(2000)               NOT NULL
 );
 
 

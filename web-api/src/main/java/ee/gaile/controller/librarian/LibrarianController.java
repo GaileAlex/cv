@@ -1,6 +1,6 @@
 package ee.gaile.controller.librarian;
 
-import ee.gaile.entity.models.Books;
+import ee.gaile.entity.librarian.Books;
 import ee.gaile.service.librarian.JsonParse;
 import ee.gaile.service.mindly.MindlyService;
 import ee.gaile.service.librarian.SearchService;

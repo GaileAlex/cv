@@ -39,7 +39,7 @@ public class Blog {
     @OneToMany(targetEntity = Comments.class, cascade = {
             CascadeType.ALL
     })
-    @JoinColumn(name = "blog_hj")
+    @JoinColumn(name = "comment_id")
     private List<Comments> items = new ArrayList<>();
 
 }

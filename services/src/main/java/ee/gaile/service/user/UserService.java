@@ -1,8 +1,8 @@
 package ee.gaile.service.user;
 
 import ee.gaile.entity.enums.EnumRoles;
-import ee.gaile.entity.models.Role;
-import ee.gaile.entity.models.User;
+import ee.gaile.entity.users.Roles;
+import ee.gaile.entity.users.Users;
 import ee.gaile.service.repository.UserRepository;
 import ee.gaile.service.security.LoginService;
 import ee.gaile.service.security.UserDetailsImpl;
@@ -25,7 +25,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -74,12 +73,12 @@ public class UserService {
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
-        User user = new User(signUpRequest.getUsername(),
+        Users user = new Users(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 
-        Set<Role> roles = new HashSet<>();
-        Role userRole = new Role(EnumRoles.ROLE_USER);
+        Set<Roles> roles = new HashSet<>();
+        Roles userRole = new Roles(EnumRoles.ROLE_USER);
         roles.add(userRole);
         user.setRoles(roles);
         userRepository.save(user);

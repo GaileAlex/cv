@@ -1,6 +1,6 @@
 package ee.gaile.service.librarian.search.date;
 
-import ee.gaile.entity.models.Books;
+import ee.gaile.entity.librarian.Books;
 import ee.gaile.entity.models.SelectedFilter;
 import ee.gaile.service.repository.librarian.LibrarianRepository;
 

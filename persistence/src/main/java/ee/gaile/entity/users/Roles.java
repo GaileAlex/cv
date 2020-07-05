@@ -1,12 +1,12 @@
-package ee.gaile.entity.models;
+package ee.gaile.entity.users;
 
 import ee.gaile.entity.enums.EnumRoles;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "Roles")
 @Table(name = "roles")
-public class Role {
+public class Roles {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +15,10 @@ public class Role {
     @Column(name = "name")
 	private EnumRoles name;
 
-	public Role() {
+	public Roles() {
 	}
 
-	public Role(EnumRoles name) {
+	public Roles(EnumRoles name) {
 		this.name = name;
 	}
 

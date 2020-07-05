@@ -1,8 +1,7 @@
 package ee.gaile.service.mindly;
 
 import ee.gaile.entity.mindly.Mindly;
-import ee.gaile.entity.models.Books;
-import ee.gaile.service.mindly.BitfinexAccessService;
+import ee.gaile.entity.librarian.Books;
 import ee.gaile.service.repository.librarian.LibrarianRepository;
 import ee.gaile.service.repository.mindly.MindlyRepository;
 import lombok.AllArgsConstructor;

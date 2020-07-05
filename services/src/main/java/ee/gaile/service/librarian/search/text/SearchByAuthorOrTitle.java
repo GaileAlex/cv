@@ -2,7 +2,7 @@ package ee.gaile.service.librarian.search.text;
 
 
 
-import ee.gaile.entity.models.Books;
+import ee.gaile.entity.librarian.Books;
 import ee.gaile.entity.models.SelectedFilter;
 
 import java.util.ArrayList;

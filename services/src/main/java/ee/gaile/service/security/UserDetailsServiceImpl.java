@@ -1,6 +1,6 @@
 package ee.gaile.service.security;
 
-import ee.gaile.entity.models.User;
+import ee.gaile.entity.users.Users;
 import ee.gaile.service.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +17,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUsername(username)
+		Users user = userRepository.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
 		return UserDetailsImpl.build(user);

@@ -1,6 +1,8 @@
 package ee.gaile.entity.blog;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ee.gaile.entity.users.Roles;
+import ee.gaile.entity.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "Comments")
 @Table(name = "comments")
 public class Comments implements Serializable {
 
@@ -27,15 +29,18 @@ public class Comments implements Serializable {
     @JsonIgnore
     private Blog blog;
 
-    @Column(name = "blog_comment", length = 2000)
+    @Column(name = "comment", length = 2000)
     private String comment;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "blog_date")
+    @Column(name = "date")
     private Date date;
 
-    @Column(name = "blog_username")
-    private String username;
+    @ManyToOne(targetEntity = Users.class)
+    @JoinTable(name = "comment_users",
+            joinColumns = @JoinColumn(name = "comment_id"),
+            inverseJoinColumns = @JoinColumn(name = "users_id"))
+    private Users users;
 
     @PrePersist
     void createdAt() {
