@@ -1,9 +1,13 @@
 package ee.gaile.entity.users;
 
 import ee.gaile.entity.enums.EnumRoles;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Data
+@NoArgsConstructor
 @Entity(name = "Roles")
 @Table(name = "roles")
 public class Roles {
@@ -15,26 +19,8 @@ public class Roles {
     @Column(name = "name")
 	private EnumRoles name;
 
-	public Roles() {
-	}
-
 	public Roles(EnumRoles name) {
 		this.name = name;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public EnumRoles getName() {
-		return name;
-	}
-
-	public void setName(EnumRoles name) {
-		this.name = name;
-	}
 }
