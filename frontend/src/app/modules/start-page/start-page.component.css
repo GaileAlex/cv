@@ -181,3 +181,9 @@ ol.type li a:hover {
 .sticky + .content {
     padding-top: 60px;
 }
+
+.btn-wiggle{
+    width: 150px;
+
+}
+
