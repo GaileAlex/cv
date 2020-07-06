@@ -1,7 +1,6 @@
 package ee.gaile.service.security;
 
 import ee.gaile.entity.users.Users;
-import ee.gaile.service.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

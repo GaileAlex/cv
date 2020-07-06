@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Constants } from '../../constants/appConstants';
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -13,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
         sessionStorage.getItem('roles');
         const user = sessionStorage.getItem('user');
         const isLoggedIn = user && sessionStorage.getItem('accessToken');
-        const isApiUrl = request.url.startsWith(Constants.API_V1_PREFIX);
+        const isApiUrl = request.url.startsWith(environment.apiUrl);
         if (isLoggedIn && isApiUrl) {
             request = request.clone({
                 setHeaders: {Authorization: `Bearer ${ sessionStorage.getItem('accessToken') }`}

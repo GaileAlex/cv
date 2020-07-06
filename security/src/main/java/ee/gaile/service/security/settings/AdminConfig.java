@@ -2,13 +2,11 @@ package ee.gaile.service.security.settings;
 
 import ee.gaile.entity.enums.EnumRoles;
 import ee.gaile.entity.users.Users;
-import ee.gaile.service.repository.UserRepository;
+import ee.gaile.service.security.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class AdminConfig implements CommandLineRunner {

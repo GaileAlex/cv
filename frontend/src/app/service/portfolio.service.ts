@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Mindly } from '../models/mindly';
-import { Constants } from '../constants/appConstants';
+import {environment} from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +13,7 @@ export class PortfolioService {
     private readonly deletePortfolioUrl: string;
 
     constructor(private http: HttpClient) {
-        this.portfolioUrl = Constants.API_V1_PREFIX + '/mindly-data';
+        this.portfolioUrl = environment.apiUrl + '/mindly-data';
         this.deletePortfolioUrl = this.portfolioUrl + '/delete';
     }
 

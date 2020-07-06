@@ -30,6 +30,7 @@
 
     <modules>
         <module>persistence</module>
+        <module>security</module>
         <module>services</module>
         <module>web-api</module>
     </modules>

@@ -2,7 +2,8 @@ package ee.gaile.service.user;
 
 import ee.gaile.entity.enums.EnumRoles;
 import ee.gaile.entity.users.Users;
-import ee.gaile.service.repository.UserRepository;
+import ee.gaile.service.security.UserRepository;
+
 import ee.gaile.service.security.LoginService;
 import ee.gaile.service.security.UserDetailsImpl;
 import ee.gaile.service.security.request.LoginRequest;

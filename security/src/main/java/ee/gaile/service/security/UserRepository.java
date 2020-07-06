@@ -1,4 +1,4 @@
-package ee.gaile.service.repository;
+package ee.gaile.service.security;
 
 import ee.gaile.entity.enums.EnumRoles;
 import ee.gaile.entity.users.Users;

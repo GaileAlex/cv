@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Books } from '../models/books';
-import { Constants } from '../constants/appConstants';
+import {environment} from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +12,7 @@ export class BooksService {
     private readonly booksUrl: string;
 
     constructor(private http: HttpClient) {
-        this.booksUrl = Constants.API_V1_PREFIX + '/librarian';
+        this.booksUrl = environment.apiUrl + '/librarian';
     }
 
     public findAll(): Observable<Books[]> {
