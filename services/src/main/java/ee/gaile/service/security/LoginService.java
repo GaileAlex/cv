@@ -15,20 +15,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class LoginService {
     private static final Logger LOG = LoggerFactory.getLogger("can_access_accounting_log");
 
-    private static final String TOKEN_IS_NOT_VALID = "Token is not valid";
-    private static final String DEFAULT_LOCALE = "en-EN";
     private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
 
     public static final String LOGIN_URL = "/api/auth/login";
@@ -37,20 +32,10 @@ public class LoginService {
 
     public static final String HEADER_STRING = "Authorization";
 
-    @Value("${test-user.username}")
-    private String testUsername;
-    @Value("${test-user.password}")
-    private String testPassword;
     @Value("${security.jwt.key}")
     private String jwtSecureKeyProp;
 
     private final JwtUtils jwtUtils;
-
-
-    private static final List<String> ALLOWED_LOCALES = Arrays.asList(
-            "en-EN",
-            "ru-RU"
-    );
 
     public LoginRequest authUser(SignupRequest userDTO) throws ApiErrorException {
         Claims claims = getJWTClaims(userDTO);
@@ -107,24 +92,4 @@ public class LoginService {
                 .parseClaimsJws(token)
                 .getBody();
     }
-
-
-    public String getUserTokenClaimByPropertyName(String token, String propertyName) throws ServletException {
-        try {
-            final Claims claims = getTokenClaims(token);
-            return claims.get(propertyName) != null ? claims.get(propertyName).toString() : "";
-        } catch (final NullPointerException e) {
-            throw new ServletException(TOKEN_IS_NOT_VALID, e);
-        }
-    }
-
-    public String getUsername() {
-        return testUsername;
-    }
-
-    public String getPassword() {
-        return testPassword;
-    }
-
-
 }

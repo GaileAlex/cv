@@ -1,15 +1,16 @@
 package ee.gaile.service.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ee.gaile.entity.enums.EnumRoles;
 import ee.gaile.entity.users.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
@@ -23,27 +24,32 @@ public class UserDetailsImpl implements UserDetails {
 	@JsonIgnore
 	private String password;
 
+	private EnumRoles role;
+
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(Long id, String username, String email, String password,
+	public UserDetailsImpl(Long id, String username, String email, String password, EnumRoles role,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.role=role;
 		this.authorities = authorities;
 	}
 
 	public static UserDetailsImpl build(Users user) {
-		List<GrantedAuthority> authorities = user.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
-				.collect(Collectors.toList());
+		List<GrantedAuthority> authorities=new ArrayList<>();
+
+        SimpleGrantedAuthority simpleGrantedAuthority=new SimpleGrantedAuthority(user.getRole().name());
+        authorities.add(simpleGrantedAuthority);
 
 		return new UserDetailsImpl(
 				user.getId(), 
 				user.getUsername(), 
 				user.getEmail(),
-				user.getPassword(), 
+				user.getPassword(),
+				user.getRole(),
 				authorities);
 	}
 

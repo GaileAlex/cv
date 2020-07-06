@@ -20,8 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String API_V1_PREFIX = "/api/v1";
 
-    private static final String DEV_PROFILE = "dev";
-
     private static final String[] SWAGGER_RESOURCE_PATTERNS = {
             "/swagger-ui.html", "/webjars/springfox-swagger-ui/**",
             "/swagger-resources/**", "/v2/api-docs/**"
@@ -31,7 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public SecurityConfig(LoginService loginService) {
         this.loginService = loginService;
-
     }
 
     @Bean

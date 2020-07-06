@@ -21,7 +21,7 @@ import static ee.gaile.service.security.settings.JwtUtils.TOKEN_TYPE;
 @Slf4j
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    private LoginService loginService;
+    private final LoginService loginService;
 
     public JWTAuthorizationFilter(AuthenticationManager authManager, LoginService loginService) {
         super(authManager);

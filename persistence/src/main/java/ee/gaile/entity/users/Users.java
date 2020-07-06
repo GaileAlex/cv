@@ -1,11 +1,10 @@
 package ee.gaile.entity.users;
 
+import ee.gaile.entity.enums.EnumRoles;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -28,17 +27,14 @@ public class Users {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(targetEntity = Roles.class, cascade = {
-            CascadeType.ALL
-    })
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Roles> roles = new HashSet<>();
+    @Column(name = "role", nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
+    private EnumRoles role;
 
-    public Users(String username, String email, String password) {
+    public Users(String username, String email, String password, EnumRoles role) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role=role;
     }
 }

@@ -1,7 +1,6 @@
 package ee.gaile.entity.blog;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import ee.gaile.entity.users.Roles;
 import ee.gaile.entity.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;

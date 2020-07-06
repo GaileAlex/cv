@@ -1,7 +1,6 @@
 package ee.gaile.service.user;
 
 import ee.gaile.entity.enums.EnumRoles;
-import ee.gaile.entity.users.Roles;
 import ee.gaile.entity.users.Users;
 import ee.gaile.service.repository.UserRepository;
 import ee.gaile.service.security.LoginService;
@@ -11,7 +10,6 @@ import ee.gaile.service.security.request.SignupRequest;
 import ee.gaile.service.security.response.MessageResponse;
 import ee.gaile.service.security.settings.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
-import ee.gaile.service.security.settings.JwtUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,7 +22,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,7 +33,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final AuthenticationManager authenticationManager;
-    private final JwtUtils jwtUtils;
 
     public LoginRequest authUser(SignupRequest signupRequest) throws ApiErrorException {
         Authentication authentication = authenticationManager.authenticate(
@@ -73,15 +69,10 @@ public class UserService {
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
-        Users user = new Users(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
 
-        Set<Roles> roles = new HashSet<>();
-        Roles userRole = new Roles(EnumRoles.ROLE_USER);
-        roles.add(userRole);
-        user.setRoles(roles);
-        userRepository.save(user);
+        userRepository.save(new Users(signUpRequest.getUsername(),
+                signUpRequest.getEmail(),
+                encoder.encode(signUpRequest.getPassword()), EnumRoles.ROLE_USER)) ;
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
