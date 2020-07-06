@@ -28,7 +28,7 @@ public class AdminConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (userRepository.findByRole(EnumRoles.ROLE_ADMIN)!=null) {
+        if (userRepository.findByRole(EnumRoles.ROLE_ADMIN)==null) {
             Users user = new Users(admin, "admin@cv.ee", encoder.encode(password), EnumRoles.ROLE_ADMIN);
             userRepository.save(user);
         }

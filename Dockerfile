@@ -13,5 +13,5 @@ RUN mvn -f pom.xml clean package
 
 FROM openjdk:8-alpine
 COPY --from=build /workspace/web-api/target/cv-exec.jar cv.jar
-EXPOSE 8088
+EXPOSE 8081
 ENTRYPOINT ["java","-jar","cv.jar"]
