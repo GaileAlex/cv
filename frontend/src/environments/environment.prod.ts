@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8081/api/v1',
-  apiAuthUrl: 'http://localhost:8081'
+  apiUrl: '//gaile.asuscomm.com/api/v1',
+  apiAuthUrl: '//gaile.asuscomm.com'
 };
