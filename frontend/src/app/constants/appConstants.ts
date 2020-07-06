@@ -1,5 +1,3 @@
-import {environment} from "../../environments/environment";
-
 export enum Constants {
     LOGIN_URL = '/api/auth/login',
     LOGOUT_URL = '/api/auth/logout',

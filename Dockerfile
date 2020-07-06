@@ -4,10 +4,12 @@ WORKDIR /workspace
 COPY pom.xml /workspace
 COPY web-api/pom.xml web-api/pom.xml
 COPY services/pom.xml services/pom.xml
+COPY security/pom.xml security/pom.xml
 COPY persistence/pom.xml persistence/pom.xml
 
 COPY web-api/src /workspace/web-api/src
 COPY services/src /workspace/services/src
+COPY security/src /workspace/security/src
 COPY persistence/src /workspace/persistence/src
 RUN mvn -f pom.xml clean package
 
