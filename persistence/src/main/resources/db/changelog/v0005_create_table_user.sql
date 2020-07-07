@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset gaile:v0005_create_user.sql
+--changeset gaile:v0005_create_table_user.sql
 
 CREATE TABLE public.users
 (

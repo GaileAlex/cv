@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset gaile:v0006_table_comments.sql
+--changeset gaile:v0006_create_table_comments.sql
 
 CREATE TABLE comments
 (

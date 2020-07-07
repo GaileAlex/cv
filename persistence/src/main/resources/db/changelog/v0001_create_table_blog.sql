@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset gaile:v0001_table_blog.sql
+--changeset gaile:v0001_create_table_blog.sql
 
 CREATE TABLE public.blog
 (
