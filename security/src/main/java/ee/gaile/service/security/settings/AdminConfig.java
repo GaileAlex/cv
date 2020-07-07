@@ -4,7 +4,6 @@ import ee.gaile.entity.enums.EnumRoles;
 import ee.gaile.entity.users.Users;
 import ee.gaile.service.security.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +31,7 @@ public class AdminConfig {
     @PostConstruct
     private void changeAdmin() {
         Users adminRepo = userRepository.findByRole(EnumRoles.ROLE_ADMIN);
-        if (adminRepo.getUsername() == null) {
+        if (adminRepo == null) {
             saveAdmin();
         } else if (!adminRepo.getUsername().equals(admin)) {
             userRepository.deleteById(adminRepo.getId());
