@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset gaile:v0003_add_table_mindly_portfolio
+--changeset gaile:v0003_create_table_mindly_portfolio
 
 CREATE TABLE mindly
 (
