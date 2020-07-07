@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 @Component
 public class AdminConfig {
     private final UserRepository userRepository;
@@ -27,7 +29,7 @@ public class AdminConfig {
     @Value("${cv.admin.password}")
     private String password;
 
-    @Bean
+    @PostConstruct
     private void changeAdmin() {
         Users adminRepo = userRepository.findByRole(EnumRoles.ROLE_ADMIN);
         if (adminRepo.getUsername() == null) {

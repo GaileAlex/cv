@@ -17,8 +17,6 @@
         <spring-boot-devtools.version>2.1.9.RELEASE</spring-boot-devtools.version>
         <spring-boot-starter-test.version>2.1.9.RELEASE</spring-boot-starter-test.version>
         <spring-boot-starter-tomcat.version>2.1.9.RELEASE</spring-boot-starter-tomcat.version>
-        <springfox-swagger2.version>2.7.0</springfox-swagger2.version>
-        <springfox-swagger-ui.version>2.6.1</springfox-swagger-ui.version>
         <main.basedir>${project.parent.basedir}</main.basedir>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -61,22 +59,6 @@
             <version>${spring-boot-starter-tomcat.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox-swagger2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox-swagger-ui.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.maven.surefire</groupId>
             <artifactId>surefire-booter</artifactId>
