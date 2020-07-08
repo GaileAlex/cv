@@ -38,6 +38,7 @@
     "ngx-page-scroll": "^7.0.1",
     "ngx-page-scroll-core": "^7.0.1",
     "ngx-scrollspy": "^1.2.1",
+    "npm-registry-fetch": "^8.1.1",
     "primeicons": "^2.0.0",
     "primeng": "^8.1.1",
     "rxjs": "^6.6.0",
