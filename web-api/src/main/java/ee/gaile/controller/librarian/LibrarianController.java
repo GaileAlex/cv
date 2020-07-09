@@ -2,7 +2,7 @@ package ee.gaile.controller.librarian;
 
 import ee.gaile.entity.librarian.Books;
 import ee.gaile.service.librarian.JsonParse;
-import ee.gaile.service.librarian.SearchService;
+import ee.gaile.service.librarian.LibrarianService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
@@ -17,7 +17,7 @@ import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 @RequestMapping(API_V1_PREFIX + "/librarian")
 @AllArgsConstructor
 public class LibrarianController {
-    private final SearchService searchService;
+    private final LibrarianService searchService;
 
     @GetMapping("/find-all")
     public List<Books> findAll() {

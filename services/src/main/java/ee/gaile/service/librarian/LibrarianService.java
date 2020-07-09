@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class SearchService {
+public class LibrarianService {
     private final LibrarianRepository booksRepository;
 
-    public SearchService(LibrarianRepository booksRepository) {
+    public LibrarianService(LibrarianRepository booksRepository) {
         this.booksRepository = booksRepository;
     }
 
