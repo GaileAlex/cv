@@ -76,4 +76,8 @@ public class SearchService {
         }
         return booksList;
     }
+
+    public List<Books> getAllBooks() {
+        return booksRepository.findAll();
+    }
 }
