@@ -1,11 +1,12 @@
 package ee.gaile.service.librarian;
 
 import ee.gaile.entity.librarian.Books;
+import ee.gaile.entity.models.FilterWrapper;
 import ee.gaile.entity.models.SelectedFilter;
-import ee.gaile.service.repository.librarian.LibrarianRepository;
 import ee.gaile.service.librarian.search.date.DateSearchList;
 import ee.gaile.service.librarian.search.date.DateSearchRepository;
 import ee.gaile.service.librarian.search.text.SearchByAuthorOrTitle;
+import ee.gaile.service.repository.librarian.LibrarianRepository;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -30,6 +31,7 @@ public class LibrarianService {
      */
     public List<Books> filterOut(List<SelectedFilter> selectedFilterList, String condition) throws ParseException {
         List<Books> booksList = booksRepository.findAll();
+      //  List<SelectedFilter> selectedFilterList = filterWrapper.getFilters();
 
         if (selectedFilterList.isEmpty()) {
             booksList.clear();

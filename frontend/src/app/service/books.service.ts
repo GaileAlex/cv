@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Books } from '../models/books';
-import {environment} from "../../environments/environment";
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +20,6 @@ export class BooksService {
     }
 
     public applyFilter(filters, condition) {
-        return this.http.post<Books[]>(`${ this.booksUrl }/${ condition }`, filters);
+        return this.http.post<Books[]>(this.booksUrl + '/' + condition, filters);
     }
 }
