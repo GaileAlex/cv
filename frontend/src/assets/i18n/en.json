@@ -68,7 +68,7 @@
     "description": "Test task description can be found here"
   },
   "librarian": {
-    "welcome": "Welcome",
+    "welcome": "Welcome!",
     "click.text": "Click the button and select a filter to search.",
     "search": "Search",
     "unfortunately": "Unfortunately",
