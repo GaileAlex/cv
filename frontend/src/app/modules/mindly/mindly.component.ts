@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, Message, SelectItem } from 'primeng/api';
 import { PortfolioService } from '../../service/portfolio.service';
 import { Mindly } from '../../models/mindly';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-mindly',
@@ -19,31 +19,33 @@ export class MindlyComponent implements OnInit {
     portfolioObject: Mindly;
     dateToday: Date;
     cryptocurrencyList: SelectItem [];
-    cryptocurrencySelect: SelectItem;
+    cryptocurrencySelect = 'Bitcoin';
 
     constructor(private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService,
                 private  portfolioService: PortfolioService, private formBuilder: FormBuilder) {
 
         this.portfolioObject = new Mindly();
-        this.cryptocurrencyList = [{value: 'Bitcoin'}, {value: 'Ethereum'}, {value: 'Ripple'}];
-
+        this.cryptocurrencyList = [
+            {label: 'Bitcoin', value: 'Bitcoin'},
+            {label: 'Ethereum', value: 'Ethereum'},
+            {label: 'Ripple', value: 'Ripple'},
+        ];
     }
 
     ngOnInit() {
         window.scrollTo(0, 0);
         this.dateToday = new Date();
-      //
 
         this.portfolioService.findAll().subscribe(data => {
             this.portfolio = data;
         });
+
         this.inputForm = this.formBuilder.group({
-            cryptocurrency: ['Bitcoin'],
+            cryptocurrency: [''],
             amount: ['', Validators.required],
             dateOfPurchase: [''],
             walletLocation: ['', Validators.required]
         });
-
     }
 
     /**
@@ -71,7 +73,7 @@ export class MindlyComponent implements OnInit {
      */
     deletePortfolio(portfolio: Mindly): void {
         this.portfolioService.deletePortfolio(portfolio.id)
-            .subscribe(data => {
+            .subscribe(() => {
                 this.portfolio = this.portfolio.filter(u => u !== portfolio);
             });
     }
@@ -80,11 +82,11 @@ export class MindlyComponent implements OnInit {
      * saving a new item Portfolio
      */
     onSubmit() {
-        this.inputForm.get('cryptocurrency').setValue(this.cryptocurrencySelect.value);
+        this.inputForm.get('cryptocurrency').setValue(this.cryptocurrencySelect);
         this.portfolioObject = this.inputForm.value;
         if (this.inputForm.valid) {
             this.portfolioObject.cryptocurrency = this.portfolioObject.cryptocurrency.toString();
-            this.portfolioService.save(this.portfolioObject).subscribe(result => this.ngOnInit());
+            this.portfolioService.save(this.portfolioObject).subscribe(() => this.ngOnInit());
         }
     }
 }

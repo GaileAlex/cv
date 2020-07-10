@@ -15,13 +15,11 @@
         <tbody>
         <tr>
           <td>
-            <p-dropdown formControlName="cryptocurrency" [(ngModel)]="cryptocurrencySelect" [options]="cryptocurrencyList" id="cryptocurrency"
-                        name="cryptocurrency" optionLabel="value" [showClear]="false"></p-dropdown>
-              <p>Selected City: {{cryptocurrencySelect ? cryptocurrencySelect.value : 'none'}}</p>
+            <p-dropdown formControlName="cryptocurrency" [(ngModel)]="cryptocurrencySelect" [options]="cryptocurrencyList" ></p-dropdown>
           </td>
           <td>
             <label for="amount"></label>
-            <input type="text" class="form-control" id="amount" name="amount" appFormControlValidationMsg
+            <input  class="form-control" id="amount" name="amount" appFormControlValidationMsg type="number"
                    validationMsgId="amount" formControlName="amount" pInputText/>
           </td>
           <td>
