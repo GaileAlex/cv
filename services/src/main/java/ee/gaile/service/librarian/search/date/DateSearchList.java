@@ -32,14 +32,14 @@ public class DateSearchList {
                 for (Books books : booksListForSearch) {
 
                     if (new SimpleDateFormat("yyyy").parse(String.valueOf(books.getReleaseDate())).
-                            equals(new SimpleDateFormat("yyyy").parse(selectedFilter.getYear()))) {
+                            equals(new SimpleDateFormat("yyyy").parse(String.valueOf(selectedFilter.getYear())))) {
                         foundBooks.add(books);
                     }
                 }
                 break;
             case "Begin with":
                 for (Books books : booksListForSearch) {
-                    Date filterDate = new SimpleDateFormat("yyyy").parse(selectedFilter.getYear());
+                    Date filterDate = new SimpleDateFormat("yyyy").parse(String.valueOf(selectedFilter.getYear()));
                     Date bookDate = new SimpleDateFormat("yyyy").parse(String.valueOf(books.getReleaseDate()));
 
                     if (filterDate.before(bookDate) || filterDate.equals(bookDate)) {

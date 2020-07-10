@@ -1,16 +1,18 @@
 package ee.gaile.entity.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
+@SuperBuilder(toBuilder = true)
+@MappedSuperclass
 public class SelectedFilter implements Serializable {
     String conditionOption;
 
@@ -22,6 +24,6 @@ public class SelectedFilter implements Serializable {
 
     String textRequest;
 
-    String year;
+    Integer year;
 
 }

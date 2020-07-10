@@ -30,11 +30,11 @@ public class DateSearchRepository {
         switch (selectedFilter.getConditionOption()) {
             case "Contains":
                 foundBooks = booksRepository.findAllByReleaseDate(new SimpleDateFormat("yyyy").
-                        parse(selectedFilter.getYear()));
+                        parse(String.valueOf(selectedFilter.getYear())));
                 break;
             case "Begin with":
                 foundBooks = booksRepository.findAllWithReleaseDateBefore(new SimpleDateFormat("yyyy").
-                        parse(selectedFilter.getYear()));
+                        parse(String.valueOf(selectedFilter.getYear())));
                 break;
         }
         return foundBooks;

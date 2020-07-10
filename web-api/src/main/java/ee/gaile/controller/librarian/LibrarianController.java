@@ -11,8 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
@@ -33,8 +35,9 @@ public class LibrarianController {
     }
 
     @PostMapping( path = "/{condition}")
-    public List<Books> getBooksByFilter(@PathVariable(value = "condition") String condition,@RequestBody ArrayList<SelectedFilter> selectedFilters) throws java.text.ParseException {
+    public List<Books> getBooksByFilter(@PathVariable(value = "condition") String condition,
+                                        @RequestBody FilterWrapper selectedFilter, HttpServletRequest request) throws java.text.ParseException {
         LOGGER.info("Getting list of network client invoices");
-        return searchService.filterOut(selectedFilters, condition);
+        return searchService.filterOut(selectedFilter, condition);
     }
 }

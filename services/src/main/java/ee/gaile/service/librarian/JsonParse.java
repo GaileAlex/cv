@@ -32,13 +32,13 @@ public class JsonParse {
             if (body.get("textRequest").toString().isEmpty() && !body.get("searchArea").toString().equals("Date")) {
                 continue;
             }
-            selectedFilterList.add(new SelectedFilter(
+            /*selectedFilterList.add(new SelectedFilter(
                     body.get("searchArea").toString(),
                     body.get("conditionOption").toString(),
                     body.get("textRequest").toString(),
                     body.get("day").toString(),
                     body.get("month").toString(),
-                    body.get("year").toString()));
+                    body.get("year").toString()));*/
         }
 
         return selectedFilterList;
