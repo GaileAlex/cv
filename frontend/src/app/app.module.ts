@@ -55,7 +55,7 @@ import {StickyNavModule} from 'ng2-sticky-nav';
 import {NgxPageScrollCoreModule} from 'ngx-page-scroll-core';
 import {NgxPageScrollModule} from 'ngx-page-scroll';
 import {CalendarModule} from "primeng/calendar";
-import {TooltipModule} from "primeng/primeng";
+import {DropdownModule, TooltipModule} from "primeng/primeng";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -129,7 +129,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StickyNavModule,
     NgxPageScrollModule,
     CalendarModule,
-    TooltipModule
+    TooltipModule,
+    DropdownModule
   ],
   providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal,
     BooksDataService,

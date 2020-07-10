@@ -14,27 +14,21 @@
         </thead>
         <tbody>
         <tr>
-          <th scope="row">
-            <select class="form-control" formControlName="cryptocurrency">
-              <option value="Bitcoin">Bitcoin</option>
-              <option value="Ethereum">Ethereum</option>
-              <option value="Ripple">Ripple</option>
-            </select>
-          </th>
+          <td>
+            <p-dropdown formControlName="cryptocurrency" [options]="cryptocurrencyList" id="cryptocurrency"
+                        name="cryptocurrency" optionLabel="value" [showClear]="false"></p-dropdown>
+          </td>
           <td>
             <label for="amount"></label>
             <input type="text" class="form-control" id="amount" name="amount" appFormControlValidationMsg
                    validationMsgId="amount" formControlName="amount" pInputText/>
-
-
           </td>
           <td>
-            <p-calendar [(ngModel)]="dateToday" [showIcon]="true" formControlName="dateOfPurchase"
+            <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="dateToday" [showIcon]="true" formControlName="dateOfPurchase"
                         id="dateOfPurchase" name="dateOfPurchase"></p-calendar>
           <td>
             <label for="walletLocation"></label>
-            <input class="form-control" id="walletLocation" name="walletLocation"
-                   appFormControlValidationMsg
+            <input class="form-control" id="walletLocation" name="walletLocation" appFormControlValidationMsg
                    validationMsgId="walletLocation" formControlName="walletLocation" pInputText/>
           </td>
         </tr>
@@ -51,32 +45,32 @@
     <h2>{{'mindly.portfolio'|translate}}</h2>
     <div class="text-center validationError">
     </div>
-    <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th class="text-center">{{'mindly.cryptocurrency'|translate}}</th>
-        <th class="text-center">{{'mindly.amount'|translate}}</th>
-        <th class="text-center">{{'mindly.date'|translate}}</th>
-        <th class="text-center">{{'mindly.wallet.location'|translate}}</th>
-        <th class="text-center">{{'mindly.current'|translate}}</th>
-        <th class="text-center">{{'mindly.option'|translate}}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let portfolioItem of portfolio">
-        <td>{{portfolioItem.cryptocurrency}}</td>
-        <td>{{portfolioItem.amount}}</td>
-        <td>{{portfolioItem.dateOfPurchase| date : "dd.MM.yy"}}</td>
-        <td>{{portfolioItem.walletLocation}}</td>
-        <td>{{portfolioItem.currentMarketValue}}
-        </td>
-        <td>
-          <button pButton type="button" label="Delete" class="ui-button-secondary"
-                  (click)="confirm(portfolioItem)"></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <p-table [value]="portfolio">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center">{{'mindly.cryptocurrency'|translate}}</th>
+          <th class="text-center">{{'mindly.amount'|translate}}</th>
+          <th class="text-center">{{'mindly.date'|translate}}</th>
+          <th class="text-center">{{'mindly.wallet.location'|translate}}</th>
+          <th class="text-center">{{'mindly.current'|translate}}</th>
+          <th class="text-center">{{'mindly.option'|translate}}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-portfolioItem>
+        <tr>
+          <td>{{portfolioItem.cryptocurrency}}</td>
+          <td>{{portfolioItem.amount}}</td>
+          <td>{{portfolioItem.dateOfPurchase| date : "dd.MM.yy"}}</td>
+          <td>{{portfolioItem.walletLocation}}</td>
+          <td>{{portfolioItem.currentMarketValue}}
+          </td>
+          <td>
+            <button pButton type="button" label="Delete" class="ui-button-secondary"
+                    (click)="confirm(portfolioItem)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
     <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
   </div>
   <div class="section-title text-center center p_50">
@@ -84,7 +78,6 @@
       {{'mindly.description'|translate}}</a></h4>
     <hr>
   </div>
-
 </div>
 
 

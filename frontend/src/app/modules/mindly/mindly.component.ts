@@ -1,6 +1,6 @@
 import {ActivatedRoute, Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
-import {ConfirmationService, Message} from 'primeng/api';
+import {ConfirmationService, Message, SelectItem} from 'primeng/api';
 import {PortfolioService} from '../../service/portfolio.service';
 import {Mindly} from '../../models/mindly';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -15,25 +15,26 @@ export class MindlyComponent implements OnInit {
 
   inputForm: FormGroup;
   portfolio: Mindly[];
-  msgs: Message[] = [];
+  msgs: Message[];
   portfolioObject: Mindly;
   dateToday: Date;
+  cryptocurrencyList: SelectItem [];
 
   constructor(private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService,
               private  portfolioService: PortfolioService, private formBuilder: FormBuilder) {
 
     this.portfolioObject = new Mindly();
+    this.cryptocurrencyList = [{value: "Bitcoin"}, {value: 'Ethereum'}, {value: 'Ripple'}]
+
   }
 
   ngOnInit() {
     window.scrollTo(0, 0);
-this.dateToday=new Date();
-
+    this.dateToday = new Date();
 
     this.portfolioService.findAll().subscribe(data => {
       this.portfolio = data;
     });
-
 
     this.inputForm = this.formBuilder.group({
       cryptocurrency: ['Bitcoin'],
@@ -79,6 +80,7 @@ this.dateToday=new Date();
   onSubmit() {
     this.portfolioObject = this.inputForm.value;
     if (this.inputForm.valid) {
+      this.portfolioObject.cryptocurrency = this.portfolioObject.cryptocurrency.toString()
       this.portfolioService.save(this.portfolioObject).subscribe(result => this.ngOnInit());
     }
   }
