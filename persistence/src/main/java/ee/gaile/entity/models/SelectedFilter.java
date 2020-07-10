@@ -13,6 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
 @MappedSuperclass
+@Data
 public class SelectedFilter implements Serializable {
     String conditionOption;
 

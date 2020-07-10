@@ -36,7 +36,7 @@ public class LibrarianController {
 
     @PostMapping( path = "/{condition}")
     public List<Books> getBooksByFilter(@PathVariable(value = "condition") String condition,
-                                        @RequestBody FilterWrapper selectedFilter, HttpServletRequest request) throws java.text.ParseException {
+                                        @RequestBody FilterWrapper selectedFilter) throws java.text.ParseException {
         LOGGER.info("Getting list of network client invoices");
         return searchService.filterOut(selectedFilter, condition);
     }
