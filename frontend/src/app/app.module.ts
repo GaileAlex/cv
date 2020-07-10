@@ -54,6 +54,10 @@ import { ErrorInterceptor } from './service/auth/error.interceptor';
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { TooltipModule } from 'primeng/tooltip';
+
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -125,7 +129,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgbModule,
         LightboxModule,
         StickyNavModule,
-        NgxPageScrollModule
+        NgxPageScrollModule,
+        CalendarModule,
+        TooltipModule,
+        DropdownModule,
     ],
     providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal,
         BooksDataService,
