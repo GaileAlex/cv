@@ -15,8 +15,9 @@
         <tbody>
         <tr>
           <td>
-            <p-dropdown formControlName="cryptocurrency" [options]="cryptocurrencyList" id="cryptocurrency"
-                        name="cryptocurrency" optionLabel="value" [showClear]="false"></p-dropdown>
+            <p-dropdown [options]="cities"  [(ngModel)]="selectedCity" optionLabel="name"
+                          [showClear]="false"></p-dropdown>
+            <p>Selected City: {{selectedCity  ? selectedCity.name : 'none'}}</p>
           </td>
           <td>
             <label for="amount"></label>

@@ -3,7 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import {ConfirmationService, Message, SelectItem} from 'primeng/api';
 import {PortfolioService} from '../../service/portfolio.service';
 import {Mindly} from '../../models/mindly';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {City} from "./City";
 
 @Component({
   selector: 'app-mindly',
@@ -18,14 +19,24 @@ export class MindlyComponent implements OnInit {
   msgs: Message[];
   portfolioObject: Mindly;
   dateToday: Date;
-  cryptocurrencyList: SelectItem [];
+  cities: City[];
+
+  selectedCity: City;
+
+
 
   constructor(private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService,
               private  portfolioService: PortfolioService, private formBuilder: FormBuilder) {
 
     this.portfolioObject = new Mindly();
-    this.cryptocurrencyList = [{value: "Bitcoin"}, {value: 'Ethereum'}, {value: 'Ripple'}]
-
+    //this.cryptocurrencyList = [{name: "Bitcoin"}, {name: 'Ethereum'}, {name: 'Ripple'}]
+    this.cities = [
+      {name: 'New York', code: 'NY'},
+      {name: 'Rome', code: 'RM'},
+      {name: 'London', code: 'LDN'},
+      {name: 'Istanbul', code: 'IST'},
+      {name: 'Paris', code: 'PRS'}
+    ];
   }
 
   ngOnInit() {
@@ -37,7 +48,7 @@ export class MindlyComponent implements OnInit {
     });
 
     this.inputForm = this.formBuilder.group({
-      cryptocurrency: ['Bitcoin'],
+      selectedCity: new FormControl('selectedCity'),
       amount: ['', Validators.required],
       dateOfPurchase: [''],
       walletLocation: ['', Validators.required]
@@ -80,7 +91,7 @@ export class MindlyComponent implements OnInit {
   onSubmit() {
     this.portfolioObject = this.inputForm.value;
     if (this.inputForm.valid) {
-      this.portfolioObject.cryptocurrency = this.portfolioObject.cryptocurrency.toString()
+     /* this.portfolioObject.cryptocurrency = this.portfolioObject.cryptocurrency.toString()*/
       this.portfolioService.save(this.portfolioObject).subscribe(result => this.ngOnInit());
     }
   }
