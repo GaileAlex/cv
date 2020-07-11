@@ -29,9 +29,9 @@ public class LibrarianService {
      * @return a list of books based on all filters.
      * @throws ParseException
      */
-    public List<Books> filterOut(List<SelectedFilter> selectedFilterList, String condition) throws ParseException {
+    public List<Books> filterOut(FilterWrapper filterWrapper, String condition) throws ParseException {
         List<Books> booksList = booksRepository.findAll();
-      //  List<SelectedFilter> selectedFilterList = filterWrapper.getFilters();
+        List<SelectedFilter> selectedFilterList = filterWrapper.getFilters();
 
         if (selectedFilterList.isEmpty()) {
             booksList.clear();
