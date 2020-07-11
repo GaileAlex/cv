@@ -5,7 +5,7 @@ services:
     image: "postgres:12.3-alpine"
     container_name: cv-postgres
     volumes:
-      - ./cv-data:/var/lib/postgresql/data
+      - cv-data:/var/lib/postgresql/data
     expose:
       - 5432
     ports:
