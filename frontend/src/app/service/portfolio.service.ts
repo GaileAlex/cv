@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Mindly } from '../models/mindly';
-import {environment} from "../../environments/environment";
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -10,11 +10,9 @@ import {environment} from "../../environments/environment";
 export class PortfolioService {
 
     private readonly portfolioUrl: string;
-    private readonly deletePortfolioUrl: string;
 
     constructor(private http: HttpClient) {
         this.portfolioUrl = environment.apiUrl + '/mindly-data';
-        this.deletePortfolioUrl = this.portfolioUrl + '/delete';
     }
 
     public findAll(): Observable<Mindly[]> {
@@ -26,7 +24,7 @@ export class PortfolioService {
         return this.http.post<Mindly>(this.portfolioUrl, portfolio);
     }
 
-    public deletePortfolio(portfolioId) {
-        return this.http.post<string>(`${ this.deletePortfolioUrl }/${ portfolioId }`, null);
+    public deletePortfolio(portfolioId): Observable<Mindly> {
+        return this.http.delete<Mindly>(`${ this.portfolioUrl }/${ portfolioId }`);
     }
 }

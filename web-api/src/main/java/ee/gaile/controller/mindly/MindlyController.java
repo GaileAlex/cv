@@ -43,8 +43,9 @@ public class MindlyController {
     /**
      * @param portfolioId id portfolio item
      */
-    @PostMapping("/delete/{portfolioId}")
-    public void delete(@PathVariable("portfolioId") Long portfolioId) {
+    @DeleteMapping("/{portfolioId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deletePortfolioItem(@PathVariable("portfolioId") Long portfolioId) {
             mindlyService.deletePortfolioById(portfolioId);
     }
 }

@@ -2,18 +2,14 @@ package ee.gaile.controller.librarian;
 
 import ee.gaile.entity.librarian.Books;
 import ee.gaile.entity.models.FilterWrapper;
-import ee.gaile.entity.models.SelectedFilter;
 import ee.gaile.service.librarian.LibrarianService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
@@ -35,7 +31,7 @@ public class LibrarianController {
 
     @PostMapping( path = "/{condition}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Books> getBooksByFilter(@PathVariable(value = "condition") String condition,@RequestBody FilterWrapper selectedFilters) throws java.text.ParseException {
-        LOGGER.info("Getting list of network client invoices");
+        LOGGER.info("Getting list of the books");
         return searchService.filterOut(selectedFilters, condition);
     }
 }
