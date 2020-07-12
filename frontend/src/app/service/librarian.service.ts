@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class BooksService {
+export class LibrarianService {
 
     private readonly booksUrl: string;
 

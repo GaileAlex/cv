@@ -7,7 +7,7 @@ import {environment} from '../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class PortfolioService {
+export class MindlyService {
 
     private readonly portfolioUrl: string;
 

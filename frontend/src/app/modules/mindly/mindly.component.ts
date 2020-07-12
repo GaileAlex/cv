@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, Message, SelectItem } from 'primeng/api';
-import { PortfolioService } from '../../service/portfolio.service';
+import { MindlyService } from '../../service/mindly.service';
 import { Mindly } from '../../models/mindly';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -22,7 +22,7 @@ export class MindlyComponent implements OnInit {
     cryptocurrencySelect = 'Bitcoin';
 
     constructor(private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService,
-                private  portfolioService: PortfolioService, private formBuilder: FormBuilder) {
+                private  portfolioService: MindlyService, private formBuilder: FormBuilder) {
 
         this.portfolioObject = new Mindly();
         this.cryptocurrencyList = [

@@ -14,7 +14,7 @@ import { MindlyComponent } from './modules/mindly/mindly.component';
 import { FormControlValidationMsgDirective } from './components/form-validation/formcontrol-validation-msg.directive';
 import { FormSubmitValidationMsgDirective } from './components/form-validation/formsubmit-validation-msg.directive';
 import { ConfirmationService } from 'primeng/api';
-import { PortfolioService } from './service/portfolio.service';
+import { MindlyService } from './service/mindly.service';
 import { ValidationMsgService } from './components/form-validation/validation-msg.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -28,7 +28,7 @@ import { LibrarianComponent } from './modules/librarian/librarian.component';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComboboxComponent } from './components/combo-box/combo-box.component';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
-import { BooksService } from './service/books.service';
+import { LibrarianService } from './service/librarian.service';
 import {
     MatButtonModule,
     MatDialogModule,
@@ -134,7 +134,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         TooltipModule,
         DropdownModule,
     ],
-    providers: [ConfirmationService, PortfolioService, ValidationMsgService, BooksService, NgbActiveModal,
+    providers: [ConfirmationService, MindlyService, ValidationMsgService, LibrarianService, NgbActiveModal,
         BooksDataService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
