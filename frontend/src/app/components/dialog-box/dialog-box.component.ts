@@ -4,6 +4,7 @@ import { LibrarianService } from '../../service/librarian.service';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BooksDataService } from '../../service/booksData';
+import { DialogService } from "primeng/dynamicdialog";
 
 @Component({
     selector: 'app-dialog-box',
@@ -14,7 +15,7 @@ export class DialogBoxComponent implements OnInit {
     formFilter: FormGroup;
 
     constructor(private formBuilder: FormBuilder, private bookService: LibrarianService,
-                private router: Router, private activeModal: NgbActiveModal, private books: BooksDataService) {
+                private router: Router, private dialogService: DialogService, private books: BooksDataService) {
     }
 
     ngOnInit(): void {
@@ -54,6 +55,6 @@ export class DialogBoxComponent implements OnInit {
     }
 
     closeClick(): void {
-        this.activeModal.close();
+        this.dialogService.dialogComponentRef.destroy();
     }
 }

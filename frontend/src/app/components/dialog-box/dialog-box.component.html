@@ -1,26 +1,17 @@
-<div class="modal-header">
-    <button class="box-button" (click)="closeClick()">x</button>
-</div>
+
 <div class="modal-content">
     <form [formGroup]='formFilter'>
 
         <div class="container">
             <div class="row justify-content-start">
-                <p class="col-4">Filter name</p>
-                <input class="name col-4" type="text">
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row justify-content-start">
-                <p class="col-4">Filtration conditions</p>
+                <p class="col-4 text-center">Filtration conditions</p>
                 <app-combo-box (formReady)="formInitialized('filterForm', $event)"></app-combo-box>
             </div>
         </div>
 
         <div class="container">
             <div class="row justify-content-start">
-                <p class="col-4">Filters should</p>
+                <p class="col-4 text-center">Filters should</p>
                 <div class="form-check form-check-inline">
                     <input checked type="radio" name="condition" id="choice1" value="allConditions"
                            class="form-check-input"
@@ -55,8 +46,7 @@
 
     </form>
 </div>
-<div class="modal-footer">
-</div>
+
 
 <!--
 <div class="col-md-8 container mt-5">

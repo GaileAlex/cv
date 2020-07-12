@@ -13,7 +13,7 @@ import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { MindlyComponent } from './modules/mindly/mindly.component';
 import { FormControlValidationMsgDirective } from './components/form-validation/formcontrol-validation-msg.directive';
 import { FormSubmitValidationMsgDirective } from './components/form-validation/formsubmit-validation-msg.directive';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { MindlyService } from './service/mindly.service';
 import { ValidationMsgService } from './components/form-validation/validation-msg.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -57,6 +57,9 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ToastModule } from 'primeng/toast';
+import { CommonModule } from '@angular/common';
 
 
 defineLocale('ru', ruLocale);
@@ -133,9 +136,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         CalendarModule,
         TooltipModule,
         DropdownModule,
+        DynamicDialogModule,
+        ToastModule,
+        CommonModule
     ],
     providers: [ConfirmationService, MindlyService, ValidationMsgService, LibrarianService, NgbActiveModal,
-        BooksDataService,
+        BooksDataService, DialogService, MessageService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
     bootstrap: [AppComponent],
