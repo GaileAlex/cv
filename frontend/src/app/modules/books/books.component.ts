@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Books} from '../../models/books';
-import {BooksService} from '../../service/books.service';
+import {LibrarianService} from '../../service/librarian.service';
 import {BooksDataService} from '../../service/booksData';
 
 @Component({
@@ -12,7 +12,7 @@ import {BooksDataService} from '../../service/booksData';
 export class BooksComponent implements OnInit {
   books: Books[];
 
-  constructor(private route: ActivatedRoute, private router: Router, private  booksService: BooksService,
+  constructor(private route: ActivatedRoute, private router: Router, private  booksService: LibrarianService,
               private booksData: BooksDataService) {
   }
 

@@ -15,17 +15,16 @@
         <tbody>
         <tr>
           <td>
-            <p-dropdown formControlName="cryptocurrency" [options]="cryptocurrencyList" id="cryptocurrency"
-                        name="cryptocurrency" optionLabel="value" [showClear]="false"></p-dropdown>
+            <p-dropdown formControlName="cryptocurrency" [(ngModel)]="cryptocurrencySelect" [options]="cryptocurrencyList" ></p-dropdown>
           </td>
           <td>
             <label for="amount"></label>
-            <input type="text" class="form-control" id="amount" name="amount" appFormControlValidationMsg
+            <input  class="form-control" id="amount" name="amount" appFormControlValidationMsg type="number"
                    validationMsgId="amount" formControlName="amount" pInputText/>
           </td>
           <td>
             <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="dateToday" [showIcon]="true" formControlName="dateOfPurchase"
-                        id="dateOfPurchase" name="dateOfPurchase"></p-calendar>
+                        id="dateOfPurchase" name="dateOfPurchase" selectOtherMonths="true"></p-calendar>
           <td>
             <label for="walletLocation"></label>
             <input class="form-control" id="walletLocation" name="walletLocation" appFormControlValidationMsg
@@ -40,7 +39,7 @@
   </div>
 </div>
 
-<div class="text-center p_100">
+<div class="text-center p_50">
   <div class="container">
     <h2>{{'mindly.portfolio'|translate}}</h2>
     <div class="text-center validationError">

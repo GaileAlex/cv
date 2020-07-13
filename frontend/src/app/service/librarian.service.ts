@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class BooksService {
+export class LibrarianService {
 
     private readonly booksUrl: string;
 
@@ -19,7 +19,7 @@ export class BooksService {
         return this.http.get<Books[]>(this.booksUrl + '/find-all');
     }
 
-    public applyFilter(filters, condition) {
+    public applyFilter(filters, condition): Observable<Books[]> {
         return this.http.post<Books[]>(this.booksUrl + '/' + condition, filters);
     }
 }

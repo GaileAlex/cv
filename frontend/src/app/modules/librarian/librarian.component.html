@@ -21,8 +21,11 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-lg-12">
-                <button pButton label="{{'librarian.search'|translate}}" class="ui-button-raised"
-                        (click)="openDialog()"></button>
+                <p-toast [style]="{marginTop: '60px'}"></p-toast>
+
+                <button type="button" (click)="show()" pButton icon="pi pi-info-circle"
+                        label="{{'librarian.search'|translate}}"></button>
+
             </div>
         </div>
     </div>

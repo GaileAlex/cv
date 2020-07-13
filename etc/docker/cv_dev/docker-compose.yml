@@ -1,9 +1,9 @@
 version: "3.8"
 services:
   postgres:
-    image: "postgres:12.3"
+    image: "postgres:12.3-alpine"
     network_mode: bridge
-    container_name: cv
+    container_name: cv-dev
     expose:
       - 5432
     ports:
@@ -14,8 +14,8 @@ services:
       - POSTGRES_DB=db
     restart: unless-stopped
     volumes:
-      - ./data:/var/lib/postgresql/data:rw
+      - dev-data:/var/lib/postgresql/data:rw
       - ./scripts:/scripts
 
 volumes:
-  cv-data:
+  dev-data:

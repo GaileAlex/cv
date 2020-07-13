@@ -37,7 +37,7 @@
     "experience": {
       "experience": "Experience",
       "job-1": "<h4>Wisercat Software OÜ</h4>\n <h4 class=\"subheading\">Junior Software Developer</h4>",
-      "job-1.description": "<br>\n - Develop software using latest technologies.<br>\n - Develop new features for existing projects.<br> - Improve, refactor and maintain existing codebase.<br><br> Backend: Java, Spring Boot, Hibernate, PostgreSQL, Git, Docker.<br> Frontend: Angular, React.",
+      "job-1.description": "<br>- Development of a web application for the collection and analysis of statistical data.<br> - Development of controllers, services and SQL queries on the Spring backend.<br> - Refactoring existing code to the changing wishes of the client.<br> - Create new and modify existing pages in the web interface with data display.<br> - Writing unit tests.<br><br>Backend: Java, Spring Boot, Hibernate, PostgreSQL, Liquibase, Docker.<br>Frontend: React",
       "job-2": "<h4>LLC \"Impulse\"</h4>\n <h4 class=\"subheading\">Deputy Director</h4>",
       "job-2.description": "<br>\n Construction company<br><br>\n - Independently created a company website.<br>\n - Created a network and electronic document management.<br>\n - Increased the company's revenue more than four times.<br>\n - Established relationships with suppliers.<br>\n - Increased the number of regular customers.<br><br>",
       "job-3": "<h4>ZAO \"PSK \"Rus\"</h4>\n <h4 class=\"subheading\">Founder, Director</h4>",
@@ -68,7 +68,7 @@
     "description": "Test task description can be found here"
   },
   "librarian": {
-    "welcome": "Welcome",
+    "welcome": "Welcome!",
     "click.text": "Click the button and select a filter to search.",
     "search": "Search",
     "unfortunately": "Unfortunately",
