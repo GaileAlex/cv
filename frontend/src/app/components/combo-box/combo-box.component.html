@@ -4,21 +4,20 @@
             <div class="container">
                 <div class="row justify-content-start">
 
-                    <select #c class="soflow" formControlName="searchArea">
-                        <option *ngFor="let v of values">{{v}}</option>
-                    </select>
+                    <p-dropdown #c class="soflow"  formControlName="searchArea"
+                                [(ngModel)]="chooseValue" [options]="chooseValues"></p-dropdown>
 
-                    <select class="soflow" formControlName="conditionOption">
-                        <option>Contains</option>
-                        <option>Begin with</option>
-                    </select>
+                    <p-dropdown class="soflow" *ngIf="c.value!='Date'" formControlName="conditionOption"
+                                [(ngModel)]="textConditionOption" [options]="textConditionOptions" ></p-dropdown>
+                    <p-dropdown class="soflow" *ngIf="c.value=='Date'" formControlName="conditionOption"
+                                [(ngModel)]="dateConditionOption" [options]="dateConditionOptions" ></p-dropdown>
 
-                    <input *ngIf="c.value!='Date'" placeholder="Text" class="name box-text" type="text"
-                           formControlName="textRequest">
+                    <label for="textRequest"></label>
+                    <input *ngIf="c.value!='Date'" id="textRequest" class="name box-text" placeholder="Text" appFormControlValidationMsg
+                           validationMsgId="textRequest" formControlName="textRequest" pInputText/>
 
                     <select *ngIf="c.value=='Date'" class="soflow day" formControlName="day">
                         <option *ngFor="let day of days">{{day}}</option>
-
                     </select>
                     <select *ngIf="c.value=='Date'" class="soflow month" formControlName="month">
                         <option *ngFor="let month of months">{{month}}</option>

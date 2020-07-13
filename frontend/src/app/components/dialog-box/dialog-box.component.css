@@ -74,13 +74,7 @@ div.modal-footer {
 }
 
 .box-soflow {
-    border-radius: 6px;
-    background: #FAFAFA;
-    color: #555;
-    font-size: inherit;
     margin-right: 5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     width: 100px;
     height: 28px;
 }
