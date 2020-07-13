@@ -1,5 +1,5 @@
 .soflow {
-    margin: 5px;
+    margin-right: 5px;
 }
 
 .box-text {
@@ -11,8 +11,8 @@
 
 .mat-button {
     margin: 5px;
-    height: 32px;
-    width: 32px;
+    height: 35px;
+    width: 35px;
     border-radius: 6px;
 }
 
@@ -29,6 +29,25 @@
 }
 
 .name {
-    height: 35px;
+    height: 25px;
     max-width: 200px;
+}
+
+select {
+    width: 100%;
+    height: 50px;
+    font-size: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0;
+    border: none;
+    padding: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 10px;
+}
+/* For IE <= 11 */
+select::-ms-expand {
+    display: none;
 }
