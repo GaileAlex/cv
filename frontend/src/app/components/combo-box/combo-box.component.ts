@@ -53,7 +53,6 @@ export class ComboboxComponent implements OnInit {
 
         });
         this.filterForms.push(filter);
-        const f2=null;
     }
 
     removeFilter(i) {
