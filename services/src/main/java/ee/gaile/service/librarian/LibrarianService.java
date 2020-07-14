@@ -31,7 +31,8 @@ public class LibrarianService extends LibrarianNativeRepo {
         List<SelectedFilter> selectedFilterList = filterWrapper.getFilters();
 
         for (int i = 0; i < selectedFilterList.size(); i++) {
-            if (!selectedFilterList.get(i).getSearchArea().equals("Date") && !selectedFilterList.get(i).getTextRequest().isEmpty()) {
+            if (!selectedFilterList.get(i).getSearchArea().equals("Date")
+                    && !selectedFilterList.get(i).getTextRequest().isEmpty()) {
                 bookQuery.append(Conditions.getQuery(selectedFilterList.get(i).getSearchArea()))
                         .append(Conditions.getQuery(selectedFilterList.get(i).getConditionOption()))
                         .append("'")
