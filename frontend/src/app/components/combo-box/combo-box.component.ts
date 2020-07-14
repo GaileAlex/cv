@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { SelectItem } from 'primeng/api';
 
 @Component({
     selector: 'app-combo-box',
@@ -9,25 +8,11 @@ import { SelectItem } from 'primeng/api';
 })
 export class ComboboxComponent implements OnInit {
 
-    chooseValue = 'Author';
-    textConditionOptions: SelectItem [];
-    textConditionOption = 'Contains';
-    dateConditionOptions: SelectItem [];
-    dateConditionOption = 'Equal to';
 
     constructor(private formBuilder: FormBuilder) {
         this.filterForm = this.formBuilder.group({
             selectedFilter: new FormArray([])
         });
-
-        this.textConditionOptions = [
-            {label: 'Contains', value: 'Contains'},
-            {label: 'Begin with', value: 'Begin with'}
-        ];
-        this.dateConditionOptions = [
-            {label: 'Equal to', value: 'Equal to'},
-            {label: 'Begin with', value: 'Begin with'}
-        ];
     }
 
     get filterForms() {
@@ -36,11 +21,7 @@ export class ComboboxComponent implements OnInit {
 
     filterForm: FormGroup;
     @Output() formReady = new EventEmitter<FormGroup>();
-    chooseValues = [
-        {label: 'Author', value: 'Author'},
-        {label: 'Title', value: 'Title'},
-        {label: 'Date', value: 'Date'}
-    ];
+    values = ['Author', 'Title', 'Date'];
     days = [];
     months = [];
     years = [];

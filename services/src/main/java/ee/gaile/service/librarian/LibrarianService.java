@@ -1,27 +1,33 @@
 package ee.gaile.service.librarian;
 
+import ee.gaile.entity.enums.Conditions;
 import ee.gaile.entity.librarian.Books;
 import ee.gaile.entity.models.FilterWrapper;
 import ee.gaile.entity.models.SelectedFilter;
-import ee.gaile.service.librarian.search.date.DateSearchList;
-import ee.gaile.service.librarian.search.date.DateSearchRepository;
-import ee.gaile.service.librarian.search.text.SearchByAuthorOrTitle;
-import ee.gaile.service.repository.librarian.LibrarianRepository;
+import lombok.AllArgsConstructor;
+import org.postgresql.util.PSQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Service
+@AllArgsConstructor
 public class LibrarianService {
-    private final LibrarianRepository booksRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(LibrarianService.class);
 
-    public LibrarianService(LibrarianRepository booksRepository) {
-        this.booksRepository = booksRepository;
-    }
+    EntityManager em;
+
+    //language=SQL
+    private static final String QUERY = "select * from books";
+
 
     /**
      * Performs filtering based on user selected conditions.
@@ -30,56 +36,39 @@ public class LibrarianService {
      * @throws ParseException
      */
     public List<Books> filterOut(FilterWrapper filterWrapper, String condition) throws ParseException {
-        List<Books> booksList = booksRepository.findAll();
+        StringBuilder bookQuery = new StringBuilder(QUERY).append(" where ");
         List<SelectedFilter> selectedFilterList = filterWrapper.getFilters();
 
-        if (selectedFilterList.isEmpty()) {
-            booksList.clear();
-            return booksList;
+
+        for (int i = 0; i < selectedFilterList.size(); i++) {
+            if (!selectedFilterList.get(i).getSearchArea().equals("Date") && !selectedFilterList.get(i).getTextRequest().isEmpty()) {
+                bookQuery.append(Conditions.getQuery(selectedFilterList.get(i).getSearchArea()))
+                        .append(Conditions.getQuery(selectedFilterList.get(i).getConditionOption()))
+                        .append("'")
+                        .append(selectedFilterList.get(i).getTextRequest())
+                        .append("'")
+                        .append("   || '%' ");
+            }
+            if (selectedFilterList.size() - i > 1) {
+                bookQuery.append(Conditions.getQuery(condition));
+            }
+
         }
 
-        if (condition.equals("allConditions") || condition.equals("noneOfTheCondition")) {
-            List<Books> tempList = new ArrayList<>(booksList);
+        Query query = em.createNativeQuery(bookQuery.toString(), Books.class);
+        List<Books> booksList=new ArrayList<>();
+        try {
+           booksList = query.getResultList();
 
-            for (SelectedFilter selectedFilter : selectedFilterList) {
-                switch (selectedFilter.getSearchArea()) {
-                    case "Author":
-                    case "Title":
-                        booksList = new SearchByAuthorOrTitle(booksList, selectedFilter).search();
-                        break;
-                    case "Date":
-                        booksList = new DateSearchList(booksList, selectedFilter).search();
-                        break;
-                }
-            }
-
-            if (condition.equals("noneOfTheCondition")) {
-                tempList.removeAll(booksList);
-                booksList.clear();
-                booksList.addAll(tempList);
-            }
-        } else {
-            Set<Books> temp = new HashSet<>();
-
-            for (SelectedFilter selectedFilter : selectedFilterList) {
-                switch (selectedFilter.getSearchArea()) {
-                    case "Author":
-                    case "Title":
-                        booksList = new SearchByAuthorOrTitle(booksList, selectedFilter).search();
-                        break;
-                    case "Date":
-                        booksList = new DateSearchRepository(booksRepository, selectedFilter).search();
-                        break;
-                }
-                temp.addAll(booksList);
-            }
-            booksList.clear();
-            booksList.addAll(temp);
+        } catch (PersistenceException pe){
+            LOGGER.info("Invalid request parameters");
         }
+
         return booksList;
     }
 
     public List<Books> getAllBooks() {
-        return booksRepository.findAll();
+        Query query = em.createNativeQuery(QUERY, Books.class);
+        return query.getResultList();
     }
 }

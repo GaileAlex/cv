@@ -11,9 +11,4 @@ import java.util.List;
 
 @Repository
 public interface LibrarianRepository extends JpaRepository<Books, Long> {
-
-    List<Books> findAllByReleaseDate(Date releaseDate);
-
-    @Query("select a from Books a where a.releaseDate >= :releaseDate")
-    List<Books> findAllWithReleaseDateBefore(@Param("releaseDate") Date releaseDate);
 }
