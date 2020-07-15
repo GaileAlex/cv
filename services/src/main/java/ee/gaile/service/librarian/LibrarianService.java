@@ -5,6 +5,7 @@ import ee.gaile.entity.librarian.Books;
 import ee.gaile.entity.models.FilterWrapper;
 import ee.gaile.entity.models.SelectedFilter;
 import ee.gaile.service.repository.librarian.LibrarianNativeRepo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -47,10 +48,15 @@ public class LibrarianService extends LibrarianNativeRepo {
 
                 getByDate(bookQuery, selectedFilterList.get(i));
             }
-            if (selectedFilterList.size() - i > 1) {
+            if (selectedFilterList.size() - i > 1 && (!selectedFilterList.get(i).getTextRequest().equals("")
+                    || selectedFilterList.get(i).getSearchArea().equals("Date"))) {
                 bookQuery.append(Conditions.getQuery(condition));
             }
 
+        }
+        if (bookQuery.toString().trim().endsWith("and") || bookQuery.toString().trim().endsWith("or")) {
+            String result = StringUtils.substring(bookQuery.toString().trim(), 0, -3);
+            return getResult(result, Books.class);
         }
         return getResult(bookQuery.toString(), Books.class);
     }
