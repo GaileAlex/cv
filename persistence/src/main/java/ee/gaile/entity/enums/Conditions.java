@@ -9,13 +9,13 @@ import java.util.stream.Stream;
 public enum Conditions {
     AUTHOR("Author", " book_article "),
     TITLE("Title", " book_title "),
-    DATE("Date", ""),
-    CONTAINS("Contains", " ilike "),
-    BEGIN_WITH("Begin with", " ilike "),
-    EQUAL_TO("Equal to", " = "),
+    DATE("Date", " book_date "),
+    CONTAINS("Contains", " ilike  '%' || '"),
+    BEGIN_WITH("Begin with", " ilike '"),
+    DATE_FROM("Date from"," >= '"),
+    EQUAL_TO("Equal to", " = '"),
     ALL_CONDITIONS("allConditions", " and "),
-    AT_LEAST_ONE_CONDITION("At least one condition", " or "),
-    NONE_OF_THE_CONDITION("None of the condition", "");
+    AT_LEAST_ONE_CONDITION("atLeastOneCondition", " or ");
 
     private final String query;
     private final String name;

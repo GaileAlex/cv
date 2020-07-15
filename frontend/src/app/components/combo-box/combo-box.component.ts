@@ -8,7 +8,6 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ComboboxComponent implements OnInit {
 
-
     constructor(private formBuilder: FormBuilder) {
         this.filterForm = this.formBuilder.group({
             selectedFilter: new FormArray([])
@@ -45,7 +44,7 @@ export class ComboboxComponent implements OnInit {
     addFilter() {
         const filter = this.formBuilder.group({
             searchArea: 'Author',
-            conditionOption: 'Contains',
+            conditionOption: 'Begin with',
             textRequest: '',
             day: '1',
             month: '1',
@@ -58,4 +57,5 @@ export class ComboboxComponent implements OnInit {
     removeFilter(i) {
         this.filterForms.removeAt(i);
     }
+
 }

@@ -8,18 +8,22 @@ import ee.gaile.service.repository.librarian.LibrarianNativeRepo;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 
 @Service
 public class LibrarianService extends LibrarianNativeRepo {
-
     public LibrarianService(EntityManager em) {
         super(em);
     }
 
     //language=SQL
     private static final String QUERY = "select * from books ";
+
+    //language=SQL
+    private static final String COUNT_ROW = "SELECT count(*) AS count FROM books ";
 
     /**
      * Performs filtering based on user selected conditions.
@@ -31,26 +35,61 @@ public class LibrarianService extends LibrarianNativeRepo {
         List<SelectedFilter> selectedFilterList = filterWrapper.getFilters();
 
         for (int i = 0; i < selectedFilterList.size(); i++) {
+
+            // Author, Title
             if (!selectedFilterList.get(i).getSearchArea().equals("Date")
-                    && !selectedFilterList.get(i).getTextRequest().isEmpty()) {
-                bookQuery.append(Conditions.getQuery(selectedFilterList.get(i).getSearchArea()))
-                        .append(Conditions.getQuery(selectedFilterList.get(i).getConditionOption()))
-                        .append("'")
-                        .append(selectedFilterList.get(i).getTextRequest())
-                        .append("'")
-                        .append("   || '%' ");
+                    && !selectedFilterList.get(i).getTextRequest().equals("")) {
 
-                if (selectedFilterList.size() - i > 1) {
-                    bookQuery.append(Conditions.getQuery(condition));
-                }
+                getByText(bookQuery, selectedFilterList.get(i));
             }
-        }
-        List<Books> booksList = getResult(bookQuery.toString(), Books.class);
+            // Date
+            if (selectedFilterList.get(i).getSearchArea().equals("Date")) {
 
-        return booksList;
+                getByDate(bookQuery, selectedFilterList.get(i));
+            }
+            if (selectedFilterList.size() - i > 1) {
+                bookQuery.append(Conditions.getQuery(condition));
+            }
+
+        }
+        return getResult(bookQuery.toString(), Books.class);
     }
 
     public List<Books> getAllBooks() {
         return getResult(QUERY, Books.class);
+    }
+
+    public BigInteger getCountRow() {
+        return getCount(COUNT_ROW);
+    }
+
+    private void getByText(StringBuilder bookQuery, SelectedFilter selectedFilter) {
+        bookQuery.append(Conditions.getQuery(selectedFilter.getSearchArea()))
+                .append(Conditions.getQuery(selectedFilter.getConditionOption()))
+                .append(selectedFilter.getTextRequest())
+                .append("'")
+                .append("   || '%' ");
+    }
+
+    private void getByDate(StringBuilder bookQuery, SelectedFilter selectedFilter) {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("d/M/yyyy");
+
+        String stringDate = selectedFilter.getDay() +
+                "/" +
+                selectedFilter.getMonth() +
+                "/" +
+                selectedFilter.getYear();
+
+        LocalDate localDate = LocalDate.parse(stringDate, df);
+
+        // TODO: refactoring front needed
+        if (selectedFilter.getConditionOption().equals("Begin with")) {
+            selectedFilter.setConditionOption("Date from");
+        }
+
+        bookQuery.append(Conditions.getQuery(selectedFilter.getSearchArea()))
+                .append(Conditions.getQuery(selectedFilter.getConditionOption()))
+                .append(localDate)
+                .append("'");
     }
 }
