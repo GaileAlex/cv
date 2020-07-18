@@ -17,7 +17,7 @@
     "button.more": "Learn More",
     "about": {
       "me": "About Me",
-      "description": " Skills: <br>Spring boot, Spring Security, MySQL, PostgreSQL, Hibernate, Docker, Liquibase, Maven, JUnit, Mockito, Java SE, Git, Angular, React, HTML, CSS, Integrated Development Environment - Intellij IDEA.<br><br> - The following technologies have been used to create this site: Spring boot, Spring Security, Hibernate, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. site is hosted on its own hosting. You can see the code here - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br> Sociable, fast learning, punctual. I devote all my free time to self-study."
+      "description": " Skills: <br>Spring boot, Spring Security, MySQL, PostgreSQL, Hibernate, Docker, Liquibase, Maven, JUnit, Mockito, Java SE, Git, Angular, React, HTML, CSS, Integrated Development Environment - Intellij IDEA.<br><br> - The following technologies have been used to create this site: Spring boot, Spring Security, Hibernate, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. Site is hosted on its own hosting. You can see the code here - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br> Sociable, fast learning, punctual. I devote all my free time to self-study."
     },
     "portfolio": {
       "portfolio": "Portfolio",
