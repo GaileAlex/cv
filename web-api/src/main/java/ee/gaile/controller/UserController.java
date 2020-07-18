@@ -20,8 +20,6 @@ import javax.validation.Valid;
 @RequestMapping("/api/auth")
 @AllArgsConstructor
 public class UserController {
-    /*protected Logger log = LoggerFactory.getLogger(this.getClass());*/
-
     UserService userService;
 
     @PostMapping(path = "/login", produces = "application/json")

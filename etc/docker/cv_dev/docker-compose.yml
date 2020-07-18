@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   postgres:
-    image: "postgres:12.3-alpine"
+    image: "postgres:11.2"
     network_mode: bridge
     container_name: cv-dev
     expose:

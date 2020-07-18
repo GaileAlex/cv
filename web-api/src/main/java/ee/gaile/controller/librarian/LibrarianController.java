@@ -29,8 +29,9 @@ public class LibrarianController {
         return searchService.getAllBooks();
     }
 
-    @PostMapping( path = "/{condition}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<Books> getBooksByFilter(@PathVariable(value = "condition") String condition,@RequestBody FilterWrapper selectedFilters) throws java.text.ParseException {
+    @PostMapping(path = "/{condition}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public List<Books> getBooksByFilter(@PathVariable(value = "condition") String condition,
+                                        @RequestBody FilterWrapper selectedFilters) {
         LOGGER.info("Getting list of the books");
         return searchService.filterOut(selectedFilters, condition);
     }
