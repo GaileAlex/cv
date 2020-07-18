@@ -31,6 +31,7 @@
     "editor.js": "^0.1.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
+    "lodash": "^4.17.19",
     "moment-timezone": "^0.5.31",
     "ng2-sticky-nav": "^6.1.0",
     "ngb-modal": "^2.0.3",
