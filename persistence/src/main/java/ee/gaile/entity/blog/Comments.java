@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -16,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity(name = "Comments")
 @Table(name = "comments")
-public class Comments implements Serializable {
+public class Comments {
 
     @Id
     @Column(name = "id")
