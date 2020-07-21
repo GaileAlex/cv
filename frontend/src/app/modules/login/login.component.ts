@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-
+    this.form.password = "admin+";
+    this.form.username = "admin";
   }
 
   onSubmit() {
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         this.errorMessage = err;
-          console.log(err)
+        console.log(err)
         this.isLoginFailed = true;
         this.isLoggedIn = false;
       }
