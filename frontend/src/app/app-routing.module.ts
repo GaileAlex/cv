@@ -9,6 +9,7 @@ import { BlogComponent } from './modules/blog/blog.component';
 import { LoginComponent } from './modules/login/login.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
 import { ProtectedGuardService } from './service/protectedGuard';
+import { BlogAdminComponent } from './modules/blog-admin/blog-admin.component';
 
 
 export const routes: Routes = [
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {path: 'books/:param', component: BooksComponent},
     {path: 'login', component: LoginComponent},
     {path: 'registration', component: RegistrationComponent},
+    {path: 'blog-admin', component: BlogAdminComponent},
     {path: '**', component: NotFoundComponent}
 ];
 

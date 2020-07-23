@@ -17,7 +17,6 @@ export class MenuComponent implements OnInit {
     username: string;
     isLoggedIn: boolean;
 
-
     constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
                 private authService: AuthService) {
         this.isLoggedIn = this.authService.isAuthenticated();
@@ -36,11 +35,9 @@ export class MenuComponent implements OnInit {
     getLanguage() {
         return this.languageService.getLanguage();
     }
-    getUserRole(){
-    let  role: string;
-    role=this.authService.getUserRole()
-      console.log(role)
-      return role;
+
+    getUserRole() {
+        return this.authService.getUserRole();
     }
 
     useLanguage(language: string) {

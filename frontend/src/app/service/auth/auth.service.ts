@@ -48,7 +48,6 @@ export class AuthService {
     if (userString) {
       const user: User = JSON.parse(userString);
       userData.username = user.username;
-
     }
     return userData.username;
   }
@@ -58,8 +57,7 @@ export class AuthService {
     const userData = new User();
     if (userString) {
       const user: User = JSON.parse(userString);
-      userData.username = user.username;
-
+      userData.role = user.role;
     }
     return userData.role;
   }

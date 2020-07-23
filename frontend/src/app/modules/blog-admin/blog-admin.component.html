@@ -1,111 +1,108 @@
 <app-menu></app-menu>
-<!--
 <div class="blog_main_area p_100 text-center">
-  <div class="container">
-    <div class="col-md-8 col-md-offset-2">
-      <h3>Add new article</h3>
-      <form method="POST" action="@{/admin-blog}" object="${blog}" enctype="multipart/form-data" novalidate>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <input field="*{headline}" type="text" class="form-control" placeholder="Headline"
-                     required="required">
-              <span class="validationError"
-                    if="${#fields.hasErrors('headline')}"
-                   errors="*{headline}"></span>
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-                    <textarea field="*{article}" class="form-control" rows="4" placeholder="The text of the article:"
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Add new article</h3>
+            <form method="POST" enctype="multipart/form-data" novalidate>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Headline"
+                                   required="required">
+                            <span class="validationError"
+
+                            ></span>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="4" placeholder="The text of the article:"
                               required></textarea>
-          <span class="validationError"
-                if="${#fields.hasErrors('article')}"
-                errors="*{article}"></span>
-          <p class="help-block text-danger"></p>
+                    <span class="validationError"
+
+                    ></span>
+                    <p class="help-block text-danger"></p>
+                </div>
+                <input accept=".jpg, .png, .gif, .tiff" type="file" class="form-control-file">
+                <span class="validationError"
+                >Image is required</span>
+                <div></div>
+                <br>
+                <button type="submit" class="btn btn-port">Create article</button>
+            </form>
         </div>
-        <input accept=".jpg, .png, .gif, .tiff" type="file" class="form-control-file" field="*{image}">
-        <span class="validationError"
-              if="${#fields.hasErrors('image')}"
-        >Image is required</span>
-        <div></div><br>
-        <button type="submit" class="btn btn-port">Create article</button>
-      </form>
     </div>
-  </div>
 </div>
 
 
-  <section class="blog_main_area p_100">
+<section class="blog_main_area p_100">
     <div class="container jumbotron ">
-      <div class="row">
+        <div class="row">
 
-        <div class="col-lg-12">
-          <div class="blog_main_inner">
-            <div class="blog_main_item">
-              <div class="blog_img mx-auto text-center">
-                <img class="img-thumbnail mx-auto d-block"
-                     src="@{'data:image/jpeg;base64,'+${image.get(item.getId())}}" alt=""/>
-                <div class="blog_date">
-                  <h4 text="${#dates.format(item.getDate(), 'dd')}">29</h4>
-                  <h5 text="${#dates.format(item.getDate(), 'MMMM, yyyy')}">October, 2017</h5>
-                </div>
-              </div>
-              <div class="blog_text">
-                <a><h4 text="${item.getHeadline()}">Headline</h4></a>
-                <p utext="${item.getArticle()}">Article.</p>
-                <form method="POST" action="@{/admin-blog/delete-blog}">
-                  <input type="hidden" name="deleteBlog" value="${item.id}"/>
-                  <button type="submit" class="btn btn-danger pull-right">Delete Blog</button>
-                </form>
-                <a class="btn-port  page-scroll" href="@{'#'+${item.id}}">Next news</a>
-
-                &lt;!&ndash; ================Comments Blog Main Area================&ndash;&gt;
-                <div>
-
-
-                  <block each="comment : ${item.getItems()}">
-                    <div class="tab-pane fade in " id="Reviews" style="background-color: #F9F9F9;">
-
-                      <div class="clearfix">
-                        <div>
-                          <strong text="${comment.getUsername()}">Bob</strong>
-                          <em text="${#dates.format(comment.getDate(), 'dd MMMM yyyy - HH:mm')}">30/12/2013
-                            - 07:37</em>
-                          <form method="POST" action="@{/admin-blog/delete-comment}">
-                            <input type="hidden" name="deleteComment"  value="${comment.id}"/>
-                            <button type="submit" class="btn btn-danger pull-right">Delete Comment</button>
-                          </form>
-                          <div data-rateit-value="5"></div>
+            <div class="col-lg-12">
+                <div class="blog_main_inner">
+                    <div class="blog_main_item">
+                        <div class="blog_img mx-auto text-center">
+                            <img class="img-thumbnail mx-auto d-block"
+                            alt=""/>
+                            <!--src="@{'data:image/jpeg;base64,'+${image.get(item.getId())}}"-->
+                            <div class="blog_date">
+                                <h4>29</h4>
+                                <h5>October, 2017</h5>
+                            </div>
                         </div>
+                        <div class="blog_text">
+                            <a><h4>Headline</h4></a>
+                            <p>Article.</p>
+                            <form method="POST">
+                                <input type="hidden" name="deleteBlog"/>
+                                <button type="submit" class="btn btn-danger pull-right">Delete Blog</button>
+                            </form>
+                            <a class="btn-port  page-scroll">Next news</a>
 
-                        <div>
-                          <p text="${comment.getComment()}">Sed velit quam, auctor id
-                            semper a, hendrerit eget justo. Cum sociis
-                            natoque penatibus et magnis dis parturient montes, nascetur
-                            ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in
-                            orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies
-                            tristique, enim mauris bibendum orci, a sodales lectus purus ut
-                            lorem.</p>
+                            <div>
 
+
+                                <div class="tab-pane fade in " id="Reviews" style="background-color: #F9F9F9;">
+
+                                    <div class="clearfix">
+                                        <div>
+                                            <strong>Bob</strong>
+                                            <em>30/12/2013
+                                                - 07:37</em>
+                                            <form method="POST">
+                                                <input type="hidden" name="deleteComment"/>
+                                                <button type="submit" class="btn btn-danger pull-right">Delete Comment
+                                                </button>
+                                            </form>
+                                            <div></div>
+                                        </div>
+
+                                        <div>
+                                            <p>Sed velit quam, auctor id
+                                                semper a, hendrerit eget justo. Cum sociis
+                                                natoque penatibus et magnis dis parturient montes, nascetur
+                                                ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in
+                                                orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies
+                                                tristique, enim mauris bibendum orci, a sodales lectus purus ut
+                                                lorem.</p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-
-                      </div>
-
                     </div>
-
-                  </block>
                 </div>
-                &lt;!&ndash; ================End Blog Main Area =================&ndash;&gt;
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
-  </section>
-  <div id="${item.id}" data-spy="scroll"></div>-->
+</section>
+<div data-spy="scroll"></div>
 
-  <app-footer></app-footer>
+<app-footer></app-footer>
+
