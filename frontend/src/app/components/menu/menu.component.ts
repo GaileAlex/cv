@@ -36,6 +36,12 @@ export class MenuComponent implements OnInit {
     getLanguage() {
         return this.languageService.getLanguage();
     }
+    getUserRole(){
+    let  role: string;
+    role=this.authService.getUserRole()
+      console.log(role)
+      return role;
+    }
 
     useLanguage(language: string) {
         this.languageService.setLanguage(language);

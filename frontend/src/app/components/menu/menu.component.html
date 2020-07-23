@@ -1,95 +1,100 @@
 <div class="sticky-nav-wrapper">
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-nav" stickyClass="sticky-box-shadow"
-         ngStickyNav>
-        <div class="container">
-            <span class="navbar-brand  nav-link navbar-header page-scroll">
-                Aleksei Gaile
-            </span>
-            <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed"
-                    aria-label="Toggle navigation" (click)="collapsed = !collapsed">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
-                <ul class="nav navbar-nav p_100_left">
-                    <li class="hidden">
-                        <a href="/"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="page-scroll nav-link" [routerLink] = "['']" pageScroll
-                           href="#about">{{'menu.about' | translate}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                                class="page-scroll nav-link" [routerLink] = "['']" pageScroll
-                                href="#resume">{{'menu.experience' | translate}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                                class="page-scroll nav-link" [routerLink] = "['']" pageScroll
-                                href="#education">{{'menu.education' | translate}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="page-scroll nav-link" [routerLink]="['/blog']">{{'menu.blog' | translate}}</a>
-                    </li>
-                    <li class="nav-item dropdown" ngbDropdown>
-                        <a class="nav-link" href="javascript:void(0)"
-                           ngbDropdownToggle>{{'menu.spring.projects' | translate}}</a>
-                        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
-                            <a [routerLink]="['/mindly']" class="hvr-underline-from-center dropdown-item"
-                                                          style="color: #58c1ff; margin-bottom: 5px;">{{'menu.test.crypto' | translate}}</a>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-nav" stickyClass="sticky-box-shadow"
+       ngStickyNav>
+    <div class="container">
+      <span class="navbar-brand  nav-link navbar-header page-scroll">
+        Aleksei Gaile
+      </span>
+      <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed"
+              aria-label="Toggle navigation" (click)="collapsed = !collapsed">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+        <ul class="nav navbar-nav p_100_left">
+          <li class="hidden">
+            <a href="/"></a>
+          </li>
+          <li class="nav-item">
+            <a class="page-scroll nav-link" [routerLink] = "['']" pageScroll
+               href="#about">{{'menu.about' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="page-scroll nav-link" [routerLink] = "['']" pageScroll
+              href="#resume">{{'menu.experience' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="page-scroll nav-link" [routerLink] = "['']" pageScroll
+              href="#education">{{'menu.education' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="page-scroll nav-link" [routerLink]="['/blog']">{{'menu.blog' | translate}}</a>
+          </li>
+          <li class="nav-item dropdown" ngbDropdown>
+            <a class="nav-link" href="javascript:void(0)"
+               ngbDropdownToggle>{{'menu.spring.projects' | translate}}</a>
+            <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+              <a [routerLink]="['/mindly']" class="hvr-underline-from-center dropdown-item"
+                                            style="color: #58c1ff; margin-bottom: 5px;">{{'menu.test.crypto' | translate}}</a>
 
-                            <a [routerLink]="['/librarian']" class="hvr-underline-from-center dropdown-item"
-                                                             style="color: #58c1ff; margin-bottom: 5px;">{{'menu.test.librarian' | translate}}</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                                class="page-scroll nav-link" pageScroll
-                                href="#contact" [pageScrollSpeed]="10" [pageScrollAdjustHash]="false">{{'menu.contact' | translate}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="page-scroll nav-link" *ngIf="getLanguage()=='en'" [routerLink]="" (click)="useLanguage('ru')"
-                        >
-                            <img src="assets/img/rus.png" alt="about-image">
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="page-scroll nav-link" *ngIf="getLanguage()=='ru'" [routerLink]="" (click)="useLanguage('en')"
-                        >
-                            <img src="assets/img/eng.png" alt="about-image">
-                        </a>
-                    </li>
-                    <ul class="nav navbar-nav" *ngIf="!isLoggedIn">
-                        <li class="nav-item">
-                            <a class="page-scroll nav-link" [routerLink]="['/login']" role="button"
-                               data-toggle="modal"
-                            >Login
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="page-scroll nav-link" [routerLink]="['/registration']" role="button"
-                               data-toggle="modal"
-                            >Sign Up
-                            </a>
-                        </li>
-                    </ul>
-
-                    <ul class="nav navbar-nav" *ngIf="isLoggedIn">
-                        <li class="nav-item">
-                            <a class="nav-link">{{ username }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href class="nav-link" (click)="logout()">LogOut</a>
-                        </li>
-                    </ul>
-
-                    <!--  <li ><a href="/admin-blog" role="button" class="btn btn-inverse"
-                                                                      data-toggle="modal"
-                                                                      style="color: #58c1ff;"><p>Admin panel</p>
-                        </a></li>-->
-                </ul>
+              <a [routerLink]="['/librarian']" class="hvr-underline-from-center dropdown-item"
+                                               style="color: #58c1ff; margin-bottom: 5px;">{{'menu.test.librarian' | translate}}</a>
             </div>
+          </li>
+          <li class="nav-item">
+            <a
+              class="page-scroll nav-link" pageScroll
+              href="#contact" [pageScrollSpeed]="10" [pageScrollAdjustHash]="false">{{'menu.contact' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="page-scroll nav-link" *ngIf="getLanguage()=='en'" [routerLink]="" (click)="useLanguage('ru')"
+            >
+              <img src="assets/img/rus.png" alt="about-image">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="page-scroll nav-link" *ngIf="getLanguage()=='ru'" [routerLink]="" (click)="useLanguage('en')"
+            >
+              <img src="assets/img/eng.png" alt="about-image">
+            </a>
+          </li>
+          <ul class="nav navbar-nav" *ngIf="!isLoggedIn">
+            <li class="nav-item">
+              <a class="page-scroll nav-link" [routerLink]="['/login']" role="button"
+                 data-toggle="modal"
+              >Login
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="page-scroll nav-link" [routerLink]="['/registration']" role="button"
+                 data-toggle="modal"
+              >Sign Up
+              </a>
+            </li>
+          </ul>
 
-        </div>
-    </nav>
+          <ul class="nav navbar-nav" *ngIf="isLoggedIn">
+            <li class="nav-item">
+              <a class="nav-link">{{ username }}</a>
+            </li>
+            <li class="nav-item">
+              <a href class="nav-link" (click)="logout()">LogOut</a>
+            </li>
+          </ul>
+
+          <li>
+            <a [routerLink]="['/admin-blog']"
+              *ngIf="getUserRole()=='ROLE_ADMIN'"
+              role="button" class="btn btn-inverse"
+              data-toggle="modal"
+              style="color: #58c1ff;">
+              <p>Admin panel</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
 </div>

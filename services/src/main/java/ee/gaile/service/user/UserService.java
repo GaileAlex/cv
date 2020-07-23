@@ -23,6 +23,9 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,15 +45,15 @@ public class UserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        Set<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toSet());
+
+        List<String> role= userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority).distinct().collect(Collectors.toList());
 
 
         SignupRequest userDTO = SignupRequest.builder()
                 .username(signupRequest.getUsername())
                 .password(signupRequest.getPassword())
-                .role(roles)
+                .role(role.get(0))
                 .build();
         return loginService.authUser(userDTO);
     }
@@ -59,7 +62,7 @@ public class UserService {
         return loginService.refreshAuth(authDTO, request);
     }
 
-    public ResponseEntity<?> registerUser(SignupRequest signUpRequest){
+    public ResponseEntity<?> registerUser(SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -73,7 +76,7 @@ public class UserService {
 
         userRepository.save(new Users(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()), EnumRoles.ROLE_USER)) ;
+                encoder.encode(signUpRequest.getPassword()), EnumRoles.ROLE_USER));
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

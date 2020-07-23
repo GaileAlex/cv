@@ -53,6 +53,17 @@ export class AuthService {
     return userData.username;
   }
 
+  getUserRole(): string {
+    const userString = sessionStorage.getItem('user');
+    const userData = new User();
+    if (userString) {
+      const user: User = JSON.parse(userString);
+      userData.username = user.username;
+
+    }
+    return userData.role;
+  }
+
   isAuthenticated(): boolean {
     return !!sessionStorage.getItem('accessToken') && !!sessionStorage.getItem('user');
   }
