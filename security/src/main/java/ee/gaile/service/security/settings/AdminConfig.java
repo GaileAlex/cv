@@ -42,10 +42,10 @@ public class AdminConfig {
     private void changeAdmin() {
         Users adminRepo = userRepository.findByRole(EnumRoles.ROLE_ADMIN);
         if (adminRepo == null) {
-            saveAdmin(admin, email, password, EnumRoles.ROLE_ADMIN);
+            saveUser(admin, email, password, EnumRoles.ROLE_ADMIN);
         } else if (!adminRepo.getUsername().equals(admin)) {
             userRepository.deleteById(adminRepo.getId());
-            saveAdmin(admin, email, password, EnumRoles.ROLE_ADMIN);
+            saveUser(admin, email, password, EnumRoles.ROLE_ADMIN);
         }
     }
 
@@ -53,14 +53,11 @@ public class AdminConfig {
     private void changeTestUser() {
         Optional<Users> userRepo = userRepository.findByUsername(testUser);
         if (!userRepo.isPresent()) {
-            saveAdmin(testUser, testUserEmail, testUserPassword, EnumRoles.ROLE_USER);
-        } else if (!userRepo.get().getUsername().equals(admin)) {
-            userRepository.deleteById(userRepo.get().getId());
-            saveAdmin(testUser, testUserEmail, testUserPassword, EnumRoles.ROLE_USER);
+            saveUser(testUser, testUserEmail, testUserPassword, EnumRoles.ROLE_USER);
         }
     }
 
-    private void saveAdmin(String name, String email, String password, EnumRoles role) {
+    private void saveUser(String name, String email, String password, EnumRoles role) {
         Users user = new Users(name, email, encoder.encode(password), role);
         userRepository.save(user);
     }
