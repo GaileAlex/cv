@@ -16,7 +16,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                 // auto logout if 401 or 403 response returned from api
                 this.auth.logout();
             }
-            const error = (err && err.error && err.error.message) || err.statusText;
+            let error = (err && err.error && err.error.message) || err.statusText;
+            if([0].includes(err.status)){
+              error='Server not responding'
+            }
             return throwError(error);
         }));
     }
