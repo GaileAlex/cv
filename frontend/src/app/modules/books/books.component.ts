@@ -10,6 +10,7 @@ import {BooksDataService} from '../../service/booksData';
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
+  errorMessage = '';
   books: Books[];
 
   constructor(private route: ActivatedRoute, private router: Router, private  booksService: LibrarianService,
@@ -21,11 +22,17 @@ export class BooksComponent implements OnInit {
       if (params.param === 'filter') {
         this.booksData.booksData.subscribe(data => {
           this.books = data;
+        }, error => {
+          this.errorMessage = error;
+          console.log(this.errorMessage)
         });
       }
       if (params.param === 'all') {
         this.booksService.findAll().subscribe(data => {
           this.books = data;
+        }, error => {
+          this.errorMessage = error;
+          console.log(this.errorMessage)
         });
       }
     });
