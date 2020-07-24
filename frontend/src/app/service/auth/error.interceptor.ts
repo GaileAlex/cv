@@ -17,8 +17,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.auth.logout();
             }
             let error = (err && err.error && err.error.message) || err.statusText;
-            if([0].includes(err.status)){
-              error='Server not responding'
+            if ([502].includes(err.status)) {
+                error = 'Server not responding';
             }
             return throwError(error);
         }));
