@@ -40,6 +40,6 @@ public class Blog {
             CascadeType.ALL
     })
     @JoinColumn(name = "comment_id")
-    private List<Comments> items = new ArrayList<>();
+    private List<Comments> comments = new ArrayList<>();
 
 }
