@@ -1,17 +1,15 @@
-/*
 package ee.gaile.controller.blog;
 
+import ee.gaile.entity.blog.Blog;
+import ee.gaile.entity.blog.Comments;
+import ee.gaile.entity.users.Users;
 import ee.gaile.service.repository.blog.BlogRepository;
 import ee.gaile.service.repository.blog.CommentsRepository;
-import ee.gaile.service.repository.entity.blog.Blog;
-import ee.gaile.service.repository.entity.blog.Comments;
-import ee.gaile.service.repository.entity.blog.User;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +18,11 @@ import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
+
 @Slf4j
-@Controller
-@RequestMapping
-@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
+@RestController
+@RequestMapping(API_V1_PREFIX + "/article")
 public class ArticleController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ArticleController.class);
     private final BlogRepository blogRepository;
@@ -39,9 +38,9 @@ public class ArticleController {
     }
 
     @GetMapping(API_V1_PREFIX + "/article-blog/{articleId}")
-    public String goToArticle(@PathVariable UUID articleId, Model model) {
+    public String goToArticle(@PathVariable Long articleId, Model model) {
 
-        listComments = (List<Comments>) commentsRepository.findAll();
+        listComments = commentsRepository.findAll();
 
         Optional<Blog> optBlog = blogRepository.findById(articleId);
         blog = optBlog.get();
@@ -74,11 +73,9 @@ public class ArticleController {
                 return "blog/article";
             }
         }
-        User user = (User) authentication.getPrincipal();
+        Users user = (Users) authentication.getPrincipal();
 
-        comments.setComment(comments.getComment());
-        comments.setUsername(user.getUsername());
-        comments.setBlog(blog);
+
         commentsRepository.save(comments);
 
         String articleId = blog.getId().toString();
@@ -86,4 +83,4 @@ public class ArticleController {
         return "redirect:/article-blog/" + articleId;
     }
 }
-*/
+

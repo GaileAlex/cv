@@ -60,6 +60,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
+import { BlogAdminService } from './service/blog-admin.service';
 
 
 defineLocale('ru', ruLocale);
@@ -141,7 +142,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         CommonModule
     ],
     providers: [ConfirmationService, MindlyService, ValidationMsgService, LibrarianService, NgbActiveModal,
-        BooksDataService, DialogService, MessageService,
+        BooksDataService, DialogService, MessageService, BlogAdminService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
     bootstrap: [AppComponent],
