@@ -17,7 +17,7 @@
     "button.more": "Learn More",
     "about": {
       "me": "About Me",
-      "description": " Skills: <br>Spring boot, Spring Security, MySQL, PostgreSQL, Hibernate, Docker, Liquibase, Maven, JUnit, Mockito, Java SE, Git, Angular, React, HTML, CSS, Integrated Development Environment - Intellij IDEA.<br><br> - The following technologies have been used to create this site: Spring boot, Spring Security, Hibernate, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. Site is hosted on its own hosting. You can see the code here - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br> Sociable, fast learning, punctual. I devote all my free time to self-study."
+      "description": "- The following technologies have been used to create this site: Spring boot, Spring Security, Hibernate, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. Site is hosted on its own hosting. You can see the code here - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br>- During work participated in two projects, where studied and used the following technologies - Java, Spring Boot, Spring Data, Spring Security, Hibernate, PostgreSQL, Liquibase, Docker, Maven, React, Angular. Now, in my free time, I study Angular and developing own project."
     },
     "portfolio": {
       "portfolio": "Portfolio",
@@ -37,11 +37,9 @@
     "experience": {
       "experience": "Experience",
       "job-1": "<h4>Wisercat Software OÜ</h4>\n <h4 class=\"subheading\">Junior Software Developer</h4>",
-      "job-1.description": "<br>- Development of a web application for the collection and analysis of statistical data.<br> - Development of controllers, services and SQL queries on the Spring backend.<br> - Refactoring existing code to the changing wishes of the client.<br> - Create new and modify existing pages in the web interface with data display.<br> - Writing unit tests.<br><br>Backend: Java, Spring Boot, Hibernate, PostgreSQL, Liquibase, Docker.<br>Frontend: React",
+      "job-1.description": "<br>- Development of a web application for the collection and analysis of statistical data.<br> - Solved current tasks on the backend and frontend using the following technologies - Java, Spring\nBoot, Spring Data, Spring Security, Hibernate, PostgreSQL, Liquibase, Docker, Maven, React, Angular.<br> - Refactoring existing code to the changing wishes of the client.<br> - SQL - queries to postgresql database.<br> - Unit testing using junit, mockito.",
       "job-2": "<h4>LLC \"Impulse\"</h4>\n <h4 class=\"subheading\">Deputy Director</h4>",
-      "job-2.description": "<br>\n Construction company<br><br>\n - Independently created a company website.<br>\n - Created a network and electronic document management.<br>\n - Increased the company's revenue more than four times.<br>\n - Established relationships with suppliers.<br>\n - Increased the number of regular customers.<br><br>",
-      "job-3": "<h4>ZAO \"PSK \"Rus\"</h4>\n <h4 class=\"subheading\">Founder, Director</h4>",
-      "job-3.description": "<br>\n Construction company<br><br>\n - Founded the company.<br>\n - Assembled a talented team of professionals.<br>\n - Established relationships with suppliers.<br>\n - Collected a portfolio of orders.<br>\n - Found large corporate clients.<br><br>"
+      "job-2.description": "<br>\n Construction company<br><br>\n - Independently created a company website.<br>\n - Created a network and electronic document management.<br>\n - Increased the company's revenue more than four times.<br>\n - Established relationships with suppliers.<br>\n - Increased the number of regular customers.<br><br>"
     },
     "education": {
       "education": "Education",
