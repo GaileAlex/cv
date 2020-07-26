@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import { Blog } from '../models/blog';
 
 @Injectable({
@@ -15,9 +15,9 @@ export class BlogAdminService {
         this.blogAdminUrl = environment.apiUrl + '/admin-blog';
     }
 
-    public findAll(): Observable<Blog[]> {
+    public findAll(): Observable<Blog> {
 
-        return this.http.get<Blog[]>(this.blogAdminUrl);
+        return this.http.get<Blog>(this.blogAdminUrl);
     }
 
     public save(blog: Blog) {

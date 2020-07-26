@@ -1,6 +1,7 @@
 package ee.gaile.controller.blog;
 
 import ee.gaile.entity.blog.Blog;
+import ee.gaile.entity.blog.BlogWrapper;
 import ee.gaile.entity.blog.Comments;
 import ee.gaile.service.repository.blog.BlogRepository;
 import ee.gaile.service.repository.blog.CommentsRepository;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

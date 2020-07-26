@@ -48,9 +48,6 @@ public class ArticleController {
         imageMap = new HashMap<>();
         byte[] encode;
 
-        encode = Base64.getEncoder().encode(blog.getImage());
-        String getImage = new String(encode, StandardCharsets.UTF_8);
-        imageMap.put(blog.getId(), getImage);
 
         model.addAttribute("listComments", listComments);
         model.addAttribute("images", imageMap);

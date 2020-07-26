@@ -2,7 +2,7 @@ export class Blog {
   id: string;
   headline: string;
   article: string;
-  image: Blob;
+  image: File;
   date: Date;
   comments: string[];
 }
