@@ -20,7 +20,7 @@ export class BlogAdminService {
         return this.http.get<Blog>(this.blogAdminUrl);
     }
 
-    public save(blog: Blog) {
+    public save(blog: FormData) {
         return this.http.post<Blog>(this.blogAdminUrl, blog);
     }
 

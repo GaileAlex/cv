@@ -30,7 +30,9 @@ public class AdminBlogController {
     }
 
     @PostMapping
-    public BlogWrapper addBlog(@RequestBody BlogWrapper blog) {
+    public BlogWrapper addBlog(@RequestParam("image") MultipartFile image,
+                               @RequestParam("headline") String headline,
+                               @RequestParam("article") String article) {
         return null;
     }
 
