@@ -6,6 +6,8 @@ import ee.gaile.service.security.settings.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
 import ee.gaile.service.user.UserService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +24,11 @@ import javax.validation.Valid;
 public class UserController {
     UserService userService;
 
+    private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
+
     @PostMapping(path = "/login", produces = "application/json")
     public LoginRequest getUserLoginToken(@RequestBody SignupRequest auth) throws ApiErrorException {
+        ACCESS_LOG.info("user access request, user name is {} ", auth.getUsername());
         return userService.authUser(auth);
     }
 

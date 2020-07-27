@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @Service
 @RequiredArgsConstructor
 public class LoginService {
-    private static final Logger LOG = LoggerFactory.getLogger("can_access_accounting_log");
+    private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
 
     private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
 
@@ -37,14 +37,14 @@ public class LoginService {
 
     private final JwtUtils jwtUtils;
 
-    public LoginRequest authUser(SignupRequest userDTO) throws ApiErrorException {
+    public LoginRequest authUser(SignupRequest userDTO) {
         Claims claims = getJWTClaims(userDTO);
 
         AuthRefreshDTO authRefresh = new AuthRefreshDTO();
         authRefresh.setAccessToken(jwtUtils.generateJwtToken(claims));
         authRefresh.setRefreshToken(jwtUtils.createRefreshToken(claims));
 
-        LOG.info("Token was generated for userDTO name={}", userDTO.getUsername());
+        ACCESS_LOG.info("Token was generated for userDTO name={}", userDTO.getUsername());
 
         return new LoginRequest(authRefresh, userDTO);
     }

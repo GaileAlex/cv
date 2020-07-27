@@ -1,38 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { Blog } from '../../models/blog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BlogAdminService } from '../../service/blog-admin.service';
+import {Component, OnInit} from '@angular/core';
+import {Blog} from '../../models/blog';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BlogAdminService} from '../../service/blog-admin.service';
 
 @Component({
-    selector: 'app-blog-admin',
-    templateUrl: './blog-admin.component.html',
-    styleUrls: ['./blog-admin.component.css']
+  selector: 'app-blog-admin',
+  templateUrl: './blog-admin.component.html',
+  styleUrls: ['./blog-admin.component.css']
 })
 export class BlogAdminComponent implements OnInit {
-    blog: Blog;
-    inputForm: FormGroup;
-    image: File;
+  blog: Blog;
+  inputForm: FormGroup;
+  image: File;
 
-    constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
-                private blogAdminService: BlogAdminService) {
-    }
+  constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
+              private blogAdminService: BlogAdminService) {
+  }
 
-    ngOnInit() {
-        this.inputForm = this.formBuilder.group({
-            id: [''],
-            headline: ['', Validators.required],
-            article: ['', Validators.required],
-            date: [''],
-        });
-    }
+  ngOnInit() {
+    this.inputForm = this.formBuilder.group({
+      headline: ['', Validators.required],
+      article: ['', Validators.required],
+      image: ['', Validators.required]
+    });
+  }
 
-    onSubmit() {
-        const formData = new FormData();
-        formData.append('image', this.inputForm.value.image);
-        this.inputForm.value.addControl(formData);
-        this.blogAdminService.save(this.inputForm.value)
-            .subscribe(() => this.ngOnInit());
+
+
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+
+      this.inputForm.get('image').setValue(file);
     }
+  }
+
+  onSubmit() {
+    const formData = new FormData();
+    formData.append('image', this.inputForm.get('image').value);
+    this.blogAdminService.save(this.inputForm.value)
+      .subscribe(() => this.ngOnInit());
+  }
 
 }

@@ -30,8 +30,8 @@ public class AdminBlogController {
     }
 
     @PostMapping
-    public Blog addBlog(@RequestBody Blog blog) {
-        return blogRepository.save(blog);
+    public BlogWrapper addBlog(@RequestBody BlogWrapper blog) {
+        return null;
     }
 
 

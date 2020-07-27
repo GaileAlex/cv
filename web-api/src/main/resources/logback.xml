@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="DEBUG"  debug="false"  scan="true" scanPeriod="15 seconds">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+
+    <logger name="org.springframework.web" level="INFO"/>
+
+    <property name="log.folder" value="logs"/>
+
+    <appender name="ACCESS-ACCOUNTING-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.folder}/access-logs/access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <maxHistory>30</maxHistory>
+            <fileNamePattern>.access-logs/access.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level User - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="access-accounting-log" level="debug">
+        <appender-ref ref="ACCESS-ACCOUNTING-FILE" />
+    </logger>
+
+</Configuration>

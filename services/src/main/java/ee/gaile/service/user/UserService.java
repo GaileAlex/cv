@@ -46,7 +46,7 @@ public class UserService {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        List<String> role= userDetails.getAuthorities().stream()
+        List<String> role = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).distinct().collect(Collectors.toList());
 
 
