@@ -3,8 +3,8 @@ package ee.gaile.entity.blog;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -29,9 +29,9 @@ public class Blog {
     @Column(name = "blog_article", length = 10485760)
     private String article;
 
-    @Lob
+    @Type(type = "org.hibernate.type.BinaryType")
     @Column(name = "blog_image")
-    private MultipartFile image;
+    private byte[] image;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "blog_date")
@@ -43,6 +43,14 @@ public class Blog {
     @JoinColumn(name = "comment_id")
     private List<Comments> comments = new ArrayList<>();
 
+    public Blog(String headline, String article, byte[] image) {
+        this.headline = headline;
+        this.article = article;
+        this.image = image;
+    }
 
-
+    @PrePersist
+    void createdAt() {
+        this.date = new Date();
+    }
 }

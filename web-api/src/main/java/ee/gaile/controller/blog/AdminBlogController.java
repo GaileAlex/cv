@@ -1,16 +1,19 @@
 package ee.gaile.controller.blog;
 
-import ee.gaile.entity.blog.Blog;
-import ee.gaile.entity.blog.BlogWrapper;
 import ee.gaile.entity.blog.Comments;
+import ee.gaile.service.blog.AdminBlogService;
 import ee.gaile.service.repository.blog.BlogRepository;
 import ee.gaile.service.repository.blog.CommentsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
@@ -22,18 +25,21 @@ public class AdminBlogController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminBlogController.class);
     private final BlogRepository blogRepository;
     private final CommentsRepository commentsRepository;
+    private final AdminBlogService adminBlogService;
     private List<Comments> listComments;
 
-    public AdminBlogController(BlogRepository blogRepository, CommentsRepository commentsRepository) {
+    public AdminBlogController(BlogRepository blogRepository, CommentsRepository commentsRepository,
+                               AdminBlogService adminBlogService) {
         this.blogRepository = blogRepository;
         this.commentsRepository = commentsRepository;
+        this.adminBlogService = adminBlogService;
     }
 
     @PostMapping
-    public BlogWrapper addBlog(@RequestParam("image") MultipartFile image,
-                               @RequestParam("headline") String headline,
-                               @RequestParam("article") String article) {
-        return null;
+    public void addBlog(@RequestParam("headline") String headline,
+                        @RequestParam("article") String article,
+                        @RequestParam("image") MultipartFile image) throws IOException {
+        adminBlogService.saveBlog(headline, article, image);
     }
 
 
