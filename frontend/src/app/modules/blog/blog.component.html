@@ -1,29 +1,19 @@
 <app-menu></app-menu>
 
-<div *ngFor="let blog of blogs ">
-  <img src="{{blog.image}}">
-</div>
-
 <div class="text-center p_150_top">
-    <div  class="section-padding blog_main_area ">
+    <div *ngFor="let blog of blogs " class="section-padding blog_main_area ">
         <div class="container">
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <article class="post-single">
                     <figure class="post-media">
-                        <img src="" alt="">
+                        <img src="{{blog.image}}" alt="">
                     </figure>
                     <div class="post-body">
                         <div class="post-meta">
-
-                            <div class="post-date" text="${#dates.format(item.getDate(), 'dd MMMM yyyy')}">01.02.2017
-                            </div>
+                            <div class="post-date">{{ blog.date | date:'dd.MM.yyyy' }}</div>
                         </div>
-
-                        <h4 class="dark-color"><a href="@{/article-blog/{articleId}(articleId=${item.getId()})}"
-                                                  text="${item.getHeadline()}">In developing</a></h4>
-
-                        <a href="@{/article-blog/{articleId}(articleId=${item.getId()})}" class="read-more">View
-                            Article</a>
+                        <h4 class="dark-color"><a>{{ blog.headline }}</a></h4>
+                        <a class="read-more">View Article</a>
                     </div>
                 </article>
             </div>
