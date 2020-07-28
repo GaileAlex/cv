@@ -35,6 +35,6 @@ public class Users {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.role=role;
+        this.role = role;
     }
 }
