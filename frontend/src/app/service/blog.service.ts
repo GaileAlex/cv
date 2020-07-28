@@ -1,23 +1,22 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Constants } from '../constants/appConstants';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {environment} from "../../environments/environment";
+import {Blog} from "../models/blog";
+import {Observable} from "rxjs";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class BlogService {
 
-    private readonly booksUrl: string;
-    blog: string;
+  private readonly booksUrl: string;
 
-    constructor(private http: HttpClient) {
-        this.booksUrl = environment.apiUrl + '/blog';
-    }
+  constructor(private http: HttpClient) {
+    this.booksUrl = environment.apiUrl + '/blog';
+  }
 
-    public findAll(): any {
-        return this.http.get(this.booksUrl, {responseType: 'text'}).subscribe(result => {
-            this.blog = result;
-        }, error => console.log(error));
-    }
+  public findAll(): Observable<Blog[]> {
+    return this.http.get<Blog[]>(this.booksUrl);
+  }
+
 }

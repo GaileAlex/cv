@@ -1,12 +1,16 @@
 <app-menu></app-menu>
 
+<div *ngFor="let blog of blogs ">
+  <img src="{{blog.image}}">
+</div>
+
 <div class="text-center p_150_top">
-    <div class="section-padding blog_main_area ">
+    <div  class="section-padding blog_main_area ">
         <div class="container">
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <article class="post-single">
                     <figure class="post-media">
-                        <img src="@{'data:image/jpeg;base64,'+${images.get(item.getId())}}" alt="">
+                        <img src="" alt="">
                     </figure>
                     <div class="post-body">
                         <div class="post-meta">

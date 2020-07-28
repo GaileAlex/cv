@@ -1,8 +1,6 @@
 package ee.gaile.entity.blog;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,10 +35,8 @@ public class Blog {
     @Column(name = "blog_date")
     private Date date;
 
-    @OneToMany(targetEntity = Comments.class, cascade = {
-            CascadeType.ALL
-    })
-    @JoinColumn(name = "comment_id")
+    @OneToMany(targetEntity = Comments.class)
+    @JoinColumn(name = "id")
     private List<Comments> comments = new ArrayList<>();
 
     public Blog(String headline, String article, byte[] image) {

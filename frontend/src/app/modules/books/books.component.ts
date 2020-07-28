@@ -24,7 +24,6 @@ export class BooksComponent implements OnInit {
           this.books = data;
         }, error => {
           this.errorMessage = error;
-          console.log(this.errorMessage)
         });
       }
       if (params.param === 'all') {

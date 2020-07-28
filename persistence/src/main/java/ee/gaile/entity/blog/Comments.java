@@ -1,7 +1,5 @@
 package ee.gaile.entity.blog;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import ee.gaile.entity.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,11 +20,6 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "comment_blog")
-    @JsonIgnore
-    private Blog blog;
-
     @Column(name = "comment", length = 2000)
     private String comment;
 
@@ -34,11 +27,8 @@ public class Comments {
     @Column(name = "date")
     private Date date;
 
-    @ManyToOne(targetEntity = Users.class)
-    @JoinTable(name = "comment_users",
-            joinColumns = @JoinColumn(name = "comment_id"),
-            inverseJoinColumns = @JoinColumn(name = "users_id"))
-    private Users users;
+    @Column(name = "user_name")
+    private String userName;
 
     @PrePersist
     void createdAt() {
