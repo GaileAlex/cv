@@ -1,6 +1,7 @@
 package ee.gaile.controller.blog;
 
 import ee.gaile.entity.blog.Blog;
+import ee.gaile.entity.blog.BlogWrapper;
 import ee.gaile.service.blog.BlogService;
 import ee.gaile.service.repository.blog.BlogRepository;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class BlogController {
     BlogService blogService;
 
     @GetMapping
-    public List<Blog> findAll() {
+    public List<BlogWrapper> findAll() {
         return blogService.findAllBlogs();
     }
 

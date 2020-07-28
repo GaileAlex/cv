@@ -3,23 +3,23 @@ package ee.gaile.service.blog;
 import ee.gaile.entity.blog.Blog;
 import ee.gaile.entity.blog.BlogWrapper;
 import ee.gaile.service.repository.blog.BlogRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
 @Service
 @Transactional
-@AllArgsConstructor
 public class BlogService {
     private final BlogRepository blogRepository;
-    private final ModelMapper modelMapper;
+    private final ModelMapper modelMapper = new ModelMapper();
+
+    public BlogService(BlogRepository blogRepository) {
+        this.blogRepository = blogRepository;
+    }
 
     public List<BlogWrapper> findAllBlogs() {
         List<Blog> blogs = blogRepository.findAll();
