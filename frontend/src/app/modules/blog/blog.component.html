@@ -12,8 +12,8 @@
                         <div class="post-meta">
                             <div class="post-date">{{ blog.date | date:'dd.MM.yyyy' }}</div>
                         </div>
-                        <h4 class="dark-color"><a>{{ blog.headline }}</a></h4>
-                        <a class="read-more">View Article</a>
+                        <h4 class="dark-color" [routerLink] = "['']"><a>{{ blog.headline }}</a></h4>
+                        <a class="read-more" [routerLink] = "['']">View Article</a>
                     </div>
                 </article>
             </div>
