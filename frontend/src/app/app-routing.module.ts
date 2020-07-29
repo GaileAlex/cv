@@ -22,7 +22,7 @@ export const routes: Routes = [
     {path: 'books/:param', component: BooksComponent},
     {path: 'login', component: LoginComponent},
     {path: 'registration', component: RegistrationComponent},
-    {path: 'blog-admin', component: BlogAdminComponent},
+    {path: 'blog-admin', component: BlogAdminComponent, canActivate: [ProtectedGuardService]},
     {path: '**', component: NotFoundComponent}
 ];
 
