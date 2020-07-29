@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { Blog } from "../../models/blog";
-import { BlogService } from "../../service/blog.service";
-import { AuthService } from "../../service/auth/auth.service";
+import { ActivatedRoute } from '@angular/router';
+import { Blog } from '../../models/blog';
+import { BlogService } from '../../service/blog.service';
+import { AuthService } from '../../service/auth/auth.service';
 
 @Component({
     selector: 'app-blog-article',
@@ -19,12 +19,11 @@ export class BlogArticleComponent implements OnInit {
     ngOnInit() {
         window.scrollTo(0, 0);
         this.isLoggedIn = this.authService.isAuthenticated();
-        let id = this.router.snapshot.params["id"];
+        const id = this.router.snapshot.params.id;
         this.blogService.findBlogById(id).subscribe(data => {
             this.blog = data;
         });
     }
-
 
 
 }

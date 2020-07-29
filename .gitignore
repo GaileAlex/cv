@@ -10,3 +10,4 @@
 /etc/docker/cv_dev/data/
 /security/security.iml
 /logs/
+/etc/docker/cv_dev/db.sql

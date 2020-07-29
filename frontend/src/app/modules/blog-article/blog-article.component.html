@@ -8,15 +8,15 @@
                 <div class="blog_main_inner">
                     <div class="blog_main_item">
                         <div class="blog_img mx-auto text-center">
-                            <img class="img-thumbnail mx-auto d-block" src="{{ blog.image }}"
-                                 alt="{{ blog.headline }}"/>
+                            <img class="img-thumbnail mx-auto d-block" src="{{ blog?.image }}"
+                                 alt="{{ blog?.headline }}"/>
                             <div class="blog_date">
-                                <h4 >{{ blog.date | date:'dd.MM.yyyy' }}</h4>
+                                <h4>{{ blog?.date | date:'dd.MM.yyyy' }}</h4>
                             </div>
                         </div>
                         <div class="blog_text">
-                            <a><h4 class="text-center">{{ blog.headline }}</h4></a>
-                            <p [innerHTML]="blog.article"></p>
+                            <a><h4 class="text-center">{{ blog?.headline }}</h4></a>
+                            <p [innerHTML]="blog?.article"></p>
                             <br><br>
                             <!-- ================Comments Blog Main Area================-->
                             <div>
