@@ -19,7 +19,7 @@
                             <br><br>
                             <!-- ================Comments Blog Main Area================-->
                             <div>
-                                <form method="POST" role="form">
+                                <form *ngIf="isLoggedIn" method="POST" role="form">
                                     <h2>Comments</h2>
                                     <div class="form-group">
                                         <label for="comment">Write a comment <span>*</span></label>
@@ -28,11 +28,11 @@
                                     <span class="validationError"></span>
                                     <div>
                                         <input type="hidden" name="articleId" id="blog"/>
-                                        <button type="submit" class="btn btn-port">Send</button>
+                                        <button type="submit" class="btn btn-info">Send</button>
                                         <br><br>
                                     </div>
                                 </form>
-                                <div>
+                                <div *ngIf="!isLoggedIn">
                                     <h2>Comments</h2>
                                     <div class="form-group">
                                         <label for="comment">Only authorized users can comment. <span>*</span></label>
