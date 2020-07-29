@@ -1,14 +1,11 @@
 package ee.gaile.controller.blog;
 
-import ee.gaile.entity.blog.Blog;
 import ee.gaile.entity.blog.BlogWrapper;
+import ee.gaile.entity.blog.Comments;
 import ee.gaile.service.blog.BlogService;
-import ee.gaile.service.repository.blog.BlogRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +21,16 @@ public class BlogController {
     @GetMapping
     public List<BlogWrapper> findAll() {
         return blogService.findAllBlogs();
+    }
+
+    @GetMapping("/find-blog/{blogId}")
+    public BlogWrapper findBlogById(@PathVariable("blogId") Long blogId) {
+        return blogService.findBlogById(blogId);
+    }
+
+    @PostMapping("/comments")
+    public Comments saveComments(String comments) {
+        return null;
     }
 
 }

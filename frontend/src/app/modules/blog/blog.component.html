@@ -13,8 +13,10 @@
                             <div class="post-meta">
                                 <div class="post-date">{{ blogs[i].date | date:'dd.MM.yyyy' }}</div>
                             </div>
-                            <h4 class="dark-color" [routerLink]="['']"><a>{{ blogs[i].headline }}</a></h4>
-                            <a class="read-more" [routerLink]="['']">View Article</a>
+                            <h4 class="dark-color" [routerLink]="['/article', blogs[i].id]">
+                                <a>{{ blogs[i].headline }}</a></h4>
+                            <a class="read-more" [routerLink]="['/article', blogs[i].id]">
+                                View Article</a>
                         </div>
                     </article>
                 </div>
@@ -27,8 +29,9 @@
                             <div class="post-meta">
                                 <div class="post-date">{{ blogs[i + 1].date | date:'dd.MM.yyyy' }}</div>
                             </div>
-                            <h4 class="dark-color" [routerLink]="['']"><a>{{ blogs[i + 1].headline }}</a></h4>
-                            <a class="read-more" [routerLink]="['']">View Article</a>
+                            <h4 class="dark-color" [routerLink]="['/article', blogs[i+1].id]">
+                                <a>{{ blogs[i + 1].headline }}</a></h4>
+                            <a class="read-more" [routerLink]="['/article', blogs[i+1].id]">View Article</a>
                         </div>
                     </article>
                 </div>

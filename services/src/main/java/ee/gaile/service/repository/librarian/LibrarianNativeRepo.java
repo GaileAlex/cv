@@ -33,7 +33,7 @@ public class LibrarianNativeRepo {
         em.persist(entityClass);
     }
 
-    public BigInteger getCount(String queryText){
+    public BigInteger getCount(String queryText) {
         Query query = em.createNativeQuery(queryText);
         return (BigInteger) query.getSingleResult();
     }

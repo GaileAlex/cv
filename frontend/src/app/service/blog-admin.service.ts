@@ -16,7 +16,6 @@ export class BlogAdminService {
     }
 
     public findAll(): Observable<Blog> {
-
         return this.http.get<Blog>(this.blogAdminUrl);
     }
 

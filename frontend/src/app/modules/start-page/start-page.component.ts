@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewportScroller } from '@angular/common';
 
 @Component({
     selector: 'app-start-page',
@@ -9,7 +8,7 @@ import { ViewportScroller } from '@angular/common';
 })
 
 export class StartPageComponent implements OnInit {
-    constructor(private viewportScroller: ViewportScroller) {
+    constructor() {
     }
 
     ngOnInit() {

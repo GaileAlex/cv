@@ -9,7 +9,6 @@ import { Blog } from "../../models/blog";
 })
 export class BlogComponent implements OnInit {
     blogs: Blog[];
-    comboBlogs: []
 
     constructor(private blogService: BlogService) {
     }

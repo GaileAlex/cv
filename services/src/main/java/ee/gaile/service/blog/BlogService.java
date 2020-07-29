@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -27,8 +28,12 @@ public class BlogService {
         for (Blog blog : blogs) {
             blogWrappers.add(toDto(blog));
         }
-
         return blogWrappers;
+    }
+
+    public BlogWrapper findBlogById(Long blogId) {
+        Optional<Blog> blog = blogRepository.findById(blogId);
+        return toDto(blog.get());
     }
 
     private BlogWrapper toDto(Blog blog) {
