@@ -1,5 +1,5 @@
 <app-menu></app-menu>
-
+<div *ngIf="!blogs" class="p_500_top"></div>
 <div class="text-center p_100_top">
     <div *ngFor="let blog of blogs; let i = index" class="section-padding blog_main_area ">
         <div *ngIf="i % 2 == 0" class="container p_50">
