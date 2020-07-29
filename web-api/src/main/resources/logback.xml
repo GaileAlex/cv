@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Configuration status="DEBUG"  scan="true" scanPeriod="15 seconds">
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+    <timestamp key="byYear" datePattern="yyyy-MM-dd"/>
 
     <logger name="org.springframework.web" level="INFO"/>
 
