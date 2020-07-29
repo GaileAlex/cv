@@ -1,39 +1,39 @@
 <div [formGroup]='filterForm'>
-  <div formArrayName="selectedFilter">
-    <div *ngFor="let filter of filterForms.controls; let i=index" [formGroupName]="i">
-      <div class="container">
-        <div class="row justify-content-start">
+    <div formArrayName="selectedFilter">
+        <div *ngFor="let filter of filterForms.controls; let i=index" [formGroupName]="i">
+            <div class="container">
+                <div class="row justify-content-start">
 
-          <select #c class="soflow" formControlName="searchArea">
-            <option *ngFor="let v of values">{{v}}</option>
-          </select>
+                    <select #c class="soflow" formControlName="searchArea">
+                        <option *ngFor="let v of values">{{v}}</option>
+                    </select>
 
-          <select class="soflow" formControlName="conditionOption">
-            <option *ngIf="c.value!='Date'">Contains</option>
-            <option *ngIf="c.value!='Date'">Begin with</option>
-            <option *ngIf="c.value=='Date'">Date from</option>
-            <option *ngIf="c.value=='Date'">Equal to</option>
-          </select>
+                    <select class="soflow" formControlName="conditionOption">
+                        <option *ngIf="c.value!='Date'">Contains</option>
+                        <option *ngIf="c.value!='Date'">Begin with</option>
+                        <option *ngIf="c.value=='Date'">Date from</option>
+                        <option *ngIf="c.value=='Date'">Equal to</option>
+                    </select>
 
-          <input *ngIf="c.value!='Date'" placeholder="Text" class="name box-text" type="text"
-                 formControlName="textRequest">
+                    <input *ngIf="c.value!='Date'" placeholder="Text" class="name box-text" type="text"
+                           formControlName="textRequest">
 
-          <select *ngIf="c.value=='Date'" class="soflow day" formControlName="day">
-            <option *ngFor="let day of days">{{day}}</option>
+                    <select *ngIf="c.value=='Date'" class="soflow day" formControlName="day">
+                        <option *ngFor="let day of days">{{day}}</option>
 
-          </select>
-          <select *ngIf="c.value=='Date'" class="soflow month" formControlName="month">
-            <option *ngFor="let month of months">{{month}}</option>
-          </select>
-          <select *ngIf="c.value=='Date'" class="soflow year" formControlName="year" [value]=currentYear>
-            <option *ngFor="let year of years">{{year}}</option>
-          </select>
+                    </select>
+                    <select *ngIf="c.value=='Date'" class="soflow month" formControlName="month">
+                        <option *ngFor="let month of months">{{month}}</option>
+                    </select>
+                    <select *ngIf="c.value=='Date'" class="soflow year" formControlName="year" [value]=currentYear>
+                        <option *ngFor="let year of years">{{year}}</option>
+                    </select>
 
-          <button *ngIf="i!=0" class="mat-button" (click)="removeFilter(i)">-</button>
-          <button *ngIf="i==0" class="mat-button" (click)="addFilter()">+</button>
+                    <button *ngIf="i!=0" class="mat-button" (click)="removeFilter(i)">-</button>
+                    <button *ngIf="i==0" class="mat-button" (click)="addFilter()">+</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 

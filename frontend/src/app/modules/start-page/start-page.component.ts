@@ -16,7 +16,4 @@ export class StartPageComponent implements OnInit {
 
     }
 
-    scrollToTest() {
-        this.viewportScroller.scrollToAnchor('education');
-    }
 }
