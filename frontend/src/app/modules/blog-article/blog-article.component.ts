@@ -15,6 +15,7 @@ export class BlogArticleComponent implements OnInit {
     blog: Blog;
     inputForm: FormGroup;
     comment: Comment;
+    comments: Comment[];
     id = this.router.snapshot.params.id;
 
     constructor(private router: ActivatedRoute, private blogService: BlogService, private authService: AuthService,
@@ -24,9 +25,7 @@ export class BlogArticleComponent implements OnInit {
     ngOnInit() {
         window.scrollTo(0, 0);
         this.isLoggedIn = this.authService.isAuthenticated();
-        this.blogService.findBlogById(this.id).subscribe(data => {
-            this.blog = data;
-        });
+        this.getBlogData();
 
         this.inputForm = this.formBuilder.group({
             comment: ['', Validators.required],
@@ -34,11 +33,18 @@ export class BlogArticleComponent implements OnInit {
         });
     }
 
-    onSubmit(){
+    getBlogData() {
+        this.blogService.findBlogById(this.id).subscribe(data => {
+            this.blog = data;
+            this.comments = data.comments
+        });
+    }
+
+    onSubmit() {
         this.comment = new Comment();
         this.inputForm.get('blogId').setValue(this.id);
         this.comment = this.inputForm.value;
 
-        this.blogService.saveComment(this.comment).subscribe(() => this.ngOnInit());
+        this.blogService.saveComment(this.comment).subscribe(() => this.getBlogData());
     }
 }

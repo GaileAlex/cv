@@ -4,5 +4,5 @@ export class Blog {
   article: string;
   image: File;
   date: Date;
-  comments: string[];
+  comments: Comment[];
 }

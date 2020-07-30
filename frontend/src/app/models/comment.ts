@@ -1,5 +1,7 @@
 ﻿export class Comment {
-  id: number;
-  comment: string;
-  blogId: number;
+    id: number;
+    comment: string;
+    date: Date;
+    userName: string
+    blogId: number;
 }
