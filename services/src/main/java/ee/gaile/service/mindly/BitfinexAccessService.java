@@ -65,7 +65,6 @@ public class BitfinexAccessService {
             e.printStackTrace();
         }
 
-
         //Ripple not sold for euros, but it is not accurate. We receive in dollars and we translate in euro at the rate.
         if (currency.equals("XRPUSD")) {
             BigDecimal usdEur = new BigDecimal(getDataByUrl("https://api.exchangeratesapi.io/latest?symbols=USD")
@@ -73,7 +72,6 @@ public class BitfinexAccessService {
 
             bitfinexRate = bitfinexRate.divide(usdEur, 2, BigDecimal.ROUND_HALF_UP);
         }
-
         return bitfinexRate;
     }
 

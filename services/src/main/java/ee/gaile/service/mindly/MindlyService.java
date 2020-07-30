@@ -19,7 +19,7 @@ public class MindlyService {
     public List<Mindly> getAllPortfolio() {
         List<Mindly> portfolioList = mindlyRepository.findAll();
 
-        portfolioList.forEach((portfolio)-> portfolio.setCurrentMarketValue(portfolio.getAmount()
+        portfolioList.forEach((portfolio) -> portfolio.setCurrentMarketValue(portfolio.getAmount()
                 .multiply(bitfinexAccessService.getCurrency(portfolio.getCryptocurrency()))));
 
         return portfolioList;

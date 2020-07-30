@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { AuthService } from "../../service/auth/auth.service";
+import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth/auth.service';
 
 @Component({
-    selector: 'login',
+    selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         window.scrollTo(0, 0);
-        this.form.username = "Test";
-        this.form.password = "testUser";
+        this.form.username = 'Test';
+        this.form.password = 'testUser';
     }
 
     onSubmit() {

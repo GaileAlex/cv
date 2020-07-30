@@ -2,10 +2,9 @@ package ee.gaile.service.user;
 
 import ee.gaile.entity.enums.EnumRoles;
 import ee.gaile.entity.users.Users;
-import ee.gaile.service.security.UserRepository;
-
 import ee.gaile.service.security.LoginService;
 import ee.gaile.service.security.UserDetailsImpl;
+import ee.gaile.service.security.UserRepository;
 import ee.gaile.service.security.request.LoginRequest;
 import ee.gaile.service.security.request.SignupRequest;
 import ee.gaile.service.security.response.MessageResponse;
@@ -23,10 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +34,7 @@ public class UserService {
     private final PasswordEncoder encoder;
     private final AuthenticationManager authenticationManager;
 
-    public LoginRequest authUser(SignupRequest signupRequest) throws ApiErrorException {
+    public LoginRequest authUser(SignupRequest signupRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signupRequest.getUsername(), signupRequest.getPassword()));
 

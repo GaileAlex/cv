@@ -8,17 +8,17 @@ import java.util.Map;
 
 public class ApiErrorUtil {
 
-    static private ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    static public String convertErrorToJSON(ApiErrorException error) throws IOException {
+    public static String convertErrorToJSON(ApiErrorException error) throws IOException {
         return convertErrorToJSON(error.getCode(), error.getMessage());
     }
 
-    static public String convertErrorToJSON(ApiErrorType error) throws IOException {
+    public static String convertErrorToJSON(ApiErrorType error) throws IOException {
         return convertErrorToJSON(error.getCode(), error.getMessage());
     }
 
-    static public String convertErrorToJSON(String code, String message) throws IOException {
+    public static String convertErrorToJSON(String code, String message) throws IOException {
         Map<String, Object> errorObj = new HashMap<>();
         errorObj.put("code", code);
         errorObj.put("message", message);

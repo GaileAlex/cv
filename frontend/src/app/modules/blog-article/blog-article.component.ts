@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Blog } from '../../models/blog';
 import { BlogService } from '../../service/blog.service';
 import { AuthService } from '../../service/auth/auth.service';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-blog-article',

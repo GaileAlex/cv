@@ -40,7 +40,6 @@ public class JwtUtils {
         // Get expiration data
         LocalDateTime expDateTime = currentTime.plusMinutes(JWT_EXPIRATION);
 
-
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuer(claims.getSubject())

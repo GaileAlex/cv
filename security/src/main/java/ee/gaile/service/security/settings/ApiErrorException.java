@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 
 public class ApiErrorException extends Exception {
 
-    private HttpStatus status;
-    private String message;
-    private String code;
+    private final HttpStatus status;
+    private final String message;
+    private final String code;
 
     public ApiErrorException(HttpStatus status, ApiErrorType error) {
         super();

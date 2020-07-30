@@ -8,11 +8,10 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
     styleUrls: ['./librarian.component.css']
 })
 export class LibrarianComponent implements OnInit {
+    ref: DynamicDialogRef;
 
     constructor(public dialogService: DialogService) {
     }
-
-    ref: DynamicDialogRef;
 
     ngOnInit(): void {
         window.scrollTo(0, 0);

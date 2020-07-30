@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Configuration status="DEBUG"  scan="true" scanPeriod="15 seconds">
+<Configuration status="DEBUG" scan="true" scanPeriod="15 seconds">
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
 
@@ -30,11 +30,11 @@
     </appender>
 
     <logger name="access-accounting-log" level="debug">
-        <appender-ref ref="ACCESS-ACCOUNTING-FILE" />
+        <appender-ref ref="ACCESS-ACCOUNTING-FILE"/>
     </logger>
 
     <logger name="currency-log" level="debug">
-        <appender-ref ref="CURRENCY-FILE" />
+        <appender-ref ref="CURRENCY-FILE"/>
     </logger>
 
 </Configuration>

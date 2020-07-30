@@ -10,7 +10,7 @@ import { LoginComponent } from './modules/login/login.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
 import { ProtectedGuardService } from './service/protectedGuard';
 import { BlogAdminComponent } from './modules/blog-admin/blog-admin.component';
-import { BlogArticleComponent } from "./modules/blog-article/blog-article.component";
+import { BlogArticleComponent } from './modules/blog-article/blog-article.component';
 
 
 export const routes: Routes = [

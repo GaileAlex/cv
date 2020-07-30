@@ -2,7 +2,6 @@ package ee.gaile.controller;
 
 import ee.gaile.service.security.request.LoginRequest;
 import ee.gaile.service.security.request.SignupRequest;
-import ee.gaile.service.security.settings.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
 import ee.gaile.service.user.UserService;
 import lombok.AllArgsConstructor;
@@ -26,7 +25,7 @@ public class UserController {
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
 
     @PostMapping(path = "/login", produces = "application/json")
-    public LoginRequest getUserLoginToken(@RequestBody SignupRequest auth) throws ApiErrorException {
+    public LoginRequest getUserLoginToken(@RequestBody SignupRequest auth) {
         ACCESS_LOG.info("user access request, user name is {} ", auth.getUsername());
         return userService.authUser(auth);
     }

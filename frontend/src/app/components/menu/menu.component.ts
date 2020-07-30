@@ -12,7 +12,6 @@ import { AuthService } from '../../service/auth/auth.service';
 
 export class MenuComponent implements OnInit {
     collapsed = true;
-
     pageId: string;
     username: string;
     isLoggedIn: boolean;
