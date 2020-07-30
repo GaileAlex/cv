@@ -36,7 +36,7 @@ export class BlogArticleComponent implements OnInit {
     getBlogData() {
         this.blogService.findBlogById(this.id).subscribe(data => {
             this.blog = data;
-            this.comments = data.comments
+            this.comments = data.comments;
         });
     }
 
@@ -45,6 +45,9 @@ export class BlogArticleComponent implements OnInit {
         this.inputForm.get('blogId').setValue(this.id);
         this.comment = this.inputForm.value;
 
-        this.blogService.saveComment(this.comment).subscribe(() => this.getBlogData());
+        this.blogService.saveComment(this.comment).subscribe(() => {
+            this.getBlogData();
+            this.inputForm.reset();
+        });
     }
 }

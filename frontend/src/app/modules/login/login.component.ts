@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         window.scrollTo(0, 0);
-        this.form.username = "test";
+        this.form.username = "Test";
         this.form.password = "testUser";
     }
 
