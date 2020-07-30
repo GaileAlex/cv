@@ -2,8 +2,8 @@ package ee.gaile.service.blog;
 
 import ee.gaile.entity.blog.Blog;
 import ee.gaile.entity.blog.BlogWrapper;
+import ee.gaile.entity.blog.CommentWrapper;
 import ee.gaile.entity.blog.Comments;
-import ee.gaile.entity.users.Users;
 import ee.gaile.service.repository.blog.BlogRepository;
 import ee.gaile.service.repository.blog.CommentsRepository;
 import org.modelmapper.ModelMapper;
@@ -12,7 +12,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -40,10 +43,11 @@ public class BlogService {
         return toDto(blog.get());
     }
 
-    public void saveComment(String comment, Long blogId) {
+    public void saveComment(CommentWrapper comment) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Users user = (Users) authentication.getPrincipal();
-        Comments newComment = new Comments(comment, user.getUsername(), blogRepository.findById(blogId).get());
+        String currentUserName = authentication.getName();
+        Comments newComment = new Comments(comment.getComment(), currentUserName,
+                blogRepository.findById(comment.getBlogId()).get());
         commentsRepository.save(newComment);
     }
 

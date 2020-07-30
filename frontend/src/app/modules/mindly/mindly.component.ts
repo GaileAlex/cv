@@ -23,17 +23,16 @@ export class MindlyComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService,
                 private  portfolioService: MindlyService, private formBuilder: FormBuilder) {
+    }
 
+    ngOnInit() {
+        window.scrollTo(0, 0);
         this.portfolioObject = new Mindly();
         this.cryptocurrencyList = [
             {label: 'Bitcoin', value: 'Bitcoin'},
             {label: 'Ethereum', value: 'Ethereum'},
             {label: 'Ripple', value: 'Ripple'},
         ];
-    }
-
-    ngOnInit() {
-        window.scrollTo(0, 0);
         this.dateToday = new Date();
 
         this.portfolioService.findAll().subscribe(data => {

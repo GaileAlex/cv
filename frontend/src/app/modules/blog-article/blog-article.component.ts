@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Blog } from '../../models/blog';
 import { BlogService } from '../../service/blog.service';
 import { AuthService } from '../../service/auth/auth.service';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
     selector: 'app-blog-article',
@@ -12,18 +13,32 @@ import { AuthService } from '../../service/auth/auth.service';
 export class BlogArticleComponent implements OnInit {
     isLoggedIn: boolean;
     blog: Blog;
+    inputForm: FormGroup;
+    comment: Comment;
+    id = this.router.snapshot.params.id;
 
-    constructor(private router: ActivatedRoute, private blogService: BlogService, private authService: AuthService) {
+    constructor(private router: ActivatedRoute, private blogService: BlogService, private authService: AuthService,
+                private formBuilder: FormBuilder) {
     }
 
     ngOnInit() {
         window.scrollTo(0, 0);
         this.isLoggedIn = this.authService.isAuthenticated();
-        const id = this.router.snapshot.params.id;
-        this.blogService.findBlogById(id).subscribe(data => {
+        this.blogService.findBlogById(this.id).subscribe(data => {
             this.blog = data;
+        });
+
+        this.inputForm = this.formBuilder.group({
+            comment: ['', Validators.required],
+            blogId: [''],
         });
     }
 
+    onSubmit(){
+        this.comment = new Comment();
+        this.inputForm.get('blogId').setValue(this.id);
+        this.comment = this.inputForm.value;
 
+        this.blogService.saveComment(this.comment).subscribe(() => this.ngOnInit());
+    }
 }

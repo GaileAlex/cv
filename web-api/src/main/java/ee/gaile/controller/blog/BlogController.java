@@ -1,6 +1,7 @@
 package ee.gaile.controller.blog;
 
 import ee.gaile.entity.blog.BlogWrapper;
+import ee.gaile.entity.blog.CommentWrapper;
 import ee.gaile.service.blog.BlogService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,8 +29,8 @@ public class BlogController {
     }
 
     @PostMapping("/comments")
-    public void saveComment(String comment, Long blogId) {
-        blogService.saveComment(comment, blogId);
+    public void saveComment(@RequestBody CommentWrapper comment) {
+        blogService.saveComment(comment);
     }
 
 }

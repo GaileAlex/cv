@@ -23,4 +23,8 @@ export class BlogService {
         return this.http.get<Blog>(this.booksUrl + '/find-blog/' + blogId);
     }
 
+    public saveComment(comment: Comment) {
+        return this.http.post<Comment>(this.booksUrl + '/comments', comment);
+    }
+
 }

@@ -20,16 +20,16 @@
                             <br><br>
                             <!-- ================Comments Blog Main Area================-->
                             <div>
-                                <form *ngIf="isLoggedIn" method="POST" role="form">
+                                <form *ngIf="isLoggedIn" [formGroup]="inputForm">
                                     <h2>Comments</h2>
                                     <div class="form-group">
                                         <label for="comment">Write a comment <span>*</span></label>
-                                        <textarea class="form-control " rows="3" id="comment"></textarea>
+                                        <textarea formControlName="comment" class="form-control " rows="3" id="comment"></textarea>
                                     </div>
                                     <span class="validationError"></span>
                                     <div>
                                         <input type="hidden" name="articleId" id="blog"/>
-                                        <button type="submit" class="btn btn-info">Send</button>
+                                        <button (click)="onSubmit();"  class="btn btn-info">Send</button>
                                         <br><br>
                                     </div>
                                 </form>
