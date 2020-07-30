@@ -12,3 +12,4 @@
 /logs/
 /etc/docker/cv_dev/db.sql
 /.access-logs/
+/.currency-logs/

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Blog } from '../models/blog';
+import { Comment } from '../models/comment';
 import { Observable } from 'rxjs';
 
 @Injectable({

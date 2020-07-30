@@ -12,6 +12,8 @@ export class ValidationMsgService {
         'walletLocation-minlength-msg': 'Wallet location must have 8 characters',
         'walletLocation-maxlength-msg': 'Wallet location can have maximum 30 characters',
 
+        'comment-required-msg': 'Comment is a required field',
+
 
     };
 

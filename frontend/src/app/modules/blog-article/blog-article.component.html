@@ -24,13 +24,20 @@
                                     <h2>Comments</h2>
                                     <div class="form-group">
                                         <label for="comment">Write a comment <span>*</span></label>
-                                        <textarea formControlName="comment" class="form-control " rows="3"
-                                                  id="comment"></textarea>
+                                        <textarea class="form-control"
+                                                  rows="3"
+                                                  name="comment"
+                                                  id="comment"
+                                                  appFormControlValidationMsg
+                                                  validationMsgId="comment"
+                                                  formControlName="comment"></textarea>
                                     </div>
-                                    <span class="validationError"></span>
                                     <div>
                                         <input type="hidden" name="articleId" id="blog"/>
-                                        <button (click)="onSubmit();" class="btn btn-info">Send</button>
+                                        <button (click)="onSubmit();"
+                                                appFormSubmitValidationMsg
+                                                class="btn btn-info"
+                                                [validationControl]="inputForm">Send</button>
                                         <br><br>
                                     </div>
                                 </form>
@@ -41,7 +48,7 @@
                                         <textarea class="form-control " rows="3" readonly></textarea>
                                     </div>
                                 </div>
-                                <div *ngFor="let comment of comments" class="tab-pane" id="Reviews">
+                                <div *ngFor="let comment of blog?.comments" class="tab-pane" id="Reviews">
                                     <div class="clearfix">
                                         <div>
                                             <strong>{{comment.userName}}</strong>

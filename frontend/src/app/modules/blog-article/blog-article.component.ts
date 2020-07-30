@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Blog } from '../../models/blog';
+import { Comment } from '../../models/comment';
 import { BlogService } from '../../service/blog.service';
 import { AuthService } from '../../service/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -25,7 +26,7 @@ export class BlogArticleComponent implements OnInit {
     ngOnInit() {
         window.scrollTo(0, 0);
         this.isLoggedIn = this.authService.isAuthenticated();
-        this.getBlogData();
+        this.blog = this.getBlogData();
 
         this.inputForm = this.formBuilder.group({
             comment: ['', Validators.required],
@@ -36,8 +37,8 @@ export class BlogArticleComponent implements OnInit {
     getBlogData() {
         this.blogService.findBlogById(this.id).subscribe(data => {
             this.blog = data;
-            this.comments = data.comments;
         });
+        return this.blog;
     }
 
     onSubmit() {

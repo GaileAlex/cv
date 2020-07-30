@@ -2,6 +2,6 @@
     id: number;
     comment: string;
     date: Date;
-    userName: string
+    userName: string;
     blogId: number;
 }

@@ -12,9 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -39,6 +37,8 @@ public class BlogService {
 
     public BlogWrapper findBlogById(Long blogId) {
         Blog blog = blogRepository.findBlogById(blogId);
+        blog.getComments().sort(Comparator.comparing(Comments::getDate).reversed());
+
         return toDto(blog);
     }
 
