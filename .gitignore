@@ -11,3 +11,4 @@
 /security/security.iml
 /logs/
 /etc/docker/cv_dev/db.sql
+/.access-logs/

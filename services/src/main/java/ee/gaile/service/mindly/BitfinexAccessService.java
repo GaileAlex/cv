@@ -3,7 +3,8 @@ package ee.gaile.service.mindly;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -23,17 +24,21 @@ import java.util.HashMap;
 @Service
 @EnableScheduling
 public class BitfinexAccessService {
+    private static final Logger CURRENCY_LOG = LoggerFactory.getLogger("currency-log");
+
     private final HashMap<String, BigDecimal> currencyMap = new HashMap<>();
 
     /**
-     * @return currency value
-     * @throws IOException
+     * @throws IOException getDataByUrl generate exception
      */
     @Scheduled(fixedRate = 120000)
-    private void getPrice() throws IOException {
+    private void setPrice() throws IOException {
         currencyMap.put("Ethereum", getPrice("Ethereum"));
         currencyMap.put("Ripple", getPrice("Ripple"));
         currencyMap.put("Bitcoin", getPrice("Bitcoin"));
+        CURRENCY_LOG.info("The current Ethereum rate is {} €", currencyMap.get("Ethereum"));
+        CURRENCY_LOG.info("The current Ripple rate is {} €", currencyMap.get("Ripple"));
+        CURRENCY_LOG.info("The current Bitcoin rate is {} €", currencyMap.get("Bitcoin"));
     }
 
     private BigDecimal getPrice(String currency) throws IOException {
@@ -75,7 +80,7 @@ public class BitfinexAccessService {
     /**
      * @param url site
      * @return raw response from site
-     * @throws IOException
+     * @throws IOException URLConnection
      */
     private String getDataByUrl(String url) throws IOException {
         URL surl = new URL(url);

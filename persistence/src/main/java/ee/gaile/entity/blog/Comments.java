@@ -30,6 +30,16 @@ public class Comments {
     @Column(name = "user_name")
     private String userName;
 
+    @ManyToOne(targetEntity = Blog.class)
+    @JoinColumn(name = "blog_id", nullable = false)
+    private Blog blog;
+
+    public Comments(String comment, String userName, Blog blog) {
+        this.comment = comment;
+        this.userName = userName;
+        this.blog = blog;
+    }
+
     @PrePersist
     void createdAt() {
         this.date = new Date();

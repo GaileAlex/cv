@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor

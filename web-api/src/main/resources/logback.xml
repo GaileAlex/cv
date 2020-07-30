@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Configuration status="DEBUG"  scan="true" scanPeriod="15 seconds">
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <timestamp key="byYear" datePattern="yyyy-MM-dd"/>
+    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
 
     <logger name="org.springframework.web" level="INFO"/>
 
@@ -18,8 +18,23 @@
         </encoder>
     </appender>
 
+    <appender name="CURRENCY-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.folder}/currency-logs/currency.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <maxHistory>30</maxHistory>
+            <fileNamePattern>.currency-logs/currency.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level User - %m%n</pattern>
+        </encoder>
+    </appender>
+
     <logger name="access-accounting-log" level="debug">
         <appender-ref ref="ACCESS-ACCOUNTING-FILE" />
+    </logger>
+
+    <logger name="currency-log" level="debug">
+        <appender-ref ref="CURRENCY-FILE" />
     </logger>
 
 </Configuration>
