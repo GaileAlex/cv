@@ -1,5 +1,6 @@
 package ee.gaile.entity.blog;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,8 +31,9 @@ public class Comments {
     @Column(name = "user_name")
     private String userName;
 
-    @ManyToOne(targetEntity = Blog.class)
+    @ManyToOne
     @JoinColumn(name = "blog_id", nullable = false)
+    @JsonIgnore
     private Blog blog;
 
     public Comments(String comment, String userName, Blog blog) {

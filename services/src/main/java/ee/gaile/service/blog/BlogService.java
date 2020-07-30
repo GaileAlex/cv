@@ -15,7 +15,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -39,8 +38,8 @@ public class BlogService {
     }
 
     public BlogWrapper findBlogById(Long blogId) {
-        Optional<Blog> blog = blogRepository.findById(blogId);
-        return toDto(blog.get());
+        Blog blog = blogRepository.findBlogById(blogId);
+        return toDto(blog);
     }
 
     public void saveComment(CommentWrapper comment) {

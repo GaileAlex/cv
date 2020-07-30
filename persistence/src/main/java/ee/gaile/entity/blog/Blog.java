@@ -5,7 +5,6 @@ import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,9 +34,8 @@ public class Blog {
     @Column(name = "blog_date")
     private Date date;
 
-    @OneToMany(targetEntity = Comments.class)
-    @JoinColumn(name = "id")
-    private List<Comments> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "blog")
+    private List<Comments> comments;
 
     public Blog(String headline, String article, byte[] image) {
         this.headline = headline;
