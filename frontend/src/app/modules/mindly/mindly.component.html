@@ -2,7 +2,7 @@
 <div class="text-center p_150_top">
     <div class="container">
         <h2>{{'mindly.add.new'|translate}}</h2>
-        <form [formGroup]="inputForm">
+        <form [formGroup]="inputForm" novalidate>
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -20,18 +20,34 @@
                     </td>
                     <td>
                         <label for="amount"></label>
-                        <input class="form-control" id="amount" name="amount" appFormControlValidationMsg type="number"
-                               validationMsgId="amount" formControlName="amount" pInputText/>
+                        <input class="form-control"
+                               id="amount"
+                               name="amount"
+                               appFormControlValidationMsg
+                               type="number"
+                               validationMsgId="amount"
+                               required
+                               formControlName="amount"
+                               pInputText/>
                     </td>
                     <td>
-                        <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="dateToday" [showIcon]="true"
+                        <p-calendar dateFormat="dd.mm.yy"
+                                    [(ngModel)]="dateToday"
+                                    [showIcon]="true"
                                     formControlName="dateOfPurchase"
-                                    id="dateOfPurchase" name="dateOfPurchase" selectOtherMonths="true"></p-calendar>
+                                    id="dateOfPurchase"
+                                    name="dateOfPurchase"
+                                    selectOtherMonths="true"></p-calendar>
                     <td>
                         <label for="walletLocation"></label>
-                        <input class="form-control" id="walletLocation" name="walletLocation"
+                        <input class="form-control"
+                               id="walletLocation"
+                               name="walletLocation"
                                appFormControlValidationMsg
-                               validationMsgId="walletLocation" formControlName="walletLocation" pInputText/>
+                               required
+                               validationMsgId="walletLocation"
+                               formControlName="walletLocation"
+                               pInputText/>
                     </td>
                 </tr>
                 </tbody>

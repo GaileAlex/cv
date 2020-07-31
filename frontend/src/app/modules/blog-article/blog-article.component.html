@@ -20,7 +20,7 @@
                             <br><br>
                             <!-- ================Comments Blog Main Area================-->
                             <div>
-                                <form *ngIf="isLoggedIn" [formGroup]="inputForm">
+                                <form *ngIf="isLoggedIn" [formGroup]="inputForm" novalidate>
                                     <h2>Comments</h2>
                                     <div class="form-group">
                                         <label for="comment">Write a comment <span>*</span></label>
@@ -28,6 +28,7 @@
                                                   rows="3"
                                                   name="comment"
                                                   id="comment"
+                                                  required
                                                   appFormControlValidationMsg
                                                   validationMsgId="comment"
                                                   formControlName="comment"></textarea>
