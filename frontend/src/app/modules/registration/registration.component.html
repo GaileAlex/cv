@@ -2,12 +2,11 @@
 
 <div class="d-flex justify-content-center align-items-center container p_150_top">
     <div class="row ">
-        <form
-                *ngIf="!isSuccessful"
-                name="form"
-                (ngSubmit)="f.form.valid && onSubmit()"
-                #f="ngForm"
-                novalidate>
+        <form *ngIf="!isSuccessful"
+              name="form"
+              (ngSubmit)="f.form.valid && onSubmit()"
+              #f="ngForm"
+              novalidate>
             <div class="form-group">
                 <img
                         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
