@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Blog } from '../../models/blog';
-import { Comment } from '../../models/comment';
-import { BlogService } from '../../service/blog.service';
-import { AuthService } from '../../service/auth/auth.service';
+import { Blog } from '../../../models/blog';
+import { Comment } from '../../../models/comment';
+import { BlogService } from '../../../service/blog.service';
+import { AuthService } from '../../../service/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Blog } from '../../models/blog';
+import { Blog } from '../../../models/blog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BlogAdminService } from '../../service/blog-admin.service';
+import { BlogAdminService } from '../../../service/blog-admin.service';
 
 @Component({
     selector: 'app-blog-admin',

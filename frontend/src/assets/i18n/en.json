@@ -7,8 +7,9 @@
     "education": "Education",
     "blog": "blog",
     "spring.projects": "Test task",
-    "test.crypto": "\"Crypto Portfolio\"",
-    "test.librarian": "\"Librarian\"",
+    "test.crypto": "\"Crypto Portfolio\" (Junior level)",
+    "test.librarian": "\"Librarian\" (Junior level)",
+    "test.travel-log": "\"Travel Log\" (Middle level)",
     "contact": "contact",
     "aleksei.gaile": "Aleksei Gaile"
   },
@@ -72,6 +73,11 @@
     "unfortunately": "Unfortunately",
     "no.result": "No results were found for your search.",
     "back": "Back"
+  },
+  "travel-log": {
+    "title": "Test Assignment \"Travel Log\"",
+    "text": "<p>According to accounting rules travel log should be kept\n                            when personal car is used for company needs.<br><br>\n                            Create an application which has the following\n                            functionalities:\n                        </p>\n                        <div>● Travel log component(s), where user can:</div>\n                        <div>&nbsp;&nbsp;○ Add a new log entry. Each log entry consists of:\n                        </div>\n                        <div>&nbsp;&nbsp;&nbsp; - Date</div>\n                        <div>&nbsp;&nbsp;&nbsp; - Vehicle registration number</div>\n                        <div>&nbsp;&nbsp;&nbsp; - Username</div>\n                        <div>&nbsp;&nbsp;&nbsp; - Odometer value at the beginning of a journey</div>\n                        <div>&nbsp;&nbsp;&nbsp; - Odometer value at the end of a journey</div>\n                        <div>&nbsp;&nbsp;&nbsp; Route (i.e. “Tallinn-Rakvere”)</div>\n                        <div>&nbsp;&nbsp;&nbsp; - Journey short description (i.e. “buying office supplies”)</div>\n                        <div>&nbsp;&nbsp;○ View a report based on existing logs. Report is a list of travel log entries\n                            that\n                            are grouped by date and sorted by odometer initial value. Before generating a report user\n                            should\n                            be able to customize a report by specifying zero or all of the following filters:\n                        </div>\n                        <div>&nbsp;&nbsp;&nbsp; - Period filter: specific date range (i.e. “01.03.2018 - 01.04.2018”)\n                        </div>\n                        <div>&nbsp;&nbsp;&nbsp; - Vehicle registration number filter</div>\n                        <div>&nbsp;&nbsp;&nbsp; - Username filter</div>\n                        <div>Also, report should contain a total amount of travelled distance in the specified period.\n                        </div>\n                        <div>● Authentication: user authentication is required. Choose one of the following:</div>\n                        <div>&nbsp;&nbsp;○ Basic Authentication (username and password)</div>\n                        <div>&nbsp;&nbsp;○ OAuth 2.0 (using Google service)</div>\n                        <div>● Authorization:</div>\n                        <div>&nbsp;&nbsp;○ Anonymous user should not be able to add or view travel log entries.</div>\n                        <div>&nbsp;&nbsp;○ Username of a new travel log entry should be set to a logged-in user name and\n                            could not be changed.\n                        </div>\n                        <div>&nbsp;&nbsp;○ Only an owner of journey log entry (username = logged-in user) can see\n                            journey\n                            route and description.\n                        </div>",
+    "go.log": "Go to app"
   },
   "footer": {
     "contact": "Contact"

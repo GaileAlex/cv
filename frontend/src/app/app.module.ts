@@ -23,11 +23,11 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { defineLocale, enGbLocale, ruLocale } from 'ngx-bootstrap/chronos';
-import { BooksComponent } from './modules/books/books.component';
-import { LibrarianComponent } from './modules/librarian/librarian.component';
+import { BooksComponent } from './modules/lib/books/books.component';
+import { LibrarianComponent } from './modules/lib/librarian/librarian.component';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ComboboxComponent } from './components/combo-box/combo-box.component';
-import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+import { ComboboxComponent } from './modules/lib/combo-box/combo-box.component';
+import { DialogBoxComponent } from './modules/lib/dialog-box/dialog-box.component';
 import { LibrarianService } from './service/librarian.service';
 import {
     MatButtonModule,
@@ -45,9 +45,8 @@ import { RouterModule } from '@angular/router';
 import { LightboxModule } from 'primeng/lightbox';
 import { LoginComponent } from './modules/login/login.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
-import { BlogArticleComponent } from './modules/blog-article/blog-article.component';
-import { BlogComponent } from './modules/blog/blog.component';
-import { BlogAdminComponent } from './modules/blog-admin/blog-admin.component';
+import { BlogArticleComponent } from './modules/blog/blog-article/blog-article.component';
+import { BlogAdminComponent } from './modules/blog/blog-admin/blog-admin.component';
 import { BooksDataService } from './service/booksData';
 import { JwtInterceptor } from './service/auth/jwt.interceptor';
 import { ErrorInterceptor } from './service/auth/error.interceptor';
@@ -61,6 +60,9 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { BlogAdminService } from './service/blog-admin.service';
+import { TravelLogStartPageComponent } from "./modules/travel/travel-log-start-page/travel-log-start-page.component";
+import { BlogListComponent } from "./modules/blog/blog-list/blog-list.component";
+import { TravelLogComponent } from './modules/travel/travel-log/travel-log.component';
 
 
 defineLocale('ru', ruLocale);
@@ -82,13 +84,15 @@ export function HttpLoaderFactory(http: HttpClient) {
         FormSubmitValidationMsgDirective,
         BooksComponent,
         LibrarianComponent,
+        TravelLogStartPageComponent,
         DialogBoxComponent,
         ComboboxComponent,
         LoginComponent,
         RegistrationComponent,
         BlogArticleComponent,
-        BlogComponent,
-        BlogAdminComponent
+        BlogListComponent,
+        BlogAdminComponent,
+        TravelLogComponent
     ],
     imports: [
         BrowserModule,

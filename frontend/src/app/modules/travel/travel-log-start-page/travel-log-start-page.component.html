@@ -1,0 +1,22 @@
+<app-menu></app-menu>
+
+<div id="about-test">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-7">
+                <div class="about-text">
+                    <h3 class="text-center"><b>{{'travel-log.title'|translate}}</b></h3><br><br>
+                    <div [innerHTML]="'travel-log.text'|translate"></div>
+                    <br><br>
+                    <div class="text-center">
+
+                        <a type="button"  pButton icon="pi pi-info-circle" [routerLink]="['/travel-log']"
+                                label="{{'travel-log.go.log'|translate}}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
