@@ -5,46 +5,85 @@
         <h3 class="p_100">{{'mindly.add.new'|translate}}</h3>
         <form [formGroup]="inputForm" novalidate>
             <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label class="label-text"
-                           for="cryptocurrency"><span>{{'mindly.choose.cryptocurrency'|translate}}</span>
-                        <select formControlName="cryptocurrency" class="form-control" id="cryptocurrency">
-                            <option selected="selected" class="large">Bitcoin</option>
-                            <option class="large">Ethereum</option>
-                            <option class="large">Ripple</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="label-text" for="amount"><span>{{'mindly.amount'|translate}}</span>
-                        <input class="form-control"
-                               name="amount"
-                               appFormControlValidationMsg
-                               type="number"
-                               validationMsgId="amount"
-                               required
-                               formControlName="amount"
-                               id="amount">
-                    </label>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="label-text" for="dateOfPurchase"><span>{{'mindly.date'|translate}}</span>
+                <div class="form-group col-md-2">
+                    <label class="label-text" for="dateLog"><span>dateLog</span>
                         <input type="date"
-                               formControlName="dateOfPurchase"
-                               name="dateOfPurchase"
+                               formControlName="dateLog"
+                               name="dateLog"
                                class="form-control"
-                               id="dateOfPurchase">
+                               id="dateLog">
                     </label>
                 </div>
-                <div class="form-group col-md-3">
-                    <label class="label-text" for="walletLocation"><span>{{'mindly.wallet.location'|translate}}</span>
+                <div class="form-group col-md-1">
+                    <label class="label-text" for="vrn"><span>vrn</span>
                         <input class="form-control"
-                               name="walletLocation"
+                               name="vrn"
                                appFormControlValidationMsg
+                               type="text"
+                               validationMsgId="vrn"
                                required
-                               validationMsgId="walletLocation"
-                               formControlName="walletLocation"
-                               id="walletLocation">
+                               formControlName="vrn"
+                               id="vrn">
+                    </label>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="label-text" for="username"><span>username</span>
+                        <input class="form-control"
+                               name="username"
+                               appFormControlValidationMsg
+                               type="text"
+                               validationMsgId="username"
+                               required
+                               formControlName="username"
+                               id="username">
+                    </label>
+                </div>
+                <div class="form-group col-md-1">
+                    <label class="label-text" for="odometerBeginning"><span>odometerBeginning</span>
+                        <input class="form-control"
+                               name="odometerBeginning"
+                               appFormControlValidationMsg
+                               type="text"
+                               validationMsgId="odometerBeginning"
+                               required
+                               formControlName="odometerBeginning"
+                               id="odometerBeginning">
+                    </label>
+                </div>
+                <div class="form-group col-md-1">
+                    <label class="label-text" for="odometerEnd"><span>odometerEnd</span>
+                        <input class="form-control"
+                               name="odometerEnd"
+                               appFormControlValidationMsg
+                               type="text"
+                               validationMsgId="odometerEnd"
+                               required
+                               formControlName="odometerEnd"
+                               id="odometerEnd">
+                    </label>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="label-text" for="routeLog"><span>routeLog</span>
+                        <input class="form-control"
+                               name="routeLog"
+                               appFormControlValidationMsg
+                               type="text"
+                               validationMsgId="routeLog"
+                               required
+                               formControlName="routeLog"
+                               id="routeLog">
+                    </label>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="label-text" for="description"><span>description</span>
+                        <input class="form-control"
+                               name="description"
+                               appFormControlValidationMsg
+                               type="text"
+                               validationMsgId="description"
+                               required
+                               formControlName="description"
+                               id="description">
                     </label>
                 </div>
             </div>
