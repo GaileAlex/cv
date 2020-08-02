@@ -50,7 +50,6 @@ import { BlogAdminComponent } from './modules/blog/blog-admin/blog-admin.compone
 import { BooksDataService } from './service/booksData';
 import { JwtInterceptor } from './service/auth/jwt.interceptor';
 import { ErrorInterceptor } from './service/auth/error.interceptor';
-import { StickyNavModule } from 'ng2-sticky-nav';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { CalendarModule } from 'primeng/calendar';
@@ -60,9 +59,10 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { BlogAdminService } from './service/blog-admin.service';
-import { TravelLogStartPageComponent } from "./modules/travel/travel-log-start-page/travel-log-start-page.component";
-import { BlogListComponent } from "./modules/blog/blog-list/blog-list.component";
+import { TravelLogStartPageComponent } from './modules/travel/travel-log-start-page/travel-log-start-page.component';
+import { BlogListComponent } from './modules/blog/blog-list/blog-list.component';
 import { TravelLogComponent } from './modules/travel/travel-log/travel-log.component';
+import { StickyNavModule } from 'ng2-sticky-nav';
 
 
 defineLocale('ru', ruLocale);
@@ -143,7 +143,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         DropdownModule,
         DynamicDialogModule,
         ToastModule,
-        CommonModule
+        CommonModule,
+        StickyNavModule,
+        StickyNavModule
     ],
     providers: [ConfirmationService, MindlyService, ValidationMsgService, LibrarianService, NgbActiveModal,
         BooksDataService, DialogService, MessageService, BlogAdminService,

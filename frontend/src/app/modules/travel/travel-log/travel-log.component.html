@@ -1,8 +1,93 @@
 <app-menu></app-menu>
 
+<div class="text-center">
+    <div class="container">
+        <h3 class="p_100">{{'mindly.add.new'|translate}}</h3>
+        <form [formGroup]="inputForm" novalidate>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label class="label-text"
+                           for="cryptocurrency"><span>{{'mindly.choose.cryptocurrency'|translate}}</span>
+                        <select formControlName="cryptocurrency" class="form-control" id="cryptocurrency">
+                            <option selected="selected" class="large">Bitcoin</option>
+                            <option class="large">Ethereum</option>
+                            <option class="large">Ripple</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="label-text" for="amount"><span>{{'mindly.amount'|translate}}</span>
+                        <input class="form-control"
+                               name="amount"
+                               appFormControlValidationMsg
+                               type="number"
+                               validationMsgId="amount"
+                               required
+                               formControlName="amount"
+                               id="amount">
+                    </label>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="label-text" for="dateOfPurchase"><span>{{'mindly.date'|translate}}</span>
+                        <input type="date"
+                               formControlName="dateOfPurchase"
+                               name="dateOfPurchase"
+                               class="form-control"
+                               id="dateOfPurchase">
+                    </label>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="label-text" for="walletLocation"><span>{{'mindly.wallet.location'|translate}}</span>
+                        <input class="form-control"
+                               name="walletLocation"
+                               appFormControlValidationMsg
+                               required
+                               validationMsgId="walletLocation"
+                               formControlName="walletLocation"
+                               id="walletLocation">
+                    </label>
+                </div>
+            </div>
+            <button (click)="onSubmit();" pButton label="Save" class="ui-button-raised" appFormSubmitValidationMsg
+                    [validationControl]="inputForm"></button>
+        </form>
+    </div>
+</div>
 
+<div class="text-center p_100">
+    <div class="container">
+        <h2>{{'mindly.portfolio'|translate}}</h2>
+        <table class=" text-center table table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">{{'mindly.cryptocurrency'|translate}}</th>
+                <th scope="col">{{'mindly.amount'|translate}}</th>
+                <th scope="col">{{'mindly.date'|translate}}</th>
+                <th scope="col">{{'mindly.wallet.location'|translate}}</th>
+                <th scope="col">{{'mindly.current'|translate}}</th>
+                <th scope="col">{{'mindly.option'|translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let portfolioItem of portfolio;">
+                <td>{{portfolioItem.cryptocurrency}}</td>
+                <td>{{portfolioItem.amount}}</td>
+                <td>{{portfolioItem.dateOfPurchase| date : "dd.MM.yy"}}</td>
+                <td>{{portfolioItem.walletLocation}}</td>
+                <td>{{portfolioItem.currentMarketValue}}
+                </td>
+                <td>
+                    <button pButton type="button" label="Delete" class="ui-button-secondary"
+                            (click)="confirm(portfolioItem)"></button>
+                </td>
+            </tr>
 
-
-
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <app-footer></app-footer>
+
+
+

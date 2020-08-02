@@ -8,15 +8,14 @@ import { ValidationMsgService } from './validation-msg.service';
     selector: '[appFormControlValidationMsg]'
 })
 export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
+    @Input() validationMsgId: string;
+    errorSpanId = '';
 
     constructor(private elRef: ElementRef,
                 private control: NgControl,
                 private validationMsgService: ValidationMsgService
     ) {
     }
-
-    @Input('validationMsgId') validationMsgId: string;
-    errorSpanId = '';
 
     statusChangeSubscription: Subscription;
 

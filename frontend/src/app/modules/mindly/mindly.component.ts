@@ -40,7 +40,7 @@ export class MindlyComponent implements OnInit {
         });
 
         this.inputForm = this.formBuilder.group({
-            cryptocurrency: [''],
+            cryptocurrency: ['Bitcoin'],
             amount: ['', Validators.required],
             dateOfPurchase: [''],
             walletLocation: ['', Validators.required]
@@ -88,4 +88,5 @@ export class MindlyComponent implements OnInit {
             this.portfolioService.save(this.portfolioObject).subscribe(() => this.ngOnInit());
         }
     }
+
 }

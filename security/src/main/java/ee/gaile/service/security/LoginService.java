@@ -47,7 +47,7 @@ public class LoginService {
         authRefresh.setAccessToken(jwtUtils.generateJwtToken(claims));
         authRefresh.setRefreshToken(jwtUtils.createRefreshToken(claims));
 
-        ACCESS_LOG.info("Token was generated for userDTO name={}", userDTO.getUsername());
+        ACCESS_LOG.info("Token was generated for username {}", userDTO.getUsername());
 
         return new LoginRequest(authRefresh, userDTO);
     }
