@@ -14,7 +14,7 @@ body {
     -webkit-flex-direction: row !important;
     flex-direction: row !important;
     margin: 0;
-    font-size: 12px !important;
+    font-size: 14px !important;
     font-weight: 400;
     line-height: 1.5;
     color: #263238;
@@ -22,7 +22,6 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    overflow-y: overlay;
 }
 
 h1 {
@@ -747,7 +746,6 @@ div.validationError {
 
 .blog_author .media .d-flex {
     padding-right: 20px;
-    -ms-flex-item-align: center;
     align-self: center;
 }
 
@@ -954,7 +952,7 @@ span.validationError {
     border: 2px solid #fff;
     text-decoration: none;
     margin-right: 10px;
-    box-shadow: 2px 8px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 2px 8px 0 rgba(0, 0, 0, 0.15);
     animation: wiggle 2.7s infinite;
     text-shadow: none;
 }

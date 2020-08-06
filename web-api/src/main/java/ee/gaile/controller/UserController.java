@@ -25,8 +25,8 @@ public class UserController {
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
 
     @PostMapping(path = "/login", produces = "application/json")
-    public LoginRequest getUserLoginToken(@RequestBody SignupRequest auth) {
-        ACCESS_LOG.info("user access request, user name is {} ", auth.getUsername());
+    public LoginRequest getUserLoginToken(@RequestBody SignupRequest auth, HttpServletRequest request) {
+        ACCESS_LOG.info("user access request, user name is {}, IP is {} ", auth.getUsername(), request.getRemoteAddr());
         return userService.authUser(auth);
     }
 
