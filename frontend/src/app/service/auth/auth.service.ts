@@ -15,9 +15,12 @@ const httpOptions = {
 })
 export class AuthService {
 
+    ipAddress: string;
+
     private TOKEN_TYPE = 'Bearer';
 
     constructor(private http: HttpClient, private router: Router) {
+        this.getUserIP();
     }
 
     register(user): Observable<any> {
@@ -29,6 +32,7 @@ export class AuthService {
     }
 
     login(username, password): Observable<any> {
+        httpOptions.headers.append('userIP', `${ this.ipAddress }`);
         return this.http.post(environment.apiAuthUrl + Constants.LOGIN_URL, {
             username,
             password
@@ -68,5 +72,11 @@ export class AuthService {
 
     isTokenPresent(): boolean {
         return !!sessionStorage.getItem('accessToken');
+    }
+
+    getUserIP() {
+        return this.http.get('https://jsonip.com/').subscribe((res: any) => {
+            this.ipAddress = res.ip;
+        });
     }
 }
