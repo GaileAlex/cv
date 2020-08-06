@@ -1,11 +1,11 @@
 <app-menu></app-menu>
 
 <div class="text-center">
+    <h3 class="p_100">{{'mindly.add.new'|translate}}</h3>
     <div class="container">
-        <h3 class="p_100">{{'mindly.add.new'|translate}}</h3>
-        <form [formGroup]="inputForm" novalidate>
-            <div class="form-row">
-                <div class="form-group col-md-3">
+        <form [formGroup]="inputForm" novalidate class="form-inline">
+            <div class="form-row  p_20_bottom">
+                <div class="form-group  col-sm ">
                     <label class="label-text"
                            for="cryptocurrency"><span>{{'mindly.choose.cryptocurrency'|translate}}</span>
                         <select formControlName="cryptocurrency" class="form-control" id="cryptocurrency">
@@ -15,7 +15,7 @@
                         </select>
                     </label>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm ">
                     <label class="label-text" for="amount"><span>{{'mindly.amount'|translate}}</span>
                         <input class="form-control"
                                name="amount"
@@ -27,8 +27,8 @@
                                id="amount">
                     </label>
                 </div>
-                <div class="form-group col-md-3">
-                    <label class="label-text" for="dateOfPurchase"><span>{{'mindly.date'|translate}}</span>
+                <div class="form-group col-sm  ">
+                    <label class="label-text date-mindly" for="dateOfPurchase"><span>{{'mindly.date'|translate}}</span>
                         <input type="date"
                                formControlName="dateOfPurchase"
                                name="dateOfPurchase"
@@ -36,7 +36,7 @@
                                id="dateOfPurchase">
                     </label>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm ">
                     <label class="label-text" for="walletLocation"><span>{{'mindly.wallet.location'|translate}}</span>
                         <input class="form-control"
                                name="walletLocation"
@@ -57,7 +57,7 @@
 <div class="text-center p_100">
     <div class="container">
         <h2>{{'mindly.portfolio'|translate}}</h2>
-        <table class=" text-center table table-bordered">
+        <table class="  table table-bordered">
             <thead class="thead-light">
             <tr>
                 <th scope="col">{{'mindly.cryptocurrency'|translate}}</th>
@@ -84,6 +84,12 @@
 
             </tbody>
         </table>
+        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    </div>
+    <div class="section-title text-center center p_50">
+        <h4><a class="btn-link" href="https://github.com/GaileAlex/mindly" target="blank">
+            {{'mindly.description'|translate}}</a></h4>
+        <hr>
     </div>
 </div>
 

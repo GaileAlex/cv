@@ -5,13 +5,24 @@
 @import "~font-awesome/css/font-awesome.css";
 
 
-body, html {
+body {
     font-family: 'Open Sans', sans-serif;
-    text-rendering: optimizeLegibility !important;
-    -webkit-font-smoothing: antialiased !important;
-    color: #000000;
-    width: 100% !important;
     height: 100% !important;
+    width: 100% !important;
+    min-width: 100vh;
+    min-height: 100vh;
+    -webkit-flex-direction: row !important;
+    flex-direction: row !important;
+    margin: 0;
+    font-size: 12px !important;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #263238;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow-y: overlay;
 }
 
 h1 {
@@ -641,6 +652,14 @@ div.validationError {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.p_10_left{
+    padding-left: 50px;
+}
+
+.p_20_bottom {
+    padding-bottom: 20px;
 }
 
 .p_50 {
