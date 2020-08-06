@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping(path = "/login", produces = "application/json")
     public LoginRequest getUserLoginToken(@RequestBody SignupRequest auth, HttpServletRequest request) {
-        ACCESS_LOG.info("user access request, user name is {}, IP is {} ", auth.getUsername(), request.getRemoteAddr());
+        ACCESS_LOG.info("user access request, user name is {}, IP is {} ", auth.getUsername(), request.getHeader("userIP"));
         return userService.authUser(auth);
     }
 
