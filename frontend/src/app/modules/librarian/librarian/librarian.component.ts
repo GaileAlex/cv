@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogBoxComponent } from '../../components/dialog-box/dialog-box.component';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({

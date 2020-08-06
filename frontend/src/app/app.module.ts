@@ -23,11 +23,11 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { defineLocale, enGbLocale, ruLocale } from 'ngx-bootstrap/chronos';
-import { BooksComponent } from './modules/books/books.component';
-import { LibrarianComponent } from './modules/librarian/librarian.component';
+import { BooksComponent } from './modules/librarian/books/books.component';
+import { LibrarianComponent } from './modules/librarian/librarian/librarian.component';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ComboboxComponent } from './components/combo-box/combo-box.component';
-import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+import { ComboboxComponent } from './modules/librarian/combo-box/combo-box.component';
+import { DialogBoxComponent } from './modules/librarian/dialog-box/dialog-box.component';
 import { LibrarianService } from './service/librarian.service';
 import {
     MatButtonModule,
@@ -45,13 +45,11 @@ import { RouterModule } from '@angular/router';
 import { LightboxModule } from 'primeng/lightbox';
 import { LoginComponent } from './modules/login/login.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
-import { BlogArticleComponent } from './modules/blog-article/blog-article.component';
-import { BlogComponent } from './modules/blog/blog.component';
-import { BlogAdminComponent } from './modules/blog-admin/blog-admin.component';
+import { BlogArticleComponent } from './modules/blog/blog-article/blog-article.component';
+import { BlogAdminComponent } from './modules/blog/blog-admin/blog-admin.component';
 import { BooksDataService } from './service/booksData';
 import { JwtInterceptor } from './service/auth/jwt.interceptor';
 import { ErrorInterceptor } from './service/auth/error.interceptor';
-import { StickyNavModule } from 'ng2-sticky-nav';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { CalendarModule } from 'primeng/calendar';
@@ -61,6 +59,8 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { BlogAdminService } from './service/blog-admin.service';
+import { BlogListComponent } from './modules/blog/blog-list/blog-list.component';
+import { StickyNavModule } from 'ng2-sticky-nav';
 
 
 defineLocale('ru', ruLocale);
@@ -87,8 +87,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         LoginComponent,
         RegistrationComponent,
         BlogArticleComponent,
-        BlogComponent,
-        BlogAdminComponent
+        BlogListComponent,
+        BlogAdminComponent,
     ],
     imports: [
         BrowserModule,
@@ -139,7 +139,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         DropdownModule,
         DynamicDialogModule,
         ToastModule,
-        CommonModule
+        CommonModule,
+        StickyNavModule,
+        StickyNavModule
     ],
     providers: [ConfirmationService, MindlyService, ValidationMsgService, LibrarianService, NgbActiveModal,
         BooksDataService, DialogService, MessageService, BlogAdminService,

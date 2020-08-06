@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { LibrarianService } from '../../service/librarian.service';
+import { LibrarianService } from '../../../service/librarian.service';
 import { Router } from '@angular/router';
-import { BooksDataService } from '../../service/booksData';
+import { BooksDataService } from '../../../service/booksData';
 import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({

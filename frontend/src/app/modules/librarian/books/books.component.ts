@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Books } from '../../models/books';
-import { LibrarianService } from '../../service/librarian.service';
-import { BooksDataService } from '../../service/booksData';
+import { Books } from '../../../models/books';
+import { LibrarianService } from '../../../service/librarian.service';
+import { BooksDataService } from '../../../service/booksData';
 
 @Component({
     selector: 'app-books',

@@ -20,7 +20,7 @@ export class MindlyService {
         return this.http.get<Mindly[]>(this.portfolioUrl);
     }
 
-    public save(portfolio: Mindly) {
+    public save(portfolio: Mindly): Observable<Mindly> {
         return this.http.post<Mindly>(this.portfolioUrl, portfolio);
     }
 

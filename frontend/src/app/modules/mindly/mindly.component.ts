@@ -40,7 +40,7 @@ export class MindlyComponent implements OnInit {
         });
 
         this.inputForm = this.formBuilder.group({
-            cryptocurrency: [''],
+            cryptocurrency: ['Bitcoin'],
             amount: ['', Validators.required],
             dateOfPurchase: [''],
             walletLocation: ['', Validators.required]

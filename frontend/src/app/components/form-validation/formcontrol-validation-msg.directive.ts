@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Directive, Input, HostListener, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { NgControl, ValidationErrors } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ValidationMsgService } from './validation-msg.service';
@@ -8,15 +8,14 @@ import { ValidationMsgService } from './validation-msg.service';
     selector: '[appFormControlValidationMsg]'
 })
 export class FormControlValidationMsgDirective implements OnInit, OnDestroy {
+    @Input() validationMsgId: string;
+    errorSpanId = '';
 
     constructor(private elRef: ElementRef,
                 private control: NgControl,
                 private validationMsgService: ValidationMsgService
     ) {
     }
-
-    @Input('validationMsgId') validationMsgId: string;
-    errorSpanId = '';
 
     statusChangeSubscription: Subscription;
 

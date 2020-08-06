@@ -1,94 +1,91 @@
 <app-menu></app-menu>
-<div class="text-center p_150_top">
-    <div class="container">
-        <h2>{{'mindly.add.new'|translate}}</h2>
-        <form [formGroup]="inputForm" novalidate>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">{{'mindly.choose.cryptocurrency'|translate}}</th>
-                    <th scope="col">{{'mindly.amount'|translate}}</th>
-                    <th scope="col">{{'mindly.date'|translate}}</th>
-                    <th scope="col">{{'mindly.wallet.location'|translate}}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <p-dropdown formControlName="cryptocurrency" [(ngModel)]="cryptocurrencySelect"
-                                    [options]="cryptocurrencyList"></p-dropdown>
-                    </td>
-                    <td>
-                        <label for="amount"></label>
+
+<div class="text-center">
+    <h3 class="p_100">{{'mindly.add.new'|translate}}</h3>
+
+    <form [formGroup]="inputForm" novalidate class="">
+        <div class="container">
+            <div class=" row  p_20_bottom">
+                <div class="form-group  col">
+                    <label class="label-text"
+                           for="cryptocurrency"><span>{{'mindly.choose.cryptocurrency'|translate}}</span>
+                        <select formControlName="cryptocurrency" class="form-control" id="cryptocurrency">
+                            <option selected="selected" class="large">Bitcoin</option>
+                            <option class="large">Ethereum</option>
+                            <option class="large">Ripple</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form-group col">
+                    <label class="label-text" for="amount"><span>{{'mindly.amount'|translate}}</span>
                         <input class="form-control"
-                               id="amount"
                                name="amount"
                                appFormControlValidationMsg
                                type="number"
                                validationMsgId="amount"
                                required
                                formControlName="amount"
-                               pInputText/>
-                    </td>
-                    <td>
-                        <p-calendar dateFormat="dd.mm.yy"
-                                    [(ngModel)]="dateToday"
-                                    [showIcon]="true"
-                                    formControlName="dateOfPurchase"
-                                    id="dateOfPurchase"
-                                    name="dateOfPurchase"
-                                    selectOtherMonths="true"></p-calendar>
-                    <td>
-                        <label for="walletLocation"></label>
+                               id="amount">
+                    </label>
+                </div>
+                <div class="form-group col">
+                    <label class="label-text date-mindly" for="dateOfPurchase"><span>{{'mindly.date'|translate}}</span>
+                        <input type="date"
+                               formControlName="dateOfPurchase"
+                               name="dateOfPurchase"
+                               class="form-control"
+                               id="dateOfPurchase">
+                    </label>
+                </div>
+                <div class="form-group col">
+                    <label class="label-text" for="walletLocation"><span>{{'mindly.wallet.location'|translate}}</span>
                         <input class="form-control"
-                               id="walletLocation"
                                name="walletLocation"
                                appFormControlValidationMsg
                                required
                                validationMsgId="walletLocation"
                                formControlName="walletLocation"
-                               pInputText/>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <button (click)="onSubmit();" pButton label="Save" class="ui-button-raised" appFormSubmitValidationMsg
-                    [validationControl]="inputForm"></button>
-        </form>
-    </div>
+                               id="walletLocation">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button (click)="onSubmit();" pButton label="Save" class="ui-button-raised" appFormSubmitValidationMsg
+                [validationControl]="inputForm"></button>
+    </form>
+
 </div>
 
-<div class="text-center p_50">
+<div class="text-center p_100">
     <div class="container">
         <h2>{{'mindly.portfolio'|translate}}</h2>
-        <div class="text-center validationError">
-        </div>
-        <p-table [value]="portfolio">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th class="text-center">{{'mindly.cryptocurrency'|translate}}</th>
-                    <th class="text-center">{{'mindly.amount'|translate}}</th>
-                    <th class="text-center">{{'mindly.date'|translate}}</th>
-                    <th class="text-center">{{'mindly.wallet.location'|translate}}</th>
-                    <th class="text-center">{{'mindly.current'|translate}}</th>
-                    <th class="text-center">{{'mindly.option'|translate}}</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-portfolioItem>
-                <tr>
-                    <td>{{portfolioItem.cryptocurrency}}</td>
-                    <td>{{portfolioItem.amount}}</td>
-                    <td>{{portfolioItem.dateOfPurchase| date : "dd.MM.yy"}}</td>
-                    <td>{{portfolioItem.walletLocation}}</td>
-                    <td>{{portfolioItem.currentMarketValue}}
-                    </td>
-                    <td>
-                        <button pButton type="button" label="Delete" class="ui-button-secondary"
-                                (click)="confirm(portfolioItem)"></button>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
+        <table class="  table table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">{{'mindly.cryptocurrency'|translate}}</th>
+                <th scope="col">{{'mindly.amount'|translate}}</th>
+                <th scope="col">{{'mindly.date'|translate}}</th>
+                <th scope="col">{{'mindly.wallet.location'|translate}}</th>
+                <th scope="col">{{'mindly.current'|translate}}</th>
+                <th scope="col">{{'mindly.option'|translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let portfolioItem of portfolio;">
+                <td>{{portfolioItem.cryptocurrency}}</td>
+                <td>{{portfolioItem.amount}}</td>
+                <td>{{portfolioItem.dateOfPurchase| date : "dd.MM.yy"}}</td>
+                <td>{{portfolioItem.walletLocation}}</td>
+                <td>{{portfolioItem.currentMarketValue}}
+                </td>
+                <td>
+                    <button pButton type="button" label="Delete" class="ui-button-secondary"
+                            (click)="confirm(portfolioItem)"></button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
         <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     </div>
     <div class="section-title text-center center p_50">
@@ -97,7 +94,6 @@
         <hr>
     </div>
 </div>
-
 
 <app-footer></app-footer>
 
