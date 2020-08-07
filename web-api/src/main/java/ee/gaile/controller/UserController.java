@@ -39,4 +39,10 @@ public class UserController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         return userService.registerUser(signUpRequest);
     }
+
+    @PostMapping(path = "/user", produces = "application/json")
+    public void getUserSpy(@RequestBody SignupRequest auth, HttpServletRequest request) {
+        ACCESS_LOG.info("user IP is {} ", request.getHeader("userIP"));
+    }
+
 }

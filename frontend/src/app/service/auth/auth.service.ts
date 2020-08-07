@@ -28,13 +28,13 @@ export class AuthService {
     }
 
     login(username, password): Observable<any> {
-        const httpOptions = {
-            headers: new HttpHeaders({'userIP': `${ this.ipAddress }`})
+        const userIPOptions = {
+            headers: new HttpHeaders({userIP: `${ this.ipAddress }`})
         };
         return this.http.post(environment.apiAuthUrl + Constants.LOGIN_URL, {
             username,
             password
-        }, httpOptions);
+        }, userIPOptions);
     }
 
     logout() {
@@ -69,6 +69,13 @@ export class AuthService {
 
     isTokenPresent(): boolean {
         return !!sessionStorage.getItem('accessToken');
+    }
+
+    userSpy() {
+        const userIPOptions = {
+            headers: new HttpHeaders({userIP: `${ this.ipAddress }`})
+        };
+        return this.http.post(environment.apiAuthUrl + Constants.USER_URL, {}, userIPOptions);
     }
 
     getUserIP() {
