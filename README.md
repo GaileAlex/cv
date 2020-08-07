@@ -10,14 +10,13 @@ The following technologies required:
   * Java 8 (OpenJDK)
   * Postgres 11.8+
 
-## Building & setup
+## Building & setup (production)
 
 Follow the steps below:
 1. install docker
 2. cd cv
 3. docker-compose up --build
-4. Go to http://localhost:4488/
-
-
+4. use port 4488 for HTTP
+5. use port 4489 for HTTPS
 
 

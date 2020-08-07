@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 import { Constants } from '../../constants/appConstants';
 import { User } from '../../models/user';
 import { environment } from '../../../environments/environment';
@@ -14,12 +13,9 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class AuthService {
-
     ipAddress: string;
 
-    private TOKEN_TYPE = 'Bearer';
-
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient) {
         this.getUserIP();
     }
 
@@ -32,7 +28,9 @@ export class AuthService {
     }
 
     login(username, password): Observable<any> {
-        httpOptions.headers.append('userIP', `${ this.ipAddress }`);
+        const httpOptions = {
+            headers: new HttpHeaders({'userIP': `${ this.ipAddress }`})
+        };
         return this.http.post(environment.apiAuthUrl + Constants.LOGIN_URL, {
             username,
             password
@@ -43,7 +41,6 @@ export class AuthService {
         sessionStorage.setItem('user', '');
         sessionStorage.setItem('accessToken', '');
         sessionStorage.setItem('roles', '');
-        this.router.navigate(['/']);
     }
 
     getUserName(): string {

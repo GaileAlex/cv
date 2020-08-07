@@ -29,6 +29,7 @@
     </properties>
 
     <modules>
+        <module>frontend</module>
         <module>persistence</module>
         <module>security</module>
         <module>services</module>
