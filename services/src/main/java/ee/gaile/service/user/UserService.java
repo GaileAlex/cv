@@ -2,6 +2,8 @@ package ee.gaile.service.user;
 
 import ee.gaile.entity.enums.EnumRoles;
 import ee.gaile.entity.users.Users;
+import ee.gaile.entity.users.VisitStatistics;
+import ee.gaile.service.repository.VisitStatisticsRepository;
 import ee.gaile.service.security.LoginService;
 import ee.gaile.service.security.UserDetailsImpl;
 import ee.gaile.service.security.UserRepository;
@@ -22,7 +24,9 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,6 +37,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final AuthenticationManager authenticationManager;
+    private final VisitStatisticsRepository visitStatisticsRepository;
 
     public LoginRequest authUser(SignupRequest signupRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -75,5 +80,28 @@ public class UserService {
                 encoder.encode(signUpRequest.getPassword()), EnumRoles.ROLE_USER));
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    public void setUserStatistics(HttpServletRequest request) {
+        Optional<VisitStatistics> visitStatistics =
+                visitStatisticsRepository.findByUserIP(request.getHeader("userIP"));
+
+        if (visitStatistics.isPresent()) {
+            visitStatistics.get().setLastVisit(new Date());
+            visitStatistics.get().setTotalVisits(visitStatistics.get().getTotalVisits() + 1);
+            if (visitStatistics.get().getUsername() == null && request.getHeader("user") != null) {
+                visitStatistics.get().setUsername(request.getHeader("user"));
+            }
+        } else {
+            VisitStatistics visitStatistic = new VisitStatistics();
+            visitStatistic.setUsername(request.getHeader("user"));
+            visitStatistic.setLastVisit(new Date());
+            visitStatistic.setFirstVisit(new Date());
+            visitStatistic.setTotalVisits(1L);
+            visitStatistic.setUserIP(request.getHeader("userIP"));
+            visitStatistic.setUserLocation(request.getHeader("userCountry"));
+
+            visitStatisticsRepository.save(visitStatistic);
+        }
     }
 }

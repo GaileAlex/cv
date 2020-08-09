@@ -8,9 +8,9 @@ CREATE TABLE public.user_info
     id                      int8                        NOT NULL GENERATED ALWAYS AS IDENTITY,
     user_ip                 varchar(20)                 NULL,
     user_location           varchar(40)                 NULL,
-    first_visit             timestamp without time zone NULL DEFAULT NOW(),
+    first_visit             timestamp without time zone NULL,
     last_visit              timestamp without time zone NULL,
-    total_visits            int8                        NULL DEFAULT nextval('total_visits_seq'),
+    total_visits            int8                        NULL,
     total_time_on_site      date                        NULL,
     time_on_site_last_visit date                        NULL
 );

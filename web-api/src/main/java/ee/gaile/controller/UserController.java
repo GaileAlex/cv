@@ -44,6 +44,7 @@ public class UserController {
     public void getUserSpy(HttpServletRequest request) {
         ACCESS_LOG.info("user IP is {}, city is {}, country is {} ", request.getHeader("userIP"),
                 request.getHeader("userCity"), request.getHeader("userCountry"));
+        userService.setUserStatistics(request);
     }
 
 }
