@@ -42,7 +42,11 @@ export class AuthService {
 
     userSpy() {
         const userIPOptions = {
-            headers: new HttpHeaders({userIP: `${ sessionStorage.getItem('userIP') }`})
+            headers: new HttpHeaders({
+                userIP: `${ sessionStorage.getItem('userIP') }`,
+                userCountry: `${ sessionStorage.getItem('userCountry') }`,
+                userCity: `${ sessionStorage.getItem('userCity') }`
+            })
         };
         return this.http.post(environment.apiAuthUrl + Constants.USER_URL, {}, userIPOptions);
     }

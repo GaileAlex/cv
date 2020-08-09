@@ -11,11 +11,18 @@ import { AuthService } from '../../service/auth/auth.service';
 export class StartPageComponent implements OnInit {
 
     constructor(private authService: AuthService) {
+        window.onbeforeunload = () => {
+            localStorage.setItem('isSameSession', JSON.stringify(false));
+        };
     }
 
     ngOnInit() {
-        setTimeout(() => {
-        this.authService.userSpy().subscribe();
-        }, 2000);
+        if (localStorage.getItem('isSameSession') === 'false') {
+            setTimeout(() => {
+                this.authService.userSpy().subscribe();
+            }, 2000);
+        } else {
+            localStorage.setItem('isSameSession', JSON.stringify(true));
+        }
     }
 }

@@ -41,8 +41,9 @@ public class UserController {
     }
 
     @PostMapping(path = "/user", produces = "application/json")
-    public void getUserSpy(@RequestBody SignupRequest auth, HttpServletRequest request) {
-        ACCESS_LOG.info("user IP is {} ", request.getHeader("userIP"));
+    public void getUserSpy(HttpServletRequest request) {
+        ACCESS_LOG.info("user IP is {}, city is {}, country is {} ", request.getHeader("userIP"),
+                request.getHeader("userCity"), request.getHeader("userCountry"));
     }
 
 }

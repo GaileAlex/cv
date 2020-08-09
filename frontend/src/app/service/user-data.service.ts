@@ -12,8 +12,10 @@ export class UserDataService {
     }
 
     getUserIP() {
-        this.http.get('https://jsonip.com/').subscribe((res: any) => {
-            sessionStorage.setItem('userIP', JSON.stringify(res.ip));
+        this.http.get('http://ip-api.com/json').subscribe((res: any) => {
+            sessionStorage.setItem('userIP', JSON.stringify(res.query));
+            sessionStorage.setItem('userCountry', JSON.stringify(res.country));
+            sessionStorage.setItem('userCity', JSON.stringify(res.city));
         });
     }
 
