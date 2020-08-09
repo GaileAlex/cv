@@ -62,7 +62,6 @@ import { BlogAdminService } from './service/blog-admin.service';
 import { BlogListComponent } from './modules/blog/blog-list/blog-list.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
 
-
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
 

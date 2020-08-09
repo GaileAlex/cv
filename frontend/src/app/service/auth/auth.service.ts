@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Constants } from '../../constants/appConstants';
-import { User } from '../../models/user';
 import { environment } from '../../../environments/environment';
 
 const httpOptions = {
@@ -13,10 +12,8 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class AuthService {
-    ipAddress: string;
 
     constructor(private http: HttpClient) {
-        this.getUserIP();
     }
 
     register(user): Observable<any> {
@@ -29,7 +26,7 @@ export class AuthService {
 
     login(username, password): Observable<any> {
         const userIPOptions = {
-            headers: new HttpHeaders({userIP: `${ this.ipAddress }`})
+            headers: new HttpHeaders({userIP: `${ sessionStorage.getItem('userIP') }`})
         };
         return this.http.post(environment.apiAuthUrl + Constants.LOGIN_URL, {
             username,
@@ -43,44 +40,10 @@ export class AuthService {
         sessionStorage.setItem('roles', '');
     }
 
-    getUserName(): string {
-        const userString = sessionStorage.getItem('user');
-        const userData = new User();
-        if (userString) {
-            const user: User = JSON.parse(userString);
-            userData.username = user.username;
-        }
-        return userData.username;
-    }
-
-    getUserRole(): string {
-        const userString = sessionStorage.getItem('user');
-        const userData = new User();
-        if (userString) {
-            const user: User = JSON.parse(userString);
-            userData.role = user.role;
-        }
-        return userData.role;
-    }
-
-    isAuthenticated(): boolean {
-        return !!sessionStorage.getItem('accessToken') && !!sessionStorage.getItem('user');
-    }
-
-    isTokenPresent(): boolean {
-        return !!sessionStorage.getItem('accessToken');
-    }
-
     userSpy() {
         const userIPOptions = {
-            headers: new HttpHeaders({userIP: `${ this.ipAddress }`})
+            headers: new HttpHeaders({userIP: `${ sessionStorage.getItem('userIP') }`})
         };
         return this.http.post(environment.apiAuthUrl + Constants.USER_URL, {}, userIPOptions);
-    }
-
-    getUserIP() {
-        return this.http.get('https://jsonip.com/').subscribe((res: any) => {
-            this.ipAddress = res.ip;
-        });
     }
 }

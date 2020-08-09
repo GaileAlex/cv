@@ -5,6 +5,7 @@ import { Comment } from '../../../models/comment';
 import { BlogService } from '../../../service/blog.service';
 import { AuthService } from '../../../service/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserDataService } from '../../../service/user-data.service';
 
 @Component({
     selector: 'app-blog-article',
@@ -20,12 +21,12 @@ export class BlogArticleComponent implements OnInit {
     id = this.router.snapshot.params.id;
 
     constructor(private router: ActivatedRoute, private blogService: BlogService, private authService: AuthService,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder, private userDataService: UserDataService) {
     }
 
     ngOnInit() {
         window.scrollTo(0, 0);
-        this.isLoggedIn = this.authService.isAuthenticated();
+        this.isLoggedIn = this.userDataService.isAuthenticated();
         this.blog = this.getBlogData();
 
         this.inputForm = this.formBuilder.group({

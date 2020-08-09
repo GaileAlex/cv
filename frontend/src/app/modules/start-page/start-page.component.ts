@@ -14,9 +14,8 @@ export class StartPageComponent implements OnInit {
     }
 
     ngOnInit() {
+        setTimeout(() => {
         this.authService.userSpy().subscribe();
+        }, 2000);
     }
-
-
-
 }

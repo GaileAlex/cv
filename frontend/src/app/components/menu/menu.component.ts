@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../service/language.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth/auth.service';
+import { UserDataService } from '../../service/user-data.service';
 
 @Component({
     selector: 'app-menu',
@@ -17,9 +18,9 @@ export class MenuComponent implements OnInit {
     isLoggedIn: boolean;
 
     constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
-                private authService: AuthService) {
-        this.isLoggedIn = this.authService.isAuthenticated();
-        this.username = authService.getUserName();
+                private authService: AuthService, private userDataService: UserDataService) {
+        this.isLoggedIn = this.userDataService.isAuthenticated();
+        this.username = userDataService.getUserName();
     }
 
     ngOnInit() {
@@ -36,7 +37,7 @@ export class MenuComponent implements OnInit {
     }
 
     getUserRole() {
-        return this.authService.getUserRole();
+        return this.userDataService.getUserRole();
     }
 
     useLanguage(language: string) {
