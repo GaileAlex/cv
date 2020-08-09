@@ -21,6 +21,10 @@ export class MenuComponent implements OnInit {
                 private authService: AuthService, private userDataService: UserDataService) {
         this.isLoggedIn = this.userDataService.isAuthenticated();
         this.username = userDataService.getUserName();
+
+        window.onbeforeunload = () => {
+            localStorage.setItem('isSameSession', 'false');
+        };
     }
 
     ngOnInit() {
@@ -28,8 +32,15 @@ export class MenuComponent implements OnInit {
         if (this.router.routerState.snapshot.url.startsWith('/#')) {
             this.pageId = '';
         }
+
         this.translate.setDefaultLang(this.languageService.getLanguage());
 
+        if ('false' === localStorage.getItem('isSameSession')) {
+            setTimeout(() => {
+                this.authService.userSpy().subscribe();
+            }, 2000);
+            localStorage.setItem('isSameSession', 'true');
+        }
     }
 
     getLanguage() {
