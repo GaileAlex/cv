@@ -16,6 +16,7 @@ export class UserDataService {
             sessionStorage.setItem('userIP', JSON.stringify(res.query));
             sessionStorage.setItem('userCountry', JSON.stringify(res.country));
             sessionStorage.setItem('userCity', JSON.stringify(res.city));
+            sessionStorage.setItem('user', JSON.stringify(res.user));
         });
     }
 
