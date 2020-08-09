@@ -16,25 +16,27 @@ export class UserDataService {
             sessionStorage.setItem('userIP', JSON.stringify(res.query));
             sessionStorage.setItem('userCountry', JSON.stringify(res.country));
             sessionStorage.setItem('userCity', JSON.stringify(res.city));
-            sessionStorage.setItem('user', JSON.stringify(res.user));
+            sessionStorage.setItem('user', this.getUserName());
         });
     }
 
     getUserName(): string {
-        const userString = sessionStorage.getItem('user');
+        const userName = sessionStorage.getItem('user');
         const userData = new User();
-        if (userString) {
-            const user: User = JSON.parse(userString);
+        console.log('userName ' + userName)
+        if (userName !== 'undefined' && userName !== '') {
+            const user: User = JSON.parse(userName);
             userData.username = user.username;
         }
         return userData.username;
     }
 
     getUserRole(): string {
-        const userString = sessionStorage.getItem('user');
+        const userRole = sessionStorage.getItem('user');
         const userData = new User();
-        if (userString) {
-            const user: User = JSON.parse(userString);
+        console.log('userRole ' + userRole)
+        if (userRole !== 'undefined' && userRole !== '') {
+            const user: User = JSON.parse(userRole);
             userData.role = user.role;
         }
         return userData.role;
