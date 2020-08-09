@@ -16,15 +16,13 @@ export class UserDataService {
             sessionStorage.setItem('userIP', JSON.stringify(res.query));
             sessionStorage.setItem('userCountry', JSON.stringify(res.country));
             sessionStorage.setItem('userCity', JSON.stringify(res.city));
-            sessionStorage.setItem('user', this.getUserName());
         });
     }
 
     getUserName(): string {
         const userName = sessionStorage.getItem('user');
         const userData = new User();
-        console.log('userName ' + userName)
-        if (userName !== 'undefined' && userName !== '') {
+        if (userName !== 'undefined' && userName !== null) {
             const user: User = JSON.parse(userName);
             userData.username = user.username;
         }
@@ -34,8 +32,7 @@ export class UserDataService {
     getUserRole(): string {
         const userRole = sessionStorage.getItem('user');
         const userData = new User();
-        console.log('userRole ' + userRole)
-        if (userRole !== 'undefined' && userRole !== '') {
+        if (userRole !== 'undefined' && userRole !== null) {
             const user: User = JSON.parse(userRole);
             userData.role = user.role;
         }

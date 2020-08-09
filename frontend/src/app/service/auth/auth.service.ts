@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Constants } from '../../constants/appConstants';
 import { environment } from '../../../environments/environment';
+import { UserDataService } from '../user-data.service';
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -13,7 +14,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private userDataService: UserDataService) {
     }
 
     register(user): Observable<any> {
@@ -45,7 +46,8 @@ export class AuthService {
             headers: new HttpHeaders({
                 userIP: `${ sessionStorage.getItem('userIP') }`,
                 userCountry: `${ sessionStorage.getItem('userCountry') }`,
-                userCity: `${ sessionStorage.getItem('userCity') }`
+                userCity: `${ sessionStorage.getItem('userCity') }`,
+                user: `${ this.userDataService.getUserName() }`
             })
         };
         return this.http.post(environment.apiAuthUrl + Constants.USER_URL, {}, userIPOptions);
