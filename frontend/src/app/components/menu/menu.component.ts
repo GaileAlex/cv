@@ -34,7 +34,6 @@ export class MenuComponent implements OnInit {
         }
 
         this.translate.setDefaultLang(this.languageService.getLanguage());
-
         if ('false' === localStorage.getItem('isSameSession')) {
             setTimeout(() => {
                 this.authService.userSpy().subscribe();
