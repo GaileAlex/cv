@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions } from "chart.js";
-import { Color, Label } from "ng2-charts";
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-visit-statistics',
@@ -11,9 +11,6 @@ export class VisitStatisticsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
   chartOptions = {
     responsive: true
   };
@@ -23,5 +20,8 @@ export class VisitStatisticsComponent implements OnInit {
     { data: [45, 67, 800, 500], label: 'Account C' }
   ];
   chartLabels = ['January', 'February', 'Mars', 'April'];
+
+  ngOnInit() {
+  }
 
 }
