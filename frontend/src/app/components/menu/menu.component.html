@@ -85,15 +85,17 @@
                             <a href class="nav-link" (click)="logout()">LogOut</a>
                         </li>
                     </ul>
-
-                    <li>
-                        <a [routerLink]="['/blog-admin']"
-                           *ngIf="getUserRole()=='ROLE_ADMIN'"
-                           role="button" class="btn btn-inverse"
-                           data-toggle="modal"
-                           style="color: #58c1ff;">
-                            <p>Admin panel</p>
-                        </a>
+                    <li *ngIf="getUserRole()=='ROLE_ADMIN'" class="nav-item dropdown" ngbDropdown>
+                        <a
+                           class="nav-link" href="javascript:void(0)"
+                           ngbDropdownToggle>Admin menu</a>
+                        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+                            <a [routerLink]="['/blog-admin']"
+                               class="hvr-underline-from-center dropdown-item"
+                               style="color: #58c1ff; margin-bottom: 5px;">Admin panel</a>
+                            <a [routerLink]="['/statistics']" class="hvr-underline-from-center dropdown-item"
+                               style="color: #58c1ff; margin-bottom: 5px;">Visit statistics</a>
+                        </div>
                     </li>
                 </ul>
             </div>

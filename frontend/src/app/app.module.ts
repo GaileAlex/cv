@@ -46,7 +46,7 @@ import { LightboxModule } from 'primeng/lightbox';
 import { LoginComponent } from './modules/login/login.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
 import { BlogArticleComponent } from './modules/blog/blog-article/blog-article.component';
-import { BlogAdminComponent } from './modules/blog/blog-admin/blog-admin.component';
+import { BlogAdminComponent } from './modules/admin-menu/blog-admin/blog-admin.component';
 import { BooksDataService } from './service/booksData';
 import { JwtInterceptor } from './service/auth/jwt.interceptor';
 import { ErrorInterceptor } from './service/auth/error.interceptor';
@@ -61,6 +61,8 @@ import { CommonModule } from '@angular/common';
 import { BlogAdminService } from './service/blog-admin.service';
 import { BlogListComponent } from './modules/blog/blog-list/blog-list.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
+import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/visit-statistics.component';
+import { ChartsModule } from "ng2-charts";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -88,6 +90,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         BlogArticleComponent,
         BlogListComponent,
         BlogAdminComponent,
+        VisitStatisticsComponent,
     ],
     imports: [
         BrowserModule,
@@ -140,7 +143,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ToastModule,
         CommonModule,
         StickyNavModule,
-        StickyNavModule
+        StickyNavModule,
+        ChartsModule
     ],
     providers: [ConfirmationService, MindlyService, ValidationMsgService, LibrarianService, NgbActiveModal,
         BooksDataService, DialogService, MessageService, BlogAdminService,

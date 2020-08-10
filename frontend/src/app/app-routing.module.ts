@@ -9,8 +9,9 @@ import { BlogListComponent } from './modules/blog/blog-list/blog-list.component'
 import { LoginComponent } from './modules/login/login.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
 import { ProtectedGuardService } from './service/protectedGuard';
-import { BlogAdminComponent } from './modules/blog/blog-admin/blog-admin.component';
+import { BlogAdminComponent } from './modules/admin-menu/blog-admin/blog-admin.component';
 import { BlogArticleComponent } from './modules/blog/blog-article/blog-article.component';
+import { VisitStatisticsComponent } from "./modules/admin-menu/visit-statistics/visit-statistics.component";
 
 
 export const routes: Routes = [
@@ -23,6 +24,7 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'registration', component: RegistrationComponent},
     {path: 'blog-admin', component: BlogAdminComponent, canActivate: [ProtectedGuardService]},
+    {path: 'statistics', component: VisitStatisticsComponent, canActivate: [ProtectedGuardService]},
     {path: '**', component: NotFoundComponent}
 ];
 

@@ -1,0 +1,18 @@
+<app-menu></app-menu>
+
+<div class="blog_main_area p_100 text-center">
+    <div class="container">
+        <div class="chart-wrapper">
+            <canvas baseChart
+                    [chartType]="'line'"
+                    [datasets]="chartData"
+                    [labels]="chartLabels"
+                    [options]="chartOptions"
+                    [legend]="true"
+                    (chartClick)="onChartClick($event)">
+            </canvas>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
