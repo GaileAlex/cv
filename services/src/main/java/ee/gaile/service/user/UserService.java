@@ -93,13 +93,14 @@ public class UserService {
                 visitStatistics.get().setUsername(request.getHeader("user"));
             }
         } else {
-            VisitStatistics visitStatistic = new VisitStatistics();
-            visitStatistic.setUsername(request.getHeader("user"));
-            visitStatistic.setLastVisit(new Date());
-            visitStatistic.setFirstVisit(new Date());
-            visitStatistic.setTotalVisits(1L);
-            visitStatistic.setUserIP(request.getHeader("userIP"));
-            visitStatistic.setUserLocation(request.getHeader("userCountry"));
+            VisitStatistics visitStatistic = VisitStatistics.builder()
+                    .username(request.getHeader("user"))
+                    .lastVisit(new Date())
+                    .firstVisit(new Date())
+                    .totalVisits(1L)
+                    .userIP(request.getHeader("userIP"))
+                    .userLocation(request.getHeader("userCountry"))
+                    .build();
 
             visitStatisticsRepository.save(visitStatistic);
         }

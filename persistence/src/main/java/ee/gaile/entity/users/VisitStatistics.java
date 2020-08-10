@@ -1,5 +1,7 @@
 package ee.gaile.entity.users;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -9,6 +11,8 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity(name = "VisitStatistics")
 @Table(name = "visit_statistics",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name"})})
