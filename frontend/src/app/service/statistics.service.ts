@@ -30,7 +30,6 @@ export class StatisticsService {
     }
 
     public findAll(): Observable<Statistic[]> {
-        console.log(this.http.get<Statistic[]>(this.GRAPH_STATISTICS_URL))
         return this.http.get<Statistic[]>(this.GRAPH_STATISTICS_URL);
     }
 }
