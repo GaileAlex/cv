@@ -14,7 +14,6 @@ import { MindlyComponent } from './modules/mindly/mindly.component';
 import { FormControlValidationMsgDirective } from './components/form-validation/formcontrol-validation-msg.directive';
 import { FormSubmitValidationMsgDirective } from './components/form-validation/formsubmit-validation-msg.directive';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { MindlyService } from './service/mindly.service';
 import { ValidationMsgService } from './components/form-validation/validation-msg.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -28,7 +27,6 @@ import { LibrarianComponent } from './modules/librarian/librarian/librarian.comp
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComboboxComponent } from './modules/librarian/combo-box/combo-box.component';
 import { DialogBoxComponent } from './modules/librarian/dialog-box/dialog-box.component';
-import { LibrarianService } from './service/librarian.service';
 import {
     MatButtonModule,
     MatDialogModule,
@@ -47,7 +45,6 @@ import { LoginComponent } from './modules/login/login.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
 import { BlogArticleComponent } from './modules/blog/blog-article/blog-article.component';
 import { BlogAdminComponent } from './modules/admin-menu/blog-admin/blog-admin.component';
-import { BooksDataService } from './service/booksData';
 import { JwtInterceptor } from './service/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './service/interceptors/error.interceptor';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
@@ -58,12 +55,10 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
-import { BlogAdminService } from './service/blog-admin.service';
 import { BlogListComponent } from './modules/blog/blog-list/blog-list.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/visit-statistics.component';
 import { ChartsModule } from "ng2-charts";
-import { StatisticsService } from "./service/statistics.service";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -147,8 +142,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         StickyNavModule,
         ChartsModule
     ],
-    providers: [ConfirmationService, MindlyService, ValidationMsgService, LibrarianService, NgbActiveModal,
-        BooksDataService, DialogService, MessageService, BlogAdminService, StatisticsService,
+    providers: [ConfirmationService, ValidationMsgService, NgbActiveModal, DialogService, MessageService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
     bootstrap: [AppComponent],
