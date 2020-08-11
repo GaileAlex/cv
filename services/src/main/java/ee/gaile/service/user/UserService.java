@@ -50,7 +50,6 @@ public class UserService {
         List<String> role = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).distinct().collect(Collectors.toList());
 
-
         SignupRequest userDTO = SignupRequest.builder()
                 .username(signupRequest.getUsername())
                 .password(signupRequest.getPassword())
