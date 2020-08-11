@@ -4,6 +4,7 @@ import { LanguageService } from '../../service/language.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth/auth.service';
 import { UserDataService } from '../../service/user-data.service';
+import { StatisticsService } from "../../service/statistics.service";
 
 @Component({
     selector: 'app-menu',
@@ -18,7 +19,7 @@ export class MenuComponent implements OnInit {
     isLoggedIn: boolean;
 
     constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
-                private authService: AuthService, private userDataService: UserDataService) {
+                private authService: AuthService, private userDataService: UserDataService, private statisticsService: StatisticsService) {
         this.isLoggedIn = this.userDataService.isAuthenticated();
         this.username = userDataService.getUserName();
 
@@ -36,7 +37,7 @@ export class MenuComponent implements OnInit {
         this.translate.setDefaultLang(this.languageService.getLanguage());
         if ('false' === localStorage.getItem('isSameSession')) {
             setTimeout(() => {
-                this.authService.userSpy().subscribe();
+                this.statisticsService.userSpy().subscribe();
             }, 2000);
             localStorage.setItem('isSameSession', 'true');
         }

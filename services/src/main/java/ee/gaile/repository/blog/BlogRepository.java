@@ -1,4 +1,4 @@
-package ee.gaile.service.repository.blog;
+package ee.gaile.repository.blog;
 
 import ee.gaile.entity.blog.Blog;
 import org.springframework.data.jpa.repository.JpaRepository;

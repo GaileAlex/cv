@@ -48,8 +48,8 @@ import { RegistrationComponent } from './modules/registration/registration.compo
 import { BlogArticleComponent } from './modules/blog/blog-article/blog-article.component';
 import { BlogAdminComponent } from './modules/admin-menu/blog-admin/blog-admin.component';
 import { BooksDataService } from './service/booksData';
-import { JwtInterceptor } from './service/auth/jwt.interceptor';
-import { ErrorInterceptor } from './service/auth/error.interceptor';
+import { JwtInterceptor } from './service/interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './service/interceptors/error.interceptor';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { CalendarModule } from 'primeng/calendar';
@@ -63,6 +63,7 @@ import { BlogListComponent } from './modules/blog/blog-list/blog-list.component'
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/visit-statistics.component';
 import { ChartsModule } from "ng2-charts";
+import { StatisticsService } from "./service/statistics.service";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -147,7 +148,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ChartsModule
     ],
     providers: [ConfirmationService, MindlyService, ValidationMsgService, LibrarianService, NgbActiveModal,
-        BooksDataService, DialogService, MessageService, BlogAdminService,
+        BooksDataService, DialogService, MessageService, BlogAdminService, StatisticsService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
     bootstrap: [AppComponent],

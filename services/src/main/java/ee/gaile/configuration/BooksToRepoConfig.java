@@ -1,4 +1,4 @@
-package ee.gaile.service.configuration;
+package ee.gaile.configuration;
 
 import ee.gaile.entity.librarian.Books;
 import ee.gaile.service.librarian.LibrarianService;

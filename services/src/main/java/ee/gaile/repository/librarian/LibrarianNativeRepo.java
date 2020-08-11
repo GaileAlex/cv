@@ -1,4 +1,4 @@
-package ee.gaile.service.repository.librarian;
+package ee.gaile.repository.librarian;
 
 import ee.gaile.entity.librarian.Books;
 import lombok.extern.slf4j.Slf4j;

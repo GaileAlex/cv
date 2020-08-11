@@ -1,4 +1,4 @@
-package ee.gaile.service.repository;
+package ee.gaile.repository;
 
 import ee.gaile.entity.users.VisitStatistics;
 import org.springframework.data.jpa.repository.JpaRepository;

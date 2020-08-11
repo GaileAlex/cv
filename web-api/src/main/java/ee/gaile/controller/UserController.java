@@ -20,7 +20,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/auth")
 @AllArgsConstructor
 public class UserController {
-    UserService userService;
+    private final UserService userService;
 
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
 
@@ -40,11 +40,6 @@ public class UserController {
         return userService.registerUser(signUpRequest);
     }
 
-    @PostMapping(path = "/user", produces = "application/json")
-    public void getUserSpy(HttpServletRequest request) {
-        ACCESS_LOG.info("user name is {} IP is {}, city is {}, country is {} ", request.getHeader("user"),
-                request.getHeader("userIP"), request.getHeader("userCity"), request.getHeader("userCountry"));
-        userService.setUserStatistics(request);
-    }
+
 
 }

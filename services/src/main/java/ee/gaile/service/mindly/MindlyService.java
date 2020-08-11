@@ -1,7 +1,7 @@
 package ee.gaile.service.mindly;
 
 import ee.gaile.entity.mindly.Mindly;
-import ee.gaile.service.repository.mindly.MindlyRepository;
+import ee.gaile.repository.mindly.MindlyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

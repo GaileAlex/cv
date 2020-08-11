@@ -16,7 +16,6 @@ export class MindlyService {
     }
 
     public findAll(): Observable<Mindly[]> {
-
         return this.http.get<Mindly[]>(this.portfolioUrl);
     }
 
