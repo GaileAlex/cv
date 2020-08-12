@@ -13,6 +13,6 @@ CREATE TRIGGER visit_statistics_trigger
     AFTER INSERT OR UPDATE
     ON visit_statistics
     FOR EACH ROW
-EXECUTE PROCEDURE visit_statistics_trigger_function(id)
+EXECUTE PROCEDURE visit_statistics_trigger_function()
 
 

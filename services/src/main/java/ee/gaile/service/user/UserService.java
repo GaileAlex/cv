@@ -50,6 +50,7 @@ public class UserService {
                 .password(signupRequest.getPassword())
                 .role(role.get(0))
                 .build();
+
         return loginService.authUser(userDTO);
     }
 
