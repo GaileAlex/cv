@@ -6,7 +6,7 @@ create or replace function visit_statistics_trigger_function()
 as '
     BEGIN
     INSERT INTO visit_statistic_user (visit_date, visit_statistics_id)
-    values (current_timestamp, id); RETURN NEW; end; ';
+    values (current_timestamp, new.id); RETURN NEW; end; ';
 
 
 CREATE TRIGGER visit_statistics_trigger
