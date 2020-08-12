@@ -1,6 +1,6 @@
 package ee.gaile.service.statistics;
 
-import ee.gaile.entity.users.VisitStatistics;
+import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.repository.VisitStatisticsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,6 +43,9 @@ public class StatisticsService {
     }
 
     public List<VisitStatistics> getStatisticsGraph() {
-        return visitStatisticsRepository.findAll();
+        // каждой дате соответствует количество посетителей
+        List<VisitStatistics> visitStatisticsList = visitStatisticsRepository.findAll();
+
+        return visitStatisticsList;
     }
 }

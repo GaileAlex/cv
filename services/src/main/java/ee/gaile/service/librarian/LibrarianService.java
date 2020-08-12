@@ -1,9 +1,9 @@
 package ee.gaile.service.librarian;
 
-import ee.gaile.entity.enums.Conditions;
+import ee.gaile.enums.Conditions;
 import ee.gaile.entity.librarian.Books;
-import ee.gaile.entity.models.FilterWrapper;
-import ee.gaile.entity.models.SelectedFilter;
+import ee.gaile.models.FilterWrapper;
+import ee.gaile.models.SelectedFilter;
 import ee.gaile.repository.librarian.LibrarianNativeRepo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

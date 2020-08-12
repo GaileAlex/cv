@@ -1,6 +1,6 @@
 package ee.gaile.service.security.settings;
 
-import ee.gaile.entity.enums.EnumRoles;
+import ee.gaile.enums.EnumRoles;
 import ee.gaile.entity.users.Users;
 import ee.gaile.service.security.UserRepository;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,6 +1,6 @@
 package ee.gaile.controller;
 
-import ee.gaile.entity.users.VisitStatistics;
+import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.service.statistics.StatisticsService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

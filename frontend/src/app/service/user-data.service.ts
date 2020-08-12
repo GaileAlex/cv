@@ -20,9 +20,9 @@ export class UserDataService {
     }
 
     getUserName(): string {
-        const userName = sessionStorage.getItem('user');
+        const userName = sessionStorage.getItem('user') ? sessionStorage.getItem('user')  : null;
         const userData = new User();
-        if (userName !== 'undefined' && userName !== null) {
+        if (userName) {
             const user: User = JSON.parse(userName);
             userData.username = user.username;
         }
@@ -30,9 +30,9 @@ export class UserDataService {
     }
 
     getUserRole(): string {
-        const userRole = sessionStorage.getItem('user');
+        const userRole = sessionStorage.getItem('user') ? sessionStorage.getItem('user')  : null;
         const userData = new User();
-        if (userRole !== 'undefined' && userRole !== null) {
+        if (userRole) {
             const user: User = JSON.parse(userRole);
             userData.role = user.role;
         }

@@ -1,4 +1,4 @@
-package ee.gaile.entity.models;
+package ee.gaile.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

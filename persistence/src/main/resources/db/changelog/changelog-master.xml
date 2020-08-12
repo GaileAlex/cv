@@ -12,4 +12,7 @@
     <include file="v0008_change_table_user_info_table.sql" relativeToChangelogFile="true"/>
     <include file="v0009_add_username_table_user_info.sql" relativeToChangelogFile="true"/>
     <include file="v0010_rename_table_user_info_to_visit_statistics.sql" relativeToChangelogFile="true"/>
+    <include file="v0011_add_primary_key_visit_statistics.sql" relativeToChangelogFile="true"/>
+    <include file="v0012_create_table_visit_statistic_user.sql" relativeToChangelogFile="true"/>
+    <include file="v0013_create_trigger_visit_statistics.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

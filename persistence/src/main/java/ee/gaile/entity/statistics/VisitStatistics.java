@@ -1,4 +1,4 @@
-package ee.gaile.entity.users;
+package ee.gaile.entity.statistics;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -41,4 +42,7 @@ public class VisitStatistics {
 
     @Column(name = "user_name")
     private String username;
+
+    @OneToMany(mappedBy = "visitStatistics")
+    private List<VisitStatisticUser> visitStatisticUsers;
 }

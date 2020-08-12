@@ -1,4 +1,4 @@
-package ee.gaile.entity.enums;
+package ee.gaile.enums;
 
 public enum EnumRoles {
     ROLE_USER,

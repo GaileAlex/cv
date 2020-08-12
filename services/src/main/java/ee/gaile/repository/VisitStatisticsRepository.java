@@ -1,6 +1,6 @@
 package ee.gaile.repository;
 
-import ee.gaile.entity.users.VisitStatistics;
+import ee.gaile.entity.statistics.VisitStatistics;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
