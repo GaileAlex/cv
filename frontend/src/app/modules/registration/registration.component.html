@@ -78,7 +78,7 @@
             <div class="text-center">
                 <button pButton class="ui-button-raised" label="Sign Up"></button>
             </div>
-            <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+            <div class="alert alert-danger" *ngIf="f.submitted && isSignUpFailed">
                 Signup failed!<br/>{{ errorMessage }}
             </div>
         </form>

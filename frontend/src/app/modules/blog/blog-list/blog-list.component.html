@@ -1,6 +1,14 @@
 <app-menu></app-menu>
 
-<div *ngIf="!blogs" class="p_500_top"></div>
+<div *ngIf="!blogs" class="p_150_top">
+    <div class="container" *ngIf="errorMessage !== ''">
+        <div class="row mt-5">
+            <div class="col-lg-6 offset-3">
+                <h3 class="p_50 alert alert-danger text-center"><b>{{errorMessage}}</b></h3>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="text-center p_100_top">
     <div *ngFor="let blog of blogs; let i = index" class="section-padding blog_main_area ">
         <div *ngIf="i % 2 == 0" class="container p_50">

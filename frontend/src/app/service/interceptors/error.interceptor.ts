@@ -19,6 +19,8 @@ export class ErrorInterceptor implements HttpInterceptor {
             let error = (err && err.error && err.error.message) || err.statusText;
             if ([502].includes(err.status)) {
                 error = 'Server not responding';
+            } else {
+                error = 'Server not responding'
             }
             return throwError(error);
         }));

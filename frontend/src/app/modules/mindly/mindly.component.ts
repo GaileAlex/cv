@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class MindlyComponent implements OnInit {
-
+    errorMessage = '';
     inputForm: FormGroup;
     portfolio: Mindly[];
     msgs: Message[];
@@ -37,6 +37,8 @@ export class MindlyComponent implements OnInit {
 
         this.portfolioService.findAll().subscribe(data => {
             this.portfolio = data;
+        }, error => {
+            this.errorMessage = error;
         });
 
         this.inputForm = this.formBuilder.group({
@@ -74,6 +76,8 @@ export class MindlyComponent implements OnInit {
         this.portfolioService.deletePortfolio(portfolio.id)
             .subscribe(() => {
                 this.portfolio = this.portfolio.filter(u => u !== portfolio);
+            }, error => {
+                this.errorMessage = error;
             });
     }
 

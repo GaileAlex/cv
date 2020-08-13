@@ -9,6 +9,7 @@ import { Blog } from '../../../models/blog';
 })
 export class BlogListComponent implements OnInit {
     blogs: Blog[];
+    errorMessage = '';
 
     constructor(private blogService: BlogService) {
     }
@@ -18,6 +19,8 @@ export class BlogListComponent implements OnInit {
 
         this.blogService.findAll().subscribe(data => {
             this.blogs = data;
+        }, error => {
+            this.errorMessage = error;
         });
     }
 }

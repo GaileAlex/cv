@@ -58,6 +58,13 @@
 
 <div class="text-center p_100">
     <div class="container">
+        <div class="container" *ngIf="errorMessage !== ''">
+            <div class="row mt-5">
+                <div class="col-lg-6 offset-3">
+                    <h3 class="p_50 alert alert-danger text-center"><b>{{errorMessage}}</b></h3>
+                </div>
+            </div>
+        </div>
         <h3 class="p_50">{{'mindly.portfolio'|translate}}</h3>
         <table class="  table table-bordered">
             <thead class="thead-light">
