@@ -65,6 +65,7 @@ export class VisitStatisticsComponent implements OnInit {
     ngOnInit() {
         this.statisticsService.findAll().subscribe(data => {
             this.statistics = data
+            console.log(this.statistics)
         });
     }
 

@@ -1,5 +1,6 @@
 package ee.gaile.controller;
 
+import ee.gaile.entity.statistics.VisitStatisticGraph;
 import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.service.statistics.StatisticsService;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class StatisticsController {
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
 
     @GetMapping(path = "/graph", produces = "application/json")
-    public List<VisitStatistics> getUserLoginToken() {
+    public VisitStatisticGraph getUserLoginToken() {
         return statisticsService.getStatisticsGraph();
     }
 

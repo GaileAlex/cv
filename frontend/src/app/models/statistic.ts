@@ -1,3 +1,5 @@
+import { VisitStatisticUser } from "./visitStatisticUser";
+
 export class Statistic {
     id: string;
     userIP: string;
@@ -6,4 +8,5 @@ export class Statistic {
     lastVisit: Date;
     totalVisits: string;
     username: string;
+    visitStatisticUser: VisitStatisticUser[];
 }
