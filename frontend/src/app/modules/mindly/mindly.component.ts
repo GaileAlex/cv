@@ -19,7 +19,7 @@ export class MindlyComponent implements OnInit {
     portfolioObject: Mindly;
     dateToday: Date;
     cryptocurrencyList: SelectItem [];
-    cryptocurrencySelect = 'Bitcoin';
+    cryptocurrencySelect = '';
 
     constructor(private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService,
                 private  portfolioService: MindlyService, private formBuilder: FormBuilder) {
@@ -49,10 +49,6 @@ export class MindlyComponent implements OnInit {
         });
     }
 
-    /**
-     * confirmation of deletion and delete request element Portfolio
-     * @param portfolioItem
-     */
     confirm(portfolioItem: Mindly) {
         this.confirmationService.confirm({
             message: 'Do you want to delete this record?',
@@ -68,10 +64,6 @@ export class MindlyComponent implements OnInit {
         });
     }
 
-    /**
-     * delete element Portfolio
-     * @param portfolio
-     */
     deletePortfolio(portfolio: Mindly): void {
         this.portfolioService.deletePortfolio(portfolio.id)
             .subscribe(() => {
@@ -81,11 +73,7 @@ export class MindlyComponent implements OnInit {
             });
     }
 
-    /**
-     * saving a new item Portfolio
-     */
     onSubmit() {
-        this.inputForm.get('cryptocurrency').setValue(this.cryptocurrencySelect);
         this.portfolioObject = this.inputForm.value;
         if (this.inputForm.valid) {
             this.portfolioObject.cryptocurrency = this.portfolioObject.cryptocurrency.toString();
