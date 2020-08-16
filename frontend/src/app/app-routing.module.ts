@@ -11,7 +11,7 @@ import { RegistrationComponent } from './modules/registration/registration.compo
 import { ProtectedGuardService } from './service/protectedGuard';
 import { BlogAdminComponent } from './modules/admin-menu/blog-admin/blog-admin.component';
 import { BlogArticleComponent } from './modules/blog/blog-article/blog-article.component';
-import { VisitStatisticsComponent } from "./modules/admin-menu/visit-statistics/visit-statistics.component";
+import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/visit-statistics.component';
 
 
 export const routes: Routes = [

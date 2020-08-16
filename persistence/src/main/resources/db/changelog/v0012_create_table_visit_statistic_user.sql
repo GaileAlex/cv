@@ -3,9 +3,9 @@
 
 CREATE TABLE public.visit_statistic_user
 (
-    id                  int8 NOT NULL GENERATED ALWAYS AS IDENTITY,
-    visit_date          date NOT NULL,
-    visit_statistics_id int8 NOT NULL,
+    id                  int8                        NOT NULL GENERATED ALWAYS AS IDENTITY,
+    visit_date          timestamp without time zone NOT NULL,
+    visit_statistics_id int8                        NOT NULL,
     CONSTRAINT visit_statistic_user_pk PRIMARY KEY (id)
 );
 

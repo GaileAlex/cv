@@ -1,4 +1,4 @@
-package ee.gaile.entity.statistics;
+package ee.gaile.models.statistics;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

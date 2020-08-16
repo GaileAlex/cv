@@ -1,10 +1,12 @@
 package ee.gaile.service.statistics;
 
-import ee.gaile.entity.statistics.VisitStatisticGraph;
+import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.entity.statistics.VisitStatistics;
-import ee.gaile.entity.statistics.VisitStatisticsDTO;
+import ee.gaile.models.statistics.VisitStatisticsDTO;
+import ee.gaile.models.statistics.VisitStatisticsUserDTO;
 import ee.gaile.repository.VisitStatisticsRepository;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.time.DateUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -49,20 +51,27 @@ public class StatisticsService {
     public VisitStatisticGraph getStatisticsGraph() {
         List<VisitStatistics> visitStatisticsList = visitStatisticsRepository.findAll();
         List<Date> visitStatisticUserDTOList = new ArrayList<>();
+        List<VisitStatisticsUserDTO> countedVisitDTOList = new ArrayList<>();
 
-        visitStatisticsList.forEach((c) -> c.getVisitStatisticUsers().forEach((v) -> {
-            Date dateVisit = v.getVisitDate();
+        visitStatisticsList.forEach((c) -> c.getVisitStatisticUsers().forEach((d) -> {
+            Date dateVisit = DateUtils.truncate(d.getVisitDate(), Calendar.DATE);
             visitStatisticUserDTOList.add(dateVisit);
         }));
 
-        Map<Date, Long> countedVisit = visitStatisticUserDTOList.stream()
+        Map<Date, Long> countedVisitMap = visitStatisticUserDTOList.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        List<VisitStatisticsDTO> visitStatisticsDTOList = new ArrayList<>();
-        visitStatisticsList.forEach((c) -> {
-            visitStatisticsDTOList.add(toDto(c));
+
+        countedVisitMap.forEach((k, v) -> {
+            VisitStatisticsUserDTO visitStatisticsUserDTO = new VisitStatisticsUserDTO(k, v);
+            countedVisitDTOList.add(visitStatisticsUserDTO);
         });
 
-        return new VisitStatisticGraph(visitStatisticsDTOList, countedVisit);
+        List<VisitStatisticsDTO> visitStatisticsDTOList = new ArrayList<>();
+        visitStatisticsList.forEach((c) -> visitStatisticsDTOList.add(toDto(c)));
+
+        countedVisitDTOList.sort(Comparator.comparing(VisitStatisticsUserDTO::getVisitDate));
+
+        return new VisitStatisticGraph(visitStatisticsDTOList, countedVisitDTOList);
     }
 
     private VisitStatisticsDTO toDto(VisitStatistics visitStatistics) {

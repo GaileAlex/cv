@@ -3,15 +3,11 @@
     <div class="container">
         <div>
             <canvas baseChart
-
                     [datasets]="labelMFL"
                     [labels]="chartLabels"
-                    [options]="lineChartOptions"
+                    [options]="chartOptions"
                     [colors]="lineChartColors"
-
-                    [chartType]="lineChartType"
-                    (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
+                    [chartType]="'line'"></canvas>
         </div>
 
 

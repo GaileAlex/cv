@@ -1,7 +1,6 @@
 package ee.gaile.controller;
 
-import ee.gaile.entity.statistics.VisitStatisticGraph;
-import ee.gaile.entity.statistics.VisitStatistics;
+import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.service.statistics.StatisticsService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
