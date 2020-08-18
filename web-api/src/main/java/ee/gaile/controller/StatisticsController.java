@@ -29,11 +29,35 @@ public class StatisticsController {
 
     @PostMapping(path = "/user", produces = "application/json")
     public void getUserSpy(HttpServletRequest request) {
+        for (String header : IP_HEADER_CANDIDATES) {
+            String ip = request.getHeader(header);
+            ACCESS_LOG.info("user name is {} is {}",
+                    ip, request.getRemoteAddr());
+
+            if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+                ACCESS_LOG.info("user name is {} is {}",
+                        ip, request.getRemoteAddr());
+            }
+        }
+
         ACCESS_LOG.info("user name is {} IP is {}, city is {}, country is {}, Remote is {} ",
                 request.getHeader("user"), request.getHeader("userIP"), request.getHeader("userCity"),
-                request.getHeader("userCountry"), request.getRemoteAddr());
+                request.getHeader("userCountry"), request.getHeader("X-Real-IP"));
         statisticsService.setUserStatistics(request);
     }
 
+    private static final String[] IP_HEADER_CANDIDATES = {
+            "X-Forwarded-For",
+            "Proxy-Client-IP",
+            "WL-Proxy-Client-IP",
+            "HTTP_X_FORWARDED_FOR",
+            "HTTP_X_FORWARDED",
+            "HTTP_X_CLUSTER_CLIENT_IP",
+            "HTTP_CLIENT_IP",
+            "HTTP_FORWARDED_FOR",
+            "HTTP_FORWARDED",
+            "HTTP_VIA",
+            "X-Real-IP",
+            "REMOTE_ADDR"};
 
 }
