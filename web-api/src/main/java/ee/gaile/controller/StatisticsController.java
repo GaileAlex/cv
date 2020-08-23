@@ -58,6 +58,7 @@ public class StatisticsController {
             "HTTP_FORWARDED",
             "HTTP_VIA",
             "X-Real-IP",
+            "HTTP_X_REAL_IP",
             "REMOTE_ADDR"};
 
 }

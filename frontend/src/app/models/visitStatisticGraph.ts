@@ -1,6 +1,6 @@
 export class VisitStatisticGraph {
     countedVisit: [{
-        countVisit: number
+        countVisits: number
         visitDate: Date;
     }];
 

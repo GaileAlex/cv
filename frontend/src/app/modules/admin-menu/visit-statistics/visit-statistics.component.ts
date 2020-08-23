@@ -60,7 +60,7 @@ export class VisitStatisticsComponent implements OnInit {
             console.log(data);
             data.countedVisit.forEach((c) => {
                 this.chartLabels.push(c.visitDate);
-                this.lineChartData.push(c.countVisit);
+                this.lineChartData.push(c.countVisits);
             });
         });
     }

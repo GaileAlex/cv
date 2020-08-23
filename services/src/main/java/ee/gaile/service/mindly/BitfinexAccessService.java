@@ -31,7 +31,7 @@ public class BitfinexAccessService {
     /**
      * @throws IOException getDataByUrl generate exception
      */
-    @Scheduled(fixedRate = 600000)
+    @Scheduled(fixedRate = 1800000)
     private void setPrice() throws IOException {
         currencyMap.put("Ethereum", getPrice("Ethereum"));
         currencyMap.put("Ripple", getPrice("Ripple"));
