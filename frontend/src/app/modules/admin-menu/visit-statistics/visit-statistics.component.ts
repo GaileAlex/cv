@@ -34,19 +34,25 @@ export class VisitStatisticsComponent implements OnInit {
         responsive: true,
         scales: {
             xAxes: [{
-                stacked: true,
                 type: 'time',
                 time: {
                     unit: 'day',
+                    tooltipFormat: 'DD.MM.YYYY',
                     displayFormats: {
-                        day: 'DD MM YYYY',
+                        day: 'DD.MM.YYYY',
                     },
+
                 },
+
             }], yAxes: [{
                 stacked: true,
                 ticks: {
                     beginAtZero: true,
-
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Visitors',
+                    fontColor: 'green'
                 },
             }]
         },
