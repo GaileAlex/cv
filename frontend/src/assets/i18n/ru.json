@@ -37,7 +37,7 @@
     "experience": {
       "experience": "Опыт",
       "job-1": " <h4>WISERCAT SOFTWARE OÜ</h4>\n<h4 class=\"subheading\">Junior Software Developer</h4>",
-      "job-1.description": "<br>- Разработка веб-приложения для сбора и анализа статистических данных.<br>- Решение текущих задач на backend и frontend с использованием следующих технологий - Java, Spring Boot, Spring Data, Spring Security, Hibernate, PostgreSQL, Liquibase, Docker, Maven, React, Angular.<br>- Приведение существующего кода в соответствие с изменяющимися пожеланиями клиента.<br>- SQL - запросы к базе данных postgresql.<br>- Unit - тестирование с использованием junit, mockito.",
+      "job-1.description": "<br>- Разработка веб-приложения для сбора и анализа статистических данных:<br>- Разработка нового функционала приложения <br> - Решение текущих задач на backend и frontend с использованием следующих технологий - Java, Spring Boot, Spring Data, Spring Security, Hibernate, PostgreSQL, Liquibase, Docker, Maven, React, Angular.<br>- Приведение существующего кода в соответствие с изменяющимися пожеланиями клиента.<br>- SQL - запросы к базе данных postgresql.<br>- Unit - тестирование с использованием junit, mockito.",
       "job-2": "<h4>ООО \"Импульс\" </h4>\n    <h4 class=\"subheading\">Заместитель директора</h4>",
       "job-2.description": "<br>\n Строительная компания<br><br>\n - Самостоятельно создал сайт компании.<br>\n - Наладил сеть и электронный документооборот.<br>\n - Увеличил выручку компании более чем в четыре раза.<br>\n - Наладил связи с поставщиками.<br>\n - Увеличил количество постоянных клиентов.<br><br>",
       "job-3": "<h4>ЗАО \"ПСК \"Русь\" </h4>\n <h4 class=\"subheading\">Генеральный директор</h4>",
