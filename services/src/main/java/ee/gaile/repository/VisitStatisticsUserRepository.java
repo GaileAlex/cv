@@ -11,12 +11,12 @@ import java.util.List;
 public interface VisitStatisticsUserRepository extends JpaRepository<VisitStatisticsUser, Long> {
 
     @Query(value = "with data as ( " +
-            "    select id, visit_statistics_id as count_visit, date_trunc('day', visit_date) as visit_date " +
+            "    select 1 as row, id, visit_statistics_id, date_trunc('day', visit_date) as visit_date " +
             "    from visit_statistic_user " +
             ") " +
             "select  row_number() OVER () AS id, " +
             "    visit_date, " +
-            "    sum(count_visit) as count_visits " +
+            "    sum(row) as count_visits " +
             "from data " +
             "group by visit_date " +
             "order by visit_date ",
