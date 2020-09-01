@@ -58,7 +58,7 @@ import { CommonModule } from '@angular/common';
 import { BlogListComponent } from './modules/blog/blog-list/blog-list.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/visit-statistics.component';
-import { ChartsModule } from "ng2-charts";
+import { ChartsModule } from 'ng2-charts';
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);

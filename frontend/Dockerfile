@@ -1,5 +1,5 @@
 ### STAGE 1: Build ###
-FROM node:latest AS build
+FROM node:12.18.3 AS build
 ENV TZ=Europe/Tallinn
 WORKDIR /usr/src/app
 COPY package*.json ./
