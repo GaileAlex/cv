@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +30,7 @@ public class StatisticsService {
                 visitStatisticsRepository.findByUserIP(request.getHeader("userIP"));
 
         if (visitStatistics.isPresent()) {
-            visitStatistics.get().setLastVisit(LocalDate.now());
+            visitStatistics.get().setLastVisit(new Date());
             visitStatistics.get().setTotalVisits(visitStatistics.get().getTotalVisits() + 1);
             if (visitStatistics.get().getUsername() == null || visitStatistics.get().getUsername().equals("undefined")
                     && request.getHeader("user") != null) {
@@ -40,7 +39,7 @@ public class StatisticsService {
         } else {
             VisitStatistics visitStatistic = VisitStatistics.builder()
                     .username(request.getHeader("user"))
-                    .lastVisit(LocalDate.now())
+                    .lastVisit(new Date())
                     .firstVisit(new Date())
                     .totalVisits(1L)
                     .userIP(request.getHeader("userIP"))
