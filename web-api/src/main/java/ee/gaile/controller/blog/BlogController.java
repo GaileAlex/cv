@@ -1,7 +1,7 @@
 package ee.gaile.controller.blog;
 
-import ee.gaile.entity.blog.BlogWrapper;
-import ee.gaile.entity.blog.CommentWrapper;
+import ee.gaile.dto.blog.BlogWrapper;
+import ee.gaile.dto.blog.CommentWrapper;
 import ee.gaile.service.blog.BlogService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

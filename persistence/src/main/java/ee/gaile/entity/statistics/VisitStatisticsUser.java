@@ -20,7 +20,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VisitStatisticsUser {
-
     @Id
     @Column(name = "id")
     @JsonIgnore

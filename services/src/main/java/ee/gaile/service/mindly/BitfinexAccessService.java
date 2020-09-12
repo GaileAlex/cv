@@ -1,8 +1,14 @@
 package ee.gaile.service.mindly;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import ee.gaile.entity.mindly.CryptocurrencyValues;
+import ee.gaile.enums.BitfinexCryptocurrencyEnum;
+import ee.gaile.enums.Currency;
+import ee.gaile.repository.mindly.BitfinexCryptocurrencyRepository;
+import ee.gaile.repository.mindly.CryptocurrencyValueRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -16,7 +22,8 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * receiving and parsing requests with Bitfinex
@@ -25,54 +32,63 @@ import java.util.HashMap;
 @EnableScheduling
 public class BitfinexAccessService {
     private static final Logger CURRENCY_LOG = LoggerFactory.getLogger("currency-log");
+    private static final Logger ERROR_LOG = LoggerFactory.getLogger("error-log");
 
-    private final HashMap<String, BigDecimal> currencyMap = new HashMap<>();
+    private static final int LAST_PRICE = 7;
+    private static final String BITFINEX_URL = "https://api-pub.bitfinex.com/v2/tickers?symbols=%s";
+    private static final String CURRENCY_URL = "https://api.exchangeratesapi.io/latest?symbols=";
 
-    /**
-     * @throws IOException getDataByUrl generate exception
-     */
-    @Scheduled(fixedRate = 1800000)
-    private void setPrice() throws IOException {
-        currencyMap.put("Ethereum", getPrice("Ethereum"));
-        currencyMap.put("Ripple", getPrice("Ripple"));
-        currencyMap.put("Bitcoin", getPrice("Bitcoin"));
-        CURRENCY_LOG.info("The current Ethereum rate is {} €", currencyMap.get("Ethereum"));
-        CURRENCY_LOG.info("The current Ripple rate is {} €", currencyMap.get("Ripple"));
-        CURRENCY_LOG.info("The current Bitcoin rate is {} €", currencyMap.get("Bitcoin"));
+    private final CryptocurrencyValueRepository cryptocurrencyValueRepository;
+    private final BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository;
+
+    public BitfinexAccessService(CryptocurrencyValueRepository cryptocurrencyValueRepository,
+                                 BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository) {
+        this.cryptocurrencyValueRepository = cryptocurrencyValueRepository;
+        this.bitfinexCryptocurrencyRepository = bitfinexCryptocurrencyRepository;
     }
 
-    private BigDecimal getPrice(String currency) throws IOException {
-        BigDecimal bitfinexRate;
+    @Scheduled(fixedDelay = Long.MAX_VALUE)
+    public void firstStartSyncService()  {
+        setCryptocurrency();
+    }
 
-        switch (currency) {
-            case ("Ethereum"):
-                currency = "ETHEUR";
-                break;
-            case ("Ripple"):
-                currency = "XRPUSD";
-                break;
-            default:
-                currency = "BTCEUR";
-                break;
-        }
-        String urlBitfinex = "https://api.bitfinex.com/v1/book/" + currency;
+    @Scheduled(cron = "${bitfinex.access.scheduled}")
+    private void setCryptocurrency()  {
+        Map<String, String> map = BitfinexCryptocurrencyEnum.getCurrencyName();
 
-        try {
-            bitfinexRate = new BigDecimal(getDataByUrl(urlBitfinex)
-                    .replaceAll(".*?([\\d.]+).*", "$1"));
-        } catch (IOException e) {
-            bitfinexRate = new BigDecimal(0);
-            e.printStackTrace();
-        }
+        map.forEach((k, v) -> {
+            String urlBitfinex = BITFINEX_URL.replace("%s", v);
+            try {
+                BigDecimal price;
 
-        //Ripple not sold for euros, but it is not accurate. We receive in dollars and we translate in euro at the rate.
-        if (currency.equals("XRPUSD")) {
-            BigDecimal usdEur = new BigDecimal(getDataByUrl("https://api.exchangeratesapi.io/latest?symbols=USD")
-                    .replaceAll(".*?([\\d.]+).*", "$1"));
+                String dataFromUrl = getDataByUrl(urlBitfinex).split(",")[LAST_PRICE];
 
-            bitfinexRate = bitfinexRate.divide(usdEur, 2, BigDecimal.ROUND_HALF_UP);
-        }
-        return bitfinexRate;
+                //Ripple not sold for euros, but it is not accurate. We receive in dollars and we translate in euro at the rate.
+                if (k.equals("XRPUSD")) {
+                    BigDecimal usdEur = new BigDecimal(getDataByUrl(CURRENCY_URL + Currency.getCurrency("USD"))
+                            .replaceAll(".*?([\\d.]+).*", "$1"));
+
+                    price = new BigDecimal(dataFromUrl)
+                            .divide(usdEur, 2, BigDecimal.ROUND_HALF_UP);
+                } else {
+                    price = new BigDecimal(dataFromUrl);
+                }
+
+                CryptocurrencyValues cryptocurrencyValues = new CryptocurrencyValues();
+                cryptocurrencyValues.setDateCryptocurrency(new Date());
+                cryptocurrencyValues.setValueCurrency(price);
+
+                cryptocurrencyValues.setBitfinexCryptocurrency(bitfinexCryptocurrencyRepository
+                        .findByCryptocurrencyName(k).get());
+
+                cryptocurrencyValueRepository.save(cryptocurrencyValues);
+
+                CURRENCY_LOG.info("The current {} rate is {} €", k, price);
+            } catch (IOException e) {
+                ERROR_LOG.error("Error getting currency data {} - {}", k, e.getMessage());
+            }
+        });
+
     }
 
     /**
@@ -87,13 +103,16 @@ public class BitfinexAccessService {
 
         JsonParser jp = new JsonParser();
         JsonElement element = jp.parse(new InputStreamReader((InputStream) request.getContent(), StandardCharsets.UTF_8));
-        JsonObject obj = element.getAsJsonObject();
+
+        if (url.contains("exchangeratesapi")) {
+            JsonObject obj = element.getAsJsonObject();
+            return obj.toString();
+        }
+
+        JsonArray obj = element.getAsJsonArray();
 
         return obj.toString();
     }
 
-    public BigDecimal getCurrency(String currency) {
-        return currencyMap.get(currency);
-    }
 }
 

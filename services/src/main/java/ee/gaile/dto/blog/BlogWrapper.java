@@ -1,5 +1,6 @@
-package ee.gaile.entity.blog;
+package ee.gaile.dto.blog;
 
+import ee.gaile.entity.blog.Comments;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

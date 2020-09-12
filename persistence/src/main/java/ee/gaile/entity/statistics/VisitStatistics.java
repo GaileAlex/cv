@@ -43,6 +43,7 @@ public class VisitStatistics {
     @Column(name = "user_name")
     private String username;
 
-    @OneToMany(mappedBy = "visitStatistics")
+    @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<VisitStatisticUser> visitStatisticUsers;
+
 }

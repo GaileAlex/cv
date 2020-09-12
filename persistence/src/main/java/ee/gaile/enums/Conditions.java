@@ -17,11 +17,11 @@ public enum Conditions {
     private final String query;
     private final String name;
 
-    private static final Map<String, String> conditionTypeMap = new HashMap<>();
+    private static final Map<String, String> CONDITION_TYPE_MAP = new HashMap<>();
 
     static {
         for (Conditions c : values()) {
-            conditionTypeMap.put(c.name, c.query);
+            CONDITION_TYPE_MAP.put(c.name, c.query);
         }
     }
 
@@ -31,6 +31,6 @@ public enum Conditions {
     }
 
     public static String getQuery(String name) {
-        return conditionTypeMap.get(name);
+        return CONDITION_TYPE_MAP.get(name);
     }
 }
