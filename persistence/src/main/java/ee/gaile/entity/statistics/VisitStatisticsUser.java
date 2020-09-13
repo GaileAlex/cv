@@ -8,6 +8,6 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table
-public class VisitStatisticsUser  extends CommonVisitStatistics {
+public class VisitStatisticsUser extends CommonVisitStatistics {
 
 }
