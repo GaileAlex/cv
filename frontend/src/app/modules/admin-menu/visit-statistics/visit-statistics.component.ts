@@ -18,7 +18,6 @@ export class VisitStatisticsComponent implements OnInit {
         }
     ];
 
-    // array colori grafico
     public lineChartColors: Array<any> = [
         {
             backgroundColor: 'rgb(175,203,199)',
@@ -63,7 +62,6 @@ export class VisitStatisticsComponent implements OnInit {
 
     ngOnInit() {
         this.statisticsService.findAll().subscribe(data => {
-            console.log(data);
             data.countedVisit.forEach((c) => {
                 this.chartLabels.push(c.visitDate);
                 this.lineChartData.push(c.countVisits);
