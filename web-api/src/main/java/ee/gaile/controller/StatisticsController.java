@@ -3,6 +3,7 @@ package ee.gaile.controller;
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.service.statistics.StatisticsService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
+@Slf4j
 @RestController
 @RequestMapping(path = API_V1_PREFIX + "/statistic")
 @AllArgsConstructor

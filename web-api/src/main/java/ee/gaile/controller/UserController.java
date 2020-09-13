@@ -5,6 +5,7 @@ import ee.gaile.service.security.request.SignupRequest;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
 import ee.gaile.service.user.UserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
