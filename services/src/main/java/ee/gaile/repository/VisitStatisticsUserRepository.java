@@ -13,7 +13,7 @@ public interface VisitStatisticsUserRepository extends JpaRepository<VisitStatis
     @Query(value = "with data as ( " +
             "    select 1 as row, id, visit_statistics_id, date_trunc('day', visit_date) as visit_date " +
             "    from visit_statistic_user " +
-            ") " +
+            "WHERE visit_date >= date_trunc('month', current_date - interval '1' month)) " +
             "select  row_number() OVER () AS id, " +
             "    visit_date, " +
             "    sum(row) as count_visits " +
@@ -22,4 +22,5 @@ public interface VisitStatisticsUserRepository extends JpaRepository<VisitStatis
             "order by visit_date ",
             nativeQuery = true)
     List<VisitStatisticsUser> selectVisitStatistic();
+
 }

@@ -1,9 +1,11 @@
 package ee.gaile.service.statistics;
 
 import ee.gaile.entity.statistics.VisitStatistics;
+import ee.gaile.entity.statistics.VisitStatisticsNewUser;
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.models.statistics.VisitStatisticsDTO;
 import ee.gaile.entity.statistics.VisitStatisticsUser;
+import ee.gaile.repository.VisitStatisticsNewUserRepository;
 import ee.gaile.repository.VisitStatisticsRepository;
 import ee.gaile.repository.VisitStatisticsUserRepository;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,7 @@ import java.util.Optional;
 public class StatisticsService {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticsUserRepository visitStatisticsUserRepository;
+    private final VisitStatisticsNewUserRepository visitStatisticsNewUserRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
     public void setUserStatistics(HttpServletRequest request) {
@@ -53,11 +56,12 @@ public class StatisticsService {
     public VisitStatisticGraph getStatisticsGraph() {
         List<VisitStatistics> visitStatisticsList = visitStatisticsRepository.findAll();
         List<VisitStatisticsUser> countedVisitDTOList = visitStatisticsUserRepository.selectVisitStatistic();
+        List<VisitStatisticsNewUser> visitStatisticsNewUsers = visitStatisticsNewUserRepository.selectNewVisitors();
 
         List<VisitStatisticsDTO> visitStatisticsDTOList = new ArrayList<>();
         visitStatisticsList.forEach((c) -> visitStatisticsDTOList.add(toDto(c)));
 
-        return new VisitStatisticGraph(visitStatisticsDTOList, countedVisitDTOList);
+        return new VisitStatisticGraph(visitStatisticsDTOList, countedVisitDTOList, visitStatisticsNewUsers);
     }
 
     private VisitStatisticsDTO toDto(VisitStatistics visitStatistics) {

@@ -3,8 +3,8 @@
     <div class="container">
         <div>
             <canvas baseChart
-                    [datasets]="labelMFL"
-                    [labels]="chartLabels"
+                    [datasets]="graphData"
+                    [labels]="countedVisitDates"
                     [options]="chartOptions"
                     [colors]="lineChartColors"
                     [chartType]="'line'"></canvas>

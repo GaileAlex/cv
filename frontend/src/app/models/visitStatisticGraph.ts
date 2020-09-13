@@ -4,6 +4,11 @@ export class VisitStatisticGraph {
         visitDate: Date;
     }];
 
+    visitStatisticsNewUsers: [{
+        countVisits: number
+        firstVisit: Date;
+    }];
+
     statistic: [{
         id: string;
         userIP: string;

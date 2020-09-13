@@ -7,14 +7,20 @@ import { StatisticsService } from '../../../service/statistics.service';
     styleUrls: ['./visit-statistics.component.css']
 })
 export class VisitStatisticsComponent implements OnInit {
-    lineChartData: number[] = [];
-    chartLabels: Date[] = [];
-    public graphName = 'Visitors';
+    countedVisitData: number[] = [];
+    countedNewVisitData: number[] = [];
+    countedVisitDates: Date[] = [];
+    public visitGraphName = 'Visitors';
+    public newVisitGraphName = 'New Visitors';
 
-    public labelMFL: Array<any> = [
+    public graphData: Array<any> = [
         {
-            data: this.lineChartData,
-            label: this.graphName
+            data: this.countedVisitData,
+            label: this.visitGraphName
+        },
+        {
+            data: this.countedNewVisitData,
+            label: this.newVisitGraphName
         }
     ];
 
@@ -63,9 +69,14 @@ export class VisitStatisticsComponent implements OnInit {
     ngOnInit() {
         this.statisticsService.findAll().subscribe(data => {
             data.countedVisit.forEach((c) => {
-                this.chartLabels.push(c.visitDate);
-                this.lineChartData.push(c.countVisits);
+                this.countedVisitData.push(c.countVisits);
+                this.countedVisitDates.push(c.visitDate);
             });
+            data.visitStatisticsNewUsers.forEach((c) => {
+                this.countedNewVisitData.push(c.countVisits);
+            });
+            console.log(data.visitStatisticsNewUsers)
+            console.log(data.countedVisit)
         });
     }
 }

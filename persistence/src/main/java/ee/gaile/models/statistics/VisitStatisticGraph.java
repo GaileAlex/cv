@@ -1,5 +1,6 @@
 package ee.gaile.models.statistics;
 
+import ee.gaile.entity.statistics.VisitStatisticsNewUser;
 import ee.gaile.entity.statistics.VisitStatisticsUser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class VisitStatisticGraph {
-    private List<VisitStatisticsDTO> visitStatisticsDTOList;
+
+    private List<VisitStatisticsDTO> visitStatisticsDTOS;
 
     private List<VisitStatisticsUser> countedVisit;
+
+    private List<VisitStatisticsNewUser> visitStatisticsNewUsers;
 }
