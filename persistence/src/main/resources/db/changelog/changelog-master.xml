@@ -16,4 +16,5 @@
     <include file="v0012_create_table_visit_statistic_user.sql" relativeToChangelogFile="true"/>
     <include file="v0013_create_trigger_visit_statistics.sql" relativeToChangelogFile="true"/>
     <include file="v0014_create_tables_bitfinex_cryptocurrency_cryptocurrency_values.sql" relativeToChangelogFile="true"/>
+    <include file="v0015_add_column_city_to_table_visit_statistics.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

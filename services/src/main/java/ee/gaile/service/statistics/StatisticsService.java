@@ -47,6 +47,7 @@ public class StatisticsService {
                     .totalVisits(1L)
                     .userIP(request.getHeader("userIP"))
                     .userLocation(request.getHeader("userCountry"))
+                    .userCity(request.getHeader("userCity"))
                     .build();
 
             visitStatisticsRepository.save(visitStatistic);

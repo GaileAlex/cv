@@ -29,6 +29,9 @@ public class VisitStatistics {
     @Column(name = "user_location")
     private String userLocation;
 
+    @Column(name = "user_city")
+    private String userCity;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "first_visit")
     private Date firstVisit;
