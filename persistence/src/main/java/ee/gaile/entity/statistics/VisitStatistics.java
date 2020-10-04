@@ -23,8 +23,8 @@ public class VisitStatistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_ip")
-    private String userIP;
+    @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    private List<VisitStatisticUserIp> visitStatisticUserIps;
 
     @Column(name = "user_location")
     private String userLocation;
