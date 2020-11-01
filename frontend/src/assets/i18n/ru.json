@@ -17,7 +17,7 @@
     "button.more": "Узнать больше",
     "about": {
       "me": "Обо мне",
-      "description": "- Для создания этого сайта были использованы следующие технологии: Spring boot, Spring Security, Hibernate/JPA, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. Сайт расположен на собственном хостинге. Код можно посмотреть тут - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n target=\"blank\">https://github.com/GaileAlex/cv.</a><br><br>- За время работы участвовал в трех проектах, где использовал следующие технологии - Java, Spring Boot, Spring Data, Spring Security, Hibernate/JPA, PostgreSQL, Liquibase, Docker, Maven, React, Angular.<br> Java forever!"
+      "description": "Я разработчик Full Stack, стремящийся создавать качественные продукты и постоянно развиваться.<br>Имею опыт разработки сложных веб-приложений, оптимизации существующих программных решений.<br>За время работы участвовал в трех проектах, где решал различные задачи на front-end и back-end, а также помогал другим разработчикам.<br>Предпочитаю работать с back-end. Java forever!<br><br>- Для создания этого сайта были использованы следующие технологии: Spring boot, Spring Security, Hibernate/JPA, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. Сайт расположен на собственном хостинге. Код можно посмотреть тут - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n target=\"blank\">https://github.com/GaileAlex/cv.</a>"
     },
     "portfolio": {
       "portfolio": "Портфолио",
