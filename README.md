@@ -14,9 +14,11 @@ The following technologies required:
 
 Follow the steps below:
 1. install docker
-2. cd cv
-3. docker-compose up --build
-4. use port 4488 for HTTP
-5. use port 4489 for HTTPS
+2. cd etc/cv_dev
+3. docker-compose up
+4. cd frontend
+5. npm install
+6. npm start
+
 
 
