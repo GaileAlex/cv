@@ -1,10 +1,10 @@
 /cv.iml
 /web-api/web-api.iml
 /frontend/cv-frontend.iml
-/services/services.iml
-/persistence/persistence.iml
 /frontend/cert.pem
 /frontend/key.pem
+/services/services.iml
+/persistence/persistence.iml
 /cv-data/
 /etc/docker/cv_postgres/data/
 /etc/docker/cv_dev/data/

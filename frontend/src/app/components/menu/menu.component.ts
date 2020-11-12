@@ -4,7 +4,7 @@ import { LanguageService } from '../../service/language.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth/auth.service';
 import { UserDataService } from '../../service/user-data.service';
-import { StatisticsService } from "../../service/statistics.service";
+import { StatisticsService } from '../../service/statistics.service';
 
 @Component({
     selector: 'app-menu',
@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit {
         if ('false' === localStorage.getItem('isSameSession')) {
             setTimeout(() => {
                 this.statisticsService.userSpy().subscribe();
-            }, 2000);
+            }, 1000);
             localStorage.setItem('isSameSession', 'true');
         }
     }
