@@ -13,3 +13,4 @@
 /etc/docker/cv_dev/db.sql
 /.access-logs/
 /.currency-logs/
+/web-api/src/main/resources/application.properties

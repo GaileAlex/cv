@@ -17,7 +17,7 @@
     "button.more": "Learn More",
     "about": {
       "me": "About Me",
-      "description": "I am a Full Stack developer aiming to create quality products and constantly evolving.<br>I have experience in developing complex web applications, optimizing existing software solutions.<br>During work participated in three projects, where solved various tasks on the front-end and back-end, and also helped other developers.<br>I prefer to work with the back-end. Java forever!<br><br>- The following technologies have been used to create this site: Spring boot, Spring Security, Hibernate/JPA, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. Site is hosted on its own hosting. You can see the code here - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n target=\"blank\">https://github.com/GaileAlex/cv.</a>"
+      "description": "I am a Java Developer aiming to create quality products and constantly evolving.<br>I have experience in developing complex web applications, optimizing existing software solutions.<br>During work participated in three projects, where solved various tasks on the front-end and back-end, and also helped other developers.<br>I prefer to work with the back-end. Java forever!<br><br>- The following technologies have been used to create this site: Spring boot, Spring Security, Hibernate/JPA, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. Site is hosted on its own hosting. You can see the code here - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n target=\"blank\">https://github.com/GaileAlex/cv.</a>"
     },
     "portfolio": {
       "portfolio": "Portfolio",
