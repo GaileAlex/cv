@@ -14,3 +14,9 @@
 /.access-logs/
 /.currency-logs/
 /web-api/src/main/resources/application.properties
+/.error/
+/.idea/
+/persistence/target/
+/security/target/
+/services/target/
+/web-api/target/
