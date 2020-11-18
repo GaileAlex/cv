@@ -2,7 +2,7 @@ version: '3.8'
 services:
 
   cv-postgres:
-    image: "postgres:13-alpine"
+    image: "postgres:12.3"
     container_name: cv-postgres
     volumes:
       - cv-data:/var/lib/postgresql/data
