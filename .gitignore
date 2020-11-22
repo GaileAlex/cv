@@ -11,12 +11,13 @@
 /security/security.iml
 /logs/
 /etc/docker/cv_dev/db.sql
-/.access-logs/
 /.currency-logs/
 /web-api/src/main/resources/application.properties
-/.error/
 /.idea/
 /persistence/target/
 /security/target/
 /services/target/
 /web-api/target/
+/.access-logs/
+/.error/
+/frontend/target/
