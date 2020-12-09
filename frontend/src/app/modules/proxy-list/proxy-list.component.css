@@ -1,0 +1,20 @@
+
+table {
+    width: 100%;
+}
+
+th.mat-header-cell {
+    padding: 16px 0;
+    text-align: center;
+    border: 1px solid #ffa600;
+}
+
+td.mat-cell {
+    padding: 16px 0;
+    text-align: center;
+    border: 1px solid #ffa600;
+}
+
+td.mat-cell:first-child {
+    border-left: 1px solid #ffa600;
+}
