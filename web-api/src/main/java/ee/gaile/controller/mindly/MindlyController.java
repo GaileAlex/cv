@@ -18,13 +18,13 @@ import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 public class MindlyController {
     private final MindlyService mindlyService;
 
-    @GetMapping(produces = "application/json")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Mindly> getPortfolio() {
         return mindlyService.getAllPortfolio();
     }
 
-    @PostMapping(consumes = "application/json")
+    @PostMapping
     public Mindly addPortfolioItem(@RequestBody Mindly portfolio) {
         return mindlyService.savePortfolio(portfolio);
     }

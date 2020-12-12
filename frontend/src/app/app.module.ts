@@ -58,7 +58,7 @@ import { CommonModule } from '@angular/common';
 import { BlogListComponent } from './modules/blog/blog-list/blog-list.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/visit-statistics.component';
-import { ChartsModule } from 'ng2-charts';
+import { ChartsModule, ThemeService } from 'ng2-charts';
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -140,9 +140,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         CommonModule,
         StickyNavModule,
         StickyNavModule,
-        ChartsModule
+        ChartsModule,
+
     ],
-    providers: [ConfirmationService, ValidationMsgService, NgbActiveModal, DialogService, MessageService,
+    providers: [ConfirmationService, ValidationMsgService, NgbActiveModal, DialogService, MessageService, ThemeService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
     bootstrap: [AppComponent],

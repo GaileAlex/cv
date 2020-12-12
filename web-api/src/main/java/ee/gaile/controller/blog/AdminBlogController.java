@@ -18,7 +18,6 @@ import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 @RestController
 @RequestMapping(API_V1_PREFIX + "/admin-blog")
 public class AdminBlogController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AdminBlogController.class);
     private final AdminBlogService adminBlogService;
 
     public AdminBlogController(AdminBlogService adminBlogService) {

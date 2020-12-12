@@ -24,14 +24,13 @@ public class StatisticsController {
 
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
 
-    @GetMapping(path = "/graph", produces = "application/json")
+    @GetMapping(path = "/graph")
     public VisitStatisticGraph getGraphData() {
         return statisticsService.getStatisticsGraph();
     }
 
-    @PostMapping(path = "/user", produces = "application/json")
+    @PostMapping(path = "/user")
     public void getUserSpy(HttpServletRequest request) {
-
         ACCESS_LOG.info("user name is {}, IP is {}, city is {}, country is {}",
                 request.getHeader("user"), request.getHeader("userIP"), request.getHeader("userCity"),
                 request.getHeader("userCountry"));

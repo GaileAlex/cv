@@ -2,14 +2,12 @@ package ee.gaile.service.statistics;
 
 import ee.gaile.entity.statistics.VisitStatisticUserIp;
 import ee.gaile.entity.statistics.VisitStatistics;
-import ee.gaile.entity.statistics.VisitStatisticsNewUser;
-import ee.gaile.entity.statistics.VisitStatisticsUser;
+import ee.gaile.entity.statistics.VisitStatisticsGraph;
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.models.statistics.VisitStatisticsDTO;
-import ee.gaile.repository.VisitStatisticIpRepository;
-import ee.gaile.repository.VisitStatisticsNewUserRepository;
-import ee.gaile.repository.VisitStatisticsRepository;
-import ee.gaile.repository.VisitStatisticsUserRepository;
+import ee.gaile.repository.statistic.VisitStatisticIpRepository;
+import ee.gaile.repository.statistic.VisitStatisticUserRepository;
+import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -27,8 +25,7 @@ import java.util.Optional;
 public class StatisticsService {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticIpRepository visitStatisticIpRepository;
-    private final VisitStatisticsUserRepository visitStatisticsUserRepository;
-    private final VisitStatisticsNewUserRepository visitStatisticsNewUserRepository;
+    private final VisitStatisticUserRepository visitStatisticUserRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
     public void setUserStatistics(HttpServletRequest request) {
@@ -73,8 +70,8 @@ public class StatisticsService {
 
     public VisitStatisticGraph getStatisticsGraph() {
         List<VisitStatistics> visitStatisticsList = visitStatisticsRepository.findAll();
-        List<VisitStatisticsUser> countedVisitDTOList = visitStatisticsUserRepository.selectVisitStatistic();
-        List<VisitStatisticsNewUser> visitStatisticsNewUsers = visitStatisticsNewUserRepository.selectNewVisitors();
+        List<VisitStatisticsGraph> countedVisitDTOList = visitStatisticUserRepository.selectVisitStatistic();
+        List<VisitStatisticsGraph> visitStatisticsNewUsers = visitStatisticUserRepository.selectNewVisitors();
 
         List<VisitStatisticsDTO> visitStatisticsDTOList = new ArrayList<>();
         visitStatisticsList.forEach((c) -> visitStatisticsDTOList.add(toDto(c)));

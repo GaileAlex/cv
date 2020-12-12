@@ -1,8 +1,8 @@
 package ee.gaile.service.blog;
 
-import ee.gaile.entity.blog.Blog;
 import ee.gaile.dto.blog.BlogWrapper;
 import ee.gaile.dto.blog.CommentWrapper;
+import ee.gaile.entity.blog.Blog;
 import ee.gaile.entity.blog.Comments;
 import ee.gaile.repository.blog.BlogRepository;
 import ee.gaile.repository.blog.CommentsRepository;
@@ -12,7 +12,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Comparator;
+import java.util.List;
 
 @Service
 @Transactional
@@ -52,10 +55,8 @@ public class BlogService {
 
     private BlogWrapper toDto(Blog blog) {
         BlogWrapper blogWrapper = modelMapper.map(blog, BlogWrapper.class);
+        blogWrapper.setImage("data:image/png;base64," + Base64.getEncoder().encodeToString(blog.getImage()));
 
-        StringBuilder base64 = new StringBuilder("data:image/png;base64,");
-        base64.append(Base64.getEncoder().encodeToString(blog.getImage()));
-        blogWrapper.setImage(base64.toString());
         return blogWrapper;
     }
 

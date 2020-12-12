@@ -29,10 +29,11 @@ public class LibrarianController {
         return searchService.getAllBooks();
     }
 
-    @PostMapping(path = "/{condition}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/{condition}")
     public List<Books> getBooksByFilter(@PathVariable(value = "condition") String condition,
                                         @RequestBody FilterWrapper selectedFilters) {
         LOGGER.info("Getting list of the books");
+
         return searchService.filterOut(selectedFilters, condition);
     }
 }

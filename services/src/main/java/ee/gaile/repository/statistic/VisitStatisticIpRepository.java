@@ -1,4 +1,4 @@
-package ee.gaile.repository;
+package ee.gaile.repository.statistic;
 
 import ee.gaile.entity.statistics.VisitStatisticUserIp;
 import org.springframework.data.jpa.repository.JpaRepository;
