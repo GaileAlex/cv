@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigInteger;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class VisitStatisticsGraph {
-    private Date visitDate;
+    private LocalDateTime visitDate;
     private BigInteger countVisits;
 }

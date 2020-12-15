@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.math.BigInteger;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @Component
@@ -16,25 +15,25 @@ public class BooksToRepoConfig {
     private final LibrarianService librarianService;
 
     @PostConstruct
-    public void demoData() throws ParseException {
+    public void demoData() {
         if (librarianService.getCountRow().equals(BigInteger.ZERO)) {
             for (int i = 0; i < 20; i++) {
                 int year = (int) (Math.random() * 40 + 1981);
                 librarianService.save(new Books("Spring MVC Cookbook", "Alex Bretet",
-                        new SimpleDateFormat("yyyy").parse(String.valueOf(year)), "Welcome to the singular" +
+                        LocalDate.ofYearDay(year, 1), "Welcome to the singular" +
                         " universe of Spring MVC Cookbook. We hope you are ready for this\n" +
                         "journey that will take you through modern Spring web development practices. We have been\n" +
                         "building the cloudstreetmarket.com , a stock exchange platform with social capabilities.\n" +
                         "We are about to take you through each step of its development process."));
                 librarianService.save(new Books("Apache Maven 3 Cookbook", "Srirangan",
-                        new SimpleDateFormat("yyyy").parse(String.valueOf(year)), "Apache Maven is more" +
+                        LocalDate.ofYearDay(year, 1), "Apache Maven is more" +
                         " than just build automation. When positioned at the very heart of your development" +
                         " strategy, Apache Maven can become a force multiplier not just for individual developers" +
                         " but for Agile teams and managers. This book covers implementation of Apache Maven with" +
                         " popular enterprise technologies/frameworks and introduces Agile collaboration techniques" +
                         " and software engineering best practices integrated with Apache Maven."));
                 librarianService.save(new Books("Spring in Action", "Walls C.",
-                        new SimpleDateFormat("yyyy").parse(String.valueOf(year)), "Spring in Action, Fifth" +
+                        LocalDate.ofYearDay(year, 1), "Spring in Action, Fifth" +
                         " Edition was written to equip you to build amazing applications\n" +
                         "using the Spring Framework, Spring Boot, and a variety of ancillary members of the\n" +
                         "Spring ecosystem. It begins by showing you how to develop web-based, databasebacked\n" +
@@ -44,7 +43,7 @@ public class BooksToRepoConfig {
                         "how to ready an application for deployment."));
                 librarianService.save(new Books("Spring Data", "Pollack M., Gierke O., Risberg T.," +
                         " Brisbin J., Hunger M.",
-                        new SimpleDateFormat("yyyy").parse(String.valueOf(year)), "The Spring Data project" +
+                        LocalDate.ofYearDay(year, 1), "The Spring Data project" +
                         " was coined at Spring One 2010 and originated from a hacking\n" +
                         "session of Rod Johnson (SpringSource) and Emil Eifrem (Neo Technologies) early that\n" +
                         "year. They were trying to integrate the Neo4j graph database with the Spring Framework\n" +
@@ -53,7 +52,7 @@ public class BooksToRepoConfig {
                         "new SpringSource project aimed at supporting the growing interest in NoSQL data\n" +
                         "stores, a trend that continues to this day."));
                 librarianService.save(new Books("Pro Spring Boot", "Felipe Gutierrez.",
-                        new SimpleDateFormat("yyyy").parse(String.valueOf(year)), "The Spring Framework was" +
+                        LocalDate.ofYearDay(year, 1), "The Spring Framework was" +
                         " released as an open source project and was accepted well. It became the best open source" +
                         " framework for creating enterprise applications in a fast, reliable, and elegant way by\n" +
                         "promoting the use of design patterns and becoming one of the first frameworks to use the" +

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -26,7 +26,7 @@ public class Comments {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
-    private Date date;
+    private LocalDateTime date;
 
     @Column(name = "user_name")
     private String userName;
@@ -44,6 +44,6 @@ public class Comments {
 
     @PrePersist
     void createdAt() {
-        this.date = new Date();
+        this.date = LocalDateTime.now();
     }
 }

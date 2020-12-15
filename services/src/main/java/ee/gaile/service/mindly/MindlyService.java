@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class MindlyService {
 
     public Mindly savePortfolio(Mindly portfolio) {
         if (portfolio.getDateOfPurchase() == null) {
-            portfolio.setDateOfPurchase(new Date());
+            portfolio.setDateOfPurchase(LocalDate.now());
         }
         return mindlyRepository.save(portfolio);
     }

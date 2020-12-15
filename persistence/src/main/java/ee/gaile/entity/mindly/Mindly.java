@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -29,7 +29,7 @@ public class Mindly {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "mindly_date_of_purchase")
-    private Date dateOfPurchase;
+    private LocalDate dateOfPurchase;
 
     @Column(name = "mindly_wallet_location")
     private String walletLocation;

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -34,11 +34,11 @@ public class VisitStatistics {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "first_visit")
-    private Date firstVisit;
+    private LocalDateTime firstVisit;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "last_visit")
-    private Date lastVisit;
+    private LocalDateTime lastVisit;
 
     @Column(name = "total_visits")
     private Long totalVisits;

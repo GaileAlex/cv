@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -24,7 +24,7 @@ public class VisitStatisticUser {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "visit_date")
-    private Date visitDate;
+    private LocalDateTime visitDate;
 
     @ManyToOne
     @JoinColumn(name = "visit_statistics_id", nullable = false)

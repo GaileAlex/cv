@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -25,7 +25,7 @@ public class CryptocurrencyValues {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_cryptocurrency")
-    private Date dateCryptocurrency;
+    private LocalDateTime dateCryptocurrency;
 
     @Column(name = "value_cryptocurrency")
     private BigDecimal valueCurrency;
