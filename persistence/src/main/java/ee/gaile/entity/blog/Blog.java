@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -34,7 +35,7 @@ public class Blog {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "blog_date")
-    private LocalDate date;
+    private LocalDateTime date;
 
     @OneToMany(mappedBy = "blog")
     private List<Comments> comments;
@@ -47,6 +48,6 @@ public class Blog {
 
     @PrePersist
     void createdAt() {
-        this.date = LocalDate.now();
+        this.date = LocalDateTime.now();
     }
 }
