@@ -42,15 +42,8 @@ export class DialogBoxComponent implements OnInit {
     }
 
     findAll() {
-        this.bookService.findAll().subscribe(
-            () => {
-                this.router.navigate(['books', 'all']);
-                this.closeClick();
-            },
-            () => {
-                this.router.navigate(['books', 'all']);
-                this.closeClick();
-            });
+        this.router.navigate(['books', 'all']);
+        this.closeClick();
     }
 
     closeClick(): void {
