@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class VisitStatisticsDTO {
+
     private Long id;
     private String userIP;
     private String userLocation;

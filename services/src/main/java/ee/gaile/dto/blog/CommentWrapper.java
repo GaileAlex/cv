@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class CommentWrapper {
 
     private String comment;
-
     private Long blogId;
 
 }

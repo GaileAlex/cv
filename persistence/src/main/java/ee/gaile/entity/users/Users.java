@@ -9,10 +9,9 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity(name = "Users")
-@Table(name = "users",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name", "email"})}
-)
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name", "email"})})
 public class Users {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

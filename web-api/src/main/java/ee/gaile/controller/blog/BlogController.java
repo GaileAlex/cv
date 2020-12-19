@@ -5,6 +5,8 @@ import ee.gaile.dto.blog.CommentWrapper;
 import ee.gaile.service.blog.BlogService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,16 +21,17 @@ public class BlogController {
     BlogService blogService;
 
     @GetMapping
-    public List<BlogWrapper> findAll() {
-        return blogService.findAllBlogs();
+    public ResponseEntity<List<BlogWrapper>> findAll() {
+        return new ResponseEntity<>(blogService.findAllBlogs(), HttpStatus.OK);
     }
 
     @GetMapping("/find-blog/{blogId}")
-    public BlogWrapper findBlogById(@PathVariable("blogId") Long blogId) {
-        return blogService.findBlogById(blogId);
+    public ResponseEntity<BlogWrapper> findBlogById(@PathVariable("blogId") Long blogId) {
+        return new ResponseEntity<>(blogService.findBlogById(blogId), HttpStatus.OK);
     }
 
     @PostMapping("/comments")
+    @ResponseStatus(HttpStatus.OK)
     public void saveComment(@RequestBody CommentWrapper comment) {
         blogService.saveComment(comment);
     }

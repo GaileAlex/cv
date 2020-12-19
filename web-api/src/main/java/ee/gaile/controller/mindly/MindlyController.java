@@ -5,6 +5,7 @@ import ee.gaile.service.mindly.MindlyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,13 +21,13 @@ public class MindlyController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Mindly> getPortfolio() {
-        return mindlyService.getAllPortfolio();
+    public ResponseEntity<List<Mindly>> getPortfolio() {
+        return new ResponseEntity<>(mindlyService.getAllPortfolio(), HttpStatus.OK);
     }
 
     @PostMapping
-    public Mindly addPortfolioItem(@RequestBody Mindly portfolio) {
-        return mindlyService.savePortfolio(portfolio);
+    public ResponseEntity<Mindly> addPortfolioItem(@RequestBody Mindly portfolio) {
+        return new ResponseEntity<>(mindlyService.savePortfolio(portfolio), HttpStatus.OK);
     }
 
     @DeleteMapping("/{portfolioId}")

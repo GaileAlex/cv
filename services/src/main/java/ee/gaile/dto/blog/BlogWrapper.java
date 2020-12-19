@@ -13,15 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BlogWrapper {
+
     private Long id;
-
     private String headline;
-
     private String article;
-
     private String image;
-
     private LocalDateTime date;
-
     private List<Comments> comments;
 }

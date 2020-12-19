@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class VisitStatisticsGraph {
+
     private LocalDateTime visitDate;
     private BigInteger countVisits;
 }

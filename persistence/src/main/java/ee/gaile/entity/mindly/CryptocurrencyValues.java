@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 @Entity(name = "CryptocurrencyValues")
 @Table(name = "cryptocurrency_values")
 public class CryptocurrencyValues {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

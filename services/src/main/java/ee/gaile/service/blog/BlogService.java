@@ -11,14 +11,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
-@Transactional
 public class BlogService {
     private final BlogRepository blogRepository;
     private final CommentsRepository commentsRepository;
@@ -49,7 +44,8 @@ public class BlogService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         Comments newComment = new Comments(comment.getComment(), currentUserName,
-                blogRepository.findById(comment.getBlogId()).get());
+                blogRepository.findById(comment.getBlogId()).orElseThrow(NoSuchElementException::new));
+
         commentsRepository.save(newComment);
     }
 

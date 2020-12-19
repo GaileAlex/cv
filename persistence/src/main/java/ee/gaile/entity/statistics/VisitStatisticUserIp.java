@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Entity(name = "VisitStatisticUserIP")
 @Table(name = "visit_statistics_user_ip")
 public class VisitStatisticUserIp {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

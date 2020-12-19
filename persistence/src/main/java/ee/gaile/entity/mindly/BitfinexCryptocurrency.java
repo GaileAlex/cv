@@ -15,6 +15,7 @@ import java.util.List;
 @Entity(name = "BitfinexCryptocurrency")
 @Table(name = "bitfinex_cryptocurrency")
 public class BitfinexCryptocurrency {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

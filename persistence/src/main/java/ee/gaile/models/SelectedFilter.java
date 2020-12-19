@@ -10,16 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class SelectedFilter {
+
     String conditionOption;
-
     String day;
-
     String month;
-
     String searchArea;
-
     String textRequest;
-
     String year;
 
 }

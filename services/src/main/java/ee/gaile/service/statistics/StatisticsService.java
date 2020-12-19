@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,14 +49,13 @@ public class StatisticsService {
                 visitStatistics.get().setUsername(request.getHeader("user"));
             }
         } else {
-            VisitStatistics visitStatistic = VisitStatistics.builder()
-                    .username(request.getHeader("user"))
-                    .lastVisit(LocalDateTime.now())
-                    .firstVisit(LocalDateTime.now())
-                    .totalVisits(1L)
-                    .userLocation(request.getHeader("userCountry"))
-                    .userCity(request.getHeader("userCity"))
-                    .build();
+            VisitStatistics visitStatistic = new VisitStatistics()
+                    .setUsername(request.getHeader("user"))
+                    .setLastVisit(LocalDateTime.now())
+                    .setFirstVisit(LocalDateTime.now())
+                    .setTotalVisits(1L)
+                    .setUserLocation(request.getHeader("userCountry"))
+                    .setUserCity(request.getHeader("userCity"));
 
             visitStatisticsRepository.save(visitStatistic);
 

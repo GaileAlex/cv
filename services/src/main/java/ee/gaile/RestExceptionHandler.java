@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.server.ResponseStatusException;
 
-
 @ControllerAdvice
 @AllArgsConstructor
 public class RestExceptionHandler {
-
     private static final Logger LOG = LoggerFactory.getLogger("error-log");
 
     @ExceptionHandler(Exception.class)
