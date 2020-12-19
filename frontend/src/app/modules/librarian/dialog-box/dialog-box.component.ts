@@ -28,17 +28,10 @@ export class DialogBoxComponent implements OnInit {
     }
 
     onSubmit() {
-        this.bookService.applyFilter(this.formFilter.controls.filterForm.value, this.formFilter.controls.condition.value).subscribe(
-            () => {
-                this.books.booksData = this.bookService.applyFilter(this.formFilter.controls.filterForm.value,
-                    this.formFilter.controls.condition.value);
-                this.router.navigate(['/books', 'filter']);
-                this.closeClick();
-            },
-            () => {
-                this.router.navigate(['/books', 'filter']);
-                this.closeClick();
-            });
+        this.books.booksData = this.bookService.applyFilter(this.formFilter.controls.filterForm.value,
+            this.formFilter.controls.condition.value);
+        this.router.navigate(['/books', 'filter']);
+        this.closeClick();
     }
 
     findAll() {
