@@ -51,6 +51,8 @@
     "serialize-javascript": "^4.0.0",
     "tslib": "^1.14.1",
     "websocket-extensions": "^0.1.4",
+    "yargs": "^16.2.0",
+    "yargs-parser": "^20.2.4",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
