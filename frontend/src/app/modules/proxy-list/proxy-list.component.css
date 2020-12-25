@@ -3,15 +3,15 @@ table {
     width: 100%;
 }
 
+th.mat-sort-header-sorted {
+    color: black;
+}
+
 th.mat-header-cell {
-    padding: 16px 0;
-    text-align: center;
     border: 1px solid #000000;
 }
 
 td.mat-cell {
-    padding: 16px 0;
-    text-align: center;
     border: 1px solid #000000;
 }
 
@@ -20,6 +20,5 @@ td.mat-cell:first-child {
 }
 
 .th.mat-sort-header-container{
-    text-align: center;
 
 }

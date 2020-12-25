@@ -10,6 +10,7 @@ import ee.gaile.enums.BitfinexCryptocurrencyEnum;
 import ee.gaile.enums.Currency;
 import ee.gaile.repository.mindly.BitfinexCryptocurrencyRepository;
 import ee.gaile.repository.mindly.CryptocurrencyValueRepository;
+import ee.gaile.service.proxy.SpeedTestTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -44,11 +45,13 @@ public class BitfinexAccessService {
 
     private final CryptocurrencyValueRepository cryptocurrencyValueRepository;
     private final BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository;
+    SpeedTestTask speedTestTask;
 
     public BitfinexAccessService(CryptocurrencyValueRepository cryptocurrencyValueRepository,
-                                 BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository) {
+                                 BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository,SpeedTestTask speedTestTask) {
         this.cryptocurrencyValueRepository = cryptocurrencyValueRepository;
         this.bitfinexCryptocurrencyRepository = bitfinexCryptocurrencyRepository;
+        this.speedTestTask=speedTestTask;
     }
 
     @Scheduled(fixedDelay = Long.MAX_VALUE)
@@ -59,6 +62,7 @@ public class BitfinexAccessService {
     @Scheduled(cron = "${bitfinex.access.scheduled}")
     private void setCryptocurrency() {
         Map<String, String> map = BitfinexCryptocurrencyEnum.getCurrencyName();
+        speedTestTask.doInBackground();
 
         map.forEach((k, v) -> {
             String urlBitfinex = BITFINEX_URL.replace("%s", v);

@@ -104,46 +104,42 @@
 <div class="text-center">
 
     <div class="container p_50">
-        <div >
-            <div class="mat-elevation-z8 table-responsive">
-                <table class="table table-bordered text-center" mat-table [dataSource]="dataSource" matSort>
+        <p>You can bind our <code>NgbPagination</code> component with slicing the data list</p>
 
-                    <!-- ID Column -->
-                    <ng-container matColumnDef="id" class="text-center">
-                        <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-                        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-                    </ng-container>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Country</th>
+                <th scope="col">Area</th>
+                <th scope="col">Population</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let country of countries">
+                <th scope="row">{{ country.id }}</th>
+                <td>
+                    <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+                    {{ country.name }}
+                </td>
+                <td>{{ country.area | number}}</td>
+                <td>{{ country.population | number }}</td>
+            </tr>
+            </tbody>
+        </table>
 
-                    <!-- Progress Column -->
-                    <ng-container matColumnDef="progress">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress</th>
-                        <td mat-cell *matCellDef="let row"> {{row.progress}}%</td>
-                    </ng-container>
+        <div class="d-flex justify-content-between p-2">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+            </ngb-pagination>
 
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
-                        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-                    </ng-container>
-
-                    <!-- Color Column -->
-                    <ng-container matColumnDef="color">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Color</th>
-                        <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                    <!-- Row shown when there is no matching data. -->
-                    <tr class="mat-row" *matNoDataRow>
-                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                    </tr>
-                </table>
-
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-            </div>
-        </div></div></div>
+            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+                <option [ngValue]="2">2 items per page</option>
+                <option [ngValue]="4">4 items per page</option>
+                <option [ngValue]="6">6 items per page</option>
+            </select>
+        </div>
+    </div>
+</div>
 <app-footer></app-footer>
 
 

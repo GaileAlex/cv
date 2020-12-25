@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, Message, SelectItem } from 'primeng/api';
 import { MindlyService } from '../../service/mindly.service';
 import { Mindly } from '../../models/mindly';
@@ -8,67 +8,115 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 
-export interface UserData {
-    id: string;
+
+interface Country {
+    id?: number;
     name: string;
-    progress: string;
-    color: string;
+    flag: string;
+    area: number;
+    population: number;
 }
 
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-    'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-    'aqua', 'blue', 'navy', 'black', 'gray'
+const COUNTRIES: Country[] = [
+    {
+        name: 'Russia',
+        flag: 'f/f3/Flag_of_Russia.svg',
+        area: 17075200,
+        population: 146989754
+    },
+    {
+        name: 'France',
+        flag: 'c/c3/Flag_of_France.svg',
+        area: 640679,
+        population: 64979548
+    },
+    {
+        name: 'Germany',
+        flag: 'b/ba/Flag_of_Germany.svg',
+        area: 357114,
+        population: 82114224
+    },
+    {
+        name: 'Portugal',
+        flag: '5/5c/Flag_of_Portugal.svg',
+        area: 92090,
+        population: 10329506
+    },
+    {
+        name: 'Canada',
+        flag: 'c/cf/Flag_of_Canada.svg',
+        area: 9976140,
+        population: 36624199
+    },
+    {
+        name: 'Vietnam',
+        flag: '2/21/Flag_of_Vietnam.svg',
+        area: 331212,
+        population: 95540800
+    },
+    {
+        name: 'Brazil',
+        flag: '0/05/Flag_of_Brazil.svg',
+        area: 8515767,
+        population: 209288278
+    },
+    {
+        name: 'Mexico',
+        flag: 'f/fc/Flag_of_Mexico.svg',
+        area: 1964375,
+        population: 129163276
+    },
+    {
+        name: 'United States',
+        flag: 'a/a4/Flag_of_the_United_States.svg',
+        area: 9629091,
+        population: 324459463
+    },
+    {
+        name: 'India',
+        flag: '4/41/Flag_of_India.svg',
+        area: 3287263,
+        population: 1324171354
+    },
+    {
+        name: 'Indonesia',
+        flag: '9/9f/Flag_of_Indonesia.svg',
+        area: 1910931,
+        population: 263991379
+    },
+    {
+        name: 'Tuvalu',
+        flag: '3/38/Flag_of_Tuvalu.svg',
+        area: 26,
+        population: 11097
+    },
+    {
+        name: 'China',
+        flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
+        area: 9596960,
+        population: 1409517397
+    }
 ];
-const NAMES: string[] = [
-    'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-    'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
+
 
 @Component({
   selector: 'app-proxy-list',
   templateUrl: './proxy-list.component.html',
   styleUrls: ['./proxy-list.component.css']
 })
-export class ProxyListComponent  {
-    displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-    dataSource: MatTableDataSource<UserData>;
-
-    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-    @ViewChild(MatSort, {static: true}) sort: MatSort;
+export class ProxyListComponent   {
+    page = 1;
+    pageSize = 4;
+    collectionSize = COUNTRIES.length;
+    countries: Country[];
 
     constructor() {
-        // Create 100 users
-        const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
-        // Assign the data to the data source for the table to render
-        this.dataSource = new MatTableDataSource(users);
+        this.refreshCountries();
     }
 
-    ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+    refreshCountries() {
+        this.countries = COUNTRIES
+            .map((country, i) => ({id: i + 1, ...country}))
+            .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     }
-
-    applyFilter(event: Event) {
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
-        }
-    }
-}
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-    const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-        NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-    return {
-        id: id.toString(),
-        name: name,
-        progress: Math.round(Math.random() * 100).toString(),
-        color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-    };
 }
