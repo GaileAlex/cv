@@ -105,14 +105,12 @@
 
     <div class="container p_50">
         <div >
-
-
-            <div class="mat-elevation-z8">
+            <div class="mat-elevation-z8 table-responsive">
                 <table class="table table-bordered text-center" mat-table [dataSource]="dataSource" matSort>
 
                     <!-- ID Column -->
-                    <ng-container matColumnDef="id">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+                    <ng-container matColumnDef="id" class="text-center">
+                        <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
                         <td mat-cell *matCellDef="let row"> {{row.id}} </td>
                     </ng-container>
 

@@ -6,15 +6,20 @@ table {
 th.mat-header-cell {
     padding: 16px 0;
     text-align: center;
-    border: 1px solid #ffa600;
+    border: 1px solid #000000;
 }
 
 td.mat-cell {
     padding: 16px 0;
     text-align: center;
-    border: 1px solid #ffa600;
+    border: 1px solid #000000;
 }
 
 td.mat-cell:first-child {
-    border-left: 1px solid #ffa600;
+    border-left: 1px solid #000000;
+}
+
+.th.mat-sort-header-container{
+    text-align: center;
+
 }
