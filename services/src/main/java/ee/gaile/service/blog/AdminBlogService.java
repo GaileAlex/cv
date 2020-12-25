@@ -10,10 +10,8 @@ import javax.transaction.Transactional;
 import java.io.IOException;
 
 @Service
-@Transactional
 @AllArgsConstructor
 public class AdminBlogService {
-
     private final BlogRepository blogRepository;
 
     public void saveBlog(String headline, String article, MultipartFile image) throws IOException {

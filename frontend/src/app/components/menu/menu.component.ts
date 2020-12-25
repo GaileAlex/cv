@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
     collapsed = true;
     pageId: string;
     username: string;
-    isLoggedIn: boolean;
+    isLoggedIn: boolean = false;
 
     constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
                 private authService: AuthService, private userDataService: UserDataService, private statisticsService: StatisticsService) {

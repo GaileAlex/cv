@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -26,12 +26,12 @@ public class Books {
     private String author;
 
     @Column(name = "book_date")
-    private Date releaseDate;
+    private LocalDate releaseDate;
 
     @Column(name = "book_text", length = 2000)
     private String bookText;
 
-    public Books(String title, String author, Date releaseDate, String bookText) {
+    public Books(String title, String author, LocalDate releaseDate, String bookText) {
         this.title = title;
         this.author = author;
         this.releaseDate = releaseDate;

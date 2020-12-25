@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
@@ -26,13 +26,13 @@ public class UserController {
 
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
 
-    @PostMapping(path = "/login", produces = "application/json")
-    public LoginRequest getUserLoginToken(@RequestBody SignupRequest auth, HttpServletRequest request) {
+    @PostMapping(path = "/login")
+    public ResponseEntity<LoginRequest> getUserLoginToken(@RequestBody SignupRequest auth, HttpServletRequest request) {
         ACCESS_LOG.info("user access request, user name is {}, IP is {} ", auth.getUsername(), request.getHeader("userIP"));
-        return userService.authUser(auth);
+        return new ResponseEntity<>(userService.authUser(auth), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/refresh", produces = "application/json")
+    @PostMapping(path = "/refresh")
     public AuthRefreshDTO getAccessTokenByRefreshToken(@RequestBody AuthRefreshDTO authDTO, HttpServletRequest request) throws Exception {
         return userService.refreshAuth(authDTO, request);
     }

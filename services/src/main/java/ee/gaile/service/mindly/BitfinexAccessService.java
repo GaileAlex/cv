@@ -26,6 +26,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -76,7 +77,7 @@ public class BitfinexAccessService {
                 }
 
                 CryptocurrencyValues cryptocurrencyValues = new CryptocurrencyValues();
-                cryptocurrencyValues.setDateCryptocurrency(new Date());
+                cryptocurrencyValues.setDateCryptocurrency(LocalDateTime.now());
                 cryptocurrencyValues.setValueCurrency(price);
 
                 cryptocurrencyValues.setBitfinexCryptocurrency(bitfinexCryptocurrencyRepository

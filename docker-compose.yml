@@ -25,7 +25,7 @@ services:
       - POSTGRES_USER=cv
       - POSTGRES_PASSWORD=cv-pass
     ports:
-      - 8081:8081
+      - 8399:8399
     links:
       - cv-postgres
     restart: unless-stopped

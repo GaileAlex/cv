@@ -2,22 +2,20 @@ package ee.gaile.service.statistics;
 
 import ee.gaile.entity.statistics.VisitStatisticUserIp;
 import ee.gaile.entity.statistics.VisitStatistics;
-import ee.gaile.entity.statistics.VisitStatisticsNewUser;
-import ee.gaile.entity.statistics.VisitStatisticsUser;
+import ee.gaile.entity.statistics.VisitStatisticsGraph;
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.models.statistics.VisitStatisticsDTO;
-import ee.gaile.repository.VisitStatisticIpRepository;
-import ee.gaile.repository.VisitStatisticsNewUserRepository;
-import ee.gaile.repository.VisitStatisticsRepository;
-import ee.gaile.repository.VisitStatisticsUserRepository;
+import ee.gaile.repository.statistic.VisitStatisticIpRepository;
+import ee.gaile.repository.statistic.VisitStatisticUserRepository;
+import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +25,7 @@ import java.util.Optional;
 public class StatisticsService {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticIpRepository visitStatisticIpRepository;
-    private final VisitStatisticsUserRepository visitStatisticsUserRepository;
-    private final VisitStatisticsNewUserRepository visitStatisticsNewUserRepository;
+    private final VisitStatisticUserRepository visitStatisticUserRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
     public void setUserStatistics(HttpServletRequest request) {
@@ -38,7 +35,7 @@ public class StatisticsService {
                 visitStatisticsRepository.findByUserIP(userIP);
 
         if (visitStatistics.isPresent()) {
-            visitStatistics.get().setLastVisit(new Date());
+            visitStatistics.get().setLastVisit(LocalDateTime.now());
             visitStatistics.get().setTotalVisits(visitStatistics.get().getTotalVisits() + 1);
 
             VisitStatisticUserIp visitStatisticUserIp = new VisitStatisticUserIp();
@@ -52,14 +49,13 @@ public class StatisticsService {
                 visitStatistics.get().setUsername(request.getHeader("user"));
             }
         } else {
-            VisitStatistics visitStatistic = VisitStatistics.builder()
-                    .username(request.getHeader("user"))
-                    .lastVisit(new Date())
-                    .firstVisit(new Date())
-                    .totalVisits(1L)
-                    .userLocation(request.getHeader("userCountry"))
-                    .userCity(request.getHeader("userCity"))
-                    .build();
+            VisitStatistics visitStatistic = new VisitStatistics()
+                    .setUsername(request.getHeader("user"))
+                    .setLastVisit(LocalDateTime.now())
+                    .setFirstVisit(LocalDateTime.now())
+                    .setTotalVisits(1L)
+                    .setUserLocation(request.getHeader("userCountry"))
+                    .setUserCity(request.getHeader("userCity"));
 
             visitStatisticsRepository.save(visitStatistic);
 
@@ -73,8 +69,8 @@ public class StatisticsService {
 
     public VisitStatisticGraph getStatisticsGraph() {
         List<VisitStatistics> visitStatisticsList = visitStatisticsRepository.findAll();
-        List<VisitStatisticsUser> countedVisitDTOList = visitStatisticsUserRepository.selectVisitStatistic();
-        List<VisitStatisticsNewUser> visitStatisticsNewUsers = visitStatisticsNewUserRepository.selectNewVisitors();
+        List<VisitStatisticsGraph> countedVisitDTOList = visitStatisticUserRepository.selectVisitStatistic();
+        List<VisitStatisticsGraph> visitStatisticsNewUsers = visitStatisticUserRepository.selectNewVisitors();
 
         List<VisitStatisticsDTO> visitStatisticsDTOList = new ArrayList<>();
         visitStatisticsList.forEach((c) -> visitStatisticsDTOList.add(toDto(c)));

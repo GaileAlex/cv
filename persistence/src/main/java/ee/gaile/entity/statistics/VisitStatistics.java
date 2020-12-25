@@ -4,20 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Accessors(chain = true)
 @Entity(name = "VisitStatistics")
 @Table(name = "visit_statistics",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name"})})
 public class VisitStatistics {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,11 +36,11 @@ public class VisitStatistics {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "first_visit")
-    private Date firstVisit;
+    private LocalDateTime firstVisit;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "last_visit")
-    private Date lastVisit;
+    private LocalDateTime lastVisit;
 
     @Column(name = "total_visits")
     private Long totalVisits;
