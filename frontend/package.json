@@ -41,6 +41,7 @@
     "ngx-lightbox": "^2.2.2",
     "ngx-page-scroll": "^7.0.3",
     "ngx-page-scroll-core": "^7.0.3",
+    "ngx-pagination": "^5.0.0",
     "ngx-scrollspy": "^1.2.1",
     "npm-registry-fetch": "^8.1.5",
     "primeflex": "^2.0.0",

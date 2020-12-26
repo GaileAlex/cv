@@ -149,7 +149,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-
     ],
     providers: [ConfirmationService, ValidationMsgService, NgbActiveModal, DialogService, MessageService, ThemeService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

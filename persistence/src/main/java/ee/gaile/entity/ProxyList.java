@@ -1,5 +1,6 @@
 package ee.gaile.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,10 @@ import java.time.LocalDateTime;
 @Entity(name = "ProxyList")
 @Table(name = "proxy_list")
 public class ProxyList {
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @Column(name = "ip_address")
@@ -50,11 +51,14 @@ public class ProxyList {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "first_checked")
+    @JsonIgnore
     private LocalDateTime firstChecked;
 
     @Column(name = "number_checks")
+    @JsonIgnore
     private Integer numberChecks;
 
     @Column(name = "number_unanswered_checks")
+    @JsonIgnore
     private Integer numberUnansweredChecks;
 }

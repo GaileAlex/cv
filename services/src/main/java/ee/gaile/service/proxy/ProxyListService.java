@@ -58,10 +58,11 @@ public class ProxyListService {
                 LocalDateTime start = LocalDateTime.now();
 
                 HttpURLConnection socksConnection = (HttpURLConnection) fileUrl.openConnection(socksProxy);
+                socksConnection.setConnectTimeout(180000);
+                socksConnection.setReadTimeout(120000);
                 socksConnection.getResponseCode();
 
                 proxyList.setResponse(Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
-                log.info("setResponse: " + Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
                 LocalDateTime startFile = LocalDateTime.now();
                 InputStream inputStream = socksConnection.getInputStream();
                 File tempFile = new File("tempFile.tmp");
