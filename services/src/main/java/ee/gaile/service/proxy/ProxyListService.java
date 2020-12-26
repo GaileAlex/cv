@@ -58,8 +58,8 @@ public class ProxyListService {
                 LocalDateTime start = LocalDateTime.now();
 
                 HttpURLConnection socksConnection = (HttpURLConnection) fileUrl.openConnection(socksProxy);
-                socksConnection.setConnectTimeout(180000);
-                socksConnection.setReadTimeout(120000);
+                socksConnection.setConnectTimeout(60000);
+                socksConnection.setReadTimeout(60000);
                 socksConnection.getResponseCode();
 
                 proxyList.setResponse(Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
