@@ -19,4 +19,7 @@ public interface ProxyRepository extends JpaRepository<ProxyList, Long> {
     @Query(value = "select count(id) from proxy_list " +
             " where speed is not null and uptime > 30 ", nativeQuery = true)
     Long getTotal();
+
+    List<ProxyList> findAllBySpeed();
+
 }

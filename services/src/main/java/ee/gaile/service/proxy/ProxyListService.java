@@ -33,7 +33,7 @@ public class ProxyListService {
 
     @Scheduled(cron = "${proxy.scheduled}")
     public void setAllProxy() {
-        List<ProxyList> proxyLists = proxyRepository.findAll();
+        List<ProxyList> proxyLists = proxyRepository.findAllBySpeed();
 
         for (ProxyList proxyList : proxyLists) {
             if (proxyList.getNumberChecks() != null) {

@@ -11,9 +11,10 @@ export class ProxyListComponent {
     proxyList: ProxyLists[];
     total: number;
     page = 0;
-    pageSize = 20;
+    pageSize = 10;
 
     constructor(private proxyService: ProxyService) {
+        window.scrollTo(0, 0);
 
         this.proxyService.findAll(this.pageSize, this.page).subscribe(data => {
             this.proxyList = data.proxyLists;
