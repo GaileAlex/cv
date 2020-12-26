@@ -1,7 +1,6 @@
-package ee.gaile.controller;
+package ee.gaile.service.statistics;
 
 import ee.gaile.models.statistics.VisitStatisticGraph;
-import ee.gaile.service.statistics.StatisticsService;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

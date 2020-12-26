@@ -1,0 +1,16 @@
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+th.mat-header-cell {
+    border: 1px solid #000000;
+}
+
+td.mat-cell {
+    border: 1px solid #000000;
+}
+
+td.mat-cell:first-child {
+    border-left: 1px solid #000000;
+}
+

@@ -1,7 +1,7 @@
 package ee.gaile.service.librarian;
 
-import ee.gaile.enums.Conditions;
 import ee.gaile.entity.librarian.Books;
+import ee.gaile.enums.Conditions;
 import ee.gaile.models.FilterWrapper;
 import ee.gaile.models.SelectedFilter;
 import ee.gaile.repository.librarian.LibrarianNativeRepo;
@@ -33,7 +33,7 @@ public class LibrarianService extends LibrarianNativeRepo {
      */
     public List<Books> filterOut(FilterWrapper filterWrapper, String condition) {
         StringBuilder bookQuery = new StringBuilder(QUERY).append(" where ");
-        List<SelectedFilter> selectedFilterList = filterWrapper.getFilters();
+        List<SelectedFilter> selectedFilterList = filterWrapper.getSelectedFilters();
 
         for (int i = 0; i < selectedFilterList.size(); i++) {
 

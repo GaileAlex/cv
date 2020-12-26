@@ -35,11 +35,16 @@
                         <a class="nav-link" href="javascript:void(0)"
                            ngbDropdownToggle>{{'menu.spring.projects' | translate}}</a>
                         <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+
+                            <a [routerLink]="['/proxy-list']" class="hvr-underline-from-center dropdown-item"
+                               style="color: #58c1ff; margin-bottom: 5px;">{{'menu.test.proxy' | translate}}</a>
+
                             <a [routerLink]="['/mindly']" class="hvr-underline-from-center dropdown-item"
                                style="color: #58c1ff; margin-bottom: 5px;">{{'menu.test.crypto' | translate}}</a>
 
                             <a [routerLink]="['/librarian']" class="hvr-underline-from-center dropdown-item"
                                style="color: #58c1ff; margin-bottom: 5px;">{{'menu.test.librarian' | translate}}</a>
+
                         </div>
                     </li>
                     <li class="nav-item">
@@ -87,8 +92,8 @@
                     </ul>
                     <li *ngIf="getUserRole()=='ROLE_ADMIN'" class="nav-item dropdown" ngbDropdown>
                         <a
-                           class="nav-link" href="javascript:void(0)"
-                           ngbDropdownToggle>Admin menu</a>
+                                class="nav-link" href="javascript:void(0)"
+                                ngbDropdownToggle>Admin menu</a>
                         <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
                             <a [routerLink]="['/blog-admin']"
                                class="hvr-underline-from-center dropdown-item"

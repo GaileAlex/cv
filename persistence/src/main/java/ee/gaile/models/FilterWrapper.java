@@ -1,25 +1,14 @@
 package ee.gaile.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class FilterWrapper {
 
     @JsonProperty("selectedFilter")
     private List<SelectedFilter> selectedFilters;
 
-    /**
-     * @return the Filters
-     */
-    public List<SelectedFilter> getFilters() {
-        return selectedFilters;
-    }
-
-    /**
-     * @param selectedFilters the Filters to set
-     */
-    public void setFilter(List<SelectedFilter> selectedFilters) {
-        this.selectedFilters = selectedFilters;
-    }
 }

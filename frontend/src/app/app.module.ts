@@ -59,6 +59,10 @@ import { BlogListComponent } from './modules/blog/blog-list/blog-list.component'
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/visit-statistics.component';
 import { ChartsModule, ThemeService } from 'ng2-charts';
+import { ProxyListComponent } from "./modules/proxy-list/proxy-list.component";
+import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -87,6 +91,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         BlogListComponent,
         BlogAdminComponent,
         VisitStatisticsComponent,
+        ProxyListComponent,
     ],
     imports: [
         BrowserModule,
@@ -141,7 +146,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         StickyNavModule,
         StickyNavModule,
         ChartsModule,
-
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
     ],
     providers: [ConfirmationService, ValidationMsgService, NgbActiveModal, DialogService, MessageService, ThemeService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

@@ -6,9 +6,10 @@
     "experience": "опыт",
     "education": "Образование",
     "blog": "блог",
-    "spring.projects": "Тестовые задания",
-    "test.crypto": "\"Crypto Portfolio\"",
-    "test.librarian": "\"Librarian\"",
+    "spring.projects": "Проекты",
+    "test.crypto": "Тестовое задание Crypto Portfolio",
+    "test.librarian": "Тестовое задание  Librarian",
+    "test.proxy": "Список proxy",
     "contact": "Контакты",
     "aleksei.gaile": "Алексей Гайле"
   },

@@ -29,9 +29,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.*;
 
-/**
- * receiving and parsing requests with Bitfinex
- */
 @Service
 @EnableScheduling
 public class BitfinexAccessService {

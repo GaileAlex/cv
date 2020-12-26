@@ -12,12 +12,14 @@ import { ProtectedGuardService } from './service/protectedGuard';
 import { BlogAdminComponent } from './modules/admin-menu/blog-admin/blog-admin.component';
 import { BlogArticleComponent } from './modules/blog/blog-article/blog-article.component';
 import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/visit-statistics.component';
+import { ProxyListComponent } from "./modules/proxy-list/proxy-list.component";
 
 
 export const routes: Routes = [
     {path: '', component: StartPageComponent},
     {path: 'mindly', component: MindlyComponent},
     {path: 'librarian', component: LibrarianComponent},
+    {path: 'proxy-list', component: ProxyListComponent},
     {path: 'blog', component: BlogListComponent},
     {path: 'article/:id', component: BlogArticleComponent},
     {path: 'books/:param', component: BooksComponent},

@@ -6,9 +6,10 @@
     "experience": "experience",
     "education": "Education",
     "blog": "blog",
-    "spring.projects": "Test task",
-    "test.crypto": "\"Crypto Portfolio\"",
-    "test.librarian": "\"Librarian\"",
+    "spring.projects": "Projects",
+    "test.crypto": "Test task Crypto Portfolio",
+    "test.librarian": "Test task Librarian",
+    "test.proxy": "Proxy List",
     "contact": "contact",
     "aleksei.gaile": "Aleksei Gaile"
   },
