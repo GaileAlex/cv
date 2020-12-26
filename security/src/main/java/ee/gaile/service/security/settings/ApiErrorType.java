@@ -9,8 +9,8 @@ public enum ApiErrorType {
     INVALID_ACCESS_TOKEN("invalid_access_token", "Invalid access token"),
     INVALID_REFRESH_TOKEN("invalid_refresh_token", "Invalid refresh token");
 
-    private String code;
-    private String message;
+    private final String code;
+    private final String message;
 
     ApiErrorType(String code, String message) {
         this.code = code;
