@@ -36,18 +36,25 @@ public class ProxyList {
     private String anonymity;
 
     @Column(name = "speed")
-    private Integer speed;
+    private Double speed;
 
     @Column(name = "uptime")
     private Double uptime;
 
     @Column(name = "response")
-    private Integer response;
+    private Long response;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "last_checked")
     private LocalDateTime lastChecked;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "first_checked")
+    private LocalDateTime firstChecked;
+
     @Column(name = "number_checks")
     private Integer numberChecks;
+
+    @Column(name = "number_unanswered_checks")
+    private Integer numberUnansweredChecks;
 }
