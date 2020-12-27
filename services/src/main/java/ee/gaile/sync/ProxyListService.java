@@ -1,10 +1,9 @@
-package ee.gaile.service.proxy;
+package ee.gaile.sync;
 
 import ee.gaile.entity.ProxyList;
 import ee.gaile.repository.ProxyRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +18,12 @@ import java.util.List;
 
 @Slf4j
 @Service
-@EnableScheduling
 @AllArgsConstructor
 public class ProxyListService {
     private final ProxyRepository proxyRepository;
     private static final String FILE_URL = "http://ipv4.ikoula.testdebit.info/1M.iso";
-    private static final Double FILE_SIZE = 1000000.0;
+    private static final Double FILE_SIZE = 1_000_000.0;
+    private static final Integer TIMEOUT = 60_000;
 
     @Scheduled(fixedDelay = Long.MAX_VALUE)
     public void firstStartSyncService() {
@@ -36,18 +35,10 @@ public class ProxyListService {
         List<ProxyList> proxyLists = proxyRepository.findAllBySpeed();
 
         for (ProxyList proxyList : proxyLists) {
-            if (proxyList.getNumberChecks() != null) {
-                proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
-            } else {
-                proxyList.setNumberChecks(1);
-            }
 
-            if (proxyList.getFirstChecked() == null) {
-                proxyList.setFirstChecked(LocalDateTime.now());
-                proxyList.setAnonymity("High anonymity");
-                proxyRepository.save(proxyList);
+            if (!doFirstCheck(proxyList)) {
+                continue;
             }
-
             proxyList.setLastChecked(LocalDateTime.now());
 
             Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
@@ -58,11 +49,13 @@ public class ProxyListService {
                 LocalDateTime start = LocalDateTime.now();
 
                 HttpURLConnection socksConnection = (HttpURLConnection) fileUrl.openConnection(socksProxy);
-                socksConnection.setConnectTimeout(60000);
-                socksConnection.setReadTimeout(60000);
+                socksConnection.setConnectTimeout(TIMEOUT);
+                socksConnection.setReadTimeout(TIMEOUT);
+
                 socksConnection.getResponseCode();
 
                 proxyList.setResponse(Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
+
                 LocalDateTime startFile = LocalDateTime.now();
                 InputStream inputStream = socksConnection.getInputStream();
                 File tempFile = new File("tempFile.tmp");
@@ -73,15 +66,17 @@ public class ProxyListService {
                 while ((bytesRead = inputStream.read(buffer)) != -1) {
                     outStream.write(buffer, 0, bytesRead);
                 }
+
                 inputStream.close();
                 outStream.close();
+
                 proxyList.setSpeed(FILE_SIZE / Duration.between(startFile.toLocalTime(),
                         LocalDateTime.now().toLocalTime()).toMillis());
 
                 Double uptime = getUptime(proxyList);
-
                 proxyList.setUptime(uptime);
                 proxyRepository.save(proxyList);
+
                 socksConnection.disconnect();
                 tempFile.delete();
                 log.info("successful check IP: " + proxyList.getIpAddress());
@@ -110,6 +105,26 @@ public class ProxyListService {
             numberUnansweredChecks = proxyList.getNumberUnansweredChecks();
         }
         return 100.0 - 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);
+    }
+
+    private boolean doFirstCheck(ProxyList proxyList) {
+        if (proxyList.getNumberChecks() != null) {
+            proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
+        } else {
+            proxyList.setNumberChecks(1);
+        }
+
+        if (proxyList.getFirstChecked() == null) {
+            proxyList.setFirstChecked(LocalDateTime.now());
+            proxyList.setAnonymity("High anonymity");
+            proxyRepository.save(proxyList);
+        }
+
+        if (proxyList.getUptime() < 20 && proxyList.getNumberUnansweredChecks() > 200) {
+            proxyRepository.delete(proxyList);
+            return false;
+        }
+        return true;
     }
 
 }

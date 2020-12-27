@@ -11,7 +11,7 @@ COPY web-api/src /workspace/web-api/src
 COPY services/src /workspace/services/src
 COPY security/src /workspace/security/src
 COPY persistence/src /workspace/persistence/src
-RUN mvn -f pom.xml clean package
+RUN mvn -f pom.xml clean package -Dmaven.test.skip
 
 FROM openjdk:8-alpine
 ENV TZ=Europe/Tallinn

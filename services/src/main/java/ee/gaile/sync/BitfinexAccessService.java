@@ -1,4 +1,4 @@
-package ee.gaile.service.mindly;
+package ee.gaile.sync;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -27,10 +26,12 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
-@EnableScheduling
 public class BitfinexAccessService {
     private static final Logger CURRENCY_LOG = LoggerFactory.getLogger("currency-log");
     private static final Logger ERROR_LOG = LoggerFactory.getLogger("error-log");
@@ -90,10 +91,6 @@ public class BitfinexAccessService {
 
     }
 
-    /**
-     * @param url site
-     * @return raw response from site
-     */
     private Crypto getDataByUrl(String url) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();

@@ -2,7 +2,7 @@
 
 <div class="text-center p_100_top">
     <div class="container">
-        <h3 class="p_20_bottom">High anonymity <code>SOCKS5</code> Proxy list for country: United States (US)</h3>
+        <h3 class="p_20_bottom">High anonymity <code>SOCKS5</code> Proxy list</h3>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -35,7 +35,8 @@
         <div class="d-flex justify-content-between p-2">
             <mat-paginator [length]="total"
                            [pageSize]="pageSize"
-                           (page)="changePage($event)">
+                           (page)="changePage($event)"
+                           [showFirstLastButtons]="true">
             </mat-paginator>
         </div>
     </div>
