@@ -4,15 +4,14 @@ import ee.gaile.entity.ProxyList;
 import ee.gaile.repository.ProxyRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
-import java.time.Duration;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,10 +19,9 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ProxyListService {
+    private static final Logger ERROR_LOG = LoggerFactory.getLogger("error-log");
     private final ProxyRepository proxyRepository;
-    private static final String FILE_URL = "http://ipv4.ikoula.testdebit.info/1M.iso";
-    private static final Double FILE_SIZE = 1_000_000.0;
-    private static final Integer TIMEOUT = 60_000;
+    private final ProxyCheck proxyCheck;
 
     @Scheduled(fixedDelay = Long.MAX_VALUE)
     public void firstStartSyncService() {
@@ -35,80 +33,21 @@ public class ProxyListService {
         List<ProxyList> proxyLists = proxyRepository.findAllBySpeed();
 
         for (ProxyList proxyList : proxyLists) {
-
             if (!doFirstCheck(proxyList)) {
                 continue;
             }
-            proxyList.setLastChecked(LocalDateTime.now());
-
-            Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
-                    new InetSocketAddress(proxyList.getIpAddress(), proxyList.getPort()));
-
-            try {
-                URL fileUrl = new URL(FILE_URL);
-                LocalDateTime start = LocalDateTime.now();
-
-                HttpURLConnection socksConnection = (HttpURLConnection) fileUrl.openConnection(socksProxy);
-                socksConnection.setConnectTimeout(TIMEOUT);
-                socksConnection.setReadTimeout(TIMEOUT);
-
-                socksConnection.getResponseCode();
-
-                proxyList.setResponse(Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
-
-                LocalDateTime startFile = LocalDateTime.now();
-                InputStream inputStream = socksConnection.getInputStream();
-                File tempFile = new File("tempFile.tmp");
-                OutputStream outStream = new FileOutputStream(tempFile);
-
-                byte[] buffer = new byte[8 * 1024];
-                int bytesRead;
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    outStream.write(buffer, 0, bytesRead);
-                }
-
-                inputStream.close();
-                outStream.close();
-
-                proxyList.setSpeed(FILE_SIZE / Duration.between(startFile.toLocalTime(),
-                        LocalDateTime.now().toLocalTime()).toMillis());
-
-                Double uptime = getUptime(proxyList);
-                proxyList.setUptime(uptime);
-                proxyRepository.save(proxyList);
-
-                socksConnection.disconnect();
-                tempFile.delete();
-                log.info("successful check IP: " + proxyList.getIpAddress());
-
-            } catch (IOException e) {
-                log.error("check failed IP: " + proxyList.getIpAddress());
-                if (proxyList.getNumberUnansweredChecks() != null) {
-                    proxyList.setNumberUnansweredChecks(proxyList.getNumberUnansweredChecks() + 1);
-                } else {
-                    proxyList.setNumberUnansweredChecks(1);
-                }
-                Double uptime = getUptime(proxyList);
-                proxyList.setUptime(uptime);
-                proxyList.setSpeed(0.0);
-                proxyRepository.save(proxyList);
-            }
+            proxyCheck.checkProxy(proxyList);
         }
-
-    }
-
-    private Double getUptime(ProxyList proxyList) {
-        Integer numberChecks = proxyList.getNumberChecks();
-        Integer numberUnansweredChecks;
-        if (proxyList.getNumberUnansweredChecks() == null) {
-            numberUnansweredChecks = 0;
-        } else {
-            numberUnansweredChecks = proxyList.getNumberUnansweredChecks();
-        }
-        return 100.0 - 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);
     }
 
     private boolean doFirstCheck(ProxyList proxyList) {
+        try {
+            Files.deleteIfExists(Paths.get(proxyList.getId() + "_"
+                    + proxyList.getIpAddress() + "_" + proxyList.getPort() + ".tmp"));
+        } catch (IOException e) {
+            ERROR_LOG.error("failed to delete file: " + proxyList.getIpAddress() + proxyList.getPort() + "tempFile.tmp");
+        }
+
         if (proxyList.getNumberChecks() != null) {
             proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
         } else {
@@ -121,7 +60,8 @@ public class ProxyListService {
             proxyRepository.save(proxyList);
         }
 
-        if (proxyList.getUptime() < 20 && proxyList.getNumberUnansweredChecks() > 200) {
+        if (proxyList.getUptime() != null && proxyList.getNumberUnansweredChecks() != null
+                && proxyList.getUptime() < 20 && proxyList.getNumberUnansweredChecks() > 200) {
             proxyRepository.delete(proxyList);
             return false;
         }
