@@ -90,6 +90,7 @@ public class ProxyListService {
                 }
                 Double uptime = getUptime(proxyList);
                 proxyList.setUptime(uptime);
+                proxyList.setSpeed(0.0);
                 proxyRepository.save(proxyList);
             }
         }
