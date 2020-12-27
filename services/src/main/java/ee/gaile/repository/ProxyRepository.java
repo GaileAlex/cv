@@ -17,7 +17,7 @@ public interface ProxyRepository extends JpaRepository<ProxyList, Long> {
     List<ProxyList> findWithPaging(@Param("pageSize") Integer pageSize, @Param("page") Integer page);
 
     @Query(value = "select count(id) from proxy_list " +
-            " where speed is not null and uptime > 30 ", nativeQuery = true)
+            " where speed > 0 and uptime > 30 ", nativeQuery = true)
     Long getTotal();
 
     @Query(value = "select * from proxy_list " +
