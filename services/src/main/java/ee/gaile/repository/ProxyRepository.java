@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProxyRepository extends JpaRepository<ProxyList, Long> {
 
     @Query(value = "select * from proxy_list " +
-            " where speed is not null and uptime > 30 " +
+            " where speed > 0 and uptime > 30 " +
             " ORDER BY speed DESC limit :pageSize offset :page ", nativeQuery = true)
     List<ProxyList> findWithPaging(@Param("pageSize") Integer pageSize, @Param("page") Integer page);
 
