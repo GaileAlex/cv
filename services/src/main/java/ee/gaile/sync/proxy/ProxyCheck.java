@@ -1,7 +1,7 @@
-package ee.gaile.sync;
+package ee.gaile.sync.proxy;
 
-import ee.gaile.entity.ProxyList;
-import ee.gaile.repository.ProxyRepository;
+import ee.gaile.entity.proxy.ProxyList;
+import ee.gaile.repository.proxy.ProxyRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

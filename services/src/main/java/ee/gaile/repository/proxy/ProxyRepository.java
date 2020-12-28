@@ -1,6 +1,6 @@
-package ee.gaile.repository;
+package ee.gaile.repository.proxy;
 
-import ee.gaile.entity.ProxyList;
+import ee.gaile.entity.proxy.ProxyList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

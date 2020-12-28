@@ -1,11 +1,10 @@
-package ee.gaile.controller;
+package ee.gaile.controller.user;
 
 import ee.gaile.service.security.request.LoginRequest;
 import ee.gaile.service.security.request.SignupRequest;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
 import ee.gaile.service.user.UserService;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -41,7 +40,5 @@ public class UserController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         return userService.registerUser(signUpRequest);
     }
-
-
 
 }

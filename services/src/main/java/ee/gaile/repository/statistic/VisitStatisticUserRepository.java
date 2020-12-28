@@ -1,6 +1,6 @@
 package ee.gaile.repository.statistic;
 
-import ee.gaile.entity.statistics.VisitStatisticsGraph;
+import ee.gaile.models.statistics.VisitStatisticsGraph;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;

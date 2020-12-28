@@ -1,7 +1,8 @@
-package ee.gaile.sync;
+package ee.gaile.sync.proxy;
 
-import ee.gaile.entity.ProxyList;
-import ee.gaile.repository.ProxyRepository;
+import ee.gaile.entity.proxy.ProxyList;
+import ee.gaile.repository.proxy.ProxyRepository;
+import ee.gaile.sync.proxy.ProxyCheck;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -41,13 +42,6 @@ public class ProxyListService {
     }
 
     private boolean doFirstCheck(ProxyList proxyList) {
-        try {
-            Files.deleteIfExists(Paths.get(proxyList.getId() + "_"
-                    + proxyList.getIpAddress() + "_" + proxyList.getPort() + ".tmp"));
-        } catch (IOException e) {
-            ERROR_LOG.error("failed to delete file: " + proxyList.getIpAddress() + proxyList.getPort() + "tempFile.tmp");
-        }
-
         if (proxyList.getNumberChecks() != null) {
             proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
         } else {
@@ -62,6 +56,13 @@ public class ProxyListService {
 
         if (proxyList.getUptime() != null && proxyList.getNumberUnansweredChecks() != null
                 && proxyList.getUptime() < 20 && proxyList.getNumberUnansweredChecks() > 200) {
+            try {
+                Files.deleteIfExists(Paths.get(proxyList.getId() + "_"
+                        + proxyList.getIpAddress() + "_" + proxyList.getPort() + ".tmp"));
+            } catch (IOException e) {
+                ERROR_LOG.error("failed to delete file: " + proxyList.getIpAddress() + proxyList.getPort() + "tempFile.tmp");
+            }
+
             proxyRepository.delete(proxyList);
             return false;
         }

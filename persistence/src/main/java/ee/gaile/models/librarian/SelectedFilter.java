@@ -1,4 +1,4 @@
-package ee.gaile.models;
+package ee.gaile.models.librarian;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

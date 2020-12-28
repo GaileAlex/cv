@@ -1,4 +1,4 @@
-package ee.gaile.sync;
+package ee.gaile.sync.mindly;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

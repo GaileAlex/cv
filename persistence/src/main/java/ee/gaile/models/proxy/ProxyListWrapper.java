@@ -1,6 +1,6 @@
-package ee.gaile.models;
+package ee.gaile.models.proxy;
 
-import ee.gaile.entity.ProxyList;
+import ee.gaile.entity.proxy.ProxyList;
 import lombok.Data;
 
 import java.util.List;

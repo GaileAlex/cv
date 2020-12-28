@@ -1,8 +1,8 @@
 package ee.gaile.service.proxy;
 
-import ee.gaile.entity.ProxyList;
-import ee.gaile.models.ProxyListWrapper;
-import ee.gaile.repository.ProxyRepository;
+import ee.gaile.entity.proxy.ProxyList;
+import ee.gaile.models.proxy.ProxyListWrapper;
+import ee.gaile.repository.proxy.ProxyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

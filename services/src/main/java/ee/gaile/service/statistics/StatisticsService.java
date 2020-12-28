@@ -2,9 +2,8 @@ package ee.gaile.service.statistics;
 
 import ee.gaile.entity.statistics.VisitStatisticUserIp;
 import ee.gaile.entity.statistics.VisitStatistics;
-import ee.gaile.entity.statistics.VisitStatisticsGraph;
 import ee.gaile.models.statistics.VisitStatisticGraph;
-import ee.gaile.models.statistics.VisitStatisticsDTO;
+import ee.gaile.models.statistics.VisitStatisticsGraph;
 import ee.gaile.repository.statistic.VisitStatisticIpRepository;
 import ee.gaile.repository.statistic.VisitStatisticUserRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
@@ -14,10 +13,14 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -68,18 +71,47 @@ public class StatisticsService {
     }
 
     public VisitStatisticGraph getStatisticsGraph() {
-        List<VisitStatistics> visitStatisticsList = visitStatisticsRepository.findAll();
         List<VisitStatisticsGraph> countedVisitDTOList = visitStatisticUserRepository.selectVisitStatistic();
         List<VisitStatisticsGraph> visitStatisticsNewUsers = visitStatisticUserRepository.selectNewVisitors();
 
-        List<VisitStatisticsDTO> visitStatisticsDTOList = new ArrayList<>();
-        visitStatisticsList.forEach((c) -> visitStatisticsDTOList.add(toDto(c)));
+        LocalDate startDate = LocalDate.from(countedVisitDTOList.get(0).getVisitDate());
+        LocalDate endDate = LocalDate.from(countedVisitDTOList.get(countedVisitDTOList.size() - 1).getVisitDate());
 
-        return new VisitStatisticGraph(visitStatisticsDTOList, countedVisitDTOList, visitStatisticsNewUsers);
+        List<BigInteger> newUsers = getPointByDate(visitStatisticsNewUsers, startDate, endDate);
+        List<BigInteger> totalVisits = getPointByDate(countedVisitDTOList, startDate, endDate);
+        List<LocalDate> date = getDates(startDate, endDate);
+
+        return new VisitStatisticGraph(newUsers, totalVisits, date);
     }
 
-    private VisitStatisticsDTO toDto(VisitStatistics visitStatistics) {
-        return modelMapper.map(visitStatistics, VisitStatisticsDTO.class);
+    private List<BigInteger> getPointByDate(List<VisitStatisticsGraph> visitList, LocalDate startDate, LocalDate endDate) {
+        List<BigInteger> points = new ArrayList<>();
+        Map<LocalDate, BigInteger> map = visitList.stream()
+                .collect(Collectors.toMap(VisitStatisticsGraph::getVisitDate, VisitStatisticsGraph::getCountVisits));
+
+        while (!startDate.equals(endDate.plusDays(1)) ) {
+            if (map.get(startDate) != null) {
+                points.add(map.get(startDate));
+            } else {
+                points.add(BigInteger.ZERO);
+            }
+
+            startDate = startDate.plusDays(1);
+        }
+
+        return points;
+
+    }
+
+    private List<LocalDate> getDates(LocalDate startDate, LocalDate endDate) {
+        List<LocalDate> dates = new ArrayList<>();
+
+        while (!startDate.equals(endDate.plusDays(1))) {
+            dates.add(startDate);
+            startDate = startDate.plusDays(1);
+        }
+
+        return dates;
     }
 
 }

@@ -1,6 +1,6 @@
-package ee.gaile.controller;
+package ee.gaile.controller.proxy;
 
-import ee.gaile.models.ProxyListWrapper;
+import ee.gaile.models.proxy.ProxyListWrapper;
 import ee.gaile.service.proxy.ProxyService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

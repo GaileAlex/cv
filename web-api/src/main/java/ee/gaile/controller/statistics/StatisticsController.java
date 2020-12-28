@@ -1,9 +1,8 @@
-package ee.gaile.controller;
+package ee.gaile.controller.statistics;
 
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.service.statistics.StatisticsService;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

@@ -7,19 +7,19 @@ import { StatisticsService } from '../../../service/statistics.service';
     styleUrls: ['./visit-statistics.component.css']
 })
 export class VisitStatisticsComponent implements OnInit {
-    countedVisitData: number[] = [];
-    countedNewVisitData: number[] = [];
-    countedVisitDates: Date[] = [];
-    public visitGraphName = 'Visitors';
-    public newVisitGraphName = 'New Visitors';
+    newUsers: number[] = [];
+    totalVisits: number[] = [];
+    dates: Date[] = [];
+    visitGraphName = 'Visitors';
+    newVisitGraphName = 'New Visitors';
 
     public graphData: Array<any> = [
         {
-            data: this.countedVisitData,
+            data: this.totalVisits,
             label: this.visitGraphName
         },
         {
-            data: this.countedNewVisitData,
+            data: this.newUsers,
             label: this.newVisitGraphName
         }
     ];
@@ -50,7 +50,6 @@ export class VisitStatisticsComponent implements OnInit {
                 },
 
             }], yAxes: [{
-                stacked: true,
                 ticks: {
                     beginAtZero: true,
                 },
@@ -68,15 +67,13 @@ export class VisitStatisticsComponent implements OnInit {
 
     ngOnInit() {
         this.statisticsService.findAll().subscribe(data => {
-            data.countedVisit.forEach((c) => {
-                this.countedVisitData.push(c.countVisits);
-                this.countedVisitDates.push(c.visitDate);
+            data.newUsers.forEach((c) => {
+                this.newUsers.push(c);
             });
-            data.visitStatisticsNewUsers.forEach((c) => {
-                this.countedNewVisitData.push(c.countVisits);
+            data.totalVisits.forEach((c) => {
+                this.totalVisits.push(c);
             });
-            console.log(data.visitStatisticsNewUsers)
-            console.log(data.countedVisit)
+            this.dates = data.dates
         });
     }
 }

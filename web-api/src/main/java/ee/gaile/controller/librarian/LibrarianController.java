@@ -1,7 +1,7 @@
 package ee.gaile.controller.librarian;
 
 import ee.gaile.entity.librarian.Books;
-import ee.gaile.models.FilterWrapper;
+import ee.gaile.models.librarian.FilterWrapper;
 import ee.gaile.service.librarian.LibrarianService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package ee.gaile.entity;
+package ee.gaile.entity.proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
