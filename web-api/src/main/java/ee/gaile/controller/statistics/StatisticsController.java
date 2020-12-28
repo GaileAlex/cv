@@ -32,7 +32,9 @@ public class StatisticsController {
     @PostMapping(path = "/user")
     public void getUserSpy(HttpServletRequest request) {
         ACCESS_LOG.info("user name is {}, IP is {}, city is {}, country is {}",
-                request.getHeader("user"), request.getHeader("userIP"), request.getHeader("userCity"),
+                request.getHeader("user"),
+                request.getHeader("userIP"),
+                request.getHeader("userCity"),
                 request.getHeader("userCountry"));
 
         statisticsService.setUserStatistics(request);

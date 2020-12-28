@@ -5,7 +5,7 @@
 
     <logger name="org.springframework.web" level="INFO"/>
 
-    <property name="log.folder" value="logs"/>
+    <property name="log.folder" value="./.logs"/>
 
     <appender name="ACCESS-ACCOUNTING-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.folder}/access-logs/access.log</file>

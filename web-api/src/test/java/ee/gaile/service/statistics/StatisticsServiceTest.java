@@ -1,15 +1,21 @@
 package ee.gaile.service.statistics;
 
+import ee.gaile.CVApplication;
+import ee.gaile.EnvironmentTest;
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest()
 @ActiveProfiles("test")
-class StatisticsServiceTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest(        classes = CVApplication.class)
+class StatisticsServiceTest    extends EnvironmentTest {
 
     @Autowired
     private StatisticsService statisticsService;

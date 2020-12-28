@@ -21,3 +21,4 @@
 /.access-logs/
 /.error/
 /frontend/target/
+/.logs/
