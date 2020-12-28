@@ -12,7 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-@ExtendWith(SpringExtension.class)
+/*@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {CVApplication.class})
 @ActiveProfiles("test")
 @Rollback(false)
@@ -20,4 +20,4 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootConfiguration
 public abstract class ApplicationIT {
 
-}
+}*/

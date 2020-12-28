@@ -12,6 +12,7 @@ import ee.gaile.repository.mindly.BitfinexCryptocurrencyRepository;
 import ee.gaile.repository.mindly.CryptocurrencyValueRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -43,6 +44,9 @@ public class BitfinexAccessService {
     private final CryptocurrencyValueRepository cryptocurrencyValueRepository;
     private final BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository;
 
+    @Value("${bitfinex.access.run}")
+    private Boolean isRun;
+
     public BitfinexAccessService(CryptocurrencyValueRepository cryptocurrencyValueRepository,
                                  BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository) {
         this.cryptocurrencyValueRepository = cryptocurrencyValueRepository;
@@ -51,7 +55,9 @@ public class BitfinexAccessService {
 
     @Scheduled(fixedDelay = Long.MAX_VALUE)
     public void firstStartSyncService() {
-        setCryptocurrency();
+        if (isRun) {
+            setCryptocurrency();
+        }
     }
 
     @Scheduled(cron = "${bitfinex.access.scheduled}")

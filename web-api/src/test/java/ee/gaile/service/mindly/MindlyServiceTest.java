@@ -1,13 +1,10 @@
 package ee.gaile.service.mindly;
 
-import ee.gaile.EnvironmentTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class MindlyServiceTest   extends EnvironmentTest {
+class MindlyServiceTest {
 
     @BeforeEach
     void setUp() {

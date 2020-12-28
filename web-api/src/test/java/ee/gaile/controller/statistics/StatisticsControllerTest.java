@@ -1,11 +1,7 @@
 package ee.gaile.controller.statistics;
 
 import ee.gaile.CVApplication;
-import ee.gaile.EnvironmentTest;
 import ee.gaile.service.statistics.StatisticsService;
-import ee.gaile.sync.mindly.BitfinexAccessService;
-import ee.gaile.sync.proxy.ProxyCheck;
-import ee.gaile.sync.proxy.ProxyListService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +20,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
-@SpringBootTest(        classes = CVApplication.class)
+@SpringBootTest(classes = CVApplication.class)
 @AutoConfigureMockMvc
-class StatisticsControllerTest  extends EnvironmentTest {
+class StatisticsControllerTest {
     @MockBean
     private StatisticsService statisticsService;
 

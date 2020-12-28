@@ -1,7 +1,6 @@
 package ee.gaile.controller.librarian;
 
 import ee.gaile.CVApplication;
-import ee.gaile.EnvironmentTest;
 import ee.gaile.configuration.BooksToRepoConfig;
 import ee.gaile.service.librarian.LibrarianService;
 import org.junit.jupiter.api.Test;
@@ -12,22 +11,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
-@SpringBootTest(        classes = CVApplication.class)
+@SpringBootTest(classes = CVApplication.class)
 @AutoConfigureMockMvc
-class LibrarianControllerTest  {
+class LibrarianControllerTest {
     @MockBean
     private LibrarianService searchService;
 
@@ -38,7 +34,7 @@ class LibrarianControllerTest  {
     private MockMvc mvc;
 
     @Test
-    void findAll()  throws Exception{
+    void findAll() throws Exception {
         mvc.perform(MockMvcRequestBuilders
                 .get(API_V1_PREFIX + "/librarian/find-all")
                 .accept(MediaType.APPLICATION_JSON))
@@ -47,9 +43,9 @@ class LibrarianControllerTest  {
     }
 
     @Test
-    void getBooksByFilter()  throws Exception{
+    void getBooksByFilter() throws Exception {
         mvc.perform(MockMvcRequestBuilders
-                .get(API_V1_PREFIX + "/librarian/{condition}",1)
+                .get(API_V1_PREFIX + "/librarian/{condition}", 1)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());

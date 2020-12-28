@@ -1,7 +1,6 @@
 package ee.gaile.controller.blog;
 
 import ee.gaile.CVApplication;
-import ee.gaile.EnvironmentTest;
 import ee.gaile.service.blog.AdminBlogService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -22,9 +21,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
-@SpringBootTest(        classes = CVApplication.class)
+@SpringBootTest(classes = CVApplication.class)
 @AutoConfigureMockMvc
-class AdminBlogControllerTest extends EnvironmentTest {
+class AdminBlogControllerTest {
     @MockBean
     private AdminBlogService adminBlogService;
 
