@@ -4,6 +4,7 @@ import ee.gaile.CVApplication;
 import ee.gaile.service.statistics.StatisticsService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import javax.servlet.http.HttpServletRequest;
+
+import static ee.gaile.UtilsTests.asJsonString;
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -30,7 +34,7 @@ class StatisticsControllerTest {
     private MockMvc mvc;
 
     @Test
-    void getGraphData() throws Exception {
+    void checkGetGraphData() throws Exception {
         mvc.perform(MockMvcRequestBuilders
                 .get(API_V1_PREFIX + "/statistic/graph")
                 .accept(MediaType.APPLICATION_JSON))
@@ -39,6 +43,14 @@ class StatisticsControllerTest {
     }
 
     @Test
-    void getUserSpy() {
+    void checkGetUserSpy() throws Exception {
+        HttpServletRequest req = Mockito.mock(HttpServletRequest.class);
+        mvc.perform(MockMvcRequestBuilders
+                .post(API_V1_PREFIX + "/statistic/user")
+                .content(asJsonString(req))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());
     }
 }

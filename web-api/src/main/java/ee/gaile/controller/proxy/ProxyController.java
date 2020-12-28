@@ -20,8 +20,6 @@ import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 public class ProxyController {
     private final ProxyService proxyService;
 
-    private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
-
     @GetMapping(path = "/list/{pageSize}/{page}")
     public ResponseEntity<ProxyListWrapper> getGraphData(@PathVariable(value = "pageSize") Integer pageSize,
                                                          @PathVariable(value = "page") Integer page) {

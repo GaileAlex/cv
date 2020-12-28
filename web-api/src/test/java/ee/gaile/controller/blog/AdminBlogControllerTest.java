@@ -31,7 +31,7 @@ class AdminBlogControllerTest {
     private MockMvc mvc;
 
     @Test
-    void addBlog() throws Exception {
+    void checkAddBlog() throws Exception {
         MockMultipartFile image = new MockMultipartFile("data", "filename.txt", "text/plain", "image".getBytes());
         mvc.perform(MockMvcRequestBuilders
                 .multipart(API_V1_PREFIX + "/admin-blog")
