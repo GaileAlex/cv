@@ -1,8 +1,8 @@
 --liquibase formatted sql
 --changeset gaile:v0019_insert_to_tables_proxy_list.sql
 
-INSERT INTO proxy_list (ip_address, port, protocol, country)
-values ('208.113.153.233', '36260', 'SOCKS5', 'United States');
+INSERT INTO proxy_list (ip_address, port, protocol, country, speed, uptime)
+values ('208.113.153.233', '36260', 'SOCKS5', 'United States', 10, 40);
 
 INSERT INTO proxy_list (ip_address, port, protocol, country)
 values ('8.135.28.152', '1080', 'SOCKS5', 'United States');

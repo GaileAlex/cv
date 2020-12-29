@@ -77,7 +77,7 @@ class StatisticsServiceTest extends ApplicationIT {
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(visitStatisticGraph.getDates().get(0)).isEqualTo("2020-12-29");
             softly.assertThat(visitStatisticGraph.getNewUsers().get(0)).isEqualTo(0);
-            softly.assertThat(visitStatisticGraph.getTotalVisits().get(0)).isEqualTo(2);
+            softly.assertThat(visitStatisticGraph.getTotalVisits().get(0)).isEqualTo(1);
         });
     }
 }
