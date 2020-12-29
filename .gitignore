@@ -22,3 +22,8 @@
 /frontend/target/
 /.logs/
 /web-api/src/main/resources/application.properties
+/web-api/.logs/
+/Dockerfile
+/docker-compose.yml
+/frontend/default.conf
+/frontend/Dockerfile
