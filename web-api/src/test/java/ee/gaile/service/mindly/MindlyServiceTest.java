@@ -33,9 +33,7 @@ class MindlyServiceTest extends ApplicationIT {
         mindlyService.deletePortfolioById(mindlyList.get(3).getId());
         List<Mindly> mindlyListAfterDelete = mindlyService.getAllPortfolio();
 
-        SoftAssertions.assertSoftly(softly -> {
-            softly.assertThat(mindlyListAfterDelete.size()).isEqualTo(3);
-        });
+        SoftAssertions.assertSoftly(softly -> softly.assertThat(mindlyListAfterDelete.size()).isEqualTo(3));
 
     }
 

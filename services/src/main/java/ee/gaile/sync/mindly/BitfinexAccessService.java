@@ -85,7 +85,7 @@ public class BitfinexAccessService {
                 cryptocurrencyValues.setValueCurrency(price);
 
                 cryptocurrencyValues.setBitfinexCryptocurrency(bitfinexCryptocurrencyRepository
-                        .findByCryptocurrencyName(k).get());
+                        .findByCryptocurrencyName(k).orElseThrow(NullPointerException::new));
 
                 cryptocurrencyValueRepository.save(cryptocurrencyValues);
 

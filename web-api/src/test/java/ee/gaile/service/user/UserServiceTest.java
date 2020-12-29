@@ -59,10 +59,8 @@ class UserServiceTest extends ApplicationIT {
 
         ResponseEntity<?> responseEntity = userService.registerUser(signupRequest);
 
-        SoftAssertions.assertSoftly(softly -> {
-            softly.assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
-        });
+        SoftAssertions.assertSoftly(softly -> softly.assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200));
 
-        userRepository.delete(userRepository.findByUsername("TestUser").get());
+        userRepository.delete(userRepository.findByUsername("TestUser").orElseThrow(NullPointerException::new));
     }
 }
