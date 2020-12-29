@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -70,9 +71,15 @@ public class StatisticsService {
         }
     }
 
-    public VisitStatisticGraph getStatisticsGraph() {
-        List<VisitStatisticsGraph> countedVisitDTOList = visitStatisticUserRepository.selectVisitStatistic();
-        List<VisitStatisticsGraph> visitStatisticsNewUsers = visitStatisticUserRepository.selectNewVisitors();
+    public VisitStatisticGraph getStatisticsGraph(String fromDate, String toDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime fromDateParse = LocalDateTime.parse(fromDate, formatter);
+        LocalDateTime toDateParse = LocalDateTime.parse(toDate, formatter);
+
+        List<VisitStatisticsGraph> countedVisitDTOList = visitStatisticUserRepository
+                .selectVisitStatistic(fromDateParse, toDateParse);
+        List<VisitStatisticsGraph> visitStatisticsNewUsers = visitStatisticUserRepository
+                .selectNewVisitors(fromDateParse, toDateParse);
 
         LocalDate startDate = LocalDate.from(countedVisitDTOList.get(0).getVisitDate());
         LocalDate endDate = LocalDate.from(countedVisitDTOList.get(countedVisitDTOList.size() - 1).getVisitDate());
@@ -89,7 +96,7 @@ public class StatisticsService {
         Map<LocalDate, BigInteger> map = visitList.stream()
                 .collect(Collectors.toMap(VisitStatisticsGraph::getVisitDate, VisitStatisticsGraph::getCountVisits));
 
-        while (!startDate.equals(endDate.plusDays(1)) ) {
+        while (!startDate.equals(endDate.plusDays(1))) {
             if (map.get(startDate) != null) {
                 points.add(map.get(startDate));
             } else {

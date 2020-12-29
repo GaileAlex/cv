@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,9 +21,10 @@ public class StatisticsController {
 
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
 
-    @GetMapping(path = "/graph")
-    public ResponseEntity<VisitStatisticGraph> getGraphData() {
-        return new ResponseEntity<>(statisticsService.getStatisticsGraph(), HttpStatus.OK);
+    @GetMapping(path = "/graph/{fromDate}/{toDate}")
+    public ResponseEntity<VisitStatisticGraph> getGraphData(@PathVariable(value = "fromDate") String fromDate,
+                                                            @PathVariable(value = "toDate") String toDate) {
+        return new ResponseEntity<>(statisticsService.getStatisticsGraph(fromDate, toDate), HttpStatus.OK);
     }
 
     @PostMapping(path = "/user")

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsService } from '../../../service/statistics.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-visit-statistics',
@@ -66,7 +67,12 @@ export class VisitStatisticsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.statisticsService.findAll().subscribe(data => {
+        let date = new Date();
+        date.setMonth(date.getMonth() - 1);
+        const fromDate = new Date(date.getFullYear(), date.getMonth(), 1);
+        let toDate = new Date();
+
+        this.statisticsService.findAll(this.formatDate(fromDate), this.formatDate(toDate)).subscribe(data => {
             data.newUsers.forEach((c) => {
                 this.newUsers.push(c);
             });
@@ -75,6 +81,10 @@ export class VisitStatisticsComponent implements OnInit {
             });
             this.dates = data.dates
         });
+    }
+
+    formatDate(date) {
+        return moment(date).format('yyyy-MM-DDTHH:mm:ss');
     }
 }
 

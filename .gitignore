@@ -12,7 +12,6 @@
 /logs/
 /etc/docker/cv_dev/db.sql
 /.currency-logs/
-/web-api/src/main/resources/application.properties
 /.idea/
 /persistence/target/
 /security/target/
@@ -22,3 +21,4 @@
 /.error/
 /frontend/target/
 /.logs/
+/web-api/src/main/resources/application.properties

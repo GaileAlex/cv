@@ -29,7 +29,7 @@ export class StatisticsService {
         return this.http.post(this.USER_STATISTICS_URL, {}, userIPOptions);
     }
 
-    public findAll(): Observable<VisitStatisticGraph> {
-        return this.http.get<VisitStatisticGraph>(this.GRAPH_STATISTICS_URL);
+    public findAll(fromDate, toDate): Observable<VisitStatisticGraph> {
+        return this.http.get<VisitStatisticGraph>(`${ this.GRAPH_STATISTICS_URL }/${ fromDate }/${ toDate }`);
     }
 }

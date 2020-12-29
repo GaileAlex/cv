@@ -31,7 +31,9 @@ public class AdminConfig {
     @PostConstruct
     private void changeAdmin() {
         Users admin = userRepository.findByRole(EnumRoles.ROLE_ADMIN);
-        userRepository.delete(admin);
+        if (admin != null) {
+            userRepository.delete(admin);
+        }
         Users user = new Users(adminName, email, encoder.encode(password), EnumRoles.ROLE_ADMIN);
         userRepository.save(user);
     }

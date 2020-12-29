@@ -29,7 +29,8 @@ class StatisticsControllerTest extends ApplicationIT {
     @Test
     void checkGetGraphData() throws Exception {
         mvc.perform(MockMvcRequestBuilders
-                .get(API_V1_PREFIX + "/statistic/graph")
+                .get(API_V1_PREFIX + "/statistic/graph/{fromDate}/{toDate}",
+                        "2020-11-01T00:00:00", "2020-12-31T00:00:00")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
