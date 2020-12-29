@@ -61,6 +61,12 @@ public class BooksToRepoConfig {
                         " technologies. This helps developers focus only on\n" +
                         "the application business-logic and leave the heavy lifting to the Spring Framework."));
             }
+            librarianService.save(new Books("Spring MVC Cookbook", "Alex Bretet",
+                    LocalDate.ofYearDay(2021, 1), "Welcome to the singular" +
+                    " universe of Spring MVC Cookbook. We hope you are ready for this\n" +
+                    "journey that will take you through modern Spring web development practices. We have been\n" +
+                    "building the cloudstreetmarket.com , a stock exchange platform with social capabilities.\n" +
+                    "We are about to take you through each step of its development process."));
         }
     }
 }

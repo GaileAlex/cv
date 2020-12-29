@@ -8,7 +8,6 @@ import ee.gaile.repository.statistic.VisitStatisticIpRepository;
 import ee.gaile.repository.statistic.VisitStatisticUserRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +29,6 @@ public class StatisticsService {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticIpRepository visitStatisticIpRepository;
     private final VisitStatisticUserRepository visitStatisticUserRepository;
-    private final ModelMapper modelMapper = new ModelMapper();
 
     public void setUserStatistics(HttpServletRequest request) {
         String userIP = request.getHeader("userIP");

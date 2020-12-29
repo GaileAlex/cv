@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -34,6 +35,13 @@ public class LibrarianService extends LibrarianNativeRepo {
     public List<Books> filterOut(FilterWrapper filterWrapper, String condition) {
         StringBuilder bookQuery = new StringBuilder(QUERY).append(" where ");
         List<SelectedFilter> selectedFilterList = filterWrapper.getSelectedFilters();
+
+        for (SelectedFilter selectedFilter : filterWrapper.getSelectedFilters()) {
+            if ((selectedFilter.getSearchArea().equals("Author") || selectedFilter.getSearchArea().equals("Title"))
+                    && selectedFilter.getTextRequest().equals("")) {
+                return Collections.emptyList();
+            }
+        }
 
         for (int i = 0; i < selectedFilterList.size(); i++) {
 

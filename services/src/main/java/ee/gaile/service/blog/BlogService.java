@@ -35,7 +35,9 @@ public class BlogService {
 
     public BlogWrapper findBlogById(Long blogId) {
         Blog blog = blogRepository.findBlogById(blogId);
-        blog.getComments().sort(Comparator.comparing(Comments::getDate).reversed());
+        if (blog.getComments() != null) {
+            blog.getComments().sort(Comparator.comparing(Comments::getDate).reversed());
+        }
 
         return toDto(blog);
     }
