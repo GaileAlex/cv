@@ -49,10 +49,10 @@ public class ProxyService {
                 try {
                     ProxyList proxyList = new ProxyList();
                     row.getCell(0);
-                    proxyList.setIpAddress(String.valueOf(row.getCell(0)));
+                    proxyList.setIpAddress(String.valueOf(row.getCell(0)).trim());
                     proxyList.setPort(Double.valueOf(String.valueOf(row.getCell(1))).intValue());
-                    proxyList.setProtocol(String.valueOf(row.getCell(2)));
-                    proxyList.setCountry(String.valueOf((row.getCell(3))));
+                    proxyList.setProtocol(String.valueOf(row.getCell(2)).trim());
+                    proxyList.setCountry(String.valueOf((row.getCell(3))).trim());
                     proxyLists.add(proxyList);
                 } catch (NumberFormatException e) {
                     log.info("end of table");

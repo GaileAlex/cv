@@ -21,7 +21,7 @@ public interface ProxyRepository extends JpaRepository<ProxyList, Long> {
     Long getTotal();
 
     @Query(value = "select * from proxy_list " +
-            " ORDER BY speed ", nativeQuery = true)
+            " ORDER BY speed desc ", nativeQuery = true)
     List<ProxyList> findAllBySpeed();
 
 }
