@@ -24,8 +24,8 @@
                 <td>{{ proxy.protocol }}</td>
                 <td>{{ proxy.country }}</td>
                 <td>{{ proxy.anonymity }}</td>
-                <td>{{ proxy.speed | number }}  kB/s</td>
-                <td>{{ proxy.uptime | number }}  %</td>
+                <td>{{ proxy.speed | number:'1.0-0' }}  kB/s</td>
+                <td>{{ proxy.uptime | number:'1.0-0' }}  %</td>
                 <td>{{ proxy.response | number }} ms</td>
                 <td>{{ proxy.lastChecked | date : "HH:mm dd-MM-yy" }}</td>
             </tr>
