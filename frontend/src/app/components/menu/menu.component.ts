@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit {
     pageId: string;
     username: string;
     isLoggedIn: boolean = false;
+    errorMessage = '';
 
     constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
                 private authService: AuthService, private userDataService: UserDataService, private statisticsService: StatisticsService) {
@@ -37,7 +38,11 @@ export class MenuComponent implements OnInit {
         this.translate.setDefaultLang(this.languageService.getLanguage());
         if ('false' === localStorage.getItem('isSameSession')) {
             setTimeout(() => {
-                this.statisticsService.userSpy().subscribe();
+                this.statisticsService.userSpy().subscribe(data => {
+
+                }, error => {
+                    this.errorMessage = error;
+                });
             }, 1000);
             localStorage.setItem('isSameSession', 'true');
         }
