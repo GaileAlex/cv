@@ -33,13 +33,14 @@ public class ProxyListService {
 
     @Scheduled(fixedDelay = Long.MAX_VALUE)
     public void firstStartSyncService() {
-        if (isRun) {
-            setAllProxy();
-        }
+        setAllProxy();
     }
 
     @Scheduled(cron = "${proxy.scheduled}")
     public void setAllProxy() {
+        if (!isRun) {
+            return;
+        }
         List<ProxyList> proxyLists = proxyRepository.findAllBySpeed();
 
         for (ProxyList proxyList : proxyLists) {
@@ -64,7 +65,7 @@ public class ProxyListService {
         }
 
         if (proxyList.getUptime() != null && proxyList.getNumberUnansweredChecks() != null
-                && proxyList.getUptime() == 0 && proxyList.getNumberUnansweredChecks() > 10000) {
+                && proxyList.getUptime() == 0 && proxyList.getNumberUnansweredChecks() > 5000) {
             try {
                 Files.deleteIfExists(Paths.get(proxyList.getId() + "_"
                         + proxyList.getIpAddress() + "_" + proxyList.getPort() + ".tmp"));

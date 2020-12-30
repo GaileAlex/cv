@@ -27,3 +27,5 @@
 /docker-compose.yml
 /frontend/default.conf
 /frontend/Dockerfile
+/proxy/
+/web-api/src/main/resources/proxy/

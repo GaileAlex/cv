@@ -55,13 +55,15 @@ public class BitfinexAccessService {
 
     @Scheduled(fixedDelay = Long.MAX_VALUE)
     public void firstStartSyncService() {
-        if (isRun) {
-            setCryptocurrency();
-        }
+        setCryptocurrency();
     }
 
     @Scheduled(cron = "${bitfinex.access.scheduled}")
     private void setCryptocurrency() {
+        if (!isRun) {
+            return;
+        }
+
         Map<String, String> map = BitfinexCryptocurrencyEnum.getCurrencyName();
 
         map.forEach((k, v) -> {
