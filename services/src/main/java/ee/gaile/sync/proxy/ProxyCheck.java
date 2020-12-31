@@ -112,7 +112,7 @@ public class ProxyCheck {
         long duration;
 
         if (Duration.between(start.toLocalTime(), now).toMillis() == 0) {
-            duration = 1L;
+            duration = 20L;
         } else {
             duration = Duration.between(start.toLocalTime(), now).toMillis();
         }
