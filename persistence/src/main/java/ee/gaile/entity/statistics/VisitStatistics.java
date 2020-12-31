@@ -41,7 +41,6 @@ public class VisitStatistics {
     @Column(name = "last_visit")
     private LocalDateTime lastVisit;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "total_time_on_site")
     private Long totalTimeOnSite;
 
