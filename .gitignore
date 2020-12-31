@@ -5,12 +5,7 @@
 /frontend/key.pem
 /services/services.iml
 /persistence/persistence.iml
-/cv-data/
-/etc/docker/cv_postgres/data/
-/etc/docker/cv_dev/data/
 /security/security.iml
-/logs/
-/etc/docker/cv_dev/db.sql
 /.currency-logs/
 /.idea/
 /persistence/target/
@@ -27,5 +22,4 @@
 /docker-compose.yml
 /frontend/default.conf
 /frontend/Dockerfile
-/proxy/
 /web-api/src/main/resources/proxy/

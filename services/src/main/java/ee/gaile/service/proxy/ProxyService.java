@@ -49,8 +49,15 @@ public class ProxyService {
                 try {
                     ProxyList proxyList = new ProxyList();
                     row.getCell(0);
-                    proxyList.setIpAddress(String.valueOf(row.getCell(0)).trim());
-                    proxyList.setPort(Double.valueOf(String.valueOf(row.getCell(1))).intValue());
+                    String ip = String.valueOf(row.getCell(0)).trim().split(":")[0];
+                    proxyList.setIpAddress(ip);
+                    String port;
+                    try {
+                        port = String.valueOf(row.getCell(1)).trim().split(":")[1];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        port = String.valueOf(row.getCell(1)).trim();
+                    }
+                    proxyList.setPort(Double.valueOf(port).intValue());
                     proxyList.setProtocol(String.valueOf(row.getCell(2)).trim());
                     proxyList.setCountry(String.valueOf((row.getCell(3))).trim());
                     proxyLists.add(proxyList);
