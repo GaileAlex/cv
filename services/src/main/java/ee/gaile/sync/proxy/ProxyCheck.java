@@ -63,15 +63,15 @@ public class ProxyCheck {
 
             inputStream.close();
 
-            proxyList.setSpeed(FILE_SIZE / Duration.between(startFile.toLocalTime(),
-                    LocalDateTime.now().toLocalTime()).toMillis());
+            proxyList.setSpeed(checkSpeed(startFile, LocalDateTime.now()));
 
             Double uptime = getUptime(proxyList);
             proxyList.setUptime(uptime);
+
             proxyRepository.save(proxyList);
 
             socksConnection.disconnect();
-            log.info("successful check IP: " + proxyList.getIpAddress());
+            log.info("successful check IP: " + proxyList.getIpAddress() + " ID: " + proxyList.getId());
 
         } catch (IOException e) {
             log.warn("check failed IP: " + proxyList.getIpAddress());
@@ -106,5 +106,18 @@ public class ProxyCheck {
             numberUnansweredChecks = proxyList.getNumberUnansweredChecks();
         }
         return 100.0 - 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);
+    }
+
+    private Double checkSpeed(LocalDateTime start, LocalDateTime now) {
+        long duration;
+
+        if (Duration.between(start.toLocalTime(), now).toMillis() == 0) {
+            duration = 1L;
+        } else {
+            duration = Duration.between(start.toLocalTime(), now).toMillis();
+        }
+
+        return FILE_SIZE / duration;
+
     }
 }
