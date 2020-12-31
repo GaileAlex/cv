@@ -28,6 +28,7 @@ public class StatisticsController {
     }
 
     @PostMapping(path = "/user")
+    @ResponseStatus(HttpStatus.OK)
     public void getUserSpy(HttpServletRequest request) {
         ACCESS_LOG.info("user name is {}, IP is {}, city is {}, country is {}",
                 request.getHeader("user"),
@@ -36,6 +37,14 @@ public class StatisticsController {
                 request.getHeader("userCountry"));
 
         statisticsService.setUserStatistics(request);
+    }
+
+    @PostMapping(path = "/user-out")
+    @ResponseStatus(HttpStatus.OK)
+    public void getUserOutDate(HttpServletRequest request) {
+        ACCESS_LOG.info("user left date is {}", request.getHeader("dateOut"));
+
+        statisticsService.setUserTotalTimeOnSite(request);
     }
 
 }

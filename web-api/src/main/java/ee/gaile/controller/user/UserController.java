@@ -32,13 +32,14 @@ public class UserController {
     }
 
     @PostMapping(path = "/refresh")
-    public AuthRefreshDTO getAccessTokenByRefreshToken(@RequestBody AuthRefreshDTO authDTO, HttpServletRequest request) throws Exception {
-        return userService.refreshAuth(authDTO, request);
+    public ResponseEntity<AuthRefreshDTO> getAccessTokenByRefreshToken(@RequestBody AuthRefreshDTO authDTO,
+                                                                       HttpServletRequest request) throws Exception {
+        return new ResponseEntity<>(userService.refreshAuth(authDTO, request), HttpStatus.OK);
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        return userService.registerUser(signUpRequest);
+        return new ResponseEntity<>(userService.registerUser(signUpRequest), HttpStatus.OK);
     }
 
 }

@@ -20,7 +20,6 @@ public class MindlyController {
     private final MindlyService mindlyService;
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Mindly>> getPortfolio() {
         return new ResponseEntity<>(mindlyService.getAllPortfolio(), HttpStatus.OK);
     }

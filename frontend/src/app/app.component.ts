@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { LanguageService } from './service/language.service';
+import { StatisticsService } from "./service/statistics.service";
 
 @Component({
     selector: 'app-root',
@@ -9,9 +10,19 @@ import { LanguageService } from './service/language.service';
 
 export class AppComponent {
     title = 'frontend';
+    errorMessage = '';
 
-    constructor(private languageService: LanguageService) {
+    constructor(private languageService: LanguageService, private statisticsService: StatisticsService) {
         languageService.setDefault();
+    }
+
+    @HostListener('window:beforeunload', ['$event'])
+    beforeUnloadHandler(event) {
+        this.statisticsService.userOut().subscribe(data => {
+
+        }, error => {
+            this.errorMessage = error;
+        });
 
     }
 

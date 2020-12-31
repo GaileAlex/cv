@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.math.BigInteger;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -87,6 +88,28 @@ public class StatisticsService {
         List<LocalDate> date = getDates(startDate, endDate);
 
         return new VisitStatisticGraph(newUsers, totalVisits, date);
+    }
+
+    public void setUserTotalTimeOnSite(HttpServletRequest request) {
+        Optional<VisitStatistics> visitStatistics = visitStatisticsRepository.findByUserIP(request.getHeader("userIP"));
+        VisitStatistics user = visitStatistics.orElseThrow(NullPointerException::new);
+
+        LocalDateTime userEntry = user.getLastVisit();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime userOut = LocalDateTime.parse(request.getHeader("dateOut"), formatter);
+
+        long between = Duration.between(userEntry, userOut).toMillis();
+
+        try {
+            user.setTotalTimeOnSite(user.getTotalTimeOnSite() + between);
+        } catch (NullPointerException e) {
+            user.setTotalTimeOnSite(between);
+        }
+
+        visitStatisticsRepository.save(user);
+
+
     }
 
     private List<BigInteger> getPointByDate(List<VisitStatisticsGraph> visitList, LocalDate startDate, LocalDate endDate) {
