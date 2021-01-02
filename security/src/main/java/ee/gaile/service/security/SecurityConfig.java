@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, LOGOUT_URL).permitAll()
                 .antMatchers(HttpMethod.POST, AUTH_REFRESH_URL).permitAll()
                 .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/blog/comments").authenticated()
+                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/statistic/**").authenticated()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), loginService))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
