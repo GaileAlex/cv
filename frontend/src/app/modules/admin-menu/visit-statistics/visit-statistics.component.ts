@@ -15,6 +15,9 @@ export class VisitStatisticsComponent implements OnInit {
     visitGraphName = 'Visitors';
     newVisitGraphName = 'New Visitors';
     visitStatisticsTables: VisitStatisticsTables[] = [];
+    total: number;
+    page = 0;
+    pageSize = 8;
 
     public graphData: Array<any> = [
         {
