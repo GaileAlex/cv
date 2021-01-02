@@ -33,7 +33,7 @@ export class StatisticsService {
     }
 
     userOut() {
-        const date = formatDate(new Date(), 'yyyy-MM-dd H:mm:ss', 'en_US')
+        const date = formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en_US')
 
         const userIPOptions = {
             headers: new HttpHeaders({

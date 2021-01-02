@@ -1,6 +1,7 @@
 package ee.gaile.service.statistics;
 
 import ee.gaile.entity.statistics.VisitStatisticUserIp;
+import ee.gaile.entity.statistics.VisitStatisticVisitDate;
 import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.models.statistics.VisitStatisticsGraph;
@@ -8,6 +9,7 @@ import ee.gaile.models.statistics.VisitStatisticsTable;
 import ee.gaile.repository.statistic.VisitStatisticIpRepository;
 import ee.gaile.repository.statistic.VisitStatisticsGraphRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
+import ee.gaile.service.security.request.SignupRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -113,6 +115,43 @@ public class StatisticsService {
 
         visitStatisticsRepository.save(user);
 
+    }
+
+    public void combineTheSameUsersByUserName(SignupRequest signupRequest) {
+        VisitStatistics visitStatistics = visitStatisticsRepository.findByUserName(signupRequest.getUsername())
+                .orElseThrow(NullPointerException::new);
+
+        List<VisitStatistics> oldUsers = visitStatisticsRepository.findOldUsers(signupRequest.getUsername());
+
+        if (oldUsers.size() != 1) {
+
+            oldUsers.remove(0);
+            List<VisitStatisticUserIp> visitStatisticUserIps = new ArrayList<>();
+            List<VisitStatisticVisitDate> visitStatisticVisitDates = new ArrayList<>();
+
+            oldUsers.forEach((c) -> {
+                if (visitStatistics.getFirstVisit().isAfter(c.getFirstVisit())) {
+                    visitStatistics.setFirstVisit(c.getFirstVisit());
+                }
+                if (c.getTotalVisits() != null) {
+                    visitStatistics.setTotalVisits(visitStatistics.getTotalVisits() + c.getTotalVisits());
+                }
+                if (c.getTotalTimeOnSite() != null) {
+                    visitStatistics.setTotalTimeOnSite(visitStatistics.getTotalTimeOnSite() + c.getTotalTimeOnSite());
+                }
+                visitStatisticUserIps.addAll(c.getVisitStatisticUserIps());
+                visitStatisticVisitDates.addAll(c.getVisitStatisticVisitDates());
+            });
+
+            visitStatisticUserIps.forEach((c) -> c.setVisitStatistics(visitStatistics));
+            visitStatisticVisitDates.forEach((c) -> c.setVisitStatistics(visitStatistics));
+
+            visitStatistics.setVisitStatisticUserIps(visitStatisticUserIps);
+            visitStatistics.setVisitStatisticVisitDates(visitStatisticVisitDates);
+
+            visitStatisticsRepository.save(visitStatistics);
+            visitStatisticsRepository.deleteAll(oldUsers);
+        }
     }
 
     private List<BigInteger> getPointByDate(List<VisitStatisticsGraph> visitList, LocalDate startDate, LocalDate endDate) {

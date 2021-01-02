@@ -42,7 +42,6 @@ export class VisitStatisticsComponent implements OnInit {
     ];
 
     chartOptions = {
-        chartType: 'line',
         responsive: true,
         scales: {
             xAxes: [{

@@ -39,7 +39,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        return new ResponseEntity<>(userService.registerUser(signUpRequest), HttpStatus.OK);
+        return userService.registerUser(signUpRequest);
     }
 
 }

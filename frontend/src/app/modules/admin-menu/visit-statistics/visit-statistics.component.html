@@ -33,8 +33,8 @@
                 <td>{{ data.userIp }}</td>
                 <td>{{ data.userCity }}</td>
                 <td>{{ data.userLocation }}</td>
-                <td>{{ data.firstVisit | date : "HH:mm dd-MM-yy" }}</td>
-                <td>{{ data.lastVisit | date : "HH:mm dd-MM-yy" }}</td>
+                <td>{{ data.firstVisit | date : "dd-MM-yy HH:mm" }}</td>
+                <td>{{ data.lastVisit | date : "dd-MM-yy HH:mm" }}</td>
                 <td>{{ data.totalVisits | number:'1.0-0' }}</td>
                 <td>{{ data.totalTimeOnSite }}</td>
             </tr>

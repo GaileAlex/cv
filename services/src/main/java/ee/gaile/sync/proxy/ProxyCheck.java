@@ -71,10 +71,8 @@ public class ProxyCheck {
             proxyRepository.save(proxyList);
 
             socksConnection.disconnect();
-            log.info("successful check IP: " + proxyList.getIpAddress() + " ID: " + proxyList.getId());
 
         } catch (IOException e) {
-            log.warn("check failed IP: " + proxyList.getIpAddress());
             if (proxyList.getNumberUnansweredChecks() != null) {
                 proxyList.setNumberUnansweredChecks(proxyList.getNumberUnansweredChecks() + 1);
             } else {

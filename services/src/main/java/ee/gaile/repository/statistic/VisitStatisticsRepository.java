@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -15,5 +16,14 @@ public interface VisitStatisticsRepository extends JpaRepository<VisitStatistics
             "    on visit_statistics.id = vsui.visit_statistics_id " +
             "where user_ip = :userIP", nativeQuery = true)
     Optional<VisitStatistics> findByUserIP(@Param("userIP") String userIP);
+
+    @Query(value = "select * from visit_statistics " +
+            "            where user_name = :userName " +
+            "order by last_visit desc limit 1", nativeQuery = true)
+    Optional<VisitStatistics> findByUserName(@Param("userName") String userName);
+
+    @Query(value = "select * from visit_statistics " +
+            "where user_name = :userName order by last_visit desc", nativeQuery = true)
+    List<VisitStatistics> findOldUsers(@Param("userName") String userName);
 
 }

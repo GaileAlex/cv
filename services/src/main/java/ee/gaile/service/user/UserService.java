@@ -1,7 +1,7 @@
 package ee.gaile.service.user;
 
-import ee.gaile.enums.EnumRoles;
 import ee.gaile.entity.users.Users;
+import ee.gaile.enums.EnumRoles;
 import ee.gaile.service.security.LoginService;
 import ee.gaile.service.security.UserDetailsImpl;
 import ee.gaile.service.security.UserRepository;
@@ -59,7 +59,9 @@ public class UserService {
     }
 
     public ResponseEntity<?> registerUser(SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername()) ||
+                signUpRequest.getUsername().trim().equals("undefined")) {
+
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));

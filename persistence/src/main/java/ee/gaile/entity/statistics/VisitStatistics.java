@@ -49,11 +49,11 @@ public class VisitStatistics {
     private String username;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL})
     private List<VisitStatisticVisitDate> visitStatisticVisitDates;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL})
     private List<VisitStatisticUserIp> visitStatisticUserIps;
 
 }
