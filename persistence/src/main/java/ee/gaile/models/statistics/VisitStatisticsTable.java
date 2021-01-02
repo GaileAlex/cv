@@ -14,6 +14,7 @@ public class VisitStatisticsTable {
     private LocalDateTime lastVisit;
     private Long totalVisits;
     private String userName;
+    private String userIp;
     private String userCity;
     private Long totalTimeOnSite;
 }

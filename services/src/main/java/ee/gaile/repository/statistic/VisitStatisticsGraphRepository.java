@@ -14,14 +14,14 @@ public class VisitStatisticsGraphRepository {
     // language=sql
     private static final String SQL_NEW_USERS = "select date_trunc('day', last_visit) as visit_date, " +
             "             count(last_visit) as count_visits from visit_statistics " +
-            "            WHERE last_visit >= ? and  last_visit <= ? " +
+            "            WHERE last_visit BETWEEN ? and ? " +
             "            group by  date_trunc('day', last_visit) " +
             "            order by visit_date ";
     // language=sql
     private static final String SQL_USERS = "with data as ( " +
             "    select 1 as row, visit_statistics_id, date_trunc('day', visit_date) as visit_date " +
             "    from visit_statistic_visit_date " +
-            "WHERE visit_date >= ? and visit_date <= ?) " +
+            "WHERE visit_date BETWEEN ? and ?) " +
             "select " +
             "    visit_date, " +
             "    sum(row) as count_visits " +
@@ -30,8 +30,12 @@ public class VisitStatisticsGraphRepository {
             "order by visit_date ";
 
     // language=sql
-    private static final String SQL_TABLE = "select * from visit_statistics " +
-            "WHERE last_visit >= ? and last_visit <= ? order by last_visit desc ";
+    private static final String SQL_TABLE = "with data as (select distinct on (user_ip) * " +
+            "              from visit_statistics " +
+            "                       left join visit_statistics_user_ip vsui on visit_statistics.id = vsui.visit_statistics_id " +
+            "              WHERE last_visit BETWEEN ? and ?)" +
+            "select * from data " +
+            "order by last_visit desc";
 
     private final JdbcTemplate jdbcTemplate;
 

@@ -6,5 +6,6 @@ export class VisitStatisticsTables {
     userName: string;
     userCity: string;
     totalTimeOnSite: string;
+    userIp: string;
 
 }

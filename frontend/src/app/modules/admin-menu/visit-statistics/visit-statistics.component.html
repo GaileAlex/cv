@@ -18,6 +18,7 @@
             <thead>
             <tr>
                 <th scope="col">User Name</th>
+                <th scope="col">User IP</th>
                 <th scope="col">User City</th>
                 <th scope="col">User Location</th>
                 <th scope="col">First Visit</th>
@@ -29,6 +30,7 @@
             <tbody>
             <tr *ngFor="let data of visitStatisticsTables">
                 <th scope="row">{{ data.userName }}</th>
+                <td>{{ data.userIp }}</td>
                 <td>{{ data.userCity }}</td>
                 <td>{{ data.userLocation }}</td>
                 <td>{{ data.firstVisit | date : "HH:mm dd-MM-yy" }}</td>
