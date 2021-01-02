@@ -113,7 +113,6 @@ public class StatisticsService {
 
         visitStatisticsRepository.save(user);
 
-
     }
 
     private List<BigInteger> getPointByDate(List<VisitStatisticsGraph> visitList, LocalDate startDate, LocalDate endDate) {

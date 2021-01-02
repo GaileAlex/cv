@@ -30,7 +30,7 @@ public class VisitStatisticsGraphRepository {
             "order by visit_date ";
 
     // language=sql
-    private static final String SQL_TABLE = "select * from db.public.visit_statistics " +
+    private static final String SQL_TABLE = "select * from visit_statistics " +
             "WHERE last_visit >= ? and last_visit <= ? order by last_visit desc ";
 
     private final JdbcTemplate jdbcTemplate;
