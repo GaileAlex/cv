@@ -24,5 +24,6 @@
     <include file="v0020_insert_to_test_db_visit_statistics.sql" relativeToChangelogFile="true"/>
     <include file="v0021_insert_to_crypto_values.sql" relativeToChangelogFile="true"/>
     <include file="v0022_uniq_key_by_columns_proxy_list.sql" relativeToChangelogFile="true"/>
+    <include file="v0023_rename_table_visit_statistic_user.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

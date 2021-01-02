@@ -1,4 +1,5 @@
 <app-menu></app-menu>
+
 <div class="blog_main_area p_100 text-center">
     <div class="container">
         <div>
@@ -9,8 +10,43 @@
                     [colors]="lineChartColors"
                     [chartType]="'line'"></canvas>
         </div>
+    </div>
 
+    <div class="container">
+        <h3 class="p_100_top  p_50_bottom">Site visit statistics</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">User Name</th>
+                <th scope="col">User City</th>
+                <th scope="col">User Location</th>
+                <th scope="col">First Visit</th>
+                <th scope="col">Last Visit</th>
+                <th scope="col">Total Visits</th>
+                <th scope="col">Total Time On Site</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of visitStatisticsTables">
+                <th scope="row">{{ data.userName }}</th>
+                <td>{{ data.userCity }}</td>
+                <td>{{ data.userLocation }}</td>
+                <td>{{ data.firstVisit | date : "HH:mm dd-MM-yy" }}</td>
+                <td>{{ data.lastVisit | date : "HH:mm dd-MM-yy" }}</td>
+                <td>{{ data.totalVisits | number:'1.0-0' }}</td>
+                <td>{{ data.totalTimeOnSite }}</td>
+            </tr>
+            </tbody>
+        </table>
 
+        <div class="d-flex justify-content-between p-2">
+            <mat-paginator [length]="total"
+                           [pageSize]="pageSize"
+                           (page)="changePage($event)"
+                           [showFirstLastButtons]="true">
+            </mat-paginator>
+        </div>
     </div>
 </div>
+
 <app-footer></app-footer>

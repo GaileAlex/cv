@@ -1,6 +1,5 @@
 package ee.gaile.entity.statistics;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,9 +23,8 @@ public class VisitStatisticUserIp {
     @Column(name = "user_ip")
     private String userIp;
 
-    @ManyToOne
-    @JoinColumn(name = "visit_statistics_id", nullable = false)
-    @JsonIgnore
+    @ManyToOne(targetEntity = VisitStatistics.class)
+    @JoinColumn(name = "visit_statistics_id")
     private VisitStatistics visitStatistics;
 
 }

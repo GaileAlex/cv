@@ -16,5 +16,4 @@ public interface VisitStatisticsRepository extends JpaRepository<VisitStatistics
             "where user_ip = :userIP", nativeQuery = true)
     Optional<VisitStatistics> findByUserIP(@Param("userIP") String userIP);
 
-    VisitStatistics findTopByOrderByIdDesc();
 }

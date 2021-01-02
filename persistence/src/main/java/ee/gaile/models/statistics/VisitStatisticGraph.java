@@ -18,4 +18,5 @@ public class VisitStatisticGraph {
     private List<BigInteger> newUsers;
     private List<BigInteger> totalVisits;
     private List<LocalDate> dates;
+    private List<VisitStatisticsTable> visitStatisticsTables;
 }

@@ -1,5 +1,6 @@
 package ee.gaile.entity.statistics;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +25,6 @@ public class VisitStatistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL}, orphanRemoval = true)
-    private List<VisitStatisticUserIp> visitStatisticUserIps;
-
     @Column(name = "user_location")
     private String userLocation;
 
@@ -50,7 +48,12 @@ public class VisitStatistics {
     @Column(name = "user_name")
     private String username;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL}, orphanRemoval = true)
-    private List<VisitStatisticUser> visitStatisticUsers;
+    private List<VisitStatisticVisitDate> visitStatisticVisitDates;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    private List<VisitStatisticUserIp> visitStatisticUserIps;
 
 }

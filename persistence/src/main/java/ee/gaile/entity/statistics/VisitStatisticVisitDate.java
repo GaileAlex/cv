@@ -1,6 +1,5 @@
 package ee.gaile.entity.statistics;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,9 +13,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "VisitStatisticUser")
-@Table(name = "visit_statistic_user")
-public class VisitStatisticUser {
+@Entity(name = "VisitStatisticVisitDate")
+@Table(name = "visit_statistic_visit_date")
+public class VisitStatisticVisitDate {
 
     @Id
     @Column(name = "id")
@@ -27,9 +26,8 @@ public class VisitStatisticUser {
     @Column(name = "visit_date")
     private LocalDateTime visitDate;
 
-    @ManyToOne
-    @JoinColumn(name = "visit_statistics_id", nullable = false)
-    @JsonIgnore
+    @ManyToOne(targetEntity = VisitStatistics.class)
+    @JoinColumn(name = "visit_statistics_id")
     private VisitStatistics visitStatistics;
 
 }

@@ -11,7 +11,7 @@ export class ProxyListComponent {
     proxyList: ProxyLists[];
     total: number;
     page = 0;
-    pageSize = 10;
+    pageSize = 8;
 
     constructor(private proxyService: ProxyService) {
         window.scrollTo(0, 0);

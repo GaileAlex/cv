@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatisticsService } from '../../../service/statistics.service';
 import * as moment from 'moment';
+import { VisitStatisticsTables } from "../../../models/visitStatisticsTables";
 
 @Component({
     selector: 'app-visit-statistics',
@@ -13,6 +14,7 @@ export class VisitStatisticsComponent implements OnInit {
     dates: Date[] = [];
     visitGraphName = 'Visitors';
     newVisitGraphName = 'New Visitors';
+    visitStatisticsTables: VisitStatisticsTables[] = [];
 
     public graphData: Array<any> = [
         {
@@ -37,6 +39,7 @@ export class VisitStatisticsComponent implements OnInit {
     ];
 
     chartOptions = {
+        chartType: 'line',
         responsive: true,
         scales: {
             xAxes: [{
@@ -80,11 +83,25 @@ export class VisitStatisticsComponent implements OnInit {
                 this.totalVisits.push(c);
             });
             this.dates = data.dates
+            this.visitStatisticsTables = data.visitStatisticsTables;
+            this.visitStatisticsTables.forEach((c) => c.totalTimeOnSite = this.msToTime(c.totalTimeOnSite))
         });
+
     }
 
     formatDate(date) {
         return moment(date).format('yyyy-MM-DDTHH:mm:ss');
+    }
+
+    msToTime(ms) {
+        const time = Number(ms) % 1000;
+        ms = (Number(ms) - time) / 1000;
+        const secs = Number(ms) % 60;
+        ms = (Number(ms) - secs) / 60;
+        const mins = Number(ms) % 60;
+        const hrs = (Number(ms) - mins) / 60;
+
+        return hrs + 'h ' + mins + 'm ' + secs + 's';
     }
 }
 

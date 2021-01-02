@@ -4,8 +4,9 @@ import ee.gaile.entity.statistics.VisitStatisticUserIp;
 import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.models.statistics.VisitStatisticsGraph;
+import ee.gaile.models.statistics.VisitStatisticsTable;
 import ee.gaile.repository.statistic.VisitStatisticIpRepository;
-import ee.gaile.repository.statistic.VisitStatisticUserRepository;
+import ee.gaile.repository.statistic.VisitStatisticsGraphRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ import java.util.stream.Collectors;
 public class StatisticsService {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticIpRepository visitStatisticIpRepository;
-    private final VisitStatisticUserRepository visitStatisticUserRepository;
+    private final VisitStatisticsGraphRepository visitStatisticsGraphRepository;
 
     public void setUserStatistics(HttpServletRequest request) {
         String userIP = request.getHeader("userIP");
@@ -75,10 +76,13 @@ public class StatisticsService {
         LocalDateTime fromDateParse = LocalDateTime.parse(fromDate, formatter);
         LocalDateTime toDateParse = LocalDateTime.parse(toDate, formatter);
 
-        List<VisitStatisticsGraph> countedVisitDTOList = visitStatisticUserRepository
+        List<VisitStatisticsGraph> countedVisitDTOList = visitStatisticsGraphRepository
                 .selectVisitStatistic(fromDateParse, toDateParse);
-        List<VisitStatisticsGraph> visitStatisticsNewUsers = visitStatisticUserRepository
+        List<VisitStatisticsGraph> visitStatisticsNewUsers = visitStatisticsGraphRepository
                 .selectNewVisitors(fromDateParse, toDateParse);
+
+        List<VisitStatisticsTable> visitStatisticsTable = visitStatisticsGraphRepository
+                .findByDate(fromDateParse, toDateParse);
 
         LocalDate startDate = LocalDate.from(countedVisitDTOList.get(0).getVisitDate());
         LocalDate endDate = LocalDate.from(countedVisitDTOList.get(countedVisitDTOList.size() - 1).getVisitDate());
@@ -87,7 +91,7 @@ public class StatisticsService {
         List<BigInteger> totalVisits = getPointByDate(countedVisitDTOList, startDate, endDate);
         List<LocalDate> date = getDates(startDate, endDate);
 
-        return new VisitStatisticGraph(newUsers, totalVisits, date);
+        return new VisitStatisticGraph(newUsers, totalVisits, date, visitStatisticsTable);
     }
 
     public void setUserTotalTimeOnSite(HttpServletRequest request) {

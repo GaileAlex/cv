@@ -663,6 +663,10 @@ div.validationError {
     padding-top: 50px;
 }
 
+.p_50_bottom {
+    padding-bottom: 50px;
+}
+
 .p_100 {
     padding-top: 100px;
 }
