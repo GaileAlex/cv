@@ -11,8 +11,13 @@ create or replace function visit_statistics_trigger_function()
 as '
     BEGIN
         INSERT INTO visit_statistic_visit_date (visit_date, visit_statistics_id)
-        values (current_timestamp, new.id); RETURN NEW;
-    end; ';
+        values (current_timestamp, new.id); RETURN NEW; end; ';
 
+
+CREATE TRIGGER visit_statistics_trigger
+    AFTER INSERT OR UPDATE
+    ON visit_statistics
+    FOR EACH ROW
+EXECUTE PROCEDURE visit_statistics_trigger_function()
 
 

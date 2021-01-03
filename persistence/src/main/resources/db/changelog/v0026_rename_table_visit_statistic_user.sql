@@ -1,9 +1,9 @@
 --liquibase formatted sql
 --changeset gaile:v0026_rename_table_visit_statistic_user.sql
 
-DROP TRIGGER visit_statistics_trigger on visit_statistics;
+DROP TRIGGER if exists visit_statistics_trigger on visit_statistics;
 
-ALTER TABLE public.visit_statistic_user
+ALTER TABLE if exists public.visit_statistic_user
     RENAME TO visit_statistic_visit_date;
 
 create or replace function visit_statistics_trigger_function()
@@ -11,8 +11,14 @@ create or replace function visit_statistics_trigger_function()
 as '
     BEGIN
         INSERT INTO visit_statistic_visit_date (visit_date, visit_statistics_id)
-        values (current_timestamp, new.id); RETURN NEW;
-    end; ';
+        values (current_timestamp, new.id); RETURN NEW; end; ';
+
+
+CREATE TRIGGER visit_statistics_trigger
+    AFTER INSERT OR UPDATE
+    ON visit_statistics
+    FOR EACH ROW
+EXECUTE PROCEDURE visit_statistics_trigger_function()
 
 
 
