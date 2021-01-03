@@ -73,7 +73,8 @@ public class StatisticsService {
         }
     }
 
-    public VisitStatisticGraph getStatisticsGraph(String fromDate, String toDate) {
+    public VisitStatisticGraph getStatisticsGraph(String fromDate, String toDate,
+                                                  Integer pageSize, Integer page) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         LocalDateTime fromDateParse = LocalDateTime.parse(fromDate, formatter);
         LocalDateTime toDateParse = LocalDateTime.parse(toDate, formatter);
@@ -84,7 +85,9 @@ public class StatisticsService {
                 .selectNewVisitors(fromDateParse, toDateParse);
 
         List<VisitStatisticsTable> visitStatisticsTable = visitStatisticsGraphRepository
-                .findByDate(fromDateParse, toDateParse);
+                .findByDate(fromDateParse, toDateParse, pageSize, page * pageSize);
+
+        Long total = visitStatisticsGraphRepository.countTotal(fromDateParse, toDateParse);
 
         LocalDate startDate = LocalDate.from(countedVisitDTOList.get(0).getVisitDate());
         LocalDate endDate = LocalDate.from(countedVisitDTOList.get(countedVisitDTOList.size() - 1).getVisitDate());
@@ -93,7 +96,7 @@ public class StatisticsService {
         List<BigInteger> totalVisits = getPointByDate(countedVisitDTOList, startDate, endDate);
         List<LocalDate> date = getDates(startDate, endDate);
 
-        return new VisitStatisticGraph(newUsers, totalVisits, date, visitStatisticsTable);
+        return new VisitStatisticGraph(newUsers, totalVisits, date, visitStatisticsTable, total);
     }
 
     public void setUserTotalTimeOnSite(HttpServletRequest request) {

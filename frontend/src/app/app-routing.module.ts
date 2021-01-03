@@ -26,7 +26,7 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'registration', component: RegistrationComponent},
     {path: 'blog-admin', component: BlogAdminComponent, canActivate: [ProtectedGuardService]},
-    {path: 'statistics', component: VisitStatisticsComponent, canActivate: [ProtectedGuardService]},
+    {path: 'statistics', component: VisitStatisticsComponent},
     {path: '**', component: NotFoundComponent}
 ];
 

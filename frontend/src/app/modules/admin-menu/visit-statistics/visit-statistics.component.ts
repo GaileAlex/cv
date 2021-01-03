@@ -17,7 +17,7 @@ export class VisitStatisticsComponent implements OnInit {
     visitStatisticsTables: VisitStatisticsTables[] = [];
     total: number;
     page = 0;
-    pageSize = 8;
+    pageSize = 10;
 
     public graphData: Array<any> = [
         {
@@ -72,23 +72,8 @@ export class VisitStatisticsComponent implements OnInit {
     }
 
     ngOnInit() {
-        let date = new Date();
-        date.setMonth(date.getMonth() - 1);
-        const fromDate = new Date(date.getFullYear(), date.getMonth(), 1);
-        let toDate = new Date();
-
-        this.statisticsService.findAll(this.formatDate(fromDate), this.formatDate(toDate)).subscribe(data => {
-            data.newUsers.forEach((c) => {
-                this.newUsers.push(c);
-            });
-            data.totalVisits.forEach((c) => {
-                this.totalVisits.push(c);
-            });
-            this.dates = data.dates
-            this.visitStatisticsTables = data.visitStatisticsTables;
-            this.visitStatisticsTables.forEach((c) => c.totalTimeOnSite = this.msToTime(c.totalTimeOnSite))
-        });
-
+        window.scrollTo(0, 0);
+        this.sendRequest(this.page);
     }
 
     formatDate(date) {
@@ -105,5 +90,30 @@ export class VisitStatisticsComponent implements OnInit {
 
         return hrs + 'h ' + mins + 'm ' + secs + 's';
     }
+
+    changePage(event) {
+        this.sendRequest(event.pageIndex);
+    }
+
+    sendRequest(pageIndex) {
+        let date = new Date();
+        date.setMonth(date.getMonth() - 1);
+        const fromDate = new Date(date.getFullYear(), date.getMonth(), 1);
+        let toDate = new Date();
+        this.statisticsService.findAll(this.formatDate(fromDate), this.formatDate(toDate), this.pageSize, pageIndex).subscribe(data => {
+            data.newUsers.forEach((c) => {
+                this.newUsers.push(c);
+            });
+            data.totalVisits.forEach((c) => {
+                this.totalVisits.push(c);
+            });
+            this.dates = data.dates
+            this.visitStatisticsTables = data.visitStatisticsTables;
+            this.total = data.total;
+            this.visitStatisticsTables.forEach((c) => c.totalTimeOnSite = this.msToTime(c.totalTimeOnSite))
+        });
+    }
+
+
 }
 

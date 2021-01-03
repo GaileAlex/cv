@@ -44,6 +44,7 @@
         <div class="d-flex justify-content-between p-2">
             <mat-paginator [length]="total"
                            [pageSize]="pageSize"
+                           (page)="changePage($event)"
                            [showFirstLastButtons]="true">
             </mat-paginator>
         </div>

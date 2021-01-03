@@ -9,6 +9,6 @@ import java.util.List;
 public class ProxyListWrapper {
 
     private List<ProxyList> proxyLists;
-    public Long total;
+    private Long total;
 
 }

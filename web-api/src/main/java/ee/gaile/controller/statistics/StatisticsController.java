@@ -21,10 +21,12 @@ public class StatisticsController {
 
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
 
-    @GetMapping(path = "/graph/{fromDate}/{toDate}")
+    @GetMapping(path = "/graph/fromDate/{fromDate}/toDate/{toDate}/pageSize/{pageSize}/page/{page}")
     public ResponseEntity<VisitStatisticGraph> getGraphData(@PathVariable(value = "fromDate") String fromDate,
-                                                            @PathVariable(value = "toDate") String toDate) {
-        return new ResponseEntity<>(statisticsService.getStatisticsGraph(fromDate, toDate), HttpStatus.OK);
+                                                            @PathVariable(value = "toDate") String toDate,
+                                                            @PathVariable(value = "pageSize") Integer pageSize,
+                                                            @PathVariable(value = "page") Integer page) {
+        return new ResponseEntity<>(statisticsService.getStatisticsGraph(fromDate, toDate, pageSize, page), HttpStatus.OK);
     }
 
     @PostMapping(path = "/user")

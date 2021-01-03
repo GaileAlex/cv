@@ -37,7 +37,15 @@ public class VisitStatisticsGraphRepository {
             "              WHERE last_visit BETWEEN ? and ?)" +
             "select * from data " +
             "where user_name != 'Admin' " +
-            "order by last_visit desc";
+            "order by last_visit desc limit ? offset ?";
+
+    // language=sql
+    private static final String SQL_TABLE_TOTAL = "with data as (select distinct on (user_ip) * " +
+            "              from visit_statistics " +
+            "                       left join visit_statistics_user_ip vsui on visit_statistics.id = vsui.visit_statistics_id " +
+            "              WHERE last_visit BETWEEN ? and ?) " +
+            "select count(user_ip) as total from data " +
+            "where user_name != 'Admin' ";
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -53,8 +61,13 @@ public class VisitStatisticsGraphRepository {
         return jdbcTemplate.query(SQL_USERS, new BeanPropertyRowMapper<>(VisitStatisticsGraph.class), fromDate, toDate);
     }
 
-    public List<VisitStatisticsTable> findByDate(LocalDateTime fromDate, LocalDateTime toDate) {
-        return jdbcTemplate.query(SQL_TABLE, new BeanPropertyRowMapper<>(VisitStatisticsTable.class), fromDate, toDate);
+    public List<VisitStatisticsTable> findByDate(LocalDateTime fromDate, LocalDateTime toDate, Integer pageSize, Integer page) {
+        return jdbcTemplate.query(SQL_TABLE, new BeanPropertyRowMapper<>(VisitStatisticsTable.class), fromDate, toDate,
+                pageSize, page);
+    }
+
+    public Long countTotal(LocalDateTime fromDate, LocalDateTime toDate) {
+        return jdbcTemplate.queryForObject(SQL_TABLE_TOTAL, Long.class, fromDate, toDate);
     }
 
 }

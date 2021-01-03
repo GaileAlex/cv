@@ -72,7 +72,10 @@ class StatisticsServiceTest extends ApplicationIT {
     void checkGetStatisticsGraph() {
         String fromDate = "2020-11-01T00:00:00";
         String toDate = "2020-12-30T00:00:00";
-        VisitStatisticGraph visitStatisticGraph = statisticsService.getStatisticsGraph(fromDate, toDate);
+        Integer page = 0;
+        Integer pageSize = 8;
+        VisitStatisticGraph visitStatisticGraph = statisticsService.getStatisticsGraph(fromDate, toDate,
+                pageSize, page * pageSize);
 
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(visitStatisticGraph.getDates().get(0)).isEqualTo("2020-12-07");

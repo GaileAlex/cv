@@ -44,7 +44,9 @@ export class StatisticsService {
         return this.http.post(this.USER_OUT_STATISTICS_URL, {}, userIPOptions);
     }
 
-    public findAll(fromDate, toDate): Observable<VisitStatisticGraph> {
-        return this.http.get<VisitStatisticGraph>(`${ this.GRAPH_STATISTICS_URL }/${ fromDate }/${ toDate }`);
+    public findAll(fromDate, toDate, pageSize, pageIndex): Observable<VisitStatisticGraph> {
+        return this.http.get<VisitStatisticGraph>(`${ this.GRAPH_STATISTICS_URL }/fromDate/${ fromDate }` +
+            `/toDate/${ toDate }/pageSize/${ pageSize }/page/${ pageIndex }`);
+
     }
 }

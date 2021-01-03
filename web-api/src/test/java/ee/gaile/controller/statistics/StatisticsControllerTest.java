@@ -28,12 +28,17 @@ class StatisticsControllerTest extends ApplicationIT {
 
     @Test
     void checkUserPermissions_GetGraphData() throws Exception {
+        String fromDate = "2020-12-01T00:00:00";
+        String toDate = "2021-01-03T14:26:58";
+        Integer page = 0;
+        Integer pageSize = 8;
+        String url = API_V1_PREFIX + "/statistic/graph/fromDate/{fromDate}/toDate/{toDate}/pageSize/{pageSize}/page/{page}";
+
         mvc.perform(MockMvcRequestBuilders
-                .get(API_V1_PREFIX + "/statistic/graph/{fromDate}/{toDate}",
-                        "2020-11-01T00:00:00", "2020-12-31T00:00:00")
+                .get(url, fromDate, toDate, pageSize, page)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().is(403));
+                .andExpect(status().isOk());
     }
 
     @Test
