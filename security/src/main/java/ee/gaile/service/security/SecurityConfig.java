@@ -46,12 +46,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/proxy/list/**").permitAll()
+                .antMatchers(HttpMethod.POST, API_V1_PREFIX + "/statistic/user").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
                 .antMatchers(HttpMethod.POST, LOGOUT_URL).permitAll()
                 .antMatchers(HttpMethod.POST, AUTH_REFRESH_URL).permitAll()
-                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/blog/comments").authenticated()
-                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/statistic/**").authenticated()
+                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/blog/comments")
+                .authenticated()
+                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/statistic/graph/*/*")
+                .authenticated()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), loginService))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

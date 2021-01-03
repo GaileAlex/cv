@@ -29,7 +29,7 @@ public class StatisticsController {
 
     @PostMapping(path = "/user")
     @ResponseStatus(HttpStatus.OK)
-    public void getUserSpy(HttpServletRequest request) {
+    public void setUserSpy(HttpServletRequest request) {
         ACCESS_LOG.info("user name is {}, IP is {}, city is {}, country is {}",
                 request.getHeader("user"),
                 request.getHeader("userIP"),
