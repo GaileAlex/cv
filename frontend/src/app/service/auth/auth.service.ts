@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Constants } from '../../constants/appConstants';
 import { environment } from '../../../environments/environment';
+import { Router } from "@angular/router";
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -13,7 +14,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, public router: Router) {
     }
 
     register(user): Observable<any> {
@@ -38,6 +39,7 @@ export class AuthService {
         sessionStorage.setItem('user', '');
         sessionStorage.setItem('accessToken', '');
         sessionStorage.setItem('roles', '');
+        this.router.navigate(['/login']);
     }
 
 }
