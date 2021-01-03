@@ -35,8 +35,10 @@ public class ProxyCheck {
 
         Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
                 new InetSocketAddress(proxyList.getIpAddress(), proxyList.getPort()));
+
         File tempFile = new File(proxyList.getId() + "_" + proxyList.getIpAddress()
                 + "_" + proxyList.getPort() + ".tmp");
+
         try (OutputStream outStream = new FileOutputStream(tempFile)) {
             URL fileUrl = new URL(FILE_URL);
             LocalDateTime start = LocalDateTime.now();
@@ -46,7 +48,6 @@ public class ProxyCheck {
             HttpURLConnection socksConnection = (HttpURLConnection) fileUrl.openConnection(socksProxy);
             socksConnection.setConnectTimeout(TIMEOUT);
             socksConnection.setReadTimeout(TIMEOUT);
-
             socksConnection.getResponseCode();
 
             proxyList.setResponse(Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
@@ -69,7 +70,6 @@ public class ProxyCheck {
             proxyList.setUptime(uptime);
 
             proxyRepository.save(proxyList);
-
             socksConnection.disconnect();
 
         } catch (IOException e) {
@@ -82,7 +82,6 @@ public class ProxyCheck {
             proxyList.setUptime(uptime);
             proxyList.setSpeed(0.0);
             proxyRepository.save(proxyList);
-
         }
 
         try {

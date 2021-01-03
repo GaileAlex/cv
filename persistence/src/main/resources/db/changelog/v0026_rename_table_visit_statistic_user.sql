@@ -7,15 +7,19 @@ ALTER TABLE if exists public.visit_statistic_user
     RENAME TO visit_statistic_visit_date;
 
 create or replace function visit_statistics_trigger_function()
-    RETURNS TRIGGER language plpgsql
-as '
+    RETURNS TRIGGER
+    language plpgsql
+as
+'
     BEGIN
-        INSERT INTO visit_statistic_visit_date (visit_date, visit_statistics_id)
-        values (current_timestamp, new.id); RETURN NEW; end; ';
-
+        INSERT
+        INTO visit_statistic_visit_date (visit_date, visit_statistics_id)
+        values (current_timestamp, new.id);
+        RETURN NEW;
+    end; ';
 
 CREATE TRIGGER visit_statistics_trigger
-    AFTER INSERT OR UPDATE
+    AFTER INSERT
     ON visit_statistics
     FOR EACH ROW
 EXECUTE PROCEDURE visit_statistics_trigger_function()

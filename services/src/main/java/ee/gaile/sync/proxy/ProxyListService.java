@@ -41,6 +41,8 @@ public class ProxyListService {
         if (!isRun) {
             return;
         }
+        log.info("Start proxy list sync");
+
         List<ProxyList> proxyLists = proxyRepository.findAllBySpeed();
 
         for (ProxyList proxyList : proxyLists) {
