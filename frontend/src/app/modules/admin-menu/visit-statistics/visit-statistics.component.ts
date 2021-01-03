@@ -12,7 +12,7 @@ export class VisitStatisticsComponent implements OnInit {
     newUsers: number[] = [];
     totalVisits: number[] = [];
     dates: Date[] = [];
-    visitGraphName = 'Visitors';
+    visitGraphName = 'Visits';
     newVisitGraphName = 'New Visitors';
     visitStatisticsTables: VisitStatisticsTables[] = [];
     total: number;
@@ -61,7 +61,7 @@ export class VisitStatisticsComponent implements OnInit {
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: 'Visitors',
+                    labelString: 'Visits',
                     fontColor: 'green'
                 },
             }]
