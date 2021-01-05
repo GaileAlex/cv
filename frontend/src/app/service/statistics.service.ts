@@ -26,24 +26,29 @@ export class StatisticsService {
             sessionStorage.setItem('userCountry', JSON.stringify(res.country_name));
             sessionStorage.setItem('userCity', JSON.stringify(res.city));
 
-            const headers = {
-                headers: new HttpHeaders({
-                    userIP: `${ sessionStorage.getItem('userIP') || undefined }`,
-                    userCountry: `${ sessionStorage.getItem('userCountry') || undefined }`,
-                    userCity: `${ sessionStorage.getItem('userCity') || undefined }`,
-                    user: `${ this.userDataService.getUserName() || undefined }`
-                })
-            };
+            this.sendUser();
 
-            this.http.post<any>(this.USER_STATISTICS_URL, {responseType: 'text'}, headers).subscribe(data => {
-                sessionStorage.setItem('sessionId', data.sessionId)
-                console.log(sessionStorage.getItem('userIP'))
-            }, error => {
-                console.log(error)
-            });
+        }, error => {
+            this.sendUser();
         });
+    }
 
+    sendUser() {
+        const headers = {
+            headers: new HttpHeaders({
+                userIP: `${ sessionStorage.getItem('userIP') || undefined }`,
+                userCountry: `${ sessionStorage.getItem('userCountry') || undefined }`,
+                userCity: `${ sessionStorage.getItem('userCity') || undefined }`,
+                user: `${ this.userDataService.getUserName() || undefined }`
+            })
+        };
 
+        this.http.post<any>(this.USER_STATISTICS_URL, {responseType: 'text'}, headers).subscribe(data => {
+            sessionStorage.setItem('sessionId', data.sessionId)
+            console.log(sessionStorage.getItem('userIP'))
+        }, error => {
+            console.log(error)
+        });
     }
 
     userOut() {
