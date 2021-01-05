@@ -24,7 +24,7 @@ export class AppComponent {
     }
 
     @HostListener('window:beforeunload', ['$event'])
-    beforeUnloadHandler() {
+    beforeUnloadHandler(event) {
         this.statisticsService.userOut().subscribe(data => {
         }, error => {
             this.errorMessage = error;
@@ -32,7 +32,7 @@ export class AppComponent {
     }
 
     @HostListener('window:unload', ['$event'])
-    unloadHandler() {
+    unloadHandler(event) {
         this.statisticsService.userOut().subscribe(data => {
         }, error => {
             this.errorMessage = error;
