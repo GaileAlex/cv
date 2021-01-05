@@ -25,6 +25,9 @@ public class VisitStatistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "session_id")
+    private String sessionId;
+
     @Column(name = "user_location")
     private String userLocation;
 

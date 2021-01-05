@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { LanguageService } from './service/language.service';
 import { StatisticsService } from "./service/statistics.service";
+import { UserDataService } from "./service/user-data.service";
 
 @Component({
     selector: 'app-root',
@@ -11,19 +12,31 @@ import { StatisticsService } from "./service/statistics.service";
 export class AppComponent {
     title = 'frontend';
     errorMessage = '';
+    sessionId: string;
 
-    constructor(private languageService: LanguageService, private statisticsService: StatisticsService) {
+    constructor(private languageService: LanguageService, private userDataService: UserDataService,
+                private statisticsService: StatisticsService) {
         languageService.setDefault();
+
+        this.statisticsService.userSpy()
+
+
     }
 
     @HostListener('window:beforeunload', ['$event'])
-    beforeUnloadHandler(event) {
+    beforeUnloadHandler() {
         this.statisticsService.userOut().subscribe(data => {
-
         }, error => {
             this.errorMessage = error;
         });
+    }
 
+    @HostListener('window:unload', ['$event'])
+    unloadHandler() {
+        this.statisticsService.userOut().subscribe(data => {
+        }, error => {
+            this.errorMessage = error;
+        });
     }
 
 }

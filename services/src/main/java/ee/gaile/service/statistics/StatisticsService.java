@@ -1,76 +1,74 @@
 package ee.gaile.service.statistics;
 
-import ee.gaile.entity.statistics.VisitStatisticUserIp;
-import ee.gaile.entity.statistics.VisitStatisticVisitDate;
 import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.models.statistics.VisitStatisticsGraph;
 import ee.gaile.models.statistics.VisitStatisticsTable;
-import ee.gaile.repository.statistic.VisitStatisticIpRepository;
 import ee.gaile.repository.statistic.VisitStatisticsGraphRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
-import ee.gaile.service.security.request.SignupRequest;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.math.BigInteger;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @Transactional
 @AllArgsConstructor
 public class StatisticsService {
     private final VisitStatisticsRepository visitStatisticsRepository;
-    private final VisitStatisticIpRepository visitStatisticIpRepository;
     private final VisitStatisticsGraphRepository visitStatisticsGraphRepository;
+    private final UndefinedUserStatistics undefinedUserStatistics;
+    private final UserWithIpStatistics userWithIpStatistics;
+    private final UserWithNameStatistics userWithNameStatistics;
 
-    public void setUserStatistics(HttpServletRequest request) {
-        String userIP = request.getHeader("userIP");
+    public Map<String, String> setUserStatistics(HttpServletRequest request) {
+        Map<String, String> response = new HashMap<>();
+        response.put("sessionId", RequestContextHolder.currentRequestAttributes().getSessionId());
 
-        Optional<VisitStatistics> visitStatistics =
-                visitStatisticsRepository.findByUserIP(userIP);
-
-        if (visitStatistics.isPresent()) {
-            visitStatistics.get().setLastVisit(LocalDateTime.now());
-            visitStatistics.get().setTotalVisits(visitStatistics.get().getTotalVisits() + 1);
-
-            VisitStatisticUserIp visitStatisticUserIp = new VisitStatisticUserIp();
-            visitStatisticUserIp.setUserIp(userIP);
-            visitStatisticUserIp.setVisitStatistics(visitStatistics.get());
-
-            visitStatisticIpRepository.save(visitStatisticUserIp);
-
-            if (visitStatistics.get().getUsername() == null || visitStatistics.get().getUsername().equals("undefined")
-                    && request.getHeader("user") != null) {
-                visitStatistics.get().setUsername(request.getHeader("user"));
-            }
-        } else {
-            VisitStatistics visitStatistic = new VisitStatistics()
-                    .setUsername(request.getHeader("user"))
-                    .setLastVisit(LocalDateTime.now())
-                    .setFirstVisit(LocalDateTime.now())
-                    .setTotalVisits(1L)
-                    .setUserLocation(request.getHeader("userCountry"))
-                    .setUserCity(request.getHeader("userCity"));
-
-            visitStatisticsRepository.save(visitStatistic);
-
-            VisitStatisticUserIp visitStatisticUserIp = new VisitStatisticUserIp();
-            visitStatisticUserIp.setUserIp(userIP);
-            visitStatisticUserIp.setVisitStatistics(visitStatistic);
-
-            visitStatisticIpRepository.save(visitStatisticUserIp);
+        if (!request.getHeader("user").equals("undefined")) {
+            userWithNameStatistics.setUserStatistics(request);
         }
+        if (!request.getHeader("userIP").equals("undefined")) {
+            userWithIpStatistics.setUserStatistics(request);
+        }
+        if (request.getHeader("user").equals("undefined") && request.getHeader("userIP").equals("undefined")) {
+            undefinedUserStatistics.setUserStatistics(request);
+        }
+
+        return response;
+    }
+
+    public void setUserTotalTimeOnSite(HttpServletRequest request) {
+        VisitStatistics user;
+
+        log.error(request.getHeader("user") + request.getHeader("userIP"));
+
+        if (!request.getHeader("user").equals("undefined")) {
+            user = userWithNameStatistics.getUserTotalTimeOnSite(request);
+        } else if (!request.getHeader("userIP").equals("undefined")) {
+            user = userWithIpStatistics.getUserTotalTimeOnSite(request);
+        } else if (request.getHeader("user").equals("undefined") && request.getHeader("userIP").equals("undefined")) {
+            user = undefinedUserStatistics.getUserTotalTimeOnSite(request);
+        } else {
+            throw new NullPointerException();
+        }
+
+
+        visitStatisticsRepository.save(user);
+
     }
 
     public VisitStatisticGraph getStatisticsGraph(String fromDate, String toDate,
@@ -97,64 +95,6 @@ public class StatisticsService {
         List<LocalDate> date = getDates(startDate, endDate);
 
         return new VisitStatisticGraph(newUsers, totalVisits, date, visitStatisticsTable, total);
-    }
-
-    public void setUserTotalTimeOnSite(HttpServletRequest request) {
-        Optional<VisitStatistics> visitStatistics = visitStatisticsRepository.findByUserIP(request.getHeader("userIP"));
-        VisitStatistics user = visitStatistics.orElseThrow(NullPointerException::new);
-
-        LocalDateTime userEntry = user.getLastVisit();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime userOut = LocalDateTime.parse(request.getHeader("dateOut"), formatter);
-
-        long between = Duration.between(userEntry, userOut).toMillis();
-
-        try {
-            user.setTotalTimeOnSite(user.getTotalTimeOnSite() + between);
-        } catch (NullPointerException e) {
-            user.setTotalTimeOnSite(between);
-        }
-
-        visitStatisticsRepository.save(user);
-
-    }
-
-    public void combineTheSameUsersByUserName(SignupRequest signupRequest) {
-        VisitStatistics visitStatistics = visitStatisticsRepository.findByUserName(signupRequest.getUsername())
-                .orElseThrow(NullPointerException::new);
-
-        List<VisitStatistics> oldUsers = visitStatisticsRepository.findOldUsers(signupRequest.getUsername());
-
-        if (oldUsers.size() != 1) {
-
-            oldUsers.remove(0);
-            List<VisitStatisticUserIp> visitStatisticUserIps = new ArrayList<>();
-            List<VisitStatisticVisitDate> visitStatisticVisitDates = new ArrayList<>();
-
-            oldUsers.forEach((c) -> {
-                if (visitStatistics.getFirstVisit().isAfter(c.getFirstVisit())) {
-                    visitStatistics.setFirstVisit(c.getFirstVisit());
-                }
-                if (c.getTotalVisits() != null) {
-                    visitStatistics.setTotalVisits(visitStatistics.getTotalVisits() + c.getTotalVisits());
-                }
-                if (c.getTotalTimeOnSite() != null) {
-                    visitStatistics.setTotalTimeOnSite(visitStatistics.getTotalTimeOnSite() + c.getTotalTimeOnSite());
-                }
-                visitStatisticUserIps.addAll(c.getVisitStatisticUserIps());
-                visitStatisticVisitDates.addAll(c.getVisitStatisticVisitDates());
-            });
-
-            visitStatisticUserIps.forEach((c) -> c.setVisitStatistics(visitStatistics));
-            visitStatisticVisitDates.forEach((c) -> c.setVisitStatistics(visitStatistics));
-
-            visitStatistics.setVisitStatisticUserIps(visitStatisticUserIps);
-            visitStatistics.setVisitStatisticVisitDates(visitStatisticVisitDates);
-
-            visitStatisticsRepository.save(visitStatistics);
-            visitStatisticsRepository.deleteAll(oldUsers);
-        }
     }
 
     private List<BigInteger> getPointByDate(List<VisitStatisticsGraph> visitList, LocalDate startDate, LocalDate endDate) {

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
@@ -31,14 +32,14 @@ public class StatisticsController {
 
     @PostMapping(path = "/user")
     @ResponseStatus(HttpStatus.OK)
-    public void setUserSpy(HttpServletRequest request) {
+    public ResponseEntity<Map<String, String>> setUserSpy(HttpServletRequest request) {
         ACCESS_LOG.info("user name is {}, IP is {}, city is {}, country is {}",
                 request.getHeader("user"),
                 request.getHeader("userIP"),
                 request.getHeader("userCity"),
                 request.getHeader("userCountry"));
 
-        statisticsService.setUserStatistics(request);
+        return new ResponseEntity<>(statisticsService.setUserStatistics(request), HttpStatus.OK);
     }
 
     @PostMapping(path = "/user-out")

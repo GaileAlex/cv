@@ -14,8 +14,10 @@ td.mat-cell:first-child {
     border-left: 1px solid #000000;
 }
 
-table.table.table-striped{
-    min-width: 500px!important;
+table.table.table-striped {
+    min-width: 500px !important;
     table-layout: fixed;
+    overflow-wrap: break-word;
+
 }
 

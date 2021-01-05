@@ -41,9 +41,10 @@ public class ProxyListService {
         if (!isRun) {
             return;
         }
-        log.info("Start proxy list sync");
 
         List<ProxyList> proxyLists = proxyRepository.findAllBySpeed();
+
+        log.info("Start proxy list sync. Size lists is {}", proxyLists.size());
 
         for (ProxyList proxyList : proxyLists) {
             if (!doFirstCheck(proxyList)) {
@@ -67,7 +68,7 @@ public class ProxyListService {
         }
 
         if (proxyList.getUptime() != null && proxyList.getNumberUnansweredChecks() != null
-                && proxyList.getUptime() == 0 && proxyList.getNumberUnansweredChecks() > 3000) {
+                && proxyList.getUptime() < 5 && proxyList.getNumberUnansweredChecks() > 500) {
             try {
                 Files.deleteIfExists(Paths.get(proxyList.getId() + "_"
                         + proxyList.getIpAddress() + "_" + proxyList.getPort() + ".tmp"));

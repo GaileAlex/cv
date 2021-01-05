@@ -31,7 +31,7 @@ public class VisitStatisticsGraphRepository {
             "order by visit_date ";
 
     // language=sql
-    private static final String SQL_TABLE = "with data as (select distinct on (user_ip) * " +
+    private static final String SQL_TABLE = "with data as (select distinct on (visit_statistics.id) * " +
             "              from visit_statistics " +
             "                       left join visit_statistics_user_ip vsui on visit_statistics.id = vsui.visit_statistics_id " +
             "              WHERE last_visit BETWEEN ? and ?)" +

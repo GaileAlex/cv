@@ -21,23 +21,38 @@ export class StatisticsService {
     }
 
     userSpy() {
-        const userIPOptions = {
-            headers: new HttpHeaders({
-                userIP: `${ sessionStorage.getItem('userIP') }`,
-                userCountry: `${ sessionStorage.getItem('userCountry') }`,
-                userCity: `${ sessionStorage.getItem('userCity') }`,
-                user: `${ this.userDataService.getUserName() }`
-            })
-        };
-        return this.http.post(this.USER_STATISTICS_URL, {}, userIPOptions);
+        this.http.get('https://ipapi.co/json/').subscribe((res: any) => {
+            sessionStorage.setItem('userIP', JSON.stringify(res.ip));
+            sessionStorage.setItem('userCountry', JSON.stringify(res.country_name));
+            sessionStorage.setItem('userCity', JSON.stringify(res.city));
+
+            const headers = {
+                headers: new HttpHeaders({
+                    userIP: `${ sessionStorage.getItem('userIP') || undefined }`,
+                    userCountry: `${ sessionStorage.getItem('userCountry') || undefined }`,
+                    userCity: `${ sessionStorage.getItem('userCity') || undefined }`,
+                    user: `${ this.userDataService.getUserName() || undefined }`
+                })
+            };
+
+            this.http.post<any>(this.USER_STATISTICS_URL, {responseType: 'text'}, headers).subscribe(data => {
+                sessionStorage.setItem('sessionId', data.sessionId)
+                console.log(sessionStorage.getItem('userIP'))
+            }, error => {
+                console.log(error)
+            });
+        });
+
+
     }
 
     userOut() {
         const date = formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en_US')
-
         const userIPOptions = {
             headers: new HttpHeaders({
-                userIP: `${ sessionStorage.getItem('userIP') }`,
+                user: `${ this.userDataService.getUserName() || undefined }`,
+                userIP: `${ sessionStorage.getItem('userIP') || undefined }`,
+                sessionId: `${ sessionStorage.getItem('sessionId') || undefined }`,
                 dateOut: `${ date }`,
             })
         };
@@ -47,6 +62,5 @@ export class StatisticsService {
     public findAll(fromDate, toDate, pageSize, pageIndex): Observable<VisitStatisticGraph> {
         return this.http.get<VisitStatisticGraph>(`${ this.GRAPH_STATISTICS_URL }/fromDate/${ fromDate }` +
             `/toDate/${ toDate }/pageSize/${ pageSize }/page/${ pageIndex }`);
-
     }
 }

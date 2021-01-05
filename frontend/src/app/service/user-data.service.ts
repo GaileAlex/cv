@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
 
 @Injectable({
@@ -7,20 +6,11 @@ import { User } from '../models/user';
 })
 export class UserDataService {
 
-    constructor(private http: HttpClient) {
-        this.getUserIP();
-    }
-
-    getUserIP() {
-        this.http.get('https://ipapi.co/json/').subscribe((res: any) => {
-            sessionStorage.setItem('userIP', JSON.stringify(res.ip));
-            sessionStorage.setItem('userCountry', JSON.stringify(res.country_name));
-            sessionStorage.setItem('userCity', JSON.stringify(res.city));
-        });
+    constructor() {
     }
 
     getUserName(): string {
-        const userName = sessionStorage.getItem('user') ? sessionStorage.getItem('user')  : null;
+        const userName = sessionStorage.getItem('user') ? sessionStorage.getItem('user') : null;
         const userData = new User();
         if (userName) {
             const user: User = JSON.parse(userName);
@@ -30,7 +20,7 @@ export class UserDataService {
     }
 
     getUserRole(): string {
-        const userRole = sessionStorage.getItem('user') ? sessionStorage.getItem('user')  : null;
+        const userRole = sessionStorage.getItem('user') ? sessionStorage.getItem('user') : null;
         const userData = new User();
         if (userRole) {
             const user: User = JSON.parse(userRole);

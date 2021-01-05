@@ -5,11 +5,12 @@ import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -22,50 +23,81 @@ class StatisticsServiceTest extends ApplicationIT {
     @Autowired
     private VisitStatisticsRepository visitStatisticsRepository;
 
-    @Test
-    void saveNewUserToRepo_setUserStatistics() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletRequest request;
+    VisitStatistics user;
 
-        when(request.getHeader("userIP")).thenReturn("222.222.222.222");
+    @BeforeEach
+    void setUp() {
+        request = mock(HttpServletRequest.class);
+        when(request.getHeader("userIP")).thenReturn("111.111.111.111");
         when(request.getHeader("user")).thenReturn("Test");
         when(request.getHeader("userCountry")).thenReturn("Estonia");
         when(request.getHeader("userCity")).thenReturn("Tallinn");
 
-        statisticsService.setUserStatistics(request);
+        user = visitStatisticsRepository.findByUserIP("111.111.111.111").get();
 
-        Optional<VisitStatistics> user = visitStatisticsRepository.findByUserIP("222.222.222.222");
+    }
 
-
-        SoftAssertions.assertSoftly(softly -> {
-            softly.assertThat(user.get().getUsername()).isEqualTo("Test");
-            softly.assertThat(user.get().getUserLocation()).isEqualTo("Estonia");
-            softly.assertThat(user.get().getUserCity()).isEqualTo("Tallinn");
-        });
-
-        visitStatisticsRepository.delete(user.get());
+    @AfterEach
+    void tearDown() {
     }
 
     @Test
-    void saveOldUserToRepo_setUserStatistics() {
-        HttpServletRequest request = mock(HttpServletRequest.class);
+    void checkTrigger_visit_statistics_trigger() {
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(user.getVisitStatisticVisitDates().get(0).getVisitStatistics().getId())
+                    .isEqualTo(user.getId());
+            softly.assertThat(user.getVisitStatisticVisitDates()).isNotNull();
+        });
+    }
 
-        when(request.getHeader("userIP")).thenReturn("555.555.555.555");
-        when(request.getHeader("user")).thenReturn("Test-old");
-        when(request.getHeader("userCountry")).thenReturn("Estonia");
-        when(request.getHeader("userCity")).thenReturn("Tallinn");
-
+    @Test
+    void saveNewUserWithIp_setUserStatistics() {
         statisticsService.setUserStatistics(request);
-        statisticsService.setUserStatistics(request);
-
-        Optional<VisitStatistics> user = visitStatisticsRepository.findByUserIP("555.555.555.555");
 
         SoftAssertions.assertSoftly(softly -> {
-            softly.assertThat(user.get().getUsername()).isEqualTo("Test-old");
-            softly.assertThat(user.get().getUserLocation()).isEqualTo("Estonia");
-            softly.assertThat(user.get().getUserCity()).isEqualTo("Tallinn");
+            softly.assertThat(user.getUsername()).isEqualTo("Test");
+            softly.assertThat(user.getUserLocation()).isEqualTo("Estonia");
+            softly.assertThat(user.getUserCity()).isEqualTo("Tallinn");
+        });
+    }
+
+    @Test
+    void saveOldUserWithIp_setUserStatistics() {
+        statisticsService.setUserStatistics(request);
+        statisticsService.setUserStatistics(request);
+
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(user.getUsername()).isEqualTo("Test");
+            softly.assertThat(user.getUserLocation()).isEqualTo("Estonia");
+            softly.assertThat(user.getUserCity()).isEqualTo("Tallinn");
         });
 
-        visitStatisticsRepository.delete(user.get());
+    }
+
+    @Test
+    void saveNewUserWithoutIp_setUserStatistics() {
+
+        statisticsService.setUserStatistics(request);
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(user.getUsername()).isEqualTo("Test");
+            softly.assertThat(user.getUserLocation()).isEqualTo("Estonia");
+            softly.assertThat(user.getUserCity()).isEqualTo("Tallinn");
+        });
+    }
+
+    @Test
+    void saveOldUserWithoutIp_setUserStatistics() {
+
+        statisticsService.setUserStatistics(request);
+        statisticsService.setUserStatistics(request);
+
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(user.getUsername()).isEqualTo("Test");
+            softly.assertThat(user.getUserLocation()).isEqualTo("Estonia");
+            softly.assertThat(user.getUserCity()).isEqualTo("Tallinn");
+        });
+
     }
 
     @Test
@@ -79,7 +111,6 @@ class StatisticsServiceTest extends ApplicationIT {
 
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(visitStatisticGraph.getDates().get(0)).isEqualTo("2020-12-07");
-            softly.assertThat(visitStatisticGraph.getNewUsers().get(0)).isEqualTo(1);
             softly.assertThat(visitStatisticGraph.getTotalVisits().get(0)).isEqualTo(1);
         });
     }
