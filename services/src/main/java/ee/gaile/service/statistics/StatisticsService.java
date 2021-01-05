@@ -54,8 +54,6 @@ public class StatisticsService {
     public void setUserTotalTimeOnSite(HttpServletRequest request) {
         VisitStatistics user;
 
-        log.error(request.getHeader("user") + request.getHeader("userIP"));
-
         if (!request.getHeader("user").equals("undefined")) {
             user = userWithNameStatistics.getUserTotalTimeOnSite(request);
         } else if (!request.getHeader("userIP").equals("undefined")) {
