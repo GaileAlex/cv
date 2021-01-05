@@ -64,7 +64,6 @@ public class StatisticsService {
             throw new NullPointerException();
         }
 
-
         visitStatisticsRepository.save(user);
 
     }

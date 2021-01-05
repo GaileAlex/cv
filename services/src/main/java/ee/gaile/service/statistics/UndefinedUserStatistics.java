@@ -3,6 +3,7 @@ package ee.gaile.service.statistics;
 import ee.gaile.entity.statistics.VisitStatisticUserIp;
 import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.repository.statistic.VisitStatisticIpRepository;
+import ee.gaile.repository.statistic.VisitStatisticVisitDateRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class UndefinedUserStatistics implements Statistics {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticIpRepository visitStatisticIpRepository;
+    private final VisitStatisticVisitDateRepository visitDateRepository;
 
     @Override
     public void setUserStatistics(HttpServletRequest request) {
@@ -39,6 +41,7 @@ public class UndefinedUserStatistics implements Statistics {
 
         visitStatisticsRepository.save(undefinedUser);
         visitStatisticIpRepository.save(undefinedUserIp);
+        setVisitDate(undefinedUser, visitDateRepository);
 
     }
 

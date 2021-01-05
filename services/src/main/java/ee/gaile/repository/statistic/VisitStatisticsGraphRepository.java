@@ -19,13 +19,13 @@ public class VisitStatisticsGraphRepository {
             "            order by visit_date ";
     // language=sql
     private static final String SQL_USERS = "with data as ( " +
-            "    select 1 as row, visit_statistics_id, date_trunc('day', visit_date) as visit_date " +
+            "    select visit_statistics_id, date_trunc('day', visit_date) as visit_date " +
             "    from visit_statistic_visit_date " +
             "left join visit_statistics vs on vs.id = visit_statistic_visit_date.visit_statistics_id " +
             "WHERE visit_date BETWEEN ? and ? and user_name != 'Admin' ) " +
             "select " +
             "    visit_date, " +
-            "    sum(row) as count_visits " +
+            "    count(visit_date) as count_visits " +
             "from data " +
             "group by visit_date " +
             "order by visit_date ";

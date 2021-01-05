@@ -3,6 +3,7 @@ package ee.gaile.service.statistics;
 import ee.gaile.entity.statistics.VisitStatisticUserIp;
 import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.repository.statistic.VisitStatisticIpRepository;
+import ee.gaile.repository.statistic.VisitStatisticVisitDateRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class UserWithNameStatistics implements Statistics {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticIpRepository visitStatisticIpRepository;
+    private final VisitStatisticVisitDateRepository visitDateRepository;
 
     @Override
     public void setUserStatistics(HttpServletRequest request) {
@@ -38,12 +40,12 @@ public class UserWithNameStatistics implements Statistics {
                 visitStatisticsByIpOptional.get().setUsername(request.getHeader("user"));
 
                 visitStatisticsRepository.save(visitStatisticsByIpOptional.get());
+                setVisitDate(visitStatisticsByIpOptional.get(), visitDateRepository);
             } else {
                 visitStatisticsByName.setTotalVisits(visitStatisticsByName.getTotalVisits() + 1);
                 visitStatisticsByName.setUserCity(request.getHeader("userCity"));
                 visitStatisticsByName.setUserLocation(request.getHeader("userCountry"));
                 visitStatisticsByName.setLastVisit(LocalDateTime.now());
-                visitStatisticsByName.setFirstVisit(LocalDateTime.now());
 
                 VisitStatisticUserIp visitStatisticUserIp = new VisitStatisticUserIp();
                 visitStatisticUserIp.setUserIp(request.getHeader("userIP"));
@@ -51,6 +53,7 @@ public class UserWithNameStatistics implements Statistics {
 
                 visitStatisticsRepository.save(visitStatisticsByName);
                 visitStatisticIpRepository.save(visitStatisticUserIp);
+                setVisitDate(visitStatisticsByName, visitDateRepository);
             }
 
         } else {
@@ -68,6 +71,7 @@ public class UserWithNameStatistics implements Statistics {
 
             visitStatisticsRepository.save(visitStatistic);
             visitStatisticIpRepository.save(visitStatisticUserIp);
+            setVisitDate(visitStatistic, visitDateRepository);
         }
     }
 

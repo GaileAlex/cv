@@ -43,15 +43,6 @@ class StatisticsServiceTest extends ApplicationIT {
     }
 
     @Test
-    void checkTrigger_visit_statistics_trigger() {
-        SoftAssertions.assertSoftly(softly -> {
-            softly.assertThat(user.getVisitStatisticVisitDates().get(0).getVisitStatistics().getId())
-                    .isEqualTo(user.getId());
-            softly.assertThat(user.getVisitStatisticVisitDates()).isNotNull();
-        });
-    }
-
-    @Test
     void saveNewUserWithIp_setUserStatistics() {
         statisticsService.setUserStatistics(request);
 
