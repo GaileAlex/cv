@@ -28,7 +28,7 @@ public class UserController {
     @PostMapping(path = "/login")
     public ResponseEntity<LoginRequest> getUserLoginToken(@RequestBody SignupRequest auth, HttpServletRequest request) {
         ACCESS_LOG.info("user access request, user name is {}, IP is {} ", auth.getUsername(), request.getHeader("userIP"));
-        return new ResponseEntity<>(userService.authUser(auth), HttpStatus.OK);
+        return new ResponseEntity<>(userService.authUser(auth, request), HttpStatus.OK);
     }
 
     @PostMapping(path = "/refresh")

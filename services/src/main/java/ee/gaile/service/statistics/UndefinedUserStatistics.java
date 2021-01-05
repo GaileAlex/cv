@@ -8,12 +8,13 @@ import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -25,32 +26,29 @@ public class UndefinedUserStatistics implements Statistics {
     private final VisitStatisticVisitDateRepository visitDateRepository;
 
     @Override
-    public void setUserStatistics(HttpServletRequest request) {
+    public Map<String, String> setUserStatistics(HttpServletRequest request) {
+        Map<String, String> response = new HashMap<>();
+        String sessionId = UUID.randomUUID().toString();
+        response.put("sessionId", sessionId);
 
-        VisitStatistics undefinedUser = new VisitStatistics();
-        undefinedUser.setLastVisit(LocalDateTime.now());
-        undefinedUser.setTotalVisits(1L);
-        undefinedUser.setUsername("undefined");
-        undefinedUser.setUserCity("undefined");
-        undefinedUser.setUserLocation("undefined");
-        undefinedUser.setSessionId(RequestContextHolder.currentRequestAttributes().getSessionId());
+        VisitStatistics undefinedUser = new VisitStatistics()
+                .setFirstVisit(LocalDateTime.now())
+                .setLastVisit(LocalDateTime.now())
+                .setTotalVisits(1L)
+                .setUsername("undefined")
+                .setUserCity(request.getHeader("userCity"))
+                .setUserLocation(request.getHeader("userCountry"))
+                .setSessionId(sessionId);
 
         VisitStatisticUserIp undefinedUserIp = new VisitStatisticUserIp();
-        undefinedUserIp.setUserIp("undefined");
+        undefinedUserIp.setUserIp(request.getHeader("userIP"));
         undefinedUserIp.setVisitStatistics(undefinedUser);
 
         visitStatisticsRepository.save(undefinedUser);
         visitStatisticIpRepository.save(undefinedUserIp);
         setVisitDate(undefinedUser, visitDateRepository);
 
+        return response;
     }
 
-    @Override
-    public VisitStatistics getUserTotalTimeOnSite(HttpServletRequest request) {
-        Optional<VisitStatistics> visitStatistics = visitStatisticsRepository.findBySessionId(request.getHeader("sessionId"));
-        VisitStatistics user = visitStatistics.orElseThrow(NullPointerException::new);
-
-        return setTime(user, request.getHeader("dateOut"));
-
-    }
 }

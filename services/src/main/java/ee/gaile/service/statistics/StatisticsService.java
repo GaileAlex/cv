@@ -9,18 +9,18 @@ import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.math.BigInteger;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -31,40 +31,36 @@ public class StatisticsService {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticsGraphRepository visitStatisticsGraphRepository;
     private final UndefinedUserStatistics undefinedUserStatistics;
-    private final UserWithIpStatistics userWithIpStatistics;
-    private final UserWithNameStatistics userWithNameStatistics;
+    private final OidUserStatistics oidUserStatistics;
 
     public Map<String, String> setUserStatistics(HttpServletRequest request) {
-        Map<String, String> response = new HashMap<>();
-        response.put("sessionId", RequestContextHolder.currentRequestAttributes().getSessionId());
 
-        if (!request.getHeader("user").equals("undefined")) {
-            userWithNameStatistics.setUserStatistics(request);
-        }
-        if (!request.getHeader("userIP").equals("undefined")) {
-            userWithIpStatistics.setUserStatistics(request);
-        }
-        if (request.getHeader("user").equals("undefined") && request.getHeader("userIP").equals("undefined")) {
-            undefinedUserStatistics.setUserStatistics(request);
+        if (request.getHeader("userId").equals("undefined")) {
+            return undefinedUserStatistics.setUserStatistics(request);
         }
 
-        return response;
+        return oidUserStatistics.setUserStatistics(request);
+
     }
 
     public void setUserTotalTimeOnSite(HttpServletRequest request) {
-        VisitStatistics user;
+        Optional<VisitStatistics> visitStatistics =
+                visitStatisticsRepository.findBySessionId(request.getHeader("userId"));
 
-        if (!request.getHeader("user").equals("undefined")) {
-            user = userWithNameStatistics.getUserTotalTimeOnSite(request);
-        } else if (!request.getHeader("userIP").equals("undefined")) {
-            user = userWithIpStatistics.getUserTotalTimeOnSite(request);
-        } else if (request.getHeader("user").equals("undefined") && request.getHeader("userIP").equals("undefined")) {
-            user = undefinedUserStatistics.getUserTotalTimeOnSite(request);
-        } else {
-            throw new NullPointerException();
+        VisitStatistics user = visitStatistics.orElseThrow(NullPointerException::new);
+
+        LocalDateTime userEntry = user.getLastVisit();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime userOut = LocalDateTime.parse(request.getHeader("dateOut"), formatter);
+
+        long between = Duration.between(userEntry, userOut).toMillis();
+
+        try {
+            user.setTotalTimeOnSite(user.getTotalTimeOnSite() + between);
+        } catch (NullPointerException e) {
+            user.setTotalTimeOnSite(between);
         }
-
-        visitStatisticsRepository.save(user);
 
     }
 
@@ -72,7 +68,7 @@ public class StatisticsService {
                                                   Integer pageSize, Integer page) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         LocalDateTime fromDateParse = LocalDateTime.parse(fromDate, formatter);
-        LocalDateTime toDateParse = LocalDateTime.parse(toDate, formatter);
+        LocalDateTime toDateParse = LocalDateTime.parse(toDate, formatter).plusDays(1);
 
         List<VisitStatisticsGraph> countedVisitDTOList = visitStatisticsGraphRepository
                 .selectVisitStatistic(fromDateParse, toDateParse);

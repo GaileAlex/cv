@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -27,6 +29,7 @@ class UserServiceTest extends ApplicationIT {
     void authUser() {
         Authentication authentication = mock(Authentication.class);
         SecurityContext securityContext = mock(SecurityContext.class);
+        HttpServletRequest request = mock(HttpServletRequest.class);
 
         when(securityContext.getAuthentication()).thenReturn(authentication);
         SecurityContextHolder.setContext(securityContext);
@@ -39,7 +42,7 @@ class UserServiceTest extends ApplicationIT {
                 .email("admin@cv.ee")
                 .build();
 
-        LoginRequest loginRequest = userService.authUser(signupRequest);
+        LoginRequest loginRequest = userService.authUser(signupRequest, request);
 
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(loginRequest.getUser().getUsername()).isEqualTo("Admin");

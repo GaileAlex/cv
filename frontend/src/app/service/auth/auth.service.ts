@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { Router } from "@angular/router";
 import { map } from 'rxjs/operators';
 import { User } from "../../models/user";
+import { StatisticsService } from "../statistics.service";
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -18,7 +19,7 @@ export class AuthService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 
-    constructor(private http: HttpClient, public router: Router) {
+    constructor(private http: HttpClient, private router: Router, private statisticsService: StatisticsService) {
         this.userSubject = new BehaviorSubject<User>(null);
         this.user = this.userSubject.asObservable();
     }
@@ -37,7 +38,11 @@ export class AuthService {
 
     login(username, password): Observable<any> {
         const userIPOptions = {
-            headers: new HttpHeaders({userIP: `${ sessionStorage.getItem('userIP') }`})
+            headers: new HttpHeaders({
+                userIP: `${ sessionStorage.getItem('userIP') }`,
+                userId: `${ this.statisticsService.getSessionCookie() }`
+
+            })
         };
         return this.http.post<any>(environment.apiAuthUrl + Constants.LOGIN_URL, {
             username,

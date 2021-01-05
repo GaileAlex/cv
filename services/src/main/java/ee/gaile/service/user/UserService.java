@@ -1,7 +1,9 @@
 package ee.gaile.service.user;
 
+import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.entity.users.Users;
 import ee.gaile.enums.EnumRoles;
+import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import ee.gaile.service.security.LoginService;
 import ee.gaile.service.security.UserDetailsImpl;
 import ee.gaile.service.security.UserRepository;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,8 +36,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final AuthenticationManager authenticationManager;
+    private final VisitStatisticsRepository visitStatisticsRepository;
 
-    public LoginRequest authUser(SignupRequest signupRequest) {
+    public LoginRequest authUser(SignupRequest signupRequest, HttpServletRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signupRequest.getUsername(), signupRequest.getPassword()));
 
@@ -50,6 +54,9 @@ public class UserService {
                 .password(signupRequest.getPassword())
                 .role(role.get(0))
                 .build();
+
+        Optional<VisitStatistics> visitStatistics = visitStatisticsRepository.findBySessionId(request.getHeader("userId"));
+        visitStatistics.ifPresent((c) -> visitStatisticsRepository.save(c.setUsername(signupRequest.getUsername())));
 
         return loginService.authUser(userDTO);
     }

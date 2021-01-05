@@ -5,6 +5,8 @@ import { UserDataService } from './user-data.service';
 import { Observable } from 'rxjs';
 import { VisitStatisticGraph } from '../models/visitStatisticGraph';
 import { formatDate } from "@angular/common";
+import Cookies from "universal-cookie";
+import * as moment from 'moment';
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +15,9 @@ export class StatisticsService {
     private readonly USER_STATISTICS_URL: string;
     private readonly GRAPH_STATISTICS_URL: string;
     private readonly USER_OUT_STATISTICS_URL: string;
+    private readonly SESSION_USER_ID_COOKIE = 'session_user-id_cookie';
+
+    cookies = new Cookies();
 
     constructor(private http: HttpClient, private userDataService: UserDataService) {
         this.USER_STATISTICS_URL = environment.apiUrl + '/statistic/user';
@@ -39,16 +44,20 @@ export class StatisticsService {
                 userIP: `${ sessionStorage.getItem('userIP') || undefined }`,
                 userCountry: `${ sessionStorage.getItem('userCountry') || undefined }`,
                 userCity: `${ sessionStorage.getItem('userCity') || undefined }`,
-                user: `${ this.userDataService.getUserName() || undefined }`
+                user: `${ this.userDataService.getUserName() || undefined }`,
+                userId: `${ this.getSessionCookie() || undefined }`
             })
         };
 
         this.http.post<any>(this.USER_STATISTICS_URL, {responseType: 'text'}, headers).subscribe(data => {
-            sessionStorage.setItem('sessionId', data.sessionId)
-            console.log(sessionStorage.getItem('userIP'))
+            if (data.sessionId !== "true") {
+                this.setSessionCookie(data.sessionId)
+            }
         }, error => {
             console.log(error)
         });
+
+
     }
 
     userOut() {
@@ -57,7 +66,7 @@ export class StatisticsService {
             headers: new HttpHeaders({
                 user: `${ this.userDataService.getUserName() || undefined }`,
                 userIP: `${ sessionStorage.getItem('userIP') || undefined }`,
-                sessionId: `${ sessionStorage.getItem('sessionId') || undefined }`,
+                userId: `${ this.getSessionCookie() || undefined }`,
                 dateOut: `${ date }`,
             })
         };
@@ -67,5 +76,16 @@ export class StatisticsService {
     public findAll(fromDate, toDate, pageSize, pageIndex): Observable<VisitStatisticGraph> {
         return this.http.get<VisitStatisticGraph>(`${ this.GRAPH_STATISTICS_URL }/fromDate/${ fromDate }` +
             `/toDate/${ toDate }/pageSize/${ pageSize }/page/${ pageIndex }`);
+    }
+
+    setSessionCookie(sessionId) {
+        this.cookies.set(this.SESSION_USER_ID_COOKIE, sessionId, {
+            expires: moment().add(10, 'years').toDate(),
+            path: '/',
+        });
+    }
+
+    getSessionCookie() {
+        return this.cookies.get(this.SESSION_USER_ID_COOKIE);
     }
 }

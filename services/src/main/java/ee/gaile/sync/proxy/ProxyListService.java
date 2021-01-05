@@ -68,7 +68,7 @@ public class ProxyListService {
         }
 
         if (proxyList.getUptime() != null && proxyList.getNumberUnansweredChecks() != null
-                && proxyList.getUptime() < 5 && proxyList.getNumberUnansweredChecks() > 500) {
+                && proxyList.getUptime() < 5 && proxyList.getNumberUnansweredChecks() > 1500) {
             try {
                 Files.deleteIfExists(Paths.get(proxyList.getId() + "_"
                         + proxyList.getIpAddress() + "_" + proxyList.getPort() + ".tmp"));
