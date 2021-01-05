@@ -34,8 +34,7 @@ public class UserWithNameStatistics implements Statistics {
         if (visitStatisticsByNameOptional.isPresent()) {
             VisitStatistics visitStatisticsByName = visitStatisticsByNameOptional.get();
 
-            if (visitStatisticsByIpOptional.isPresent() && visitStatisticsByIpOptional.get().getSessionId()
-                    .equals(RequestContextHolder.currentRequestAttributes().getSessionId())) {
+            if (visitStatisticsByIpOptional.isPresent()) {
 
                 visitStatisticsByIpOptional.get().setUsername(request.getHeader("user"));
 
