@@ -24,7 +24,6 @@ public class UserWithIpStatistics implements Statistics {
 
     @Override
     public void setUserStatistics(HttpServletRequest request) {
-
         Optional<VisitStatistics> visitStatisticsOptional =
                 visitStatisticsRepository.findByUserIP(request.getHeader("userIP"));
 

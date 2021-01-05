@@ -27,13 +27,14 @@ public class UserWithNameStatistics implements Statistics {
         Optional<VisitStatistics> visitStatisticsByNameOptional =
                 visitStatisticsRepository.findByUserName(request.getHeader("user"));
         Optional<VisitStatistics> visitStatisticsByIpOptional =
-                visitStatisticsRepository.findByUserName(request.getHeader("userIP"));
+                visitStatisticsRepository.findByUserIP(request.getHeader("userIP"));
 
         if (visitStatisticsByNameOptional.isPresent()) {
             VisitStatistics visitStatisticsByName = visitStatisticsByNameOptional.get();
 
             if (visitStatisticsByIpOptional.isPresent() && visitStatisticsByIpOptional.get().getSessionId()
                     .equals(RequestContextHolder.currentRequestAttributes().getSessionId())) {
+
                 visitStatisticsByIpOptional.get().setUsername(request.getHeader("user"));
 
                 visitStatisticsRepository.save(visitStatisticsByIpOptional.get());
