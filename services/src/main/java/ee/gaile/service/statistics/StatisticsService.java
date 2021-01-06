@@ -80,8 +80,17 @@ public class StatisticsService {
 
         Long total = visitStatisticsGraphRepository.countTotal(fromDateParse, toDateParse);
 
-        LocalDate startDate = LocalDate.from(countedVisitDTOList.get(0).getVisitDate());
+        LocalDate from;
+
+        try {
+            from = countedVisitDTOList.get(0).getVisitDate();
+        } catch (IndexOutOfBoundsException e) {
+            return new VisitStatisticGraph();
+        }
+
+        LocalDate startDate = LocalDate.from(from);
         LocalDate endDate = LocalDate.from(countedVisitDTOList.get(countedVisitDTOList.size() - 1).getVisitDate());
+
 
         List<BigInteger> newUsers = getPointByDate(visitStatisticsNewUsers, startDate, endDate);
         List<BigInteger> totalVisits = getPointByDate(countedVisitDTOList, startDate, endDate);

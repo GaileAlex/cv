@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset gaile:v0027_change_tables_visit_statistics.sql
+--changeset gaile:v0024_change_tables_visit_statistics.sql
 
 ALTER TABLE public.visit_statistics
     ALTER COLUMN last_visit DROP NOT NULL;

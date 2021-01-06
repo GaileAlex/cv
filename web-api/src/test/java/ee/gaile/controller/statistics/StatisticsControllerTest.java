@@ -52,4 +52,16 @@ class StatisticsControllerTest extends ApplicationIT {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void checkSetUserOut() throws Exception {
+        HttpServletRequest req = Mockito.mock(HttpServletRequest.class);
+        mvc.perform(MockMvcRequestBuilders
+                .post(API_V1_PREFIX + "/statistic/user-out")
+                .content(asJsonString(req))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());
+    }
 }
