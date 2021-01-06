@@ -42,7 +42,7 @@ public class ProxyListService {
             return;
         }
 
-        List<ProxyList> proxyLists = proxyRepository.findAllBySpeed();
+        List<ProxyList> proxyLists = proxyRepository.findAllByUptime();
 
         log.info("Start proxy list sync. Size lists is {}", proxyLists.size());
 
