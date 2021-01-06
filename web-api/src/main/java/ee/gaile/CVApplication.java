@@ -11,8 +11,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
 
-@EnableScheduling
 @EnableAsync
+@EnableScheduling
 @SpringBootApplication
 public class CVApplication extends SpringBootServletInitializer {
 

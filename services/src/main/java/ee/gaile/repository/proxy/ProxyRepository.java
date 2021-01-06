@@ -24,4 +24,8 @@ public interface ProxyRepository extends JpaRepository<ProxyList, Long> {
             " ORDER BY uptime desc ", nativeQuery = true)
     List<ProxyList> findAllByUptime();
 
+    @Query(value = "select * from proxy_list " +
+            " WHERE country = 'unknown'", nativeQuery = true)
+    List<ProxyList> findAllWhereCountryUnknown();
+
 }

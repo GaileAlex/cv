@@ -2,11 +2,11 @@ package ee.gaile.sync.proxy;
 
 import ee.gaile.entity.proxy.ProxyList;
 import ee.gaile.repository.proxy.ProxyRepository;
+import ee.gaile.sync.SyncService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,30 +17,14 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class ProxyListService {
+@RequiredArgsConstructor
+public class ProxyListService implements SyncService {
     private static final Logger ERROR_LOG = LoggerFactory.getLogger("error-log");
     private final ProxyRepository proxyRepository;
     private final ProxyCheck proxyCheck;
 
-    @Value("${proxy.scheduled.run}")
-    private Boolean isRun;
-
-    public ProxyListService(ProxyRepository proxyRepository,
-                            ProxyCheck proxyCheck) {
-        this.proxyRepository = proxyRepository;
-        this.proxyCheck = proxyCheck;
-    }
-
-    @Scheduled(fixedDelay = Long.MAX_VALUE)
-    public void firstStartSyncService() {
-        setAllProxy();
-    }
-
-    @Scheduled(cron = "${proxy.scheduled}")
-    public void setAllProxy() {
-        if (!isRun) {
-            return;
-        }
+    @Override
+    public void sync() {
 
         List<ProxyList> proxyLists = proxyRepository.findAllByUptime();
 

@@ -10,12 +10,12 @@ import ee.gaile.enums.BitfinexCryptocurrencyEnum;
 import ee.gaile.enums.Currency;
 import ee.gaile.repository.mindly.BitfinexCryptocurrencyRepository;
 import ee.gaile.repository.mindly.CryptocurrencyValueRepository;
+import ee.gaile.sync.SyncService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,7 +33,8 @@ import java.util.Map;
 import java.util.Objects;
 
 @Service
-public class BitfinexAccessService {
+@RequiredArgsConstructor
+public class BitfinexAccessSyncService implements SyncService {
     private static final Logger CURRENCY_LOG = LoggerFactory.getLogger("currency-log");
     private static final Logger ERROR_LOG = LoggerFactory.getLogger("error-log");
 
@@ -44,26 +45,8 @@ public class BitfinexAccessService {
     private final CryptocurrencyValueRepository cryptocurrencyValueRepository;
     private final BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository;
 
-    @Value("${bitfinex.access.run}")
-    private Boolean isRun;
-
-    public BitfinexAccessService(CryptocurrencyValueRepository cryptocurrencyValueRepository,
-                                 BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository) {
-        this.cryptocurrencyValueRepository = cryptocurrencyValueRepository;
-        this.bitfinexCryptocurrencyRepository = bitfinexCryptocurrencyRepository;
-    }
-
-    @Scheduled(fixedDelay = Long.MAX_VALUE)
-    public void firstStartSyncService() {
-        setCryptocurrency();
-    }
-
-    @Scheduled(cron = "${bitfinex.access.scheduled}")
-    private void setCryptocurrency() {
-        if (!isRun) {
-            return;
-        }
-
+    @Override
+    public void sync() {
         Map<String, String> map = BitfinexCryptocurrencyEnum.getCurrencyName();
 
         map.forEach((k, v) -> {
