@@ -35,7 +35,6 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class BitfinexAccessSyncService implements SyncService {
-    private static final Logger CURRENCY_LOG = LoggerFactory.getLogger("currency-log");
     private static final Logger ERROR_LOG = LoggerFactory.getLogger("error-log");
 
     private static final int LAST_PRICE = 7;
@@ -74,7 +73,6 @@ public class BitfinexAccessSyncService implements SyncService {
 
                 cryptocurrencyValueRepository.save(cryptocurrencyValues);
 
-                CURRENCY_LOG.info("The current {} rate is {} €", k, price);
             } catch (Exception e) {
                 ERROR_LOG.error("Error getting currency data {} - {}", k, e.getMessage());
             }

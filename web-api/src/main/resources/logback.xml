@@ -18,17 +18,6 @@
         </encoder>
     </appender>
 
-    <appender name="CURRENCY-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.folder}/currency-logs/currency.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <maxHistory>30</maxHistory>
-            <fileNamePattern>.currency-logs/currency.%d{yyyy-MM-dd}.log</fileNamePattern>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level User - %m%n</pattern>
-        </encoder>
-    </appender>
-
     <appender name="ERROR-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.folder}/error/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -43,9 +32,7 @@
     <logger name="access-accounting-log" level="debug">
         <appender-ref ref="ACCESS-ACCOUNTING-FILE"/>
     </logger>
-    <logger name="currency-log" level="debug">
-        <appender-ref ref="CURRENCY-FILE"/>
-    </logger>
+
     <logger name="error-log" level="debug">
         <appender-ref ref="ERROR-FILE"/>
     </logger>
