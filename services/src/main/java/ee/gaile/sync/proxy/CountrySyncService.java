@@ -5,8 +5,6 @@ import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.sync.SyncService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +18,6 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class CountrySyncService implements SyncService {
-    private static final Logger ERROR_LOG = LoggerFactory.getLogger("error-log");
-
     private final ProxyRepository proxyRepository;
 
     @Override
@@ -49,7 +45,7 @@ public class CountrySyncService implements SyncService {
                     proxyRepository.save(proxyList);
 
                 } catch (Exception e) {
-                    ERROR_LOG.info("proxy set country error for {} {}", proxyList.getIpAddress(), proxyList.getPort());
+                    log.info("proxy set country error for {} {}", proxyList.getIpAddress(), proxyList.getPort());
                     returnIfRequestIsBlocked++;
                     if (returnIfRequestIsBlocked == 10) {
                         return;

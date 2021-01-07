@@ -25,10 +25,10 @@ public class ProxyListService implements SyncService {
 
     @Override
     public void sync() {
-
         List<ProxyList> proxyLists = proxyRepository.findAllByUptime();
 
-        log.info("Start proxy list sync. Size lists is {}", proxyLists.size());
+        log.info("Start proxy list sync. Size lists is {}, in total there were {} ",
+                proxyLists.size(), proxyRepository.getTotal());
 
         for (ProxyList proxyList : proxyLists) {
             if (!doFirstCheck(proxyList)) {
@@ -52,7 +52,7 @@ public class ProxyListService implements SyncService {
         }
 
         if (proxyList.getUptime() != null && proxyList.getNumberUnansweredChecks() != null
-                && proxyList.getUptime() < 1 && proxyList.getNumberUnansweredChecks() > 1500) {
+                && proxyList.getUptime() < 1 && proxyList.getNumberUnansweredChecks() > 1000) {
             try {
                 Files.deleteIfExists(Paths.get(proxyList.getId() + "_"
                         + proxyList.getIpAddress() + "_" + proxyList.getPort() + ".tmp"));

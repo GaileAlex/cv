@@ -72,8 +72,6 @@ public class ProxyCheckSyncService {
             proxyRepository.save(proxyList);
             socksConnection.disconnect();
 
-            log.info("Proxy verified successfully " + proxyList.getIpAddress());
-
         } catch (IOException e) {
             if (proxyList.getNumberUnansweredChecks() != null) {
                 proxyList.setNumberUnansweredChecks(proxyList.getNumberUnansweredChecks() + 1);
@@ -117,6 +115,5 @@ public class ProxyCheckSyncService {
         }
 
         return FILE_SIZE / duration;
-
     }
 }
