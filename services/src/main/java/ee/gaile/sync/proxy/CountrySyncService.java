@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -37,11 +38,11 @@ public class CountrySyncService implements SyncService {
         for (ProxyList proxyList : proxyLists) {
             if (proxyList.getCountry().equals("unknown")) {
                 try {
-                    ResponseEntity<String> listResponseEntity2 = restTemplate
+                    ResponseEntity<String> listResponseEntity = restTemplate
                             .exchange("http://ipinfo.io/" + proxyList.getIpAddress(), HttpMethod.GET, null,
                                     new ParameterizedTypeReference<String>() {
                                     });
-                    String[] st = listResponseEntity2.getBody().split("\",\\n");
+                    String[] st = Objects.requireNonNull(listResponseEntity.getBody()).split("\",\\n");
 
                     String city = st[3].split(": \"")[1] + " " + st[2].split(": \"")[1];
                     proxyList.setCountry(city);
