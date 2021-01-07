@@ -24,4 +24,8 @@ public interface ProxyRepository extends JpaRepository<ProxyList, Long> {
             " WHERE country = 'unknown'", nativeQuery = true)
     List<ProxyList> findAllWhereCountryUnknown();
 
+    @Query(value = "select * from proxy_list " +
+            " order by random()", nativeQuery = true)
+    List<ProxyList> findAllOrderByRandom();
+
 }
