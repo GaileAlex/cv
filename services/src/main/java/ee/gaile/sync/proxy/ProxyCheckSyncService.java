@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class ProxyCheck {
+public class ProxyCheckSyncService {
     private static final Logger ERROR_LOG = LoggerFactory.getLogger("error-log");
 
     private final ProxyRepository proxyRepository;

@@ -21,7 +21,7 @@ import java.util.List;
 public class ProxyListService implements SyncService {
     private static final Logger ERROR_LOG = LoggerFactory.getLogger("error-log");
     private final ProxyRepository proxyRepository;
-    private final ProxyCheck proxyCheck;
+    private final ProxyCheckSyncService proxyCheckSyncService;
 
     @Override
     public void sync() {
@@ -34,7 +34,7 @@ public class ProxyListService implements SyncService {
             if (!doFirstCheck(proxyList)) {
                 continue;
             }
-            proxyCheck.checkProxy(proxyList);
+            proxyCheckSyncService.checkProxy(proxyList);
         }
     }
 
