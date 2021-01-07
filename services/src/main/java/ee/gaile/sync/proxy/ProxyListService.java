@@ -25,7 +25,7 @@ public class ProxyListService implements SyncService {
 
     @Override
     public void sync() {
-        List<ProxyList> proxyLists = proxyRepository.findAllByUptime();
+        List<ProxyList> proxyLists = proxyRepository.findAll();
 
         log.info("Start proxy list sync. Size lists is {}, in total there were {} ",
                 proxyLists.size(), proxyRepository.getTotal());
