@@ -45,7 +45,7 @@ export class StatisticsService {
                 userCountry: `${ sessionStorage.getItem('userCountry') || undefined }`,
                 userCity: `${ sessionStorage.getItem('userCity') || undefined }`,
                 user: `${ this.userDataService.getUserName() || undefined }`,
-                userId: `${ sessionStorage.getItem('userId') || undefined }`
+                userId: `${ this.getSessionCookie() || undefined }`
             })
         };
 
