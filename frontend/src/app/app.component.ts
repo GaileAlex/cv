@@ -31,12 +31,12 @@ export class AppComponent {
         });
     }
 
-    @HostListener('window:unload', ['$event'])
+   /* @HostListener('window:unload', ['$event'])
     unloadHandler(event) {
         this.statisticsService.userOut().subscribe(data => {
         }, error => {
             this.errorMessage = error;
         });
-    }
+    }*/
 
 }

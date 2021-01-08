@@ -43,8 +43,6 @@ public class ProxyCheckSyncService {
             URL fileUrl = new URL(FILE_URL);
             LocalDateTime start = LocalDateTime.now();
 
-            proxyList.setLastChecked(LocalDateTime.now());
-
             HttpURLConnection socksConnection = (HttpURLConnection) fileUrl.openConnection(socksProxy);
             socksConnection.setConnectTimeout(TIMEOUT);
             socksConnection.setReadTimeout(TIMEOUT);
@@ -68,6 +66,7 @@ public class ProxyCheckSyncService {
 
             Double uptime = getUptime(proxyList);
             proxyList.setUptime(uptime);
+            proxyList.setLastChecked(LocalDateTime.now());
 
             proxyRepository.save(proxyList);
             socksConnection.disconnect();
@@ -81,6 +80,8 @@ public class ProxyCheckSyncService {
             Double uptime = getUptime(proxyList);
             proxyList.setUptime(uptime);
             proxyList.setSpeed(0.0);
+            proxyList.setLastChecked(LocalDateTime.now());
+
             proxyRepository.save(proxyList);
         }
 

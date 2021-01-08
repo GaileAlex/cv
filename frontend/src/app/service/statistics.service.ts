@@ -45,14 +45,13 @@ export class StatisticsService {
                 userCountry: `${ sessionStorage.getItem('userCountry') || undefined }`,
                 userCity: `${ sessionStorage.getItem('userCity') || undefined }`,
                 user: `${ this.userDataService.getUserName() || undefined }`,
-                userId: `${ this.getSessionCookie() || undefined }`
+                userId: `${ sessionStorage.getItem('userId') || undefined }`
             })
         };
 
         this.http.post<any>(this.USER_STATISTICS_URL, {responseType: 'text'}, headers).subscribe(data => {
-            if (data.sessionId !== "true") {
-                this.setSessionCookie(data.sessionId)
-            }
+            this.setSessionCookie(data.sessionId)
+            sessionStorage.setItem('userId', data.sessionId)
         }, error => {
             console.log(error)
         });

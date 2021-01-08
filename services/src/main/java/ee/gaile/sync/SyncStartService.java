@@ -27,7 +27,7 @@ public class SyncStartService {
     @Scheduled(cron = "${bitfinex.access.scheduled}")
     public void syncBitfinex() {
         if (!isRunBitfinex) {
-            log.info("Scheduled proxy list sync disable");
+            log.info("Scheduled Bitfinex sync disable");
             return;
         }
         bitfinexAccessSyncService.sync();
@@ -45,7 +45,7 @@ public class SyncStartService {
     @Scheduled(cron = "${proxy.country.scheduled}")
     public void syncCheckCountry() {
         if (!isRunCheckCountry) {
-            log.info("Scheduled proxy list sync disable");
+            log.info("Scheduled proxy country sync disable");
             return;
         }
         countrySyncService.sync();

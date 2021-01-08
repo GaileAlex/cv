@@ -57,7 +57,7 @@ public class OidUserStatistics implements Statistics {
 
             setVisitDate(oldUser, visitDateRepository);
 
-            response.put("sessionId", "true");
+            response.put("sessionId", oldUser.getSessionId());
             return response;
         }
 
