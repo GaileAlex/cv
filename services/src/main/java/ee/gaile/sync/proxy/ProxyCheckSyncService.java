@@ -9,7 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -36,10 +37,7 @@ public class ProxyCheckSyncService {
         Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
                 new InetSocketAddress(proxyList.getIpAddress(), proxyList.getPort()));
 
-        File tempFile = new File(proxyList.getId() + "_" + proxyList.getIpAddress()
-                + "_" + proxyList.getPort() + ".tmp");
-
-        try (OutputStream outStream = new FileOutputStream(tempFile)) {
+        try {
             URL fileUrl = new URL(FILE_URL);
             LocalDateTime start = LocalDateTime.now();
 
@@ -55,12 +53,7 @@ public class ProxyCheckSyncService {
 
             byte[] buffer = new byte[8 * 1024];
             int bytesRead;
-
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outStream.write(buffer, 0, bytesRead);
-            }
-
-            inputStream.close();
+            while ((bytesRead = inputStream.read(buffer)) != -1) ;
 
             proxyList.setSpeed(checkSpeed(startFile, LocalDateTime.now()));
 
