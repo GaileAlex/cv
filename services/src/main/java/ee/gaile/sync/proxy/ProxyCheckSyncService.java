@@ -15,8 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -33,7 +31,6 @@ public class ProxyCheckSyncService {
 
     @Async
     public void checkProxy(ProxyList proxyList) {
-
         Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
                 new InetSocketAddress(proxyList.getIpAddress(), proxyList.getPort()));
 
@@ -77,15 +74,6 @@ public class ProxyCheckSyncService {
 
             proxyRepository.save(proxyList);
         }
-
-        try {
-            Files.deleteIfExists(Paths.get(proxyList.getId() + "_" +
-                    proxyList.getIpAddress() + "_" + proxyList.getPort() + ".tmp"));
-        } catch (IOException e) {
-            ERROR_LOG.error("failed to delete file: " + proxyList.getId() + "_" +
-                    proxyList.getIpAddress() + "_" + proxyList.getPort() + ".tmp");
-        }
-
     }
 
     private Double getUptime(ProxyList proxyList) {
