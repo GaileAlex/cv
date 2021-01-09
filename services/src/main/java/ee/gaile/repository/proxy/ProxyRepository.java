@@ -13,7 +13,7 @@ public interface ProxyRepository extends JpaRepository<ProxyList, Long> {
 
     @Query(value = "select * from proxy_list " +
             " where speed > 0 " +
-            " ORDER BY speed DESC limit :pageSize offset :page ", nativeQuery = true)
+            " order by speed desc limit :pageSize offset :page ", nativeQuery = true)
     List<ProxyList> findWithPaging(@Param("pageSize") Integer pageSize, @Param("page") Integer page);
 
     @Query(value = "select count(id) from proxy_list " +
@@ -21,7 +21,7 @@ public interface ProxyRepository extends JpaRepository<ProxyList, Long> {
     Long getTotal();
 
     @Query(value = "select * from proxy_list " +
-            " WHERE country = 'unknown' order by uptime desc", nativeQuery = true)
+            " where country = 'unknown' and uptime > 0", nativeQuery = true)
     List<ProxyList> findAllWhereCountryUnknown();
 
     @Query(value = "select * from proxy_list " +

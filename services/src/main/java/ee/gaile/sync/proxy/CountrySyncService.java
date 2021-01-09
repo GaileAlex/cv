@@ -25,6 +25,8 @@ public class CountrySyncService implements SyncService {
         RestTemplate restTemplate = new RestTemplate();
         List<ProxyList> proxyLists = proxyRepository.findAllWhereCountryUnknown();
 
+        log.info("Start proxy country sync. Size lists is {} ", proxyLists.size());
+
         if (proxyLists.size() == 0) {
             return;
         }
