@@ -52,6 +52,9 @@ public class ProxyCheckSyncService {
             int bytesRead;
             while ((bytesRead = inputStream.read(buffer)) != -1) ;
 
+            socksConnection.disconnect();
+            inputStream.close();
+
             proxyList.setSpeed(checkSpeed(startFile, LocalDateTime.now()));
 
             Double uptime = getUptime(proxyList);
@@ -59,7 +62,6 @@ public class ProxyCheckSyncService {
             proxyList.setLastChecked(LocalDateTime.now());
 
             proxyRepository.save(proxyList);
-            socksConnection.disconnect();
 
         } catch (IOException e) {
             if (proxyList.getNumberUnansweredChecks() != null) {

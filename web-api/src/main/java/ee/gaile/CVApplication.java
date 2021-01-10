@@ -30,7 +30,7 @@ public class CVApplication extends SpringBootServletInitializer {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(150);
         executor.setMaxPoolSize(500);
-        executor.setQueueCapacity(50000);
+        executor.setQueueCapacity(60000);
         executor.setThreadNamePrefix("Async-pool-");
         executor.initialize();
         return executor;

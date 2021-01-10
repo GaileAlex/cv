@@ -45,7 +45,7 @@ public class ProxyListService implements SyncService {
         }
 
         if (proxyList.getUptime() != null && proxyList.getNumberUnansweredChecks() != null
-                && proxyList.getUptime() < 5 && proxyList.getNumberUnansweredChecks() > 1000) {
+                && proxyList.getUptime() < 5 && proxyList.getNumberUnansweredChecks() > 500) {
             proxyRepository.delete(proxyList);
             return false;
         }
