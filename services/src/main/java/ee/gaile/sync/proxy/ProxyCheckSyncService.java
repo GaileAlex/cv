@@ -4,9 +4,6 @@ import ee.gaile.entity.proxy.ProxyList;
 import ee.gaile.repository.proxy.ProxyRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -22,14 +19,11 @@ import java.time.LocalDateTime;
 @Service
 @AllArgsConstructor
 public class ProxyCheckSyncService {
-    private static final Logger ERROR_LOG = LoggerFactory.getLogger("error-log");
-
     private final ProxyRepository proxyRepository;
     private static final String FILE_URL = "http://ipv4.ikoula.testdebit.info/1M.iso";
     private static final Double FILE_SIZE = 1_000_000.0;
     private static final Integer TIMEOUT = 60_000;
 
-    @Async
     public void checkProxy(ProxyList proxyList) {
         Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
                 new InetSocketAddress(proxyList.getIpAddress(), proxyList.getPort()));

@@ -3,12 +3,16 @@ package ee.gaile.sync.proxy;
 import ee.gaile.entity.proxy.ProxyList;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.sync.SyncService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 @Slf4j
 @Service
@@ -17,18 +21,26 @@ public class ProxyListService implements SyncService {
     private final ProxyRepository proxyRepository;
     private final ProxyCheckSyncService proxyCheckSyncService;
 
+    @Getter
+    ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(100);
+
     @Override
     public void sync() {
+        if (((ThreadPoolExecutor) proxyListsExecutor).getActiveCount() > 0) {
+            log.warn("Proxy list sync canceled. The previous sync is incomplete");
+            return;
+        }
+
         List<ProxyList> proxyLists = proxyRepository.findAllOrderByRandom();
 
         log.info("Start proxy list sync. Size lists is {}, in total there were {} ",
                 proxyLists.size(), proxyRepository.getTotal());
 
-        for (ProxyList proxyList : proxyLists) {
+        proxyLists.forEach(proxyList -> proxyListsExecutor.execute(() -> {
             if (doFirstCheck(proxyList)) {
                 proxyCheckSyncService.checkProxy(proxyList);
             }
-        }
+        }));
     }
 
     private boolean doFirstCheck(ProxyList proxyList) {

@@ -12,10 +12,10 @@ import java.util.List;
 @Service
 public class VisitStatisticsGraphRepository {
     // language=sql
-    private static final String SQL_NEW_USERS = "select date_trunc('day', last_visit) as visit_date, " +
-            "             count(last_visit) as count_visits from visit_statistics " +
-            "            WHERE last_visit BETWEEN ? and ? and user_name != 'Admin' " +
-            "            group by  date_trunc('day', last_visit) " +
+    private static final String SQL_NEW_USERS = "select date_trunc('day', first_visit) as visit_date, " +
+            "             count(first_visit) as count_visits from visit_statistics " +
+            "            WHERE first_visit BETWEEN ? and ? and user_name != 'Admin' " +
+            "            group by  date_trunc('day', first_visit) " +
             "            order by visit_date ";
     // language=sql
     private static final String SQL_USERS = "with data as ( " +
