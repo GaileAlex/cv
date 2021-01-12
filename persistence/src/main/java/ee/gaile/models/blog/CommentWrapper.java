@@ -1,4 +1,4 @@
-package ee.gaile.dto.blog;
+package ee.gaile.models.blog;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

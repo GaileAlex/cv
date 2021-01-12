@@ -1,7 +1,7 @@
 package ee.gaile.service.blog;
 
-import ee.gaile.dto.blog.BlogWrapper;
-import ee.gaile.dto.blog.CommentWrapper;
+import ee.gaile.models.blog.BlogWrapper;
+import ee.gaile.models.blog.CommentWrapper;
 import ee.gaile.entity.blog.Blog;
 import ee.gaile.entity.blog.Comments;
 import ee.gaile.repository.blog.BlogRepository;

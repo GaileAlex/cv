@@ -1,6 +1,6 @@
 package ee.gaile.entity.users;
 
-import ee.gaile.enums.EnumRoles;
+import gaile.enums.EnumRoles;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

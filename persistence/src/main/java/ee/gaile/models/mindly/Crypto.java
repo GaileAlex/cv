@@ -1,4 +1,4 @@
-package ee.gaile.dto.mindly;
+package ee.gaile.models.mindly;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

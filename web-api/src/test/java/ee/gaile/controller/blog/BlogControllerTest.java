@@ -1,7 +1,7 @@
 package ee.gaile.controller.blog;
 
 import ee.gaile.ApplicationIT;
-import ee.gaile.dto.blog.CommentWrapper;
+import ee.gaile.models.blog.CommentWrapper;
 import ee.gaile.service.blog.BlogService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

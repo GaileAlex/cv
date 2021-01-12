@@ -33,6 +33,7 @@
         <module>security</module>
         <module>services</module>
         <module>web-api</module>
+        <module>common</module>
     </modules>
 
     <dependencies>

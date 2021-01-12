@@ -24,3 +24,4 @@
 /frontend/Dockerfile
 /web-api/src/main/resources/proxy/
 /web-api/.access-logs/
+/common/common.iml

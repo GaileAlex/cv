@@ -2,7 +2,6 @@ package ee.gaile.service.user;
 
 import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.entity.users.Users;
-import ee.gaile.enums.EnumRoles;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import ee.gaile.service.security.LoginService;
 import ee.gaile.service.security.UserDetailsImpl;
@@ -12,6 +11,7 @@ import ee.gaile.service.security.request.SignupRequest;
 import ee.gaile.service.security.response.MessageResponse;
 import ee.gaile.service.security.settings.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
+import gaile.enums.EnumRoles;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

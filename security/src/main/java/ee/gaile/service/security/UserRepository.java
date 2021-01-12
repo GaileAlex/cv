@@ -1,7 +1,7 @@
 package ee.gaile.service.security;
 
-import ee.gaile.enums.EnumRoles;
 import ee.gaile.entity.users.Users;
+import gaile.enums.EnumRoles;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
