@@ -22,7 +22,7 @@ public class ProxyListService implements SyncService {
     private final ProxyCheckSyncService proxyCheckSyncService;
 
     @Getter
-    ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(100);
+    ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(140);
 
     @Override
     public void sync() {

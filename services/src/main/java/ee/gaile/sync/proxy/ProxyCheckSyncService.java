@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ProxyCheckSyncService {
     private final ProxyRepository proxyRepository;
-    private static final String FILE_URL = "http://ipv4.ikoula.testdebit.info/1M.iso";
-    private static final Double FILE_SIZE = 1_000_000.0;
+    private static final String FILE_URL = "http://ipv4.ikoula.testdebit.info/5M.iso";
+    private static final Double FILE_SIZE = 5_000_000.0;
     private static final Integer TIMEOUT = 60_000;
 
     public void checkProxy(ProxyList proxyList) {
@@ -84,14 +84,6 @@ public class ProxyCheckSyncService {
     }
 
     private Double checkSpeed(LocalDateTime start, LocalDateTime now) {
-        long duration;
-
-        if (Duration.between(start.toLocalTime(), now).toMillis() == 0) {
-            duration = 20L;
-        } else {
-            duration = Duration.between(start.toLocalTime(), now).toMillis();
-        }
-
-        return FILE_SIZE / duration;
+        return FILE_SIZE / Duration.between(start.toLocalTime(), now).toMillis();
     }
 }
