@@ -7,6 +7,7 @@ import { VisitStatisticGraph } from '../models/visitStatisticGraph';
 import { formatDate } from "@angular/common";
 import Cookies from "universal-cookie";
 import * as moment from 'moment';
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -15,14 +16,16 @@ export class StatisticsService {
     private readonly USER_STATISTICS_URL: string;
     private readonly GRAPH_STATISTICS_URL: string;
     private readonly USER_OUT_STATISTICS_URL: string;
+    private readonly USER_EVENTS_URL: string;
     private readonly SESSION_USER_ID_COOKIE = 'session_user-id_cookie';
 
     cookies = new Cookies();
 
-    constructor(private http: HttpClient, private userDataService: UserDataService) {
+    constructor(private router: Router, private http: HttpClient, private userDataService: UserDataService) {
         this.USER_STATISTICS_URL = environment.apiUrl + '/statistic/user';
         this.USER_OUT_STATISTICS_URL = environment.apiUrl + '/statistic/user-out';
         this.GRAPH_STATISTICS_URL = environment.apiUrl + '/statistic/graph';
+        this.USER_EVENTS_URL = environment.apiUrl + '/statistic/events';
     }
 
     userSpy() {
@@ -45,17 +48,33 @@ export class StatisticsService {
                 userCountry: `${ sessionStorage.getItem('userCountry') || undefined }`,
                 userCity: `${ sessionStorage.getItem('userCity') || undefined }`,
                 user: `${ this.userDataService.getUserName() || undefined }`,
-                userId: `${ this.getSessionCookie() || undefined }`
+                userId: `${ this.getSessionCookie() || undefined }`,
+                sessionStorageUserId: `${ sessionStorage.getItem('userId') || undefined }`,
             })
         };
 
         this.http.post<any>(this.USER_STATISTICS_URL, {responseType: 'text'}, headers).subscribe(data => {
             this.setSessionCookie(data.sessionId)
             sessionStorage.setItem('userId', data.sessionId)
+            this.sentEvent(this.router.url);
         }, error => {
             console.log(error)
         });
+    }
 
+    sentEvent(events) {
+        const headers = {
+            headers: new HttpHeaders({
+                userId: `${ this.getSessionCookie() || undefined }`,
+                sessionStorageUserId: `${ sessionStorage.getItem('userId') || undefined }`,
+                events: `${ events || undefined }`
+            })
+        };
+
+        this.http.post<any>(this.USER_EVENTS_URL, {responseType: 'text'}, headers).subscribe(data => {
+        }, error => {
+            console.log(error)
+        });
 
     }
 
@@ -69,7 +88,10 @@ export class StatisticsService {
                 dateOut: `${ date }`,
             })
         };
-        return this.http.post(this.USER_OUT_STATISTICS_URL, {}, userIPOptions);
+        return this.http.post(this.USER_OUT_STATISTICS_URL, {}, userIPOptions).subscribe(data => {
+        }, error => {
+            console.log(error)
+        });
     }
 
     public findAll(fromDate, toDate, pageSize, pageIndex): Observable<VisitStatisticGraph> {

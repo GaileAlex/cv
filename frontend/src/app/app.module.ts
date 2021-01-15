@@ -63,6 +63,7 @@ import { ProxyListComponent } from "./modules/proxy-list/proxy-list.component";
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { ErrorModalComponent } from "./components/error-modal/error-modal.component";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -92,6 +93,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         BlogAdminComponent,
         VisitStatisticsComponent,
         ProxyListComponent,
+        ErrorModalComponent,
     ],
     imports: [
         BrowserModule,

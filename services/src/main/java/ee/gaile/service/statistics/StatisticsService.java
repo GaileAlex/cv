@@ -40,7 +40,19 @@ public class StatisticsService {
         }
 
         return oidUserStatistics.setUserStatistics(request);
+    }
 
+    public void setUserEvent(HttpServletRequest request) {
+        String sessionId;
+        if (!request.getHeader("userId").equals("undefined")) {
+            sessionId = request.getHeader("userId");
+        } else if (!request.getHeader("sessionStorageUserId").equals("undefined")) {
+            sessionId = request.getHeader("userId");
+        } else {
+            return;
+        }
+
+        oidUserStatistics.setEvent(request, sessionId);
     }
 
     public void setUserTotalTimeOnSite(HttpServletRequest request) {

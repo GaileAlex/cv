@@ -31,14 +31,26 @@ public class StatisticsController {
     }
 
     @PostMapping(path = "/user")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Map<String, String>> setUserSpy(HttpServletRequest request) {
-        ACCESS_LOG.info("user IP is {}, city is {}, country is {}",
+        ACCESS_LOG.info("user IP is {}, city is {}, country is {}, ID: {}, sessionStorageUserId: {}",
                 request.getHeader("userIP"),
                 request.getHeader("userCity"),
-                request.getHeader("userCountry"));
+                request.getHeader("userCountry"),
+                request.getHeader("userId"),
+                request.getHeader("sessionStorageUserId"));
 
         return new ResponseEntity<>(statisticsService.setUserStatistics(request), HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/events")
+    @ResponseStatus(HttpStatus.OK)
+    public void setEventUser(HttpServletRequest request) {
+        ACCESS_LOG.info("user event: {}, ID: {}, sessionStorageUserId: {}",
+                request.getHeader("events"),
+                request.getHeader("userId"),
+                request.getHeader("sessionStorageUserId"));
+
+        statisticsService.setUserEvent(request);
     }
 
     @PostMapping(path = "/user-out")

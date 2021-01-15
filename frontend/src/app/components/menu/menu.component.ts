@@ -4,6 +4,7 @@ import { LanguageService } from '../../service/language.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth/auth.service';
 import { UserDataService } from '../../service/user-data.service';
+import { StatisticsService } from "../../service/statistics.service";
 
 @Component({
     selector: 'app-menu',
@@ -18,8 +19,10 @@ export class MenuComponent implements OnInit {
     isLoggedIn: boolean = false;
     errorMessage = '';
 
-    constructor(private translate: TranslateService, private languageService: LanguageService, private router: Router,
-                private authService: AuthService, private userDataService: UserDataService) {
+    constructor(private translate: TranslateService, private languageService: LanguageService,
+                private router: Router, private authService: AuthService,
+                private userDataService: UserDataService,
+                private statisticsService: StatisticsService) {
         this.isLoggedIn = this.userDataService.isAuthenticated();
         this.username = userDataService.getUserName();
 
@@ -35,6 +38,7 @@ export class MenuComponent implements OnInit {
         }
 
         this.translate.setDefaultLang(this.languageService.getLanguage());
+        this.statisticsService.sentEvent(this.router.url);
     }
 
     getLanguage() {

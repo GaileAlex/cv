@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { StatisticsService } from "../../service/statistics.service";
 
 @Component({
     selector: 'app-start-page',
@@ -9,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 
 export class StartPageComponent implements OnInit {
 
-    constructor() {
+    constructor(private router: Router, private statisticsService: StatisticsService) {
     }
 
     ngOnInit() {
+    }
+
+    eventCv() {
+        this.statisticsService.sentEvent("download CV")
     }
 }

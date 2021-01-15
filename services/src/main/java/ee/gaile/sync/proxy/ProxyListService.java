@@ -20,13 +20,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ProxyListService implements SyncService {
     private final ProxyRepository proxyRepository;
     private final ProxyCheckSyncService proxyCheckSyncService;
+    private static final Integer THREAD_POOL = 80;
 
     @Getter
-    ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(50);
+    ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL);
 
     @Override
     public void sync() {
-        if (((ThreadPoolExecutor) proxyListsExecutor).getActiveCount() > 0) {
+        if (((ThreadPoolExecutor) proxyListsExecutor).getActiveCount() > THREAD_POOL) {
             log.warn("Proxy list sync canceled. The previous sync is incomplete");
             return;
         }

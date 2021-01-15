@@ -42,6 +42,10 @@ public class VisitStatistics {
     @Column(name = "last_visit")
     private LocalDateTime lastVisit;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "last_event")
+    private LocalDateTime lastEvent;
+
     @Column(name = "total_time_on_site")
     private Long totalTimeOnSite;
 
@@ -58,5 +62,9 @@ public class VisitStatistics {
     @JsonIgnore
     @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL})
     private List<VisitStatisticUserIp> visitStatisticUserIps;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "visitStatistics", cascade = {CascadeType.ALL})
+    private List<VisitStatisticsEvents> visitStatisticsEvents;
 
 }

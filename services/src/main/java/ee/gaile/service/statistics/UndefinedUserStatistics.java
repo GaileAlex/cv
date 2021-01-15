@@ -34,6 +34,7 @@ public class UndefinedUserStatistics implements Statistics {
         VisitStatistics undefinedUser = new VisitStatistics()
                 .setFirstVisit(LocalDateTime.now())
                 .setLastVisit(LocalDateTime.now())
+                .setLastEvent(LocalDateTime.now())
                 .setTotalVisits(1L)
                 .setUsername("undefined")
                 .setUserCity(request.getHeader("userCity"))
