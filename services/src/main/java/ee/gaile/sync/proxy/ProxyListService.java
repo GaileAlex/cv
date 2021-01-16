@@ -27,14 +27,14 @@ public class ProxyListService implements SyncService {
 
     @Override
     public void sync() {
-        if (((ThreadPoolExecutor) proxyListsExecutor).getActiveCount() > THREAD_POOL) {
-            log.warn("Proxy list sync canceled. The previous sync is incomplete");
+        if (((ThreadPoolExecutor) proxyListsExecutor).getQueue().size() > 0) {
+            log.warn("Proxy list sync canceled. The previous sync is incomplete.");
             return;
         }
 
         List<ProxyList> proxyLists = proxyRepository.findAllOrderByRandom();
 
-        log.info("Start proxy list sync. Size lists is {}, in total there were {} ",
+        log.info("Start proxy list sync. Size lists is {}, in total there were {}",
                 proxyLists.size(), proxyRepository.getTotal());
 
         proxyLists.forEach(proxyList -> proxyListsExecutor.execute(() -> {

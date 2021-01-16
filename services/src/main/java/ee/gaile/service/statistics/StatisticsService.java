@@ -31,7 +31,7 @@ public class StatisticsService {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticsGraphRepository visitStatisticsGraphRepository;
     private final UndefinedUserStatistics undefinedUserStatistics;
-    private final OidUserStatistics oidUserStatistics;
+    private final OldUserStatistics oldUserStatistics;
 
     public Map<String, String> setUserStatistics(HttpServletRequest request) {
 
@@ -39,7 +39,7 @@ public class StatisticsService {
             return undefinedUserStatistics.setUserStatistics(request);
         }
 
-        return oidUserStatistics.setUserStatistics(request);
+        return oldUserStatistics.setUserStatistics(request);
     }
 
     public void setUserEvent(HttpServletRequest request) {
@@ -52,7 +52,7 @@ public class StatisticsService {
             return;
         }
 
-        oidUserStatistics.setEvent(request, sessionId);
+        oldUserStatistics.setEvent(request, sessionId);
     }
 
     public void setUserTotalTimeOnSite(HttpServletRequest request) {

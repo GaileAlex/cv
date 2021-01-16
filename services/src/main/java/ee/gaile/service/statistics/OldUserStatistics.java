@@ -23,7 +23,7 @@ import java.util.Optional;
 @Service
 @Transactional
 @AllArgsConstructor
-public class OidUserStatistics implements Statistics {
+public class OldUserStatistics implements Statistics {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticIpRepository visitStatisticIpRepository;
     private final VisitStatisticVisitDateRepository visitDateRepository;
