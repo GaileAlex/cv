@@ -18,9 +18,9 @@ import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 @RequestMapping(path = API_V1_PREFIX + "/statistic")
 @AllArgsConstructor
 public class StatisticsController {
-    private final StatisticsService statisticsService;
-
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
+
+    private final StatisticsService statisticsService;
 
     @GetMapping(path = "/graph/fromDate/{fromDate}/toDate/{toDate}/pageSize/{pageSize}/page/{page}")
     public ResponseEntity<VisitStatisticGraph> getGraphData(@PathVariable(value = "fromDate") String fromDate,
