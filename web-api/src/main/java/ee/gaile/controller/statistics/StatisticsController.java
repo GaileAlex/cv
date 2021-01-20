@@ -32,12 +32,14 @@ public class StatisticsController {
 
     @PostMapping(path = "/user")
     public ResponseEntity<Map<String, String>> setUserSpy(HttpServletRequest request) {
+        ACCESS_LOG.info("********************************************************************************************");
         ACCESS_LOG.info("user IP is {}, city is {}, country is {}, ID: {}, sessionStorageUserId: {}",
                 request.getHeader("userIP"),
                 request.getHeader("userCity"),
                 request.getHeader("userCountry"),
                 request.getHeader("userId"),
                 request.getHeader("sessionStorageUserId"));
+        ACCESS_LOG.info("********************************************************************************************");
 
         return new ResponseEntity<>(statisticsService.setUserStatistics(request), HttpStatus.OK);
     }

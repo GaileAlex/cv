@@ -18,16 +18,17 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Service
 @RequiredArgsConstructor
 public class ProxyListService implements SyncService {
+    private static final Integer THREAD_POOL = 80;
+
     private final ProxyRepository proxyRepository;
     private final ProxyCheckSyncService proxyCheckSyncService;
-    private static final Integer THREAD_POOL = 80;
 
     @Getter
     ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL);
 
     @Override
     public void sync() {
-        if (((ThreadPoolExecutor) proxyListsExecutor).getQueue().size() > 0) {
+        if (((ThreadPoolExecutor) proxyListsExecutor).getActiveCount() > 0) {
             log.warn("Proxy list sync canceled. The previous sync is incomplete.");
             return;
         }
