@@ -6,6 +6,7 @@ import ee.gaile.models.statistics.VisitStatisticsGraph;
 import ee.gaile.models.statistics.VisitStatisticsTable;
 import ee.gaile.repository.statistic.VisitStatisticsGraphRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
+import gaile.enums.GoogleBot;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -34,6 +32,10 @@ public class StatisticsService {
     private final OldUserStatistics oldUserStatistics;
 
     public Map<String, String> setUserStatistics(HttpServletRequest request) {
+
+        if (GoogleBot.isGoogleBot(request.getHeader("userIP"))) {
+            return Collections.emptyMap();
+        }
 
         if (request.getHeader("userId").equals("undefined")) {
             return undefinedUserStatistics.setUserStatistics(request);
