@@ -64,9 +64,7 @@ public class StatisticsService {
         VisitStatistics user = visitStatistics.orElseThrow(NullPointerException::new);
 
         LocalDateTime userEntry = user.getLastVisit();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime userOut = LocalDateTime.parse(request.getHeader("dateOut"), formatter);
+        LocalDateTime userOut = LocalDateTime.now();
 
         long between = Duration.between(userEntry, userOut).toMillis();
 
