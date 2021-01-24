@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class StatisticsServiceGoogleBotTest extends ApplicationIT {
+class StatisticsServiceSearchEngineBotTest extends ApplicationIT {
 
     @Autowired
     private StatisticsService statisticsService;

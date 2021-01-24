@@ -30,13 +30,13 @@ public class ProxyCheckSyncService {
 
         try {
             URL fileUrl = new URL(FILE_URL);
-            LocalDateTime start = LocalDateTime.now();
+            LocalDateTime startConnection = LocalDateTime.now();
 
             HttpURLConnection socksConnection = (HttpURLConnection) fileUrl.openConnection(socksProxy);
             socksConnection.setConnectTimeout(TIMEOUT);
             socksConnection.setReadTimeout(TIMEOUT);
 
-            proxyList.setResponse(Duration.between(start.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
+            proxyList.setResponse(Duration.between(startConnection.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
 
             LocalDateTime startFile = LocalDateTime.now();
             InputStream inputStream = socksConnection.getInputStream();
