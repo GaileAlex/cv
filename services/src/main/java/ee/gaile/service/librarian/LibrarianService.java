@@ -4,7 +4,7 @@ import ee.gaile.entity.librarian.Books;
 import ee.gaile.models.librarian.FilterWrapper;
 import ee.gaile.models.librarian.SelectedFilter;
 import ee.gaile.repository.librarian.LibrarianNativeRepo;
-import gaile.enums.Conditions;
+import ee.gaile.enums.Conditions;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

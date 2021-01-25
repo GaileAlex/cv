@@ -1,4 +1,4 @@
-package gaile.enums;
+package ee.gaile.enums;
 
 public enum SearchEngineBot {
     GOOGLE_1("66.249.73.177"),

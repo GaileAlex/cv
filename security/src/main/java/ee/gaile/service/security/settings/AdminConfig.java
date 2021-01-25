@@ -3,7 +3,7 @@ package ee.gaile.service.security.settings;
 import ee.gaile.entity.users.Users;
 import ee.gaile.service.security.SecurityConfig;
 import ee.gaile.service.security.UserRepository;
-import gaile.enums.EnumRoles;
+import ee.gaile.enums.EnumRoles;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

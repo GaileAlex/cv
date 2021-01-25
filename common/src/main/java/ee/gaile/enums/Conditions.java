@@ -1,4 +1,4 @@
-package gaile.enums;
+package ee.gaile.enums;
 
 import java.util.HashMap;
 import java.util.Map;

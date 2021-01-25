@@ -6,7 +6,7 @@ import ee.gaile.models.statistics.VisitStatisticsGraph;
 import ee.gaile.models.statistics.VisitStatisticsTable;
 import ee.gaile.repository.statistic.VisitStatisticsGraphRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
-import gaile.enums.SearchEngineBot;
+import ee.gaile.enums.SearchEngineBot;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
