@@ -35,6 +35,7 @@ public class ProxyCheckSyncService {
             HttpURLConnection socksConnection = (HttpURLConnection) fileUrl.openConnection(socksProxy);
             socksConnection.setConnectTimeout(TIMEOUT);
             socksConnection.setReadTimeout(TIMEOUT);
+            socksConnection.getResponseCode();
 
             proxyList.setResponse(Duration.between(startConnection.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
 
