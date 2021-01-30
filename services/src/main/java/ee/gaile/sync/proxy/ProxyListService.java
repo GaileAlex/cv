@@ -62,8 +62,7 @@ public class ProxyListService implements SyncService {
                 && proxyList.getUptime() < 5 && proxyList.getNumberUnansweredChecks() > 500) {
             proxyRepository.delete(proxyList);
 
-            log.warn("Proxy deleted. ID {}, uptime {}, count unanswered {} ",
-                    proxyList.getId(), proxyList.getUptime(), proxyList.getNumberUnansweredChecks());
+            log.warn("Proxy deleted. ID {}, uptime {} ", proxyList.getId(), proxyList.getUptime());
             return false;
         }
         return true;
