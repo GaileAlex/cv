@@ -132,7 +132,7 @@ public class ProxyListService implements SyncService {
                     }
                 }
             } catch (IOException e) {
-                log.error("Site connection error {} ", proxySites);
+                log.error("Site connection error {} ", proxySites.getUrl());
             }
         }
 

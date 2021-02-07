@@ -58,8 +58,23 @@ public class ProxyService {
                         port = String.valueOf(row.getCell(1)).trim();
                     }
                     proxyList.setPort(Double.valueOf(port).intValue());
-                    proxyList.setProtocol(String.valueOf(row.getCell(2)).trim());
-                    proxyList.setCountry(String.valueOf((row.getCell(3))).trim());
+
+                    String protocol;
+                    if (row.getCell(2) == null) {
+                        protocol = "SOCKS5";
+                    } else {
+                        protocol = String.valueOf(row.getCell(2)).trim();
+                    }
+                    proxyList.setProtocol(protocol);
+
+                    String country;
+                    if (row.getCell(2) == null) {
+                        country = "unknown";
+                    } else {
+                        country = String.valueOf((row.getCell(3))).trim();
+                    }
+                    proxyList.setCountry(country);
+
                     proxyLists.add(proxyList);
                 } catch (NumberFormatException e) {
                     log.info("end of table");
