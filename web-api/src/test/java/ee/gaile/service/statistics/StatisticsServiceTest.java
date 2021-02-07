@@ -5,10 +5,7 @@ import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@Disabled
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class StatisticsServiceTest extends ApplicationIT {
 
@@ -43,7 +41,7 @@ class StatisticsServiceTest extends ApplicationIT {
         statisticsService.setUserStatistics(request);
     }
 
-    @AfterAll
+    @AfterEach
     public void tearDown() {
         visitStatisticsRepository.deleteAll();
     }
