@@ -21,6 +21,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
+/**
+ * Runs synchronization services on a schedule
+ *
+ * @author Aleksei Gaile
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -34,6 +39,9 @@ public class ProxyListService implements SyncService {
     @Getter
     ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL);
 
+    /**
+     * Checks the end of the previous schedule and the start of the proxy check service
+     */
     @Override
     public void sync() {
         if (((ThreadPoolExecutor) proxyListsExecutor).getActiveCount() > 0) {
@@ -59,6 +67,12 @@ public class ProxyListService implements SyncService {
         }));
     }
 
+    /**
+     * Sets the number of checks and removes inactive proxies
+     *
+     * @param proxyList - proxy list
+     * @return boolean
+     */
     private boolean doFirstCheck(ProxyList proxyList) {
         if (proxyList.getNumberChecks() != null) {
             proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
@@ -82,6 +96,9 @@ public class ProxyListService implements SyncService {
         return true;
     }
 
+    /**
+     * Searches for new proxies on sites, adds to the database
+     */
     public void setNewProxy() {
         List<ProxyList> proxyLists = new ArrayList<>();
 
@@ -100,7 +117,8 @@ public class ProxyListService implements SyncService {
 
                     for (String ip : parts) {
 
-                        if (ip.matches("^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$")) {
+                        if (ip.matches("^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.)" +
+                                "{3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$")) {
                             proxyList.setIpAddress(ip);
                             continue;
                         }

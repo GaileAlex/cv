@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+/**
+ * REST service controller for user authorization and registration
+ *
+ * @author Aleksei Gaile
+ */
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor

@@ -12,6 +12,11 @@ import java.util.List;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
+/**
+ * REST service controller for retrieving data to the tables of the librarian test task
+ *
+ * @author Aleksei Gaile
+ */
 @RestController
 @AllArgsConstructor
 @RequestMapping(API_V1_PREFIX + "/librarian")

@@ -13,6 +13,11 @@ import java.util.List;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
+/**
+ * REST service controller for fetching blog data and saving article comments
+ *
+ * @author Aleksei Gaile
+ */
 @Slf4j
 @AllArgsConstructor
 @RestController
@@ -31,7 +36,6 @@ public class BlogController {
     }
 
     @PostMapping("/comments")
-    @ResponseStatus(HttpStatus.OK)
     public void saveComment(@RequestBody CommentWrapper comment) {
         blogService.saveComment(comment);
     }

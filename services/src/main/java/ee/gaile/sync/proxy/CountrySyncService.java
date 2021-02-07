@@ -14,12 +14,23 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Getting proxy country
+ *
+ * @author Aleksei Gaile
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class CountrySyncService implements SyncService {
     private final ProxyRepository proxyRepository;
 
+    /**
+     * Sets the proxy country
+     * <p>
+     * A ban is possible if the number of requests is exceeded.
+     * Proxy check is interrupted after ten rejections
+     */
     @Override
     public void sync() {
         RestTemplate restTemplate = new RestTemplate();
@@ -42,8 +53,8 @@ public class CountrySyncService implements SyncService {
                                     });
                     String[] st = Objects.requireNonNull(listResponseEntity.getBody()).split("\",\\n");
 
-                    String city = st[3].split(": \"")[1] + " " + st[2].split(": \"")[1];
-                    proxyList.setCountry(city);
+                    String country = st[3].split(": \"")[1] + " " + st[2].split(": \"")[1];
+                    proxyList.setCountry(country);
                     proxyRepository.save(proxyList);
 
                 } catch (Exception e) {

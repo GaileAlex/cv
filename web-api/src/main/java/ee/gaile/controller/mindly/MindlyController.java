@@ -12,6 +12,11 @@ import java.util.List;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
+/**
+ * REST service controller for retrieving, deleting and adding data to the tables of the crypto portfolio test task
+ *
+ * @author Aleksei Gaile
+ */
 @Slf4j
 @RestController
 @RequestMapping(path = API_V1_PREFIX + "/mindly-data")
@@ -30,7 +35,6 @@ public class MindlyController {
     }
 
     @DeleteMapping("/{portfolioId}")
-    @ResponseStatus(HttpStatus.OK)
     public void deletePortfolioItem(@PathVariable("portfolioId") Long portfolioId) {
         mindlyService.deletePortfolioById(portfolioId);
     }

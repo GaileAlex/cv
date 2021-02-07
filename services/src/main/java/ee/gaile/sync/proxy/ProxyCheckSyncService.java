@@ -15,6 +15,11 @@ import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+/**
+ * Checks proxy list
+ *
+ * @author Aleksei Gaile
+ */
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -24,6 +29,11 @@ public class ProxyCheckSyncService {
     private static final Double FILE_SIZE = 10_000_000.0;
     private static final Integer TIMEOUT = 60_000;
 
+    /**
+     * Checks the proxy list for the ability to connect and download the file
+     *
+     * @param proxyList - proxy
+     */
     public void checkProxy(ProxyList proxyList) {
         Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
                 new InetSocketAddress(proxyList.getIpAddress(), proxyList.getPort()));
@@ -72,6 +82,12 @@ public class ProxyCheckSyncService {
         }
     }
 
+    /**
+     * Set uptime
+     *
+     * @param proxyList - proxy
+     * @return Double - uptime
+     */
     private Double getUptime(ProxyList proxyList) {
         Integer numberChecks = proxyList.getNumberChecks();
         Integer numberUnansweredChecks;
@@ -83,14 +99,15 @@ public class ProxyCheckSyncService {
         return 100.0 - 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);
     }
 
+    /**
+     * Sets the download speed of the file
+     *
+     * @param start -download start time
+     * @param now   - download end time
+     * @return Double - file download speed
+     */
     private Double checkSpeed(LocalDateTime start, LocalDateTime now) {
-        long duration;
-
-        if (Duration.between(start.toLocalTime(), now).toMillis() == 0) {
-            duration = 20L;
-        } else {
-            duration = Duration.between(start.toLocalTime(), now).toMillis();
-        }
+        long duration = Duration.between(start.toLocalTime(), now).toMillis();
 
         return FILE_SIZE / duration;
     }

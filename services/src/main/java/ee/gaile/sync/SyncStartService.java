@@ -9,6 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+/**
+ * Runs synchronization services on a schedule
+ *
+ * @author Aleksei Gaile
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor

@@ -14,6 +14,11 @@ import java.util.Map;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
+/**
+ * REST service controller for receiving and sending site visit data
+ *
+ * @author Aleksei Gaile
+ */
 @RestController
 @RequestMapping(path = API_V1_PREFIX + "/statistic")
 @AllArgsConstructor

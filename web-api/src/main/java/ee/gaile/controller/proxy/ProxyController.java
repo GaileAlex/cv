@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
+/**
+ * REST service controller to get proxy list table data
+ *
+ * @author Aleksei Gaile
+ */
 @RestController
 @RequestMapping(path = API_V1_PREFIX + "/proxy")
 @AllArgsConstructor

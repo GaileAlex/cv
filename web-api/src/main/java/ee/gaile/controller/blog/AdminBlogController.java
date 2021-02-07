@@ -10,6 +10,11 @@ import java.io.IOException;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
+/**
+ * REST service controller for saving new blog posts
+ *
+ * @author Aleksei Gaile
+ */
 @Slf4j
 @RestController
 @RequestMapping(API_V1_PREFIX + "/admin-blog")
@@ -21,7 +26,6 @@ public class AdminBlogController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
     public void addBlog(@RequestParam("headline") String headline,
                         @RequestParam("article") String article,
                         @RequestParam("image") MultipartFile image) throws IOException {
