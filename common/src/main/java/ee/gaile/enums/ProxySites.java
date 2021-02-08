@@ -9,7 +9,9 @@ public enum ProxySites {
     PROXY_4("https://www.proxy-list.download/SOCKS5"),
     PROXY_5("https://top-proxies.ru/free_proxy.php"),
     PROXY_6("https://proxylist.live/dashboard/socks5"),
-    PROXY_7("https://www.freeproxy.world/?type=socks5");
+    PROXY_7("https://www.freeproxy.world/?type=socks5"),
+    PROXY_8("https://github.com/ShiftyTR/Proxy-List/blob/master/socks5.txt"),
+    PROXY_9("https://github.com/hookzof/socks5_list/blob/master/proxy.txt");
 
     @Getter
     private final String url;
