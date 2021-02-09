@@ -34,6 +34,7 @@ public class ProxyCheckSyncService {
      *
      * @param proxyList - proxy
      */
+    @SuppressWarnings("StatementWithEmptyBody")
     public void checkProxy(ProxyList proxyList) {
         Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
                 new InetSocketAddress(proxyList.getIpAddress(), proxyList.getPort()));
@@ -53,8 +54,7 @@ public class ProxyCheckSyncService {
             InputStream inputStream = socksConnection.getInputStream();
 
             byte[] buffer = new byte[8 * 1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) ;
+            while ((inputStream.read(buffer)) != -1) ;
 
             socksConnection.disconnect();
             inputStream.close();
