@@ -1,8 +1,9 @@
 package ee.gaile.sync.proxy;
 
 import ee.gaile.entity.proxy.ProxyList;
-import ee.gaile.enums.ProxySites;
+import ee.gaile.entity.proxy.ProxySite;
 import ee.gaile.repository.proxy.ProxyRepository;
+import ee.gaile.repository.proxy.ProxySitesRepository;
 import ee.gaile.sync.SyncService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,7 @@ public class ProxyListService implements SyncService {
     private static final int ALLOWABLE_AMOUNT = 120;
 
     private final ProxyRepository proxyRepository;
+    private final ProxySitesRepository proxySitesRepository;
     private final ProxyCheckSyncService proxyCheckSyncService;
 
     @Getter
@@ -102,9 +104,11 @@ public class ProxyListService implements SyncService {
     public void setNewProxy() {
         List<ProxyList> proxyLists = new ArrayList<>();
 
-        for (ProxySites proxySites : ProxySites.values()) {
+        List<ProxySite> proxySites = proxySitesRepository.findAll();
+
+        for (ProxySite proxySite : proxySites) {
             try {
-                Document doc = Jsoup.connect(proxySites.getUrl()).timeout(0).get();
+                Document doc = Jsoup.connect(proxySite.getUrl()).timeout(0).get();
 
                 Elements table = doc.select("table");
                 Elements rows = table.select("tr");
@@ -132,7 +136,7 @@ public class ProxyListService implements SyncService {
                     }
                 }
             } catch (IOException e) {
-                log.error("Site connection error {} ", proxySites.getUrl());
+                log.error("Site connection error {} ", proxySite.getUrl());
             }
         }
 
