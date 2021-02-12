@@ -4,13 +4,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import ee.gaile.models.mindly.Crypto;
 import ee.gaile.entity.mindly.CryptocurrencyValues;
+import ee.gaile.enums.BitfinexCryptocurrencyEnum;
+import ee.gaile.enums.Currency;
+import ee.gaile.models.mindly.Crypto;
 import ee.gaile.repository.mindly.BitfinexCryptocurrencyRepository;
 import ee.gaile.repository.mindly.CryptocurrencyValueRepository;
 import ee.gaile.sync.SyncService;
-import ee.gaile.enums.BitfinexCryptocurrencyEnum;
-import ee.gaile.enums.Currency;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +32,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Service for adding cryptocurrencies to the database
+ *
+ * @author Aleksei Gaile
+ */
 @Service
 @RequiredArgsConstructor
 public class BitfinexAccessSyncService implements SyncService {
@@ -44,6 +49,9 @@ public class BitfinexAccessSyncService implements SyncService {
     private final CryptocurrencyValueRepository cryptocurrencyValueRepository;
     private final BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository;
 
+    /**
+     * Adding currency value to the database
+     */
     @Override
     public void sync() {
         Map<String, String> map = BitfinexCryptocurrencyEnum.getCurrencyName();
@@ -80,6 +88,12 @@ public class BitfinexAccessSyncService implements SyncService {
 
     }
 
+    /**
+     * Contacting Bitfinex api
+     *
+     * @param url - url cryptocurrency
+     * @return - Crypto object
+     */
     private Crypto getDataByUrl(String url) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -96,6 +110,13 @@ public class BitfinexAccessSyncService implements SyncService {
                 Double.valueOf(listResponseEntity.getBody().get(0)[LAST_PRICE]));
     }
 
+    /**
+     * Contacting currency api
+     *
+     * @param url - url currency
+     * @return - dollar rate
+     * @throws IOException - URLConnection
+     */
     private String getCurrencyUrl(String url) throws IOException {
         URL surl = new URL(url);
         URLConnection request = surl.openConnection();

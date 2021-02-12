@@ -1,4 +1,4 @@
-package ee.gaile.service.proxy;
+package ee.gaile.sync.proxy;
 
 import ee.gaile.entity.proxy.ProxyList;
 import ee.gaile.entity.proxy.ProxySite;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Adds new proxies
+ * Service for adding new proxies to DB
  *
  * @author Aleksei Gaile
  */
@@ -36,7 +36,7 @@ public class NewProxyService {
     private final ProxySitesRepository proxySitesRepository;
 
     /**
-     * searches for new proxies on sites, adds to the database
+     * Searches for new proxies on sites, adds to the database
      */
     public void setNewProxy() {
         List<ProxyList> proxyLists = new ArrayList<>();

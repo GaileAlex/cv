@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 /**
- * Runs synchronization services on a schedule
+ * Synchronization start service
  *
  * @author Aleksei Gaile
  */
@@ -29,6 +29,9 @@ public class SyncStartService {
     @Value("${proxy.country.scheduled.run}")
     private boolean isRunCheckCountry;
 
+    /**
+     * Launches cryptocurrency synchronization
+     */
     @Scheduled(cron = "${bitfinex.access.scheduled}")
     public void syncBitfinex() {
         if (!isRunBitfinex) {
@@ -38,6 +41,9 @@ public class SyncStartService {
         bitfinexAccessSyncService.sync();
     }
 
+    /**
+     * Starts syncing proxy list
+     */
     @Scheduled(cron = "${proxy.list.scheduled}")
     public void syncProxy() {
         if (!isRunProxy) {
@@ -47,6 +53,9 @@ public class SyncStartService {
         proxyListService.sync();
     }
 
+    /**
+     * Starts synchronization of unknown proxy countries
+     */
     @Scheduled(cron = "${proxy.country.scheduled}")
     public void syncCheckCountry() {
         if (!isRunCheckCountry) {

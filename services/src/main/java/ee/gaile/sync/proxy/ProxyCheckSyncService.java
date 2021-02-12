@@ -16,7 +16,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 /**
- * Checks proxy list
+ * Service for checking proxy for availability
  *
  * @author Aleksei Gaile
  */

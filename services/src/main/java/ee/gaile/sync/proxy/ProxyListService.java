@@ -2,9 +2,7 @@ package ee.gaile.sync.proxy;
 
 import ee.gaile.entity.proxy.ProxyList;
 import ee.gaile.repository.proxy.ProxyRepository;
-import ee.gaile.service.proxy.NewProxyService;
 import ee.gaile.sync.SyncService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +14,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * Runs synchronization services on a schedule
+ * Proxy list sync service
  *
  * @author Aleksei Gaile
  */
@@ -24,15 +22,15 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Service
 @RequiredArgsConstructor
 public class ProxyListService implements SyncService {
-    private static final int THREAD_POOL = 200;
+    private static final int THREAD_POOL = 80;
+    private static final int DIVIDER_TO_CHECK_EVERY_HOUR = 200;
     private static final int ALLOWABLE_AMOUNT = 120;
 
     private final ProxyRepository proxyRepository;
     private final NewProxyService newProxyService;
     private final ProxyCheckSyncService proxyCheckSyncService;
 
-    @Getter
-    ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL);
+    private final ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL);
 
     /**
      * Checks the end of the previous schedule and the start of the proxy check service
@@ -44,16 +42,20 @@ public class ProxyListService implements SyncService {
             return;
         }
 
-        Long aliveProxies = proxyRepository.getTotal();
+        Long aliveProxies = proxyRepository.getTotalAliveProxies();
 
         if (aliveProxies < ALLOWABLE_AMOUNT) {
             newProxyService.setNewProxy();
         }
 
+        int threadPool = proxyRepository.getTotal() / DIVIDER_TO_CHECK_EVERY_HOUR;
+        ((ThreadPoolExecutor) proxyListsExecutor).setCorePoolSize(threadPool);
+        ((ThreadPoolExecutor) proxyListsExecutor).setMaximumPoolSize(threadPool);
+
         List<ProxyList> proxyLists = proxyRepository.findAllOrderByRandom();
 
-        log.info("Start proxy list sync. Size lists is {}, in total there were {}",
-                proxyLists.size(), aliveProxies);
+        log.info("Start proxy list sync. Size lists is {}, in total there were {}, thread pool {}",
+                proxyLists.size(), aliveProxies, ((ThreadPoolExecutor) proxyListsExecutor).getCorePoolSize());
 
         proxyLists.forEach(proxyList -> proxyListsExecutor.execute(() -> {
             if (doFirstCheck(proxyList)) {

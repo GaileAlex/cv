@@ -19,6 +19,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Service for saving statistics of visits to the site by a old user
+ *
+ * @author Aleksei Gaile
+ */
 @Slf4j
 @Service
 @Transactional

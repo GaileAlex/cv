@@ -2,6 +2,7 @@ package ee.gaile.service.user;
 
 import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.entity.users.Users;
+import ee.gaile.enums.EnumRoles;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import ee.gaile.service.security.LoginService;
 import ee.gaile.service.security.UserDetailsImpl;
@@ -11,7 +12,6 @@ import ee.gaile.service.security.request.SignupRequest;
 import ee.gaile.service.security.response.MessageResponse;
 import ee.gaile.service.security.settings.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
-import ee.gaile.enums.EnumRoles;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +28,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * User access service
+ *
+ * @author Aleksei Gaile
+ */
 @Service
 @Transactional
 @AllArgsConstructor
@@ -38,6 +43,13 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
     private final VisitStatisticsRepository visitStatisticsRepository;
 
+    /**
+     * Verifies the user
+     *
+     * @param signupRequest - user information
+     * @param request       - user ID
+     * @return - registered user
+     */
     public LoginRequest authUser(SignupRequest signupRequest, HttpServletRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signupRequest.getUsername(), signupRequest.getPassword()));
@@ -61,10 +73,24 @@ public class UserService {
         return loginService.authUser(userDTO);
     }
 
+    /**
+     * Updates the authorization token
+     *
+     * @param authDTO - token
+     * @param request - HttpServletRequest
+     * @return - new token
+     * @throws ApiErrorException - token update error
+     */
     public AuthRefreshDTO refreshAuth(AuthRefreshDTO authDTO, HttpServletRequest request) throws ApiErrorException {
         return loginService.refreshAuth(authDTO, request);
     }
 
+    /**
+     * Registers a user
+     *
+     * @param signUpRequest - user information
+     * @return - registration result
+     */
     public ResponseEntity<?> registerUser(SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername()) ||
                 signUpRequest.getUsername().trim().equals("undefined")) {

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Getting proxy country
+ * Service for determining unknown countries from a proxy
  *
  * @author Aleksei Gaile
  */

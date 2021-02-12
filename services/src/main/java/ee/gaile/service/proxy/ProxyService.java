@@ -31,7 +31,7 @@ public class ProxyService {
         List<ProxyList> proxyLists = proxyRepository.findWithPaging(pageSize, page * pageSize);
         ProxyListWrapper responseWrapper = new ProxyListWrapper();
         responseWrapper.setProxyLists(proxyLists);
-        responseWrapper.setTotal(proxyRepository.getTotal());
+        responseWrapper.setTotal(proxyRepository.getTotalAliveProxiesLimit());
 
         return responseWrapper;
     }

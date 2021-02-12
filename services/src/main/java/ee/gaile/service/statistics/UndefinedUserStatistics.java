@@ -16,6 +16,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Service for saving statistics of visits to the site by a new user
+ *
+ * @author Aleksei Gaile
+ */
 @Slf4j
 @Service
 @Transactional
@@ -25,6 +30,12 @@ public class UndefinedUserStatistics implements Statistics {
     private final VisitStatisticIpRepository visitStatisticIpRepository;
     private final VisitStatisticVisitDateRepository visitDateRepository;
 
+    /**
+     * Saves user data to a database
+     *
+     * @param request - HttpServletRequest
+     * @return - sessionId
+     */
     @Override
     public Map<String, String> setUserStatistics(HttpServletRequest request) {
         Map<String, String> response = new HashMap<>();
