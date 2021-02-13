@@ -9,11 +9,19 @@ import javax.annotation.PostConstruct;
 import java.math.BigInteger;
 import java.time.LocalDate;
 
+/**
+ * Service for filling the database with data
+ *
+ * @author Aleksei Gaile
+ */
 @AllArgsConstructor
 @Component
 public class BooksToRepoConfig {
     private final LibrarianService librarianService;
 
+    /**
+     * Fills the database with data for a test task librarian
+     */
     @PostConstruct
     public void demoData() {
         if (librarianService.getCountRow().equals(BigInteger.ZERO)) {

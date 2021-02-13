@@ -11,6 +11,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Service for working with test task data Mindly
+ *
+ * @author Aleksei Gaile
+ */
 @Service
 @Transactional
 @AllArgsConstructor
@@ -18,6 +23,11 @@ public class MindlyService {
     private final MindlyRepository mindlyRepository;
     private final CryptocurrencyValueRepository cryptocurrencyValueRepository;
 
+    /**
+     * Gives a list of currencies to the cryptoportfolio
+     *
+     * @return - list of currencies cryptoportfolio
+     */
     public List<Mindly> getAllPortfolio() {
         List<Mindly> portfolioList = mindlyRepository.findAll();
 
@@ -33,6 +43,12 @@ public class MindlyService {
         return portfolioList;
     }
 
+    /**
+     * Save the new entry to the cryptoportfolio
+     *
+     * @param portfolio currencies cryptoportfolio
+     * @return - cryptoportfolio
+     */
     public Mindly savePortfolio(Mindly portfolio) {
         if (portfolio.getDateOfPurchase() == null) {
             portfolio.setDateOfPurchase(LocalDate.now());
@@ -40,6 +56,11 @@ public class MindlyService {
         return mindlyRepository.save(portfolio);
     }
 
+    /**
+     * Deletes the entry in the cryptoportfolio
+     *
+     * @param portfolioId - portfolio ID
+     */
     public void deletePortfolioById(Long portfolioId) {
         mindlyRepository.deleteById(portfolioId);
     }

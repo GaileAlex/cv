@@ -35,6 +35,12 @@ public class OldUserStatistics implements Statistics {
     private final UndefinedUserStatistics undefinedUserStatistics;
     private final VisitStatisticEventRepository visitStatisticEventRepository;
 
+    /**
+     * Saves user data to a database
+     *
+     * @param request - HttpServletRequest
+     * @return - sessionId
+     */
     @Override
     public Map<String, String> setUserStatistics(HttpServletRequest request) {
         Map<String, String> response = new HashMap<>();
@@ -74,6 +80,12 @@ public class OldUserStatistics implements Statistics {
         return undefinedUserStatistics.setUserStatistics(request);
     }
 
+    /**
+     * Saves user actions on the site in the database
+     *
+     * @param request   - HttpServletRequest
+     * @param sessionId - session ID
+     */
     public void setEvent(HttpServletRequest request, String sessionId) {
         Optional<VisitStatistics> visitStatisticsByNameOptional =
                 visitStatisticsRepository.findBySessionId(sessionId);

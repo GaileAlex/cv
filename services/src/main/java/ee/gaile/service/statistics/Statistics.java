@@ -12,6 +12,11 @@ public interface Statistics {
 
     Map<String, String> setUserStatistics(HttpServletRequest request);
 
+    /**
+     * Saves the date the user visited the site
+     * @param visitStatistics - list of user visits
+     * @param visitDateRepository - visit date statistics repository
+     */
     default void setVisitDate(VisitStatistics visitStatistics,
                               VisitStatisticVisitDateRepository visitDateRepository) {
         VisitStatisticVisitDate visitDate = new VisitStatisticVisitDate();

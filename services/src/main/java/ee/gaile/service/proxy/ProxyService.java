@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Getting data for api
+ * Service data for proxy table
  *
  * @author Aleksei Gaile
  */
@@ -21,7 +21,7 @@ public class ProxyService {
     private final ProxyRepository proxyRepository;
 
     /**
-     * getting data for proxy table
+     * Getting data for proxy table
      *
      * @param pageSize - number of pages in the table
      * @param page     - page number

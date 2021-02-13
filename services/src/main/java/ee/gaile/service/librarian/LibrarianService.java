@@ -1,10 +1,10 @@
 package ee.gaile.service.librarian;
 
 import ee.gaile.entity.librarian.Books;
+import ee.gaile.enums.Conditions;
 import ee.gaile.models.librarian.FilterWrapper;
 import ee.gaile.models.librarian.SelectedFilter;
 import ee.gaile.repository.librarian.LibrarianNativeRepo;
-import ee.gaile.enums.Conditions;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Service for working with test task data Librarian
+ *
+ * @author Aleksei Gaile
+ */
 @Service
 public class LibrarianService extends LibrarianNativeRepo {
     public LibrarianService(EntityManager em) {
@@ -69,14 +74,30 @@ public class LibrarianService extends LibrarianNativeRepo {
         return getResult(bookQuery.toString(), Books.class);
     }
 
+    /**
+     * Finds a list of all books
+     *
+     * @return - list of books
+     */
     public List<Books> getAllBooks() {
         return getResult(QUERY, Books.class);
     }
 
+    /**
+     * Finds the number of rows in a database
+     *
+     * @return - number of rows in the database
+     */
     public BigInteger getCountRow() {
         return getCount(COUNT_ROW);
     }
 
+    /**
+     * Creates a query by text
+     *
+     * @param bookQuery      - basic request text
+     * @param selectedFilter - selected filter
+     */
     private void getByText(StringBuilder bookQuery, SelectedFilter selectedFilter) {
         bookQuery.append(Conditions.getQuery(selectedFilter.getSearchArea()))
                 .append(Conditions.getQuery(selectedFilter.getConditionOption()))
@@ -85,6 +106,12 @@ public class LibrarianService extends LibrarianNativeRepo {
                 .append("   || '%' ");
     }
 
+    /**
+     * Creates a query by date
+     *
+     * @param bookQuery      - basic request text
+     * @param selectedFilter - selected filter
+     */
     private void getByDate(StringBuilder bookQuery, SelectedFilter selectedFilter) {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("d/M/yyyy");
 
@@ -96,7 +123,6 @@ public class LibrarianService extends LibrarianNativeRepo {
 
         LocalDate localDate = LocalDate.parse(stringDate, df);
 
-        // TODO: refactoring front needed
         if (selectedFilter.getConditionOption().equals("Begin with")) {
             selectedFilter.setConditionOption("Date from");
         }

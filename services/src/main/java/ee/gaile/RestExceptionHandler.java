@@ -24,12 +24,12 @@ public class RestExceptionHandler {
         LOG.error("the following error occurred \n " + message, e);
 
         if (e instanceof ResponseStatusException) {
-            objectNode.put("error", ((ResponseStatusException) e).getReason());
+            objectNode.put("message", ((ResponseStatusException) e).getReason());
             return ResponseEntity.status(((ResponseStatusException) e).getStatus())
                     .body(objectNode);
         }
 
-        objectNode.put("error", message);
+        objectNode.put("message", message);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(objectNode);

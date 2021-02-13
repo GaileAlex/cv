@@ -13,14 +13,18 @@ import ee.gaile.service.security.response.MessageResponse;
 import ee.gaile.service.security.settings.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -33,6 +37,7 @@ import java.util.stream.Collectors;
  *
  * @author Aleksei Gaile
  */
+@Slf4j
 @Service
 @Transactional
 @AllArgsConstructor
@@ -51,8 +56,13 @@ public class UserService {
      * @return - registered user
      */
     public LoginRequest authUser(SignupRequest signupRequest, HttpServletRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(signupRequest.getUsername(), signupRequest.getPassword()));
+        Authentication authentication;
+        try {
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(signupRequest.getUsername(), signupRequest.getPassword()));
+        } catch (BadCredentialsException e) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Error: Invalid user data");
+        }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
