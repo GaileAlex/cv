@@ -60,8 +60,8 @@ public class ProxyCheckSyncService {
             inputStream.close();
 
             proxyList.setSpeed(checkSpeed(startFile, LocalDateTime.now()));
-
-            Double uptime = getUptime(proxyList);
+            proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
+            double uptime = getUptime(proxyList);
             proxyList.setUptime(uptime);
             proxyList.setLastChecked(LocalDateTime.now());
 
@@ -73,9 +73,10 @@ public class ProxyCheckSyncService {
             } else {
                 proxyList.setNumberUnansweredChecks(1);
             }
-            Double uptime = getUptime(proxyList);
+            double uptime = getUptime(proxyList);
             proxyList.setUptime(uptime);
             proxyList.setSpeed(0.0);
+            proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
             proxyList.setLastChecked(LocalDateTime.now());
 
             proxyRepository.save(proxyList);

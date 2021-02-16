@@ -61,7 +61,7 @@ public class UserService {
             authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(signupRequest.getUsername(), signupRequest.getPassword()));
         } catch (BadCredentialsException e) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Error: Invalid user data");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid user data");
         }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

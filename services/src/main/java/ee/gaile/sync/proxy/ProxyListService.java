@@ -30,16 +30,19 @@ public class ProxyListService implements SyncService {
     private final NewProxyService newProxyService;
     private final ProxyCheckSyncService proxyCheckSyncService;
 
-    private final ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL);
+    private ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL);
 
     /**
      * Checks the end of the previous schedule and the start of the proxy check service
      */
     @Override
     public void sync() {
-        if (((ThreadPoolExecutor) proxyListsExecutor).getActiveCount() > 0) {
-            log.warn("Proxy list sync canceled. The previous sync is incomplete.");
-            return;
+        int activeThreadPool = ((ThreadPoolExecutor) proxyListsExecutor).getActiveCount();
+
+        if (activeThreadPool > 0) {
+            log.warn("The previous sync is incomplete, canceled. Unfinished tasks - {}", activeThreadPool);
+            proxyListsExecutor.shutdownNow();
+            proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL);
         }
 
         Long aliveProxies = proxyRepository.getTotalAliveProxies();
@@ -65,15 +68,13 @@ public class ProxyListService implements SyncService {
     }
 
     /**
-     * Sets the number of checks and removes inactive proxies
+     * Sets the first check and removes inactive proxies
      *
      * @param proxyList - proxy list
      * @return boolean
      */
     private boolean doFirstCheck(ProxyList proxyList) {
-        if (proxyList.getNumberChecks() != null) {
-            proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
-        } else {
+        if (proxyList.getNumberChecks() == null) {
             proxyList.setNumberChecks(1);
         }
 
