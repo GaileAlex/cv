@@ -5,6 +5,7 @@ import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.sync.SyncService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -30,7 +31,8 @@ public class ProxyListService implements SyncService {
     private final NewProxyService newProxyService;
     private final ProxyCheckSyncService proxyCheckSyncService;
 
-    private ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL);
+    private ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL
+            , new CustomizableThreadFactory("proxy-sync-"));
 
     /**
      * Checks the end of the previous schedule and the start of the proxy check service
@@ -42,7 +44,8 @@ public class ProxyListService implements SyncService {
         if (activeThreadPool > 0) {
             log.warn("The previous sync is incomplete, canceled. Unfinished tasks - {}", activeThreadPool);
             proxyListsExecutor.shutdownNow();
-            proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL);
+            proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL,
+                    new CustomizableThreadFactory("proxy-sync-"));
         }
 
         Long aliveProxies = proxyRepository.getTotalAliveProxies();
@@ -52,6 +55,10 @@ public class ProxyListService implements SyncService {
         }
 
         int threadPool = proxyRepository.getTotal() / DIVIDER_TO_CHECK_EVERY_HOUR;
+        if (threadPool < THREAD_POOL) {
+            threadPool = THREAD_POOL;
+        }
+
         ((ThreadPoolExecutor) proxyListsExecutor).setCorePoolSize(threadPool);
         ((ThreadPoolExecutor) proxyListsExecutor).setMaximumPoolSize(threadPool);
 
