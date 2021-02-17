@@ -40,7 +40,7 @@ public class StatisticsController {
     @PostMapping(path = "/user")
     public ResponseEntity<Map<String, String>> setUserSpy(HttpServletRequest request) {
         ACCESS_LOG.info("********************************************************************************************");
-        ACCESS_LOG.info("user IP is {}, city is {}, country is {}, ID: {}, sessionStorageUserId: {}",
+        ACCESS_LOG.info("user IP is {}, city is {}, country is {}, ID: {}, session Id: {}",
                 request.getHeader("userIP"),
                 request.getHeader("userCity"),
                 request.getHeader("userCountry"),
@@ -54,7 +54,7 @@ public class StatisticsController {
     @PostMapping(path = "/events")
     @ResponseStatus(HttpStatus.OK)
     public void setEventUser(HttpServletRequest request) {
-        ACCESS_LOG.info("user event: {}, ID: {}, sessionStorageUserId: {}",
+        ACCESS_LOG.info("user event: {}, ID: {}, session Id: {}",
                 request.getHeader("events"),
                 request.getHeader("userId"),
                 request.getHeader("sessionStorageUserId"));
