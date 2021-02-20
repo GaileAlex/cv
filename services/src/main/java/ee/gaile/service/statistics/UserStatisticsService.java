@@ -2,8 +2,10 @@ package ee.gaile.service.statistics;
 
 import ee.gaile.entity.statistics.VisitStatistics;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
-import lombok.AllArgsConstructor;
+import ee.gaile.service.email.EmailServiceImpl;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,11 +23,15 @@ import java.util.Optional;
 @Slf4j
 @Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserStatisticsService {
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final UndefinedUserStatistics undefinedUserStatistics;
     private final OldUserStatistics oldUserStatistics;
+    private final EmailServiceImpl emailService;
+
+    @Value("${mail.enable}")
+    private boolean isMailEnable;
 
     /**
      * Definition of new or old user
@@ -34,6 +40,10 @@ public class UserStatisticsService {
      * @return - sessionId
      */
     public Map<String, String> setUserStatistics(HttpServletRequest request) {
+
+        if (isMailEnable) {
+            emailService.sendSimpleMessage(request.getHeader("userCountry"));
+        }
 
         if (request.getHeader("userId").equals("undefined")) {
             return undefinedUserStatistics.setUserStatistics(request);
