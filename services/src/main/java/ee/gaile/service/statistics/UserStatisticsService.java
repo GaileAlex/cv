@@ -42,7 +42,7 @@ public class UserStatisticsService {
     public Map<String, String> setUserStatistics(HttpServletRequest request) {
 
         if (isMailEnable) {
-            emailService.sendSimpleMessage(request.getHeader("userCountry"));
+            emailService.sendSimpleMessage(request);
         }
 
         if (request.getHeader("userId").equals("undefined")) {

@@ -6,6 +6,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Service for sending a notification about a site visit
  *
@@ -15,7 +17,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class EmailServiceImpl {
     private static final String SUBJECT = "new user";
-    private static final String TEXT = "New user noticed from ";
+    private static final String TEXT_COUNTRY = "New user noticed from ";
+    private static final String TEXT_ID = " user ID - ";
     private final JavaMailSender emailSender;
 
     @Value("${spring.mail.username}")
@@ -24,14 +27,14 @@ public class EmailServiceImpl {
     /**
      * Sends a message about a user visit to the site
      *
-     * @param userCountry - user country
+     * @param request - user country, ID
      */
-    public void sendSimpleMessage(String userCountry) {
+    public void sendSimpleMessage(HttpServletRequest request) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(username);
         message.setTo(username);
         message.setSubject(SUBJECT);
-        message.setText(TEXT + userCountry);
+        message.setText(TEXT_COUNTRY + request.getHeader("userCountry") + TEXT_ID + request.getHeader("userId"));
         emailSender.send(message);
     }
 }
