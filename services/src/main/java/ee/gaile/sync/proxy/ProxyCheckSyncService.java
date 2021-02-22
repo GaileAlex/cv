@@ -24,10 +24,11 @@ import java.time.LocalDateTime;
 @Service
 @AllArgsConstructor
 public class ProxyCheckSyncService {
-    private final ProxyRepository proxyRepository;
     private static final String FILE_URL = "http://ipv4.ikoula.testdebit.info/10M.iso";
     private static final Double FILE_SIZE = 10_000_000.0;
     private static final Integer TIMEOUT = 60_000;
+
+    private final ProxyRepository proxyRepository;
 
     /**
      * Checks the proxy list for the ability to connect and download the file

@@ -23,6 +23,8 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class CountrySyncService implements SyncService {
+    private static final String IP_INFO_URL = "http://ipinfo.io/";
+
     private final ProxyRepository proxyRepository;
 
     /**
@@ -36,11 +38,12 @@ public class CountrySyncService implements SyncService {
         RestTemplate restTemplate = new RestTemplate();
         List<ProxyList> proxyLists = proxyRepository.findAllWhereCountryUnknown();
 
-        log.info("Start proxy country sync. Size lists is {} ", proxyLists.size());
-
         if (proxyLists.size() == 0) {
+            log.info("Proxy country sync. Size lists is null.");
             return;
         }
+
+        log.info("Start proxy country sync. Size lists is {} ", proxyLists.size());
 
         int returnIfRequestIsBlocked = 0;
 
@@ -48,7 +51,7 @@ public class CountrySyncService implements SyncService {
             if (proxyList.getCountry().equals("unknown")) {
                 try {
                     ResponseEntity<String> listResponseEntity = restTemplate
-                            .exchange("http://ipinfo.io/" + proxyList.getIpAddress(), HttpMethod.GET, null,
+                            .exchange(IP_INFO_URL + proxyList.getIpAddress(), HttpMethod.GET, null,
                                     new ParameterizedTypeReference<String>() {
                                     });
                     String[] st = Objects.requireNonNull(listResponseEntity.getBody()).split("\",\\n");
