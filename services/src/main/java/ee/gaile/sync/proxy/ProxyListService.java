@@ -23,44 +23,30 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Service
 @RequiredArgsConstructor
 public class ProxyListService implements SyncService {
-    private static final int THREAD_POOL = 80;
-    private static final int DIVIDER_TO_CHECK_EVERY_HOUR = 200;
-    private static final int ALLOWABLE_AMOUNT = 120;
+    private static final int THREAD_POOL = 100;
+    private static final int DIVIDER_TO_CHECK_EVERY_HOUR = 150;
+    private static final int ALLOWABLE_PROXY = 120;
 
     private final ProxyRepository proxyRepository;
     private final NewProxyService newProxyService;
     private final ProxyCheckSyncService proxyCheckSyncService;
 
-    private ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL
-            , new CustomizableThreadFactory("proxy-sync-"));
+    private ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL,
+            new CustomizableThreadFactory("proxy-sync-"));
 
     /**
-     * Checks the end of the previous schedule and the start of the proxy check service
+     * The start of the proxy check service
      */
     @Override
     public void sync() {
-        int activeThreadPool = ((ThreadPoolExecutor) proxyListsExecutor).getActiveCount();
+        checkActiveThreadPool();
 
-        if (activeThreadPool > 0) {
-            log.warn("The previous sync is incomplete, canceled. Unfinished tasks - {}", activeThreadPool);
-            proxyListsExecutor.shutdownNow();
-            proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL,
-                    new CustomizableThreadFactory("proxy-sync-"));
-        }
-
-        Long aliveProxies = proxyRepository.getTotalAliveProxies();
-
-        if (aliveProxies < ALLOWABLE_AMOUNT) {
+        long aliveProxies = proxyRepository.getTotalAliveProxies();
+        if (aliveProxies < ALLOWABLE_PROXY) {
             newProxyService.setNewProxy();
         }
 
-        int threadPool = proxyRepository.getTotal() / DIVIDER_TO_CHECK_EVERY_HOUR;
-        if (threadPool < THREAD_POOL) {
-            threadPool = THREAD_POOL;
-        }
-
-        ((ThreadPoolExecutor) proxyListsExecutor).setCorePoolSize(threadPool);
-        ((ThreadPoolExecutor) proxyListsExecutor).setMaximumPoolSize(threadPool);
+        setCorePoolSize();
 
         List<ProxyList> proxyLists = proxyRepository.findAllOrderByRandom();
 
@@ -99,6 +85,30 @@ public class ProxyListService implements SyncService {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Checks the end of the previous schedule
+     */
+    private void checkActiveThreadPool() {
+        int activeThreadPool = ((ThreadPoolExecutor) proxyListsExecutor).getActiveCount();
+        if (activeThreadPool > 0) {
+            log.warn("The previous sync is incomplete, canceled. Unfinished tasks - {}", activeThreadPool);
+            proxyListsExecutor.shutdownNow();
+            proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL,
+                    new CustomizableThreadFactory("proxy-sync-"));
+        }
+    }
+
+    /**
+     * Sets core pool size
+     */
+    private void setCorePoolSize() {
+        int threadPool = proxyRepository.getTotal() / DIVIDER_TO_CHECK_EVERY_HOUR;
+        if (threadPool > THREAD_POOL) {
+            ((ThreadPoolExecutor) proxyListsExecutor).setCorePoolSize(threadPool);
+            ((ThreadPoolExecutor) proxyListsExecutor).setMaximumPoolSize(threadPool);
+        }
     }
 
 }
