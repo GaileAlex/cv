@@ -79,6 +79,7 @@ public class NewProxyService {
 
         int counter = 0;
         for (ProxyList proxyList : proxyLists) {
+            // Ignore the error of adding an existing proxy to the database
             try {
                 proxyRepository.save(proxyList);
                 counter++;
@@ -98,8 +99,8 @@ public class NewProxyService {
      * third column - protocol
      * fourth column - country
      *
-     * @throws IOException            - Workbook
-     * @throws InvalidFormatException - Workbook
+     * @throws IOException            - if Workbook not available
+     * @throws InvalidFormatException - if Workbook not available
      */
     @PostConstruct
     private void readExcel() throws IOException, InvalidFormatException {

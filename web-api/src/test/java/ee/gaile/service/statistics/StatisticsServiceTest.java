@@ -41,7 +41,7 @@ class StatisticsServiceTest extends ApplicationIT {
         when(request.getHeader("userCity")).thenReturn("Tallinn");
         when(request.getHeader("userId")).thenReturn("undefined");
 
-        userStatisticsService.setUserStatistics(request);
+        userStatisticsService.setStatistics(request);
     }
 
     @AfterEach
@@ -65,7 +65,7 @@ class StatisticsServiceTest extends ApplicationIT {
         user = visitStatisticsRepository.findByUserIP("2.2.2.2").get();
         when(request.getHeader("userId")).thenReturn(user.getSessionId());
 
-        userStatisticsService.setUserStatistics(request);
+        userStatisticsService.setStatistics(request);
 
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(user.getUsername()).isEqualTo("undefined");

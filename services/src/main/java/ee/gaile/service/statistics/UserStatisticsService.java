@@ -39,7 +39,7 @@ public class UserStatisticsService {
      * @param request - HttpServletRequest
      * @return - sessionId
      */
-    public Map<String, String> setUserStatistics(HttpServletRequest request) {
+    public Map<String, String> setStatistics(HttpServletRequest request) {
 
         if (isMailEnable) {
             emailService.sendSimpleMessage(request);

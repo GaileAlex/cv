@@ -48,7 +48,7 @@ public class StatisticsController {
                 request.getHeader("sessionStorageUserId"));
         ACCESS_LOG.info("********************************************************************************************");
 
-        return new ResponseEntity<>(userStatisticsService.setUserStatistics(request), HttpStatus.OK);
+        return new ResponseEntity<>(userStatisticsService.setStatistics(request), HttpStatus.OK);
     }
 
     @PostMapping(path = "/events")

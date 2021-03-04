@@ -10,11 +10,18 @@ import java.util.Map;
 
 public interface Statistics {
 
+    /**
+     * Saves user data to a database
+     *
+     * @param request - HttpServletRequest
+     * @return - sessionId
+     */
     Map<String, String> setUserStatistics(HttpServletRequest request);
 
     /**
      * Saves the date the user visited the site
-     * @param visitStatistics - list of user visits
+     *
+     * @param visitStatistics     - list of user visits
      * @param visitDateRepository - visit date statistics repository
      */
     default void setVisitDate(VisitStatistics visitStatistics,
