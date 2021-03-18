@@ -1,7 +1,8 @@
 package ee.gaile.controller.statistics;
 
 import ee.gaile.ApplicationIT;
-import ee.gaile.service.statistics.StatisticsService;
+import ee.gaile.service.statistics.UserEvents;
+import ee.gaile.service.statistics.UserStatisticsService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class StatisticsControllerTest extends ApplicationIT {
     @MockBean
-    private StatisticsService statisticsService;
+    private UserStatisticsService statisticsService;
+    @MockBean
+    private UserEvents userEvents;
 
     @Autowired
     private MockMvc mvc;

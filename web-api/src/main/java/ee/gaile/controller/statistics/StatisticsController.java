@@ -2,6 +2,7 @@ package ee.gaile.controller.statistics;
 
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.service.statistics.StatisticsService;
+import ee.gaile.service.statistics.UserEvents;
 import ee.gaile.service.statistics.UserStatisticsService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -28,6 +29,7 @@ public class StatisticsController {
 
     private final StatisticsService statisticsService;
     private final UserStatisticsService userStatisticsService;
+    private final UserEvents userEvents;
 
     @GetMapping(path = "/graph/fromDate/{fromDate}/toDate/{toDate}/pageSize/{pageSize}/page/{page}")
     public ResponseEntity<VisitStatisticGraph> getGraphData(@PathVariable(value = "fromDate") String fromDate,
@@ -59,7 +61,7 @@ public class StatisticsController {
                 request.getHeader("userId"),
                 request.getHeader("sessionStorageUserId"));
 
-        userStatisticsService.setUserEvent(request);
+        userEvents.setUserEvent(request);
     }
 
     @PostMapping(path = "/user-out")
@@ -67,7 +69,7 @@ public class StatisticsController {
     public void getUserOutDate(HttpServletRequest request) {
         ACCESS_LOG.info("user left date is {}", request.getHeader("dateOut"));
 
-        userStatisticsService.setUserTotalTimeOnSite(request);
+        userEvents.setUserTotalTimeOnSite(request);
     }
 
 }
