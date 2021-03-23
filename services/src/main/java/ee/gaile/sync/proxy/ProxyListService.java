@@ -109,10 +109,12 @@ public class ProxyListService implements SyncService {
      */
     private void setCorePoolSize() {
         int threadPool = proxyRepository.getTotal() / DIVIDER_TO_CHECK_EVERY_HOUR;
-        if (threadPool > THREAD_POOL) {
-            ((ThreadPoolExecutor) proxyListsExecutor).setCorePoolSize(threadPool);
-            ((ThreadPoolExecutor) proxyListsExecutor).setMaximumPoolSize(threadPool);
+        if (threadPool < THREAD_POOL) {
+            threadPool = THREAD_POOL;
         }
+
+        ((ThreadPoolExecutor) proxyListsExecutor).setCorePoolSize(threadPool);
+        ((ThreadPoolExecutor) proxyListsExecutor).setMaximumPoolSize(threadPool);
     }
 
 }
