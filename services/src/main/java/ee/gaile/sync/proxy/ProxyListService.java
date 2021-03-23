@@ -26,6 +26,7 @@ public class ProxyListService implements SyncService {
     private static final int THREAD_POOL = 100;
     private static final int DIVIDER_TO_CHECK_EVERY_HOUR = 150;
     private static final int ALLOWABLE_PROXY = 120;
+    private static final int NUMBER_UNANSWERED_CHECKS = 200;
 
     private final ProxyRepository proxyRepository;
     private final NewProxyService newProxyService;
@@ -77,8 +78,11 @@ public class ProxyListService implements SyncService {
             proxyRepository.save(proxyList);
         }
 
-        if (proxyList.getUptime() != null && proxyList.getNumberUnansweredChecks() != null
-                && proxyList.getUptime() < 5 && proxyList.getNumberUnansweredChecks() > 500) {
+        if (proxyList.getUptime() != null &&
+                proxyList.getNumberUnansweredChecks() != null &&
+                proxyList.getUptime() < 5 &&
+                proxyList.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS) {
+
             proxyRepository.delete(proxyList);
 
             log.warn("Proxy deleted. ID {}, uptime {} ", proxyList.getId(), proxyList.getUptime());
