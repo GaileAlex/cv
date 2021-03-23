@@ -23,8 +23,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Service
 @RequiredArgsConstructor
 public class ProxyListService implements SyncService {
-    private static final int THREAD_POOL = 100;
-    private static final int DIVIDER_TO_CHECK_EVERY_HOUR = 150;
+    private static final int THREAD_POOL = 150;
     private static final int ALLOWABLE_PROXY = 120;
     private static final int NUMBER_UNANSWERED_CHECKS = 200;
 
@@ -108,10 +107,7 @@ public class ProxyListService implements SyncService {
      * Sets core pool size
      */
     private void setCorePoolSize() {
-        int threadPool = proxyRepository.getTotal() / DIVIDER_TO_CHECK_EVERY_HOUR;
-        if (threadPool < THREAD_POOL) {
-            threadPool = THREAD_POOL;
-        }
+        int threadPool = proxyRepository.getTotal() / THREAD_POOL;
 
         ((ThreadPoolExecutor) proxyListsExecutor).setCorePoolSize(threadPool);
         ((ThreadPoolExecutor) proxyListsExecutor).setMaximumPoolSize(threadPool);
