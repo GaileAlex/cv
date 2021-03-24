@@ -84,7 +84,6 @@ public class ProxyListService implements SyncService {
 
             proxyRepository.delete(proxyList);
 
-            log.warn("Proxy deleted. ID {}, uptime {} ", proxyList.getId(), proxyList.getUptime());
             return false;
         }
         return true;
