@@ -68,7 +68,7 @@ public class ProxyListService implements SyncService {
      */
     private boolean doFirstCheck(ProxyList proxyList) {
         if (proxyList.getNumberChecks() == null) {
-            proxyList.setNumberChecks(1);
+            proxyList.setNumberChecks(0);
         }
 
         if (proxyList.getFirstChecked() == null) {
