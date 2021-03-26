@@ -48,6 +48,7 @@ public class BitfinexAccessSyncService implements SyncService {
 
     private final CryptocurrencyValueRepository cryptocurrencyValueRepository;
     private final BitfinexCryptocurrencyRepository bitfinexCryptocurrencyRepository;
+    private final RestTemplate restTemplate;
 
     /**
      * Adding currency value to the database
@@ -95,7 +96,6 @@ public class BitfinexAccessSyncService implements SyncService {
      * @return - Crypto object
      */
     private Crypto getDataByUrl(String url) {
-        RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" +

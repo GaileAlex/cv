@@ -26,6 +26,7 @@ public class CountrySyncService implements SyncService {
     private static final String IP_INFO_URL = "http://ipinfo.io/";
 
     private final ProxyRepository proxyRepository;
+    private final RestTemplate restTemplate;
 
     /**
      * Sets the proxy country
@@ -35,7 +36,6 @@ public class CountrySyncService implements SyncService {
      */
     @Override
     public void sync() {
-        RestTemplate restTemplate = new RestTemplate();
         List<ProxyList> proxyLists = proxyRepository.findAllWhereCountryUnknown();
 
         if (proxyLists.size() == 0) {
