@@ -111,6 +111,10 @@ public class ProxyCheckSyncService {
     private Double checkSpeed(LocalDateTime start, LocalDateTime now) {
         long duration = Duration.between(start.toLocalTime(), now).toMillis();
 
-        return FILE_SIZE / duration;
+        if (duration != 0) {
+            return FILE_SIZE / duration;
+        }
+
+        return 0.0;
     }
 }
