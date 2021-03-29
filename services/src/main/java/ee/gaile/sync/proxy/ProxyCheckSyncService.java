@@ -14,6 +14,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 /**
  * Service for checking proxy for availability
@@ -102,7 +103,7 @@ public class ProxyCheckSyncService {
         double numberChecksValue = 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);
 
         if (Double.isInfinite(numberChecksValue)) {
-            log.info("speed is infinite");
+            log.info("proxy speed is infinite");
             numberChecksValue = 0.0;
         }
 
