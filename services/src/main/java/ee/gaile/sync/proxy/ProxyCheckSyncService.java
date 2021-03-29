@@ -98,7 +98,15 @@ public class ProxyCheckSyncService {
         } else {
             numberUnansweredChecks = proxyList.getNumberUnansweredChecks();
         }
-        return 100.0 - 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);
+
+        double numberChecksValue = 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);
+
+        if (Double.isInfinite(numberChecksValue)) {
+            log.info("speed is infinite");
+            numberChecksValue = 0.0;
+        }
+
+        return 100.0 - numberChecksValue;
     }
 
     /**
@@ -110,11 +118,14 @@ public class ProxyCheckSyncService {
      */
     private Double checkSpeed(LocalDateTime start, LocalDateTime now) {
         long duration = Duration.between(start.toLocalTime(), now).toMillis();
+        double speed = FILE_SIZE / duration;
 
-        if (duration != 0) {
-            return FILE_SIZE / duration;
+        if (Double.isInfinite(speed)) {
+            log.info("speed is infinite");
+            return 0.0;
         }
 
-        return 0.0;
+        return speed;
     }
+
 }
