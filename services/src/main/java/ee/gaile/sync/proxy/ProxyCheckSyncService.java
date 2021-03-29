@@ -103,7 +103,6 @@ public class ProxyCheckSyncService {
         double numberChecksValue = 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);
 
         if (Double.isInfinite(numberChecksValue)) {
-            log.info("proxy speed is infinite");
             numberChecksValue = 0.0;
         }
 
