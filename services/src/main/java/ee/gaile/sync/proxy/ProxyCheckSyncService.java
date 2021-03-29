@@ -121,7 +121,7 @@ public class ProxyCheckSyncService {
         double speed = FILE_SIZE / duration;
 
         if (Double.isInfinite(speed)) {
-            log.info("speed is infinite");
+            log.info("proxy speed is infinite");
             return 0.0;
         }
 
