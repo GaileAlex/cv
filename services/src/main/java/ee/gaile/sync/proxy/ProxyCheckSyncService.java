@@ -103,7 +103,7 @@ public class ProxyCheckSyncService {
         double numberChecksValue = 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);
 
         if (Double.isInfinite(numberChecksValue)) {
-            numberChecksValue = 0.0;
+            numberChecksValue = 100.0;
         }
 
         return 100.0 - numberChecksValue;
