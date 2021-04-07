@@ -12,6 +12,4 @@ public interface BitfinexCryptocurrencyRepository extends JpaRepository<Bitfinex
 
     Optional<BitfinexCryptocurrency> findByCryptocurrencyName(@Param("cryptocurrencyName") String cryptocurrencyName);
 
-
-
 }

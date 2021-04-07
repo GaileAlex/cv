@@ -14,7 +14,6 @@ import java.net.Proxy;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 
 /**
  * Service for checking proxy for availability
@@ -70,15 +69,17 @@ public class ProxyCheckSyncService {
             proxyRepository.save(proxyList);
 
         } catch (IOException e) {
+            double uptime = getUptime(proxyList);
+            proxyList.setUptime(uptime);
+            proxyList.setSpeed(0.0);
+            proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
+
             if (proxyList.getNumberUnansweredChecks() != null) {
                 proxyList.setNumberUnansweredChecks(proxyList.getNumberUnansweredChecks() + 1);
             } else {
                 proxyList.setNumberUnansweredChecks(1);
             }
-            double uptime = getUptime(proxyList);
-            proxyList.setUptime(uptime);
-            proxyList.setSpeed(0.0);
-            proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
+
             proxyList.setLastChecked(LocalDateTime.now());
 
             proxyRepository.save(proxyList);
