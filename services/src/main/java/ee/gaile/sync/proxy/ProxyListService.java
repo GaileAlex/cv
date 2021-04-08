@@ -71,19 +71,16 @@ public class ProxyListService implements SyncService {
             proxyList.setFirstChecked(LocalDateTime.now());
             proxyList.setAnonymity("High anonymity");
             proxyList.setNumberChecks(0);
+            proxyList.setNumberUnansweredChecks(0);
             proxyList.setUptime(0.0);
             proxyRepository.save(proxyList);
         }
 
-        if (proxyList.getUptime() != null &&
-                proxyList.getNumberUnansweredChecks() != null &&
-                proxyList.getUptime() < 5 &&
-                proxyList.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS) {
-
+        if (proxyList.getUptime() < 5 && proxyList.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS) {
             proxyRepository.delete(proxyList);
-
             return false;
         }
+
         return true;
     }
 
