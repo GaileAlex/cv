@@ -67,13 +67,11 @@ public class ProxyListService implements SyncService {
      * @return boolean
      */
     private boolean doFirstCheck(ProxyList proxyList) {
-        if (proxyList.getNumberChecks() == null) {
-            proxyList.setNumberChecks(0);
-        }
-
         if (proxyList.getFirstChecked() == null) {
             proxyList.setFirstChecked(LocalDateTime.now());
             proxyList.setAnonymity("High anonymity");
+            proxyList.setNumberChecks(0);
+            proxyList.setUptime(0.0);
             proxyRepository.save(proxyList);
         }
 
