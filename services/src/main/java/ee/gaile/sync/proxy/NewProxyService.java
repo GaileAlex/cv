@@ -45,7 +45,11 @@ public class NewProxyService {
 
         for (ProxySite proxySite : proxySites) {
             try {
-                Document doc = Jsoup.connect(proxySite.getUrl()).timeout(0).get();
+                Document doc = Jsoup.connect(proxySite.getUrl())
+                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+                                "(KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36")
+                        .referrer("https://www.google.com")
+                        .timeout(10000).get();
 
                 Elements table = doc.select("table");
                 Elements rows = table.select("tr");
@@ -87,7 +91,7 @@ public class NewProxyService {
             }
         }
 
-        log.warn("Proxy saved - {}", counter);
+        log.info("Proxy saved - {}", counter);
     }
 
     /**
