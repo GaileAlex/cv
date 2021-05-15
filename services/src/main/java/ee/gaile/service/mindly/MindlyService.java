@@ -5,6 +5,7 @@ import ee.gaile.repository.mindly.CryptocurrencyValueRepository;
 import ee.gaile.repository.mindly.MindlyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
@@ -31,7 +32,7 @@ public class MindlyService {
     public List<Mindly> getAllPortfolio() {
         List<Mindly> portfolioList = mindlyRepository.findAll();
 
-        portfolioList.forEach((portfolio) -> {
+        portfolioList.forEach(portfolio -> {
             BigDecimal value = cryptocurrencyValueRepository
                     .findByCryptocurrencyNameAndLastDate(portfolio.getCryptocurrency()).getValueCurrency()
                     .setScale(2, BigDecimal.ROUND_HALF_EVEN);
@@ -49,7 +50,7 @@ public class MindlyService {
      * @param portfolio currencies cryptoportfolio
      * @return - cryptoportfolio
      */
-    public Mindly savePortfolio(Mindly portfolio) {
+    public Mindly savePortfolio(@RequestBody Mindly portfolio) {
         if (portfolio.getDateOfPurchase() == null) {
             portfolio.setDateOfPurchase(LocalDate.now());
         }

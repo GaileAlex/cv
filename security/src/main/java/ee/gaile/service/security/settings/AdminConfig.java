@@ -1,9 +1,9 @@
 package ee.gaile.service.security.settings;
 
 import ee.gaile.entity.users.Users;
+import ee.gaile.enums.EnumRoles;
 import ee.gaile.service.security.SecurityConfig;
 import ee.gaile.service.security.UserRepository;
-import ee.gaile.enums.EnumRoles;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class AdminConfig {
     private final UserRepository userRepository;
     private final SecurityConfig securityConfig;
 
-    private AdminConfig(UserRepository userRepository, SecurityConfig securityConfig) {
+    public AdminConfig(UserRepository userRepository, SecurityConfig securityConfig) {
         this.userRepository = userRepository;
         this.securityConfig = securityConfig;
     }
