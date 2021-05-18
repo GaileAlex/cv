@@ -101,7 +101,7 @@ public class ProxyListService implements SyncService {
      * Sets core pool size
      */
     private void setCorePoolSize() {
-        int threadPool = proxyRepository.getTotal() / THREAD_POOL;
+        int threadPool = Math.max(proxyRepository.getTotal() / THREAD_POOL, 50);
 
         ((ThreadPoolExecutor) proxyListsExecutor).setCorePoolSize(threadPool);
         ((ThreadPoolExecutor) proxyListsExecutor).setMaximumPoolSize(threadPool);
