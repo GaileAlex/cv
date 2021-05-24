@@ -24,8 +24,8 @@ public interface ProxyRepository extends JpaRepository<ProxyList, Long> {
             " select count(id) from data", nativeQuery = true)
     Long getTotalAliveProxiesLimit();
 
-    @Query(value = "select count(id) from proxy_list ", nativeQuery = true)
-    Integer getTotal();
+    @Query(value = "select count(id) from proxy_list where uptime > 0", nativeQuery = true)
+    Integer getUptimeAboveZero();
 
     @Query(value = "select * from proxy_list " +
             " where country = 'unknown' and uptime > 0", nativeQuery = true)
