@@ -178,7 +178,7 @@ hr {
 }
 
 
-.btn-primary i.fa {
+.btn-primary em.fa {
     margin-right: 10px;
 }
 
@@ -382,7 +382,7 @@ hr {
     padding: 30px 0;
 }
 
-#contact i.fa {
+#contact em.fa {
     color: #121d1f;
     margin-bottom: 10px;
 }
@@ -444,14 +444,14 @@ label {
     margin: 0 20px;
 }
 
-#contact .social i.fa {
+#contact .social em.fa {
     font-size: 30px;
     padding: 4px 5px;
     color: #fff;
     transition: all 0.5s;
 }
 
-#contact .social i.fa:hover {
+#contact .social em.fa:hover {
     color: #121d1f;
 }
 
