@@ -60,7 +60,7 @@ public class ProxyCheckSyncService {
             socksConnection.disconnect();
             inputStream.close();
 
-            proxyList.setSpeed(checkSpeed(startFile, LocalDateTime.now()));
+            proxyList.setSpeed(checkSpeed(startFile, LocalDateTime.now(), proxyList.getId()));
             proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
             double uptime = getUptime(proxyList);
             proxyList.setUptime(uptime);
@@ -117,12 +117,12 @@ public class ProxyCheckSyncService {
      * @param now   - download end time
      * @return Double - file download speed
      */
-    private Double checkSpeed(LocalDateTime start, LocalDateTime now) {
+    private Double checkSpeed(LocalDateTime start, LocalDateTime now, Long id) {
         long duration = Duration.between(start.toLocalTime(), now).toMillis();
         double speed = FILE_SIZE / duration;
 
         if (Double.isInfinite(speed)) {
-            log.info("proxy speed is infinite");
+            log.info("proxy speed is infinite. ID is {}", id);
             return 0.0;
         }
 

@@ -16,7 +16,7 @@ public class VisitStatisticsGraphRepository {
     private static final String SQL_NEW_USERS = "select date_trunc('day', first_visit) as visit_date, " +
             "             count(first_visit) as count_visits from visit_statistics " +
             "            WHERE first_visit BETWEEN :fromDate and :toDate and user_name != 'Admin' " +
-            "            and total_time_on_site > 1000 " +
+            "            and total_time_on_site > 3000 " +
             "            group by  date_trunc('day', first_visit) " +
             "            order by visit_date ";
     // language=sql
@@ -25,7 +25,7 @@ public class VisitStatisticsGraphRepository {
             "    from visit_statistic_visit_date " +
             "left join visit_statistics vs on vs.id = visit_statistic_visit_date.visit_statistics_id " +
             "WHERE visit_date BETWEEN :fromDate and :toDate and user_name != 'Admin' " +
-            "            and total_time_on_site > 1000) " +
+            "            and total_time_on_site > 3000) " +
             "select " +
             "    visit_date, " +
             "    count(visit_date) as count_visits " +
@@ -40,7 +40,7 @@ public class VisitStatisticsGraphRepository {
             "              WHERE last_visit BETWEEN :fromDate and :toDate)" +
             "select * from data " +
             "where user_name != 'Admin' " +
-            "and total_time_on_site > 1000 " +
+            "and total_time_on_site > 3000 " +
             "order by last_visit desc limit :pageSize offset :page";
 
     // language=sql
@@ -48,7 +48,7 @@ public class VisitStatisticsGraphRepository {
             "              from visit_statistics " +
             "                       left join visit_statistics_user_ip vsui on visit_statistics.id = vsui.visit_statistics_id " +
             "              WHERE last_visit BETWEEN :fromDate and :toDate" +
-            "              and total_time_on_site > 1000) " +
+            "              and total_time_on_site > 3000) " +
             "select count(user_ip) as total from data " +
             "where user_name != 'Admin' ";
 
