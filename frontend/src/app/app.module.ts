@@ -22,11 +22,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { defineLocale, enGbLocale, ruLocale } from 'ngx-bootstrap/chronos';
-import { BooksComponent } from './modules/librarian/books/books.component';
-import { LibrarianComponent } from './modules/librarian/librarian/librarian.component';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ComboboxComponent } from './modules/librarian/combo-box/combo-box.component';
-import { DialogBoxComponent } from './modules/librarian/dialog-box/dialog-box.component';
 import {
     MatButtonModule,
     MatDialogModule,
@@ -82,10 +78,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         MindlyComponent,
         FormControlValidationMsgDirective,
         FormSubmitValidationMsgDirective,
-        BooksComponent,
-        LibrarianComponent,
-        DialogBoxComponent,
-        ComboboxComponent,
         LoginComponent,
         RegistrationComponent,
         BlogArticleComponent,
@@ -155,8 +147,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     providers: [ConfirmationService, ValidationMsgService, NgbActiveModal, DialogService, MessageService, ThemeService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
-    bootstrap: [AppComponent],
-    entryComponents: [DialogBoxComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

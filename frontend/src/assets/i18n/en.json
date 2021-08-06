@@ -8,7 +8,6 @@
     "blog": "blog",
     "spring.projects": "Projects",
     "test.crypto": "Test task Crypto Portfolio",
-    "test.librarian": "Test task Librarian",
     "test.proxy": "Proxy List",
     "contact": "contact",
     "aleksei.gaile": "Aleksei Gaile"
@@ -65,14 +64,6 @@
     "current": "Current market value (EUR)",
     "option": "Option",
     "description": "Test task description can be found here"
-  },
-  "librarian": {
-    "welcome": "Welcome!",
-    "click.text": "Click the button and select a filter to search.",
-    "search": "Search",
-    "unfortunately": "Unfortunately",
-    "no.result": "No results were found for your search.",
-    "back": "Back"
   },
   "footer": {
     "contact": "Contact"

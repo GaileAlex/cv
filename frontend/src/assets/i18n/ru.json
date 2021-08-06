@@ -8,7 +8,6 @@
     "blog": "блог",
     "spring.projects": "Проекты",
     "test.crypto": "Тестовое задание Crypto Portfolio",
-    "test.librarian": "Тестовое задание  Librarian",
     "test.proxy": "Список proxy",
     "contact": "Контакты",
     "aleksei.gaile": "Алексей Гайле"
@@ -67,14 +66,6 @@
     "current": "Текущая рыночная стоимость (евро)",
     "option": "Опции",
     "description": "Описание тестовой задачи можно найти здесь"
-  },
-  "librarian": {
-    "welcome": "Добро пожаловать!",
-    "click.text": "Нажмите кнопку и выберите фильтр для поиска.",
-    "search": "Поиск",
-    "unfortunately": "К сожалению",
-    "no.result": "По вашему запросу ничего не найдено.",
-    "back": "Назад"
   },
   "footer": {
     "contact": "Контакты"
