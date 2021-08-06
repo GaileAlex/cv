@@ -10,6 +10,7 @@ import { ProtectedGuardService } from './service/protectedGuard';
 import { BlogAdminComponent } from './modules/admin-menu/blog-admin/blog-admin.component';
 import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/visit-statistics.component';
 import { ProxyListComponent } from "./modules/proxy-list/proxy-list.component";
+import { BlogArticleComponent } from "./modules/blog/blog-article/blog-article.component";
 
 
 export const routes: Routes = [
@@ -17,6 +18,7 @@ export const routes: Routes = [
     {path: 'mindly', component: MindlyComponent},
     {path: 'proxy-list', component: ProxyListComponent},
     {path: 'blog', component: BlogListComponent},
+    {path: 'article/:id', component: BlogArticleComponent},
     {path: 'login', component: LoginComponent},
     {path: 'registration', component: RegistrationComponent},
     {path: 'blog-admin', component: BlogAdminComponent, canActivate: [ProtectedGuardService]},
