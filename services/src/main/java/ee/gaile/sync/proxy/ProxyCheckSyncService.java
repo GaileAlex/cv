@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
+import java.net.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -25,6 +22,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ProxyCheckSyncService {
     private static final String FILE_URL = "http://ipv4.ikoula.testdebit.info/10M.iso";
+    private static final String GOOGLE_URL = "http://www.google.com";
     private static final Double FILE_SIZE = 10_000_000.0;
     private static final Integer TIMEOUT = 60_000;
 
@@ -37,6 +35,10 @@ public class ProxyCheckSyncService {
      */
     @SuppressWarnings("StatementWithEmptyBody")
     public void checkProxy(ProxyList proxyList) {
+        if (!checkInternetConnection()) {
+            return;
+        }
+
         Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
                 new InetSocketAddress(proxyList.getIpAddress(), proxyList.getPort()));
 
@@ -127,6 +129,18 @@ public class ProxyCheckSyncService {
         }
 
         return speed;
+    }
+
+    private boolean checkInternetConnection() {
+        try {
+            URL url = new URL(GOOGLE_URL);
+            URLConnection connection = url.openConnection();
+            connection.connect();
+            return true;
+        } catch (IOException e) {
+            log.error("No internet connection");
+            return false;
+        }
     }
 
 }

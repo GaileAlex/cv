@@ -8,9 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -29,7 +26,6 @@ public class ProxyListService implements SyncService {
     private static final int THREAD_POOL = 20;
     private static final int ALLOWABLE_PROXY = 120;
     private static final int NUMBER_UNANSWERED_CHECKS = 200;
-    private static final String GOOGLE_URL = "http://www.google.com";
 
     private final ProxyRepository proxyRepository;
     private final NewProxyService newProxyService;
@@ -43,9 +39,6 @@ public class ProxyListService implements SyncService {
      */
     @Override
     public void sync() {
-        if (!checkInternetConnection()) {
-            return;
-        }
         checkActiveThreadPool();
 
         long aliveProxies = proxyRepository.getTotalAliveProxies();
@@ -112,18 +105,6 @@ public class ProxyListService implements SyncService {
 
         ((ThreadPoolExecutor) proxyListsExecutor).setCorePoolSize(threadPool);
         ((ThreadPoolExecutor) proxyListsExecutor).setMaximumPoolSize(threadPool);
-    }
-
-    private boolean checkInternetConnection() {
-        try {
-            URL url = new URL(GOOGLE_URL);
-            URLConnection connection = url.openConnection();
-            connection.connect();
-            return true;
-        } catch (IOException e) {
-            log.error("No internet connection");
-            return false;
-        }
     }
 
 }
