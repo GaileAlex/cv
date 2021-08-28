@@ -138,7 +138,6 @@ public class ProxyCheckSyncService {
             connection.connect();
             return true;
         } catch (IOException e) {
-            log.error("No internet connection");
             return false;
         }
     }
