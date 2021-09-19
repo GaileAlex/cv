@@ -3,8 +3,9 @@ package ee.gaile.controller.blog;
 import ee.gaile.models.blog.BlogWrapper;
 import ee.gaile.models.blog.CommentWrapper;
 import ee.gaile.service.blog.BlogService;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +19,27 @@ import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
  *
  * @author Aleksei Gaile
  */
-@Slf4j
-@AllArgsConstructor
 @RestController
 @RequestMapping(API_V1_PREFIX + "/blog")
+@RequiredArgsConstructor
+@Tag(name = "BlogController", description = "Blogging controller")
 public class BlogController {
-    BlogService blogService;
+    private final BlogService blogService;
 
     @GetMapping
+    @Operation(summary = "Service for displaying blogs")
     public ResponseEntity<List<BlogWrapper>> findAll() {
         return new ResponseEntity<>(blogService.findAllBlogs(), HttpStatus.OK);
     }
 
     @GetMapping("/find-blog/{blogId}")
+    @Operation(summary = "Service for finding a blog by id")
     public ResponseEntity<BlogWrapper> findBlogById(@PathVariable("blogId") Long blogId) {
         return new ResponseEntity<>(blogService.findBlogById(blogId), HttpStatus.OK);
     }
 
     @PostMapping("/comments")
+    @Operation(summary = "Service for saving a comment in a blog")
     public void saveComment(@RequestBody CommentWrapper comment) {
         blogService.saveComment(comment);
     }

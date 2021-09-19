@@ -1,3 +1,4 @@
+/*
 package ee.gaile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,3 +13,4 @@ public class UtilsTests {
         }
     }
 }
+*/

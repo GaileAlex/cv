@@ -1,11 +1,14 @@
 package ee.gaile.service.security.settings;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ApiErrorUtil {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -24,4 +27,5 @@ public class ApiErrorUtil {
         errorObj.put("message", message);
         return objectMapper.writeValueAsString(errorObj);
     }
+
 }

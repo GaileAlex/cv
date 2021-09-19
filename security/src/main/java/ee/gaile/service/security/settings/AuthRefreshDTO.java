@@ -8,7 +8,9 @@ import static ee.gaile.service.security.settings.JwtUtils.TOKEN_TYPE;
 public class AuthRefreshDTO {
 
     String tokenType = TOKEN_TYPE;
+
     String accessToken;
+
     String refreshToken;
 
 }

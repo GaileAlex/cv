@@ -1,6 +1,6 @@
 package ee.gaile.sync.proxy;
 
-import ee.gaile.entity.proxy.ProxyList;
+import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,16 +31,16 @@ public class ProxyCheckSyncService {
     /**
      * Checks the proxy list for the ability to connect and download the file
      *
-     * @param proxyList - proxy
+     * @param proxyEntity - proxy
      */
     @SuppressWarnings("StatementWithEmptyBody")
-    public void checkProxy(ProxyList proxyList) {
+    public void checkProxy(ProxyEntity proxyEntity) {
         if (!checkInternetConnection()) {
             return;
         }
 
         Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
-                new InetSocketAddress(proxyList.getIpAddress(), proxyList.getPort()));
+                new InetSocketAddress(proxyEntity.getIpAddress(), proxyEntity.getPort()));
 
         try {
             URL fileUrl = new URL(FILE_URL);
@@ -51,7 +51,7 @@ public class ProxyCheckSyncService {
             socksConnection.setReadTimeout(TIMEOUT);
             socksConnection.getResponseCode();
 
-            proxyList.setResponse(Duration.between(startConnection.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
+            proxyEntity.setResponse(Duration.between(startConnection.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
 
             LocalDateTime startFile = LocalDateTime.now();
             InputStream inputStream = socksConnection.getInputStream();
@@ -62,45 +62,45 @@ public class ProxyCheckSyncService {
             socksConnection.disconnect();
             inputStream.close();
 
-            proxyList.setSpeed(checkSpeed(startFile, LocalDateTime.now(), proxyList.getId()));
-            proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
-            double uptime = getUptime(proxyList);
-            proxyList.setUptime(uptime);
-            proxyList.setLastChecked(LocalDateTime.now());
+            proxyEntity.setSpeed(checkSpeed(startFile, LocalDateTime.now(), proxyEntity.getId()));
+            proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
+            double uptime = getUptime(proxyEntity);
+            proxyEntity.setUptime(uptime);
+            proxyEntity.setLastChecked(LocalDateTime.now());
 
-            proxyRepository.save(proxyList);
+            proxyRepository.save(proxyEntity);
 
         } catch (IOException e) {
-            double uptime = getUptime(proxyList);
-            proxyList.setUptime(uptime);
-            proxyList.setSpeed(0.0);
-            proxyList.setNumberChecks(proxyList.getNumberChecks() + 1);
+            double uptime = getUptime(proxyEntity);
+            proxyEntity.setUptime(uptime);
+            proxyEntity.setSpeed(0.0);
+            proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
 
-            if (proxyList.getNumberUnansweredChecks() != null) {
-                proxyList.setNumberUnansweredChecks(proxyList.getNumberUnansweredChecks() + 1);
+            if (proxyEntity.getNumberUnansweredChecks() != null) {
+                proxyEntity.setNumberUnansweredChecks(proxyEntity.getNumberUnansweredChecks() + 1);
             } else {
-                proxyList.setNumberUnansweredChecks(1);
+                proxyEntity.setNumberUnansweredChecks(1);
             }
 
-            proxyList.setLastChecked(LocalDateTime.now());
+            proxyEntity.setLastChecked(LocalDateTime.now());
 
-            proxyRepository.save(proxyList);
+            proxyRepository.save(proxyEntity);
         }
     }
 
     /**
      * Set uptime
      *
-     * @param proxyList - proxy
+     * @param proxyEntity - proxy
      * @return Double - uptime
      */
-    private Double getUptime(ProxyList proxyList) {
-        Integer numberChecks = proxyList.getNumberChecks();
+    private Double getUptime(ProxyEntity proxyEntity) {
+        Integer numberChecks = proxyEntity.getNumberChecks();
         Integer numberUnansweredChecks;
-        if (proxyList.getNumberUnansweredChecks() == null) {
+        if (proxyEntity.getNumberUnansweredChecks() == null) {
             numberUnansweredChecks = 0;
         } else {
-            numberUnansweredChecks = proxyList.getNumberUnansweredChecks();
+            numberUnansweredChecks = proxyEntity.getNumberUnansweredChecks();
         }
 
         double numberChecksValue = 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);

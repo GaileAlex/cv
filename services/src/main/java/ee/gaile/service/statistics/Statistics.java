@@ -1,7 +1,7 @@
 package ee.gaile.service.statistics;
 
-import ee.gaile.entity.statistics.VisitStatisticVisitDate;
-import ee.gaile.entity.statistics.VisitStatistics;
+import ee.gaile.entity.statistics.VisitStatisticVisitDateEntity;
+import ee.gaile.entity.statistics.VisitStatisticsEntity;
 import ee.gaile.repository.statistic.VisitStatisticVisitDateRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +24,9 @@ public interface Statistics {
      * @param visitStatistics     - list of user visits
      * @param visitDateRepository - visit date statistics repository
      */
-    default void setVisitDate(VisitStatistics visitStatistics,
+    default void setVisitDate(VisitStatisticsEntity visitStatistics,
                               VisitStatisticVisitDateRepository visitDateRepository) {
-        VisitStatisticVisitDate visitDate = new VisitStatisticVisitDate();
+        VisitStatisticVisitDateEntity visitDate = new VisitStatisticVisitDateEntity();
         visitDate.setVisitStatistics(visitStatistics);
         visitDate.setVisitDate(LocalDateTime.now());
 

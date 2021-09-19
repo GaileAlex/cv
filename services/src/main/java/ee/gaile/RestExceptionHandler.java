@@ -21,7 +21,7 @@ public class RestExceptionHandler {
         String message = e.getMessage();
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode objectNode = mapper.createObjectNode();
-        LOG.error("the following error occurred \n " + message, e);
+        LOG.error("the following error occurred {}, {}", message, e);
 
         if (e instanceof ResponseStatusException) {
             objectNode.put("message", ((ResponseStatusException) e).getReason());

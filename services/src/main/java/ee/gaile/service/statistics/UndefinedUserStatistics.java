@@ -1,7 +1,7 @@
 package ee.gaile.service.statistics;
 
-import ee.gaile.entity.statistics.VisitStatisticUserIp;
-import ee.gaile.entity.statistics.VisitStatistics;
+import ee.gaile.entity.statistics.VisitStatisticUserIpEntity;
+import ee.gaile.entity.statistics.VisitStatisticsEntity;
 import ee.gaile.repository.statistic.VisitStatisticIpRepository;
 import ee.gaile.repository.statistic.VisitStatisticVisitDateRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
@@ -36,7 +36,7 @@ public class UndefinedUserStatistics implements Statistics {
         String sessionId = UUID.randomUUID().toString();
         response.put("sessionId", sessionId);
 
-        VisitStatistics undefinedUser = new VisitStatistics()
+        VisitStatisticsEntity undefinedUser = new VisitStatisticsEntity()
                 .setFirstVisit(LocalDateTime.now())
                 .setLastVisit(LocalDateTime.now())
                 .setLastEvent(LocalDateTime.now())
@@ -46,7 +46,7 @@ public class UndefinedUserStatistics implements Statistics {
                 .setUserLocation(request.getHeader("userCountry"))
                 .setSessionId(sessionId);
 
-        VisitStatisticUserIp undefinedUserIp = new VisitStatisticUserIp();
+        VisitStatisticUserIpEntity undefinedUserIp = new VisitStatisticUserIpEntity();
         undefinedUserIp.setUserIp(request.getHeader("userIP"));
         undefinedUserIp.setVisitStatistics(undefinedUser);
 

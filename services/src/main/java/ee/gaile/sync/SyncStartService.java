@@ -64,4 +64,5 @@ public class SyncStartService {
         }
         countrySyncService.sync();
     }
+
 }

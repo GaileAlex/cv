@@ -1,6 +1,6 @@
 package ee.gaile.sync.proxy;
 
-import ee.gaile.entity.proxy.ProxyList;
+import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.sync.SyncService;
 import lombok.RequiredArgsConstructor;
@@ -36,32 +36,32 @@ public class CountrySyncService implements SyncService {
      */
     @Override
     public void sync() {
-        List<ProxyList> proxyLists = proxyRepository.findAllWhereCountryUnknown();
+        List<ProxyEntity> proxyEntities = proxyRepository.findAllWhereCountryUnknown();
 
-        if (proxyLists.size() == 0) {
+        if (proxyEntities.isEmpty()) {
             log.info("Proxy country sync. Size lists is null.");
             return;
         }
 
-        log.info("Start proxy country sync. Size lists is {} ", proxyLists.size());
+        log.info("Start proxy country sync. Size lists is {} ", proxyEntities.size());
 
         int returnIfRequestIsBlocked = 0;
 
-        for (ProxyList proxyList : proxyLists) {
-            if (proxyList.getCountry().equals("unknown")) {
+        for (ProxyEntity proxyEntity : proxyEntities) {
+            if (proxyEntity.getCountry().equals("unknown")) {
                 try {
                     ResponseEntity<String> listResponseEntity = restTemplate
-                            .exchange(IP_INFO_URL + proxyList.getIpAddress(), HttpMethod.GET, null,
+                            .exchange(IP_INFO_URL + proxyEntity.getIpAddress(), HttpMethod.GET, null,
                                     new ParameterizedTypeReference<String>() {
                                     });
                     String[] st = Objects.requireNonNull(listResponseEntity.getBody()).split("\",\\n");
 
                     String country = st[3].split(": \"")[1] + " " + st[2].split(": \"")[1];
-                    proxyList.setCountry(country);
-                    proxyRepository.save(proxyList);
+                    proxyEntity.setCountry(country);
+                    proxyRepository.save(proxyEntity);
 
                 } catch (Exception e) {
-                    log.info("proxy set country error for {} {}", proxyList.getIpAddress(), proxyList.getPort());
+                    log.info("proxy set country error for {} {}", proxyEntity.getIpAddress(), proxyEntity.getPort());
                     returnIfRequestIsBlocked++;
                     if (returnIfRequestIsBlocked == 10) {
                         return;

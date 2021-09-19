@@ -1,6 +1,6 @@
 package ee.gaile.sync.proxy;
 
-import ee.gaile.entity.proxy.ProxyList;
+import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.sync.SyncService;
 import lombok.RequiredArgsConstructor;
@@ -48,12 +48,12 @@ public class ProxyListService implements SyncService {
 
         setCorePoolSize();
 
-        List<ProxyList> proxyLists = proxyRepository.findAllOrderByRandom();
+        List<ProxyEntity> proxyEntities = proxyRepository.findAllOrderByRandom();
 
         log.info("Start proxy list sync. Size lists is {}, in total there were {}, thread pool {}",
-                proxyLists.size(), aliveProxies, ((ThreadPoolExecutor) proxyListsExecutor).getCorePoolSize());
+                proxyEntities.size(), aliveProxies, ((ThreadPoolExecutor) proxyListsExecutor).getCorePoolSize());
 
-        proxyLists.forEach(proxyList -> proxyListsExecutor.execute(() -> {
+        proxyEntities.forEach(proxyList -> proxyListsExecutor.execute(() -> {
             if (doFirstCheck(proxyList)) {
                 proxyCheckSyncService.checkProxy(proxyList);
             }
@@ -63,21 +63,21 @@ public class ProxyListService implements SyncService {
     /**
      * Sets the first check and removes inactive proxies
      *
-     * @param proxyList - proxy list
+     * @param proxyEntity - proxy list
      * @return boolean
      */
-    private boolean doFirstCheck(ProxyList proxyList) {
-        if (proxyList.getFirstChecked() == null) {
-            proxyList.setFirstChecked(LocalDateTime.now());
-            proxyList.setAnonymity("High anonymity");
-            proxyList.setNumberChecks(0);
-            proxyList.setNumberUnansweredChecks(0);
-            proxyList.setUptime(0.0);
-            proxyRepository.save(proxyList);
+    private boolean doFirstCheck(ProxyEntity proxyEntity) {
+        if (proxyEntity.getFirstChecked() == null) {
+            proxyEntity.setFirstChecked(LocalDateTime.now());
+            proxyEntity.setAnonymity("High anonymity");
+            proxyEntity.setNumberChecks(0);
+            proxyEntity.setNumberUnansweredChecks(0);
+            proxyEntity.setUptime(0.0);
+            proxyRepository.save(proxyEntity);
         }
 
-        if (proxyList.getUptime() < 5 && proxyList.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS) {
-            proxyRepository.delete(proxyList);
+        if (proxyEntity.getUptime() < 5 && proxyEntity.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS) {
+            proxyRepository.delete(proxyEntity);
             return false;
         }
 

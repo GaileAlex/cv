@@ -1,7 +1,7 @@
 package ee.gaile.service.statistics;
 
-import ee.gaile.entity.statistics.VisitStatisticUserIp;
-import ee.gaile.entity.statistics.VisitStatistics;
+import ee.gaile.entity.statistics.VisitStatisticUserIpEntity;
+import ee.gaile.entity.statistics.VisitStatisticsEntity;
 import ee.gaile.repository.statistic.VisitStatisticIpRepository;
 import ee.gaile.repository.statistic.VisitStatisticVisitDateRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
@@ -35,12 +35,12 @@ public class OldUserStatistics implements Statistics {
     public Map<String, String> setUserStatistics(HttpServletRequest request) {
         Map<String, String> response = new HashMap<>();
 
-        Optional<VisitStatistics> visitStatisticsByNameOptional =
+        Optional<VisitStatisticsEntity> visitStatisticsByNameOptional =
                 visitStatisticsRepository.findBySessionId(request.getHeader("userId"));
 
         if (visitStatisticsByNameOptional.isPresent()) {
 
-            VisitStatistics oldUser = visitStatisticsByNameOptional.get();
+            VisitStatisticsEntity oldUser = visitStatisticsByNameOptional.get();
             oldUser.setLastVisit(LocalDateTime.now())
                     .setLastEvent(LocalDateTime.now())
                     .setTotalVisits(oldUser.getTotalVisits() + 1L);
@@ -55,7 +55,7 @@ public class OldUserStatistics implements Statistics {
             visitStatisticsRepository.save(oldUser);
 
             if (!request.getHeader("userIP").equals("undefined")) {
-                VisitStatisticUserIp oldUserIp = new VisitStatisticUserIp();
+                VisitStatisticUserIpEntity oldUserIp = new VisitStatisticUserIpEntity();
                 oldUserIp.setUserIp(request.getHeader("userIP"));
                 oldUserIp.setVisitStatistics(oldUser);
                 visitStatisticIpRepository.save(oldUserIp);

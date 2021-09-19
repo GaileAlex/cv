@@ -9,6 +9,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class LoginRequest {
+
     private AuthRefreshDTO auth;
+
     private SignupRequest user;
+
 }

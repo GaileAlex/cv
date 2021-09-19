@@ -4,9 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import ee.gaile.entity.mindly.CryptocurrencyValues;
+import ee.gaile.entity.mindly.CryptocurrencyValueEntity;
 import ee.gaile.enums.BitfinexCryptocurrencyEnum;
-import ee.gaile.enums.Currency;
+import ee.gaile.enums.CurrencyEnum;
 import ee.gaile.models.mindly.Crypto;
 import ee.gaile.repository.mindly.BitfinexCryptocurrencyRepository;
 import ee.gaile.repository.mindly.CryptocurrencyValueRepository;
@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -65,15 +66,15 @@ public class BitfinexAccessSyncService implements SyncService {
 
                 //Ripple not sold for euros, but it is not accurate. We receive in dollars and we translate in euro at the rate.
                 if (k.equals("Ripple")) {
-                    BigDecimal usdEur = new BigDecimal(getCurrencyUrl(CURRENCY_URL + Currency.getCurrency("USD"))
+                    BigDecimal usdEur = new BigDecimal(getCurrencyUrl(CURRENCY_URL + CurrencyEnum.getCurrency("USD"))
                             .replaceAll(".*?([\\d.]+).*", "$1"));
                     price = BigDecimal.valueOf(crypto.getLastPrice())
-                            .divide(usdEur, 2, BigDecimal.ROUND_HALF_UP);
+                            .divide(usdEur, 2, RoundingMode.HALF_UP);
                 } else {
                     price = BigDecimal.valueOf(crypto.getLastPrice());
                 }
 
-                CryptocurrencyValues cryptocurrencyValues = new CryptocurrencyValues();
+                CryptocurrencyValueEntity cryptocurrencyValues = new CryptocurrencyValueEntity();
                 cryptocurrencyValues.setDateCryptocurrency(LocalDateTime.now());
                 cryptocurrencyValues.setValueCurrency(price);
 
@@ -86,7 +87,6 @@ public class BitfinexAccessSyncService implements SyncService {
                 ERROR_LOG.error("Error getting currency data {} - {}", k, e.getMessage());
             }
         });
-
     }
 
     /**
@@ -103,7 +103,7 @@ public class BitfinexAccessSyncService implements SyncService {
         HttpEntity<String> entity = new HttpEntity<>("body", headers);
 
         ResponseEntity<List<String[]>> listResponseEntity = restTemplate.exchange(url, HttpMethod.GET, entity,
-                new ParameterizedTypeReference<List<String[]>>() {
+                new ParameterizedTypeReference<>() {
                 });
 
         return new Crypto(Objects.requireNonNull(listResponseEntity.getBody()).get(0)[0],

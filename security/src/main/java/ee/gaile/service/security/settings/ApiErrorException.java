@@ -2,7 +2,7 @@ package ee.gaile.service.security.settings;
 
 import org.springframework.http.HttpStatus;
 
-public class ApiErrorException extends Exception {
+public class ApiErrorException extends RuntimeException {
 
     private final HttpStatus status;
     private final String message;
@@ -23,6 +23,7 @@ public class ApiErrorException extends Exception {
         return code;
     }
 
+    @Override
     public String getMessage() {
         return message;
     }

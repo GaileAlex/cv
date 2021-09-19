@@ -1,12 +1,11 @@
 package ee.gaile.sync.proxy;
 
-import ee.gaile.entity.proxy.ProxyList;
-import ee.gaile.entity.proxy.ProxySite;
+import ee.gaile.entity.proxy.ProxyEntity;
+import ee.gaile.entity.proxy.ProxySiteEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.repository.proxy.ProxySitesRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -39,11 +38,11 @@ public class NewProxyService {
      * Searches for new proxies on sites, adds to the database
      */
     public void setNewProxy() {
-        List<ProxyList> proxyLists = new ArrayList<>();
+        List<ProxyEntity> proxyEntities = new ArrayList<>();
 
-        List<ProxySite> proxySites = proxySitesRepository.findAll();
+        List<ProxySiteEntity> proxySites = proxySitesRepository.findAll();
 
-        for (ProxySite proxySite : proxySites) {
+        for (ProxySiteEntity proxySite : proxySites) {
             try {
                 Document doc = Jsoup.connect(proxySite.getUrl())
                         .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
@@ -58,20 +57,19 @@ public class NewProxyService {
                     Element row = rows.get(i);
 
                     String[] parts = row.toString().split("[^0-9.0-9]");
-                    ProxyList proxyList = new ProxyList();
+                    ProxyEntity proxyEntity = new ProxyEntity();
 
                     for (String ip : parts) {
 
                         if (ip.matches("^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.)" +
                                 "{3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$")) {
-                            proxyList.setIpAddress(ip);
-                            continue;
+                            proxyEntity.setIpAddress(ip);
                         }
-                        if (proxyList.getIpAddress() != null && !ip.equals("")) {
-                            proxyList.setPort(Integer.valueOf(ip));
-                            proxyList.setProtocol("SOCKS5");
-                            proxyList.setCountry("unknown");
-                            proxyLists.add(proxyList);
+                        if (Objects.nonNull(proxyEntity.getIpAddress()) && !ip.equals("")) {
+                            proxyEntity.setPort(Integer.valueOf(ip));
+                            proxyEntity.setProtocol("SOCKS5");
+                            proxyEntity.setCountry("unknown");
+                            proxyEntities.add(proxyEntity);
                             break;
                         }
                     }
@@ -82,10 +80,10 @@ public class NewProxyService {
         }
 
         int counter = 0;
-        for (ProxyList proxyList : proxyLists) {
+        for (ProxyEntity proxyEntity : proxyEntities) {
             // Ignore the error of adding an existing proxy to the database
             try {
-                proxyRepository.save(proxyList);
+                proxyRepository.save(proxyEntity);
                 counter++;
             } catch (Exception ignored) {
             }
@@ -103,11 +101,10 @@ public class NewProxyService {
      * third column - protocol
      * fourth column - country
      *
-     * @throws IOException            - if Workbook not available
-     * @throws InvalidFormatException - if Workbook not available
+     * @throws IOException - if Workbook not available
      */
     @PostConstruct
-    private void readExcel() throws IOException, InvalidFormatException {
+    private void readExcel() throws IOException {
         String path = "proxy/Book.xlsx";
         ClassLoader classLoader = getClass().getClassLoader();
         File excel = new File(Objects.requireNonNull(classLoader.getResource(path)).getFile());
@@ -116,45 +113,41 @@ public class NewProxyService {
 
             Workbook workbook = WorkbookFactory.create(excel);
             Sheet sheet = workbook.getSheetAt(0);
-            List<ProxyList> proxyLists = new ArrayList<>();
+            List<ProxyEntity> proxyEntities = new ArrayList<>();
 
             sheet.forEach(row -> {
+                ProxyEntity proxyEntity = new ProxyEntity();
+                row.getCell(0);
+                String ip = String.valueOf(row.getCell(0)).trim().split(":")[0];
+                proxyEntity.setIpAddress(ip);
+                String port;
                 try {
-                    ProxyList proxyList = new ProxyList();
-                    row.getCell(0);
-                    String ip = String.valueOf(row.getCell(0)).trim().split(":")[0];
-                    proxyList.setIpAddress(ip);
-                    String port;
-                    try {
-                        port = String.valueOf(row.getCell(1)).trim().split(":")[1];
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        port = String.valueOf(row.getCell(1)).trim();
-                    }
-                    proxyList.setPort(Double.valueOf(port).intValue());
-
-                    String protocol;
-                    if (row.getCell(2) == null) {
-                        protocol = "SOCKS5";
-                    } else {
-                        protocol = String.valueOf(row.getCell(2)).trim();
-                    }
-                    proxyList.setProtocol(protocol);
-
-                    String country;
-                    if (row.getCell(2) == null) {
-                        country = "unknown";
-                    } else {
-                        country = String.valueOf((row.getCell(3))).trim();
-                    }
-                    proxyList.setCountry(country);
-
-                    proxyLists.add(proxyList);
-                } catch (NumberFormatException e) {
-                    log.info("end of table");
+                    port = String.valueOf(row.getCell(1)).trim().split(":")[1];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    port = String.valueOf(row.getCell(1)).trim();
                 }
+                proxyEntity.setPort(Double.valueOf(port).intValue());
+
+                String protocol;
+                if (row.getCell(2) == null) {
+                    protocol = "SOCKS5";
+                } else {
+                    protocol = String.valueOf(row.getCell(2)).trim();
+                }
+                proxyEntity.setProtocol(protocol);
+
+                String country;
+                if (row.getCell(2) == null) {
+                    country = "unknown";
+                } else {
+                    country = String.valueOf((row.getCell(3))).trim();
+                }
+                proxyEntity.setCountry(country);
+
+                proxyEntities.add(proxyEntity);
             });
 
-            proxyLists.forEach((c) -> {
+            proxyEntities.forEach(c -> {
                 try {
                     proxyRepository.save(c);
                 } catch (Exception e) {

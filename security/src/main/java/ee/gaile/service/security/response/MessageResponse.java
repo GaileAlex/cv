@@ -1,6 +1,7 @@
 package ee.gaile.service.security.response;
 
 public class MessageResponse {
+
     private String message;
 
     public MessageResponse(String message) {

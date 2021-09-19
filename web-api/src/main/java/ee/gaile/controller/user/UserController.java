@@ -2,9 +2,13 @@ package ee.gaile.controller.user;
 
 import ee.gaile.service.security.request.LoginRequest;
 import ee.gaile.service.security.request.SignupRequest;
+import ee.gaile.service.security.response.MessageResponse;
+import ee.gaile.service.security.settings.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
 import ee.gaile.service.user.UserService;
-import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -24,26 +28,30 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/auth")
-@AllArgsConstructor
+@RequiredArgsConstructor
+@Tag(name = "UserController", description = "Controller for authorization and user registration")
 public class UserController {
     private final UserService userService;
 
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
 
     @PostMapping(path = "/login")
+    @Operation(summary = "Service for user authorization")
     public ResponseEntity<LoginRequest> getUserLoginToken(@RequestBody SignupRequest auth, HttpServletRequest request) {
         ACCESS_LOG.info("user access request, user name is {}, IP is {} ", auth.getUsername(), request.getHeader("userIP"));
         return new ResponseEntity<>(userService.authUser(auth, request), HttpStatus.OK);
     }
 
     @PostMapping(path = "/refresh")
+    @Operation(summary = "Token renewal service")
     public ResponseEntity<AuthRefreshDTO> getAccessTokenByRefreshToken(@RequestBody AuthRefreshDTO authDTO,
-                                                                       HttpServletRequest request) throws Exception {
+                                                                       HttpServletRequest request) throws ApiErrorException {
         return new ResponseEntity<>(userService.refreshAuth(authDTO, request), HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    @Operation(summary = "User registration service")
+    public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         return userService.registerUser(signUpRequest);
     }
 
