@@ -6,17 +6,12 @@ import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.repository.proxy.ProxySitesRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,73 +85,6 @@ public class NewProxyService {
         }
 
         log.info("Proxy saved - {}", counter);
-    }
-
-    /**
-     * adds new proxies from the excel file
-     * the first column of the file must contain the ip address
-     * the second column must contain the port
-     * <p>
-     * optional:
-     * third column - protocol
-     * fourth column - country
-     *
-     * @throws IOException - if Workbook not available
-     */
-    @PostConstruct
-    private void readExcel() throws IOException {
-        String path = "proxy/Book.xlsx";
-        ClassLoader classLoader = getClass().getClassLoader();
-        File excel = new File(Objects.requireNonNull(classLoader.getResource(path)).getFile());
-
-        if (excel.canRead()) {
-
-            Workbook workbook = WorkbookFactory.create(excel);
-            Sheet sheet = workbook.getSheetAt(0);
-            List<ProxyEntity> proxyEntities = new ArrayList<>();
-
-            sheet.forEach(row -> {
-                ProxyEntity proxyEntity = new ProxyEntity();
-                row.getCell(0);
-                String ip = String.valueOf(row.getCell(0)).trim().split(":")[0];
-                proxyEntity.setIpAddress(ip);
-                String port;
-                try {
-                    port = String.valueOf(row.getCell(1)).trim().split(":")[1];
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    port = String.valueOf(row.getCell(1)).trim();
-                }
-                proxyEntity.setPort(Double.valueOf(port).intValue());
-
-                String protocol;
-                if (row.getCell(2) == null) {
-                    protocol = "SOCKS5";
-                } else {
-                    protocol = String.valueOf(row.getCell(2)).trim();
-                }
-                proxyEntity.setProtocol(protocol);
-
-                String country;
-                if (row.getCell(2) == null) {
-                    country = "unknown";
-                } else {
-                    country = String.valueOf((row.getCell(3))).trim();
-                }
-                proxyEntity.setCountry(country);
-
-                proxyEntities.add(proxyEntity);
-            });
-
-            proxyEntities.forEach(c -> {
-                try {
-                    proxyRepository.save(c);
-                } catch (Exception e) {
-                    log.warn("duplicate key value");
-                }
-            });
-
-            workbook.close();
-        }
     }
 
 }
