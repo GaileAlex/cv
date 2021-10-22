@@ -17,7 +17,7 @@
     "button.more": "Learn More",
     "about": {
       "me": "About Me",
-      "description": "I am a Java Developer aiming to create quality products and constantly evolving.<br><br>I have experience in developing complex web applications, optimizing existing software solutions.<br><br>During work participated in several commercial projects, where solved various tasks on the front-end and back-end, and also helped other developers. Prefer to work with the back-end. Java forever!<br><br>- The following technologies have been used to create this site: Spring boot, Spring Security, Hibernate/JPA, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. <br>- Site is hosted on its own hosting. <br>- You can see the code here - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n target=\"blank\">https://github.com/GaileAlex/cv.</a>"
+      "description": "I am a Java Developer aiming to create quality products and constantly evolving.<br><br>I have experience in developing complex web applications.<br><br>During work participated in various commercial projects, where solved various tasks on the front-end and back-end, and also helped other developers. Prefer to work with the back-end. Java forever!<br><br>- The following technologies have been used to create this site: Spring boot, Spring Security, Hibernate/JPA, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS."
     },
     "portfolio": {
       "portfolio": "Portfolio",
@@ -46,9 +46,7 @@
     "education": {
       "education": "Education",
       "education-1": "<h4>Ida-Virumaa Kutsehariduskeskus</h4>\n <h4 class=\"subheading\">Secondary education</h4>",
-      "education-1.description": "Software Developer.<br><br>\n During my studies I studied the following technologies - HTML, CSS, MySQL,\n PostgreSQL, Hibernate/JPA, Maven, JUnit, Java SE, JavaFX, Spring boot, Spring Security,\n Thymeleaf, GitHub, Agile Methodologies.<br><br>\n\n Developed:<br><br>\n\n - Application for tracking live queues at the border. JavaFX, Jsoup (the program\n parses the data from the site <a class=\"btn-link\"\n href=\"https://www.estonianborder.eu\"\n target=\"blank\">https://www.estonianborder.eu.</a>)\n -\n <a class=\"btn-link\" href=\"https://github.com/GaileAlex/GoSwift\"\n target=\"blank\">https://github.com/GaileAlex/GoSwift.</a><br><br>\n\n - The application emulates the store operation (test task found on the\n Internet).JavaFx, MySQL - <a class=\"btn-link\"\n href=\"https://github.com/GaileAlex/Shop-Emulation\"\n target=\"blank\">https://github.com/GaileAlex/Shop-Emulation</a><br><br>\n\n Thesis:<br>\n - CV website creation, the following technologies are used: HTML, CSS, Spring boot,\n Spring Security, Thymeleaf, Hibernate/JPA, PostgreSQL, Maven. The site is hosted on its\n own hosting managed by the Tomcat server.",
-      "education-2": "<h4>Сourses</h4>\n <h4 class=\"subheading\">\"Training Center \"Connesance\"</h4>",
-      "education-2.description": "Estimated business in construction.",
+      "education-1.description": "Software Developer.<br>",
       "education-3": "<h4>Сourses</h4>\n <h4 class=\"subheading\">\"Status\"</h4>",
       "education-3.description": "Network administrator (Windows Server).",
       "education-4": "<h4>Baltic State Technical University \"Voenmeh\" D.F.Ustinov</h4>\n <h4 class=\"subheading\">Higher education</h4>",

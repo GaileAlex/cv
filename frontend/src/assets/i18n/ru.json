@@ -17,7 +17,7 @@
     "button.more": "Узнать больше",
     "about": {
       "me": "Обо мне",
-      "description": "Я Java разработчик, стремящийся создавать качественные продукты и постоянно развиваться.<br><br>Имею опыт разработки сложных веб-приложений, оптимизации существующих программных решений.<br><br>За время работы участвовал в нескольких проектах, где решал различные задачи на front-end и back-end, а также помогал другим разработчикам. Предпочитаю работать с back-end. Java forever!<br><br>- Для создания этого сайта были использованы следующие технологии: Spring boot, Spring Security, Hibernate/JPA, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. <br>- Сайт расположен на собственном хостинге. <br>- Код можно посмотреть тут - <a class=\"btn-link\" href=\"https://github.com/GaileAlex/cv\"\n target=\"blank\">https://github.com/GaileAlex/cv.</a>"
+      "description": "Я Java разработчик, стремящийся создавать качественные продукты и постоянно развиваться.<br><br>Имею опыт разработки сложных веб-приложений.<br><br>За время работы участвовал в различных проектах, где решал различные задачи на front-end и back-end, а также помогал другим разработчикам. Предпочитаю работать с back-end. Java forever!<br><br>- Для создания этого сайта были использованы следующие технологии: Spring boot, Spring Security, Hibernate/JPA, PostgreSQL, Liquibase, Angular, Docker, Maven, HTML, CSS. <br>"
     },
     "portfolio": {
       "portfolio": "Портфолио",
@@ -46,9 +46,7 @@
     "education": {
       "education": "Образование",
       "education-1": "<h4>Ida-Virumaa Kutsehariduskeskus</h4>\n <h4 class=\"subheading\">Среднее образование</h4>",
-      "education-1.description": "Разработчик программного обеспечения.<br><br>\n\n Во время обучения я изучал следующие технологии - HTML, CSS, MySQL, PostgreSQL,\n Hibernate/JPA, Maven, JUnit, Java SE, JavaFX, Spring boot, Spring Security, Thymeleaf,\n GitHub, Agile Methodologies.<br><br>\n\n Разработал:<br><br>\n\n - Приложение для отслеживание живой очереди на границе. JavaFX, Jsoup (программа\n парсит данные с\n сайта <a class=\"btn-link\" href=\"https://www.estonianborder.eu/\"\n target=\"blank\">https://www.estonianborder.eu/</a>.) -\n <a class=\"btn-link\" href=\"https://github.com/GaileAlex/GoSwift\"\n target=\"blank\">https://github.com/GaileAlex/GoSwift.</a><br><br>\n\n - Приложение эмулирует работу магазина (тестовое задание найденное в интернете).\n JavaFx, MySQL -\n <a class=\"btn-link\" href=\"https://github.com/GaileAlex/Shop-Emulation\"\n target=\"blank\">https://github.com/GaileAlex/Shop-Emulation.</a><br><br>\n Дипломная работа:<br>\n - Создание сайта CV, используются следующие технологии: HTML, CSS, Spring\n Boot, Spring Security, Thymeleaf, Hibernate/JPA, PostgreSQL, Maven. Сайт размещен\n на собственном хостинге, управляемом сервером Tomcat.",
-      "education-2": " <h4>Курсы</h4>\n  <h4 class=\"subheading\">\"Обучающий центр \"Коннессанс\"</h4>",
-      "education-2.description": "Сметное дело в строительстве.",
+      "education-1.description": "Разработчик программного обеспечения.<br>",
       "education-3": "<h4>Курсы</h4>\n <h4 class=\"subheading\">\"Статус\"</h4>",
       "education-3.description": "Администратор сети (Windows Server).",
       "education-4": "<h4>БГТУ \"ВОЕНМЕХ\" им. Д. Ф. Устинова</h4>\n <h4 class=\"subheading\">Высшее образование</h4>",
