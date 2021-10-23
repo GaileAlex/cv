@@ -59,6 +59,7 @@ public class NewProxyService {
                         if (ip.matches("^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.)" +
                                 "{3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$")) {
                             proxyEntity.setIpAddress(ip);
+                            continue;
                         }
                         if (Objects.nonNull(proxyEntity.getIpAddress()) && !ip.equals("")) {
                             proxyEntity.setPort(Integer.valueOf(ip));
