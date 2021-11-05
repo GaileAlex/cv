@@ -10,7 +10,6 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
-import { MindlyComponent } from './modules/mindly/mindly.component';
 import { FormControlValidationMsgDirective } from './components/form-validation/formcontrol-validation-msg.directive';
 import { FormSubmitValidationMsgDirective } from './components/form-validation/formsubmit-validation-msg.directive';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -75,7 +74,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         StartPageComponent,
         MenuComponent,
         NotFoundComponent,
-        MindlyComponent,
         FormControlValidationMsgDirective,
         FormSubmitValidationMsgDirective,
         LoginComponent,

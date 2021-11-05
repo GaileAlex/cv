@@ -1,6 +1,5 @@
 package ee.gaile.sync;
 
-import ee.gaile.sync.mindly.BitfinexAccessSyncService;
 import ee.gaile.sync.proxy.CountrySyncService;
 import ee.gaile.sync.proxy.ProxyListService;
 import lombok.RequiredArgsConstructor;
@@ -18,28 +17,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SyncStartService {
-    private final BitfinexAccessSyncService bitfinexAccessSyncService;
     private final ProxyListService proxyListService;
     private final CountrySyncService countrySyncService;
 
-    @Value("${bitfinex.access.run}")
-    private boolean isRunBitfinex;
     @Value("${proxy.list.scheduled.run}")
     private boolean isRunProxy;
     @Value("${proxy.country.scheduled.run}")
     private boolean isRunCheckCountry;
-
-    /**
-     * Launches cryptocurrency synchronization
-     */
-    @Scheduled(cron = "${bitfinex.access.scheduled}")
-    public void syncBitfinex() {
-        if (!isRunBitfinex) {
-            log.info("Scheduled Bitfinex sync disable");
-            return;
-        }
-        bitfinexAccessSyncService.sync();
-    }
 
     /**
      * Starts syncing proxy list

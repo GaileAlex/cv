@@ -38,5 +38,6 @@
     <include file="v0033_create_table_proxy_sites.sql" relativeToChangelogFile="true"/>
     <include file="v0034_uniq_key_by_columns_proxy_sites.sql" relativeToChangelogFile="true"/>
     <include file="v0035_drop_books_table.sql" relativeToChangelogFile="true"/>
+    <include file="v0036_drop_mindly_tables.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StartPageComponent } from './modules/start-page/start-page.component';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
-import { MindlyComponent } from './modules/mindly/mindly.component';
 import { BlogListComponent } from './modules/blog/blog-list/blog-list.component';
 import { LoginComponent } from './modules/login/login.component';
 import { RegistrationComponent } from './modules/registration/registration.component';
@@ -15,7 +14,6 @@ import { BlogArticleComponent } from "./modules/blog/blog-article/blog-article.c
 
 export const routes: Routes = [
     {path: '', component: StartPageComponent},
-    {path: 'mindly', component: MindlyComponent},
     {path: 'proxy-list', component: ProxyListComponent},
     {path: 'blog', component: BlogListComponent},
     {path: 'article/:id', component: BlogArticleComponent},

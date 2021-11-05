@@ -7,7 +7,6 @@
     "education": "Education",
     "blog": "blog",
     "spring.projects": "Projects",
-    "test.crypto": "Test task Crypto Portfolio",
     "test.proxy": "Proxy List",
     "contact": "contact",
     "aleksei.gaile": "Aleksei Gaile"
@@ -41,7 +40,7 @@
       "job-2": "<h4>LLC \"Impulse\"</h4>\n <h4 class=\"subheading\">Deputy Director</h4>",
       "job-2.description": "<br>\n Construction company<br><br>\n - Independently created a company website.<br>\n - Created a network and electronic document management.<br>\n - Increased the company's revenue more than four times.<br>\n - Established relationships with suppliers.<br>\n - Increased the number of regular customers.<br><br>",
       "job-3": "<h4>\"ART-BANK\" </h4>\n <h4 class=\"subheading\">Java Developer</h4>",
-      "job-3.description": "<br>\n - Remote work<br><br>\n - Development \"from scratch\" of an application for managing tariffs and billing of transactions.<br><br>\n - Work on VTB Bank projects<br><br>- Project stack:<br>Java 11, Spring Boot, Hibernate / JPA, Ehcache, PostgreSQL, Liquibase, Flyway, Docker, Maven.<br><br> - Creation of architecture<br>- Development of new functionality of the application<br>- Development of Rest - services<br>- SQL - queries to databases.<br>- Integration and unit tests using junit, mockito.<br>- Creation of libraries for Spring projects<br>- Help and training of other developers<br><br>"
+      "job-3.description": "<br>\n - Remote work<br><br>\n - Development \"from scratch\" of an application for managing tariffs and billing of transactions.<br><br>\n - Work on VTB Bank projects<br><br>- Project stack:<br>Java 11, Spring Boot, Kafka, Hibernate / JPA, Ehcache, PostgreSQL, Liquibase, Flyway, Docker, Maven.<br><br> - Creation of architecture<br>- Development of new functionality of the application<br>- Development of Rest - services<br>- SQL - queries to databases.<br>- Integration and unit tests using junit, mockito.<br>- Creation of libraries for Spring projects<br>- Help and training of other developers<br><br>"
     },
     "education": {
       "education": "Education",
@@ -52,18 +51,6 @@
       "education-4": "<h4>Baltic State Technical University \"Voenmeh\" D.F.Ustinov</h4>\n <h4 class=\"subheading\">Higher education</h4>",
       "education-4.description": "Master's degree. Rocket Engine Mechanical Engineer."
     }
-  },
-  "mindly": {
-    "add.new": "Add a new portfolio item",
-    "choose.cryptocurrency": "Choose cryptocurrency",
-    "amount": "Amount",
-    "date": "Date of purchase",
-    "wallet.location": "Wallet location",
-    "portfolio": "Portfolio",
-    "cryptocurrency": "Cryptocurrency",
-    "current": "Current market value (EUR)",
-    "option": "Option",
-    "description": "Test task description can be found here"
   },
   "footer": {
     "contact": "Contact"
