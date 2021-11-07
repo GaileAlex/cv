@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Table(name = "proxy_sites")
 @NoArgsConstructor
 public class ProxySiteEntity {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
