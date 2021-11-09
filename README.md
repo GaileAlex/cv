@@ -3,7 +3,9 @@
 ![logo](frontend/src/assets/img/about.jpg)
 
 ## Introduction
-Portfolio website, the following technologies used Spring boot, Spring Security, Angular, Hibernate, PostgreSQL, Docker, Liquibase, Maven. 
+Portfolio website, the following technologies used Spring boot, Spring Security, Angular, Hibernate, PostgreSQL, Docker, Liquibase, Maven.
+
+URL - https://agaile.asuscomm.com
 
 ## Prerequisites
 The following technologies required:
