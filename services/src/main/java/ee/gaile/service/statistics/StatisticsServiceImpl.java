@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @AllArgsConstructor
-public class StatisticsServiceImpl implements StatisticsService{
+public class StatisticsServiceImpl implements StatisticsService {
     private final VisitStatisticsGraphRepository visitStatisticsGraphRepository;
 
     @Override

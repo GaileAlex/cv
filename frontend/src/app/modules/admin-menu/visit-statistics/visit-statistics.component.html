@@ -3,12 +3,12 @@
 <div class="blog_main_area p_100 text-center">
     <div class="container">
         <div>
-            <canvas baseChart
+            <canvas [chartType]="'line'"
+                    [colors]="lineChartColors"
                     [datasets]="graphData"
                     [labels]="dates"
                     [options]="chartOptions"
-                    [colors]="lineChartColors"
-                    [chartType]="'line'"></canvas>
+                    baseChart></canvas>
         </div>
     </div>
 
@@ -42,9 +42,9 @@
         </table>
 
         <div class="d-flex justify-content-between p-2">
-            <mat-paginator [length]="total"
+            <mat-paginator (page)="changePage($event)"
+                           [length]="total"
                            [pageSize]="pageSize"
-                           (page)="changePage($event)"
                            [showFirstLastButtons]="true">
             </mat-paginator>
         </div>

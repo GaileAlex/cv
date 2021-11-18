@@ -1,7 +1,7 @@
 <app-menu></app-menu>
 
 <div *ngIf="!blogs || blogs.length === 0" class="p_150_top">
-    <div class="container" *ngIf="errorMessage !== ''">
+    <div *ngIf="errorMessage !== ''" class="container">
         <div class="row mt-5">
             <div class="col-lg-6 offset-3">
                 <h3 class="p_50 alert alert-danger text-center"><b>{{errorMessage}}</b></h3>
@@ -17,15 +17,15 @@
                 <div class="col-4">
                     <article class="post-single">
                         <figure class="post-media">
-                            <img src="{{ blogs[i].image }}" alt="{{ blogs[i].headline }}">
+                            <img alt="{{ blogs[i].headline }}" src="{{ blogs[i].image }}">
                         </figure>
                         <div class="post-body">
                             <div class="post-meta">
                                 <div class="post-date">{{ blogs[i].date | date:'dd.MM.yyyy' }}</div>
                             </div>
-                            <h4 class="dark-color" [routerLink]="['/article', blogs[i].id]">
+                            <h4 [routerLink]="['/article', blogs[i].id]" class="dark-color">
                                 <a>{{ blogs[i].headline }}</a></h4>
-                            <a class="read-more" [routerLink]="['/article', blogs[i].id]">
+                            <a [routerLink]="['/article', blogs[i].id]" class="read-more">
                                 View Article</a>
                         </div>
                     </article>
@@ -33,15 +33,15 @@
                 <div *ngIf="i + 1 < blogs.length" class="col-4">
                     <article class="post-single">
                         <figure class="post-media">
-                            <img src="{{ blogs[i+1].image }}" alt="{{ blogs[i+1].headline }}">
+                            <img alt="{{ blogs[i+1].headline }}" src="{{ blogs[i+1].image }}">
                         </figure>
                         <div class="post-body">
                             <div class="post-meta">
                                 <div class="post-date">{{ blogs[i + 1].date | date:'dd.MM.yyyy' }}</div>
                             </div>
-                            <h4 class="dark-color" [routerLink]="['/article', blogs[i+1].id]">
+                            <h4 [routerLink]="['/article', blogs[i+1].id]" class="dark-color">
                                 <a>{{ blogs[i + 1].headline }}</a></h4>
-                            <a class="read-more" [routerLink]="['/article', blogs[i+1].id]">View Article</a>
+                            <a [routerLink]="['/article', blogs[i+1].id]" class="read-more">View Article</a>
                         </div>
                     </article>
                 </div>

@@ -1,40 +1,40 @@
 <div class="sticky-nav-wrapper">
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-nav" stickyClass="sticky-box-shadow"
-         ngStickyNav>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-nav" ngStickyNav
+         stickyClass="sticky-box-shadow">
         <div class="container">
       <span class="navbar-brand  nav-link navbar-header page-scroll">
         Aleksei Gaile
       </span>
-            <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed"
-                    aria-label="Toggle navigation" (click)="collapsed = !collapsed">
+            <button (click)="collapsed = !collapsed" [attr.aria-expanded]="!collapsed" aria-controls="navbarContent" aria-label="Toggle navigation"
+                    class="navbar-toggler" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+            <div [class.collapse]="collapsed" class="navbar-collapse" id="navbarContent">
                 <ul class="nav navbar-nav p_100_left">
                     <li class="hidden">
                         <a href="/"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="page-scroll nav-link" [routerLink]="['']" pageScroll
-                           href="#about">{{'menu.about' | translate}}</a>
+                        <a [routerLink]="['']" class="page-scroll nav-link" href="#about"
+                           pageScroll>{{'menu.about' | translate}}</a>
                     </li>
                     <li class="nav-item">
                         <a
-                                class="page-scroll nav-link" [routerLink]="['']" pageScroll
-                                href="#resume">{{'menu.experience' | translate}}</a>
+                                [routerLink]="['']" class="page-scroll nav-link" href="#resume"
+                                pageScroll>{{'menu.experience' | translate}}</a>
                     </li>
                     <li class="nav-item">
                         <a
-                                class="page-scroll nav-link" [routerLink]="['']" pageScroll
-                                href="#education">{{'menu.education' | translate}}</a>
+                                [routerLink]="['']" class="page-scroll nav-link" href="#education"
+                                pageScroll>{{'menu.education' | translate}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="page-scroll nav-link" [routerLink]="['/blog']">{{'menu.blog' | translate}}</a>
+                        <a [routerLink]="['/blog']" class="page-scroll nav-link">{{'menu.blog' | translate}}</a>
                     </li>
                     <li class="nav-item dropdown" ngbDropdown>
                         <a class="nav-link" href="javascript:void(0)"
                            ngbDropdownToggle>{{'menu.spring.projects' | translate}}</a>
-                        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+                        <div aria-labelledby="id01" class="dropdown-menu" ngbDropdownMenu>
 
                             <a [routerLink]="['/proxy-list']" class="hvr-underline-from-center dropdown-item"
                                style="color: #58c1ff; margin-bottom: 5px;">{{'menu.test.proxy' | translate}}</a>
@@ -46,52 +46,52 @@
                     </li>
                     <li class="nav-item">
                         <a
-                                class="page-scroll nav-link" pageScroll
-                                href="#contact" [pageScrollSpeed]="10"
-                                [pageScrollAdjustHash]="false">{{'menu.contact' | translate}}</a>
+                                [pageScrollAdjustHash]="false" [pageScrollSpeed]="10"
+                                class="page-scroll nav-link" href="#contact"
+                                pageScroll>{{'menu.contact' | translate}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="page-scroll nav-link" *ngIf="getLanguage()=='en'" [routerLink]=""
-                           (click)="useLanguage('ru')"
+                        <a (click)="useLanguage('ru')" *ngIf="getLanguage()=='en'" [routerLink]=""
+                           class="page-scroll nav-link"
                         >
-                            <img src="assets/img/rus.png" alt="about-image">
+                            <img alt="about-image" src="assets/img/rus.png">
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="page-scroll nav-link" *ngIf="getLanguage()=='ru'" [routerLink]=""
-                           (click)="useLanguage('en')"
+                        <a (click)="useLanguage('en')" *ngIf="getLanguage()=='ru'" [routerLink]=""
+                           class="page-scroll nav-link"
                         >
-                            <img src="assets/img/eng.png" alt="about-image">
+                            <img alt="about-image" src="assets/img/eng.png">
                         </a>
                     </li>
-                    <ul class="nav navbar-nav" *ngIf="!isLoggedIn">
+                    <ul *ngIf="!isLoggedIn" class="nav navbar-nav">
                         <li class="nav-item">
-                            <a class="page-scroll nav-link" [routerLink]="['/login']" role="button"
-                               data-toggle="modal"
+                            <a [routerLink]="['/login']" class="page-scroll nav-link" data-toggle="modal"
+                               role="button"
                             >Login
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="page-scroll nav-link" [routerLink]="['/registration']" role="button"
-                               data-toggle="modal"
+                            <a [routerLink]="['/registration']" class="page-scroll nav-link" data-toggle="modal"
+                               role="button"
                             >Sign Up
                             </a>
                         </li>
                     </ul>
 
-                    <ul class="nav navbar-nav" *ngIf="isLoggedIn">
+                    <ul *ngIf="isLoggedIn" class="nav navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link">{{ username }}</a>
                         </li>
                         <li class="nav-item">
-                            <a href class="nav-link" (click)="logout()">LogOut</a>
+                            <a (click)="logout()" class="nav-link" href>LogOut</a>
                         </li>
                     </ul>
                     <li *ngIf="getUserRole()=='ROLE_ADMIN'" class="nav-item dropdown" ngbDropdown>
                         <a
                                 class="nav-link" href="javascript:void(0)"
                                 ngbDropdownToggle>Admin menu</a>
-                        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+                        <div aria-labelledby="id01" class="dropdown-menu" ngbDropdownMenu>
                             <a [routerLink]="['/blog-admin']"
                                class="hvr-underline-from-center dropdown-item"
                                style="color: #58c1ff; margin-bottom: 5px;">Admin panel</a>

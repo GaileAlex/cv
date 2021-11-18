@@ -6,8 +6,8 @@
                 <div class="intro-text">
                     <span [innerHTML]="'start.page.greeting'|translate"></span>
                     <p>Java Web Developer</p>
-                    <a pageScroll href="#about"
-                       class="btn btn-default btn-lg page-scroll btn-wiggle">{{'start.page.button.more'|translate}}</a>
+                    <a class="btn btn-default btn-lg page-scroll btn-wiggle" href="#about"
+                       pageScroll>{{'start.page.button.more'|translate}}</a>
                 </div>
             </div>
         </div>
@@ -24,16 +24,16 @@
             <hr>
         </div>
         <div class="row justify-content-md-center">
-            <div class="col-md-12 text-center"><img src="assets/img/about.jpg" class="img-responsive"
-                                                    alt="Java Developer">
+            <div class="col-md-12 text-center"><img alt="Java Developer" class="img-responsive"
+                                                    src="assets/img/about.jpg">
             </div>
             <div class="col-md-8">
                 <div class="about-text">
                     <p [innerHTML]="'start.page.about.description'|translate">
                     </p>
-                    <p class="text-center"><a (click)="eventCv()" icon="fa fa-download" pButton label="Download Resume"
-                                              class="ui-button-raised"
-                                              href="assets/img/CV Aleksei Gaile.pdf"
+                    <p class="text-center"><a (click)="eventCv()" class="ui-button-raised" href="assets/img/CV Aleksei Gaile.pdf" icon="fa fa-download"
+                                              label="Download Resume"
+                                              pButton
                                               target="_blank"></a></p>
                 </div>
             </div>
@@ -42,7 +42,7 @@
 </div>
 
 <!-- Resume Section -->
-<div id="resume" class="text-center">
+<div class="text-center" id="resume">
     <div class="container">
         <div class="section-title center">
             <h2>{{'start.page.experience.experience'|translate}}</h2>
@@ -62,8 +62,8 @@
                                 <span [innerHTML]="'start.page.experience.job-3'|translate"></span>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-left text-14"
-                                   [innerHTML]="'start.page.experience.job-3.description'|translate"></p>
+                                <p [innerHTML]="'start.page.experience.job-3.description'|translate"
+                                   class="text-left text-14"></p>
                             </div>
                         </div>
                     </li>
@@ -78,8 +78,8 @@
                                 <span [innerHTML]="'start.page.experience.job-1'|translate"></span>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-left text-14"
-                                   [innerHTML]="'start.page.experience.job-1.description'|translate"></p>
+                                <p [innerHTML]="'start.page.experience.job-1.description'|translate"
+                                   class="text-left text-14"></p>
                             </div>
                         </div>
                     </li>
@@ -94,8 +94,8 @@
                                 <span [innerHTML]="'start.page.experience.job-2'|translate"></span>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-left text-14"
-                                   [innerHTML]="'start.page.experience.job-2.description'|translate"></p>
+                                <p [innerHTML]="'start.page.experience.job-2.description'|translate"
+                                   class="text-left text-14"></p>
                             </div>
                         </div>
                     </li>
@@ -106,7 +106,7 @@
 </div>
 
 <!-- Education Section-->
-<div id="education" class="text-center p_100">
+<div class="text-center p_100" id="education">
     <div class="container">
         <div class="section-title center">
             <h2>{{'start.page.education.education'|translate}}</h2>

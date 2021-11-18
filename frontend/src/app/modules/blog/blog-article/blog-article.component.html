@@ -8,8 +8,8 @@
                 <div class="blog_main_inner">
                     <div class="blog_main_item">
                         <div class="blog_img mx-auto text-center">
-                            <img class="img-thumbnail mx-auto d-block" src="{{ blog?.image }}"
-                                 alt="{{ blog?.headline }}"/>
+                            <img alt="{{ blog?.headline }}" class="img-thumbnail mx-auto d-block"
+                                 src="{{ blog?.image }}"/>
                             <div class="blog_date">
                                 <h4>{{ blog?.date | date:'dd.MM.yyyy' }}</h4>
                             </div>
@@ -24,21 +24,22 @@
                                     <h2>Comments</h2>
                                     <div class="form-group">
                                         <label for="comment">Write a comment <span>*</span></label>
-                                        <textarea class="form-control"
-                                                  rows="3"
-                                                  name="comment"
+                                        <textarea appFormControlValidationMsg
+                                                  class="form-control"
+                                                  formControlName="comment"
                                                   id="comment"
+                                                  name="comment"
                                                   required
-                                                  appFormControlValidationMsg
-                                                  validationMsgId="comment"
-                                                  formControlName="comment"></textarea>
+                                                  rows="3"
+                                                  validationMsgId="comment"></textarea>
                                     </div>
                                     <div>
-                                        <input type="hidden" name="articleId" id="blog"/>
+                                        <input id="blog" name="articleId" type="hidden"/>
                                         <button (click)="onSubmit();"
+                                                [validationControl]="inputForm"
                                                 appFormSubmitValidationMsg
-                                                class="btn btn-info"
-                                                [validationControl]="inputForm">Send</button>
+                                                class="btn btn-info">Send
+                                        </button>
                                         <br><br>
                                     </div>
                                 </form>
@@ -46,7 +47,7 @@
                                     <h2>Comments</h2>
                                     <div class="form-group">
                                         <label for="comment">Only authorized users can comment. <span>*</span></label>
-                                        <textarea class="form-control " rows="3" readonly></textarea>
+                                        <textarea class="form-control " readonly rows="3"></textarea>
                                     </div>
                                 </div>
                                 <div *ngFor="let comment of blog?.comments" class="tab-pane" id="Reviews">

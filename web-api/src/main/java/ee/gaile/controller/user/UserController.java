@@ -31,9 +31,8 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Tag(name = "UserController", description = "Controller for authorization and user registration")
 public class UserController {
-    private final UserService userService;
-
     private static final Logger ACCESS_LOG = LoggerFactory.getLogger("access-accounting-log");
+    private final UserService userService;
 
     @PostMapping(path = "/login")
     @Operation(summary = "Service for user authorization")

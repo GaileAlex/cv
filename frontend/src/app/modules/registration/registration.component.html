@@ -2,30 +2,30 @@
 
 <div class="d-flex justify-content-center align-items-center container p_150_top">
     <div class="row ">
-        <form *ngIf="!isSuccessful"
-              name="form"
+        <form #f="ngForm"
               (ngSubmit)="f.form.valid && onSubmit()"
-              #f="ngForm"
+              *ngIf="!isSuccessful"
+              name="form"
               novalidate>
             <div class="form-group">
                 <img
-                        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                        class="profile-img-card offset-5"/>
+                        class="profile-img-card offset-5"
+                        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
             </div>
             <div class="form-group">
-                <label for="inputUserName" class="control-label">Enter Username</label>
-                <input type="text"
-                       placeholder="Name"
+                <label class="control-label" for="inputUserName">Enter Username</label>
+                <input #username="ngModel"
+                       [(ngModel)]="form.username"
                        class="form-control"
                        id="inputUserName"
-                       name="username"
-                       [(ngModel)]="form.username"
-                       required
-                       minlength="3"
                        maxlength="20"
-                       #username="ngModel"
+                       minlength="3"
+                       name="username"
+                       placeholder="Name"
+                       required
+                       type="text"
                 />
-                <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+                <div *ngIf="f.submitted && username.invalid" class="alert-danger">
                     <div *ngIf="username.errors.required">Username is required</div>
                     <div *ngIf="username.errors.minlength">
                         Username must be at least 3 characters
@@ -37,18 +37,18 @@
             </div>
 
             <div class="form-group">
-                <label for="inputEmail" class="control-label">Enter Email</label>
-                <input type="email"
-                       placeholder="Email"
+                <label class="control-label" for="inputEmail">Enter Email</label>
+                <input #email="ngModel"
+                       [(ngModel)]="form.email"
                        class="form-control"
+                       email
                        id="inputEmail"
                        name="email"
-                       [(ngModel)]="form.email"
+                       placeholder="Email"
                        required
-                       email
-                       #email="ngModel"
+                       type="email"
                 />
-                <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+                <div *ngIf="f.submitted && email.invalid" class="alert-danger">
                     <div *ngIf="email.errors.required">Email is required</div>
                     <div *ngIf="email.errors.email">
                         Email must be a valid email address
@@ -56,19 +56,19 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputPassword" class="control-label">Enter Password</label>
+                <label class="control-label" for="inputPassword">Enter Password</label>
                 <input
-                        type="password"
-                        placeholder="Password"
+                        #password="ngModel"
+                        [(ngModel)]="form.password"
                         class="form-control"
                         id="inputPassword"
-                        name="password"
-                        [(ngModel)]="form.password"
-                        required
                         minlength="6"
-                        #password="ngModel"
+                        name="password"
+                        placeholder="Password"
+                        required
+                        type="password"
                 />
-                <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+                <div *ngIf="f.submitted && password.invalid" class="alert-danger">
                     <div *ngIf="password.errors.required">Password is required</div>
                     <div *ngIf="password.errors.minlength">
                         Password must be at least 6 characters
@@ -76,14 +76,14 @@
                 </div>
             </div>
             <div class="text-center">
-                <button pButton class="ui-button-raised" label="Sign Up"></button>
+                <button class="ui-button-raised" label="Sign Up" pButton></button>
             </div>
-            <div class="alert alert-danger" *ngIf="f.submitted && isSignUpFailed">
+            <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-danger">
                 Signup failed!<br/>{{ errorMessage }}
             </div>
         </form>
         <div class="p_150_top">
-            <div class="alert alert-success" *ngIf="isSuccessful">
+            <div *ngIf="isSuccessful" class="alert alert-success">
                 Your registration is successful!
             </div>
         </div>

@@ -9,12 +9,12 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <input
-                                    name="headline"
-                                    type="text"
                                     class="form-control"
-                                    placeholder="Headline"
                                     formControlName="headline"
-                                    required>
+                                    name="headline"
+                                    placeholder="Headline"
+                                    required
+                                    type="text">
                             <span class="validationError"></span>
                             <p class="help-block text-danger"></p>
                         </div>
@@ -22,35 +22,35 @@
                 </div>
                 <div class="form-group">
                     <textarea
-                            name="article"
                             class="form-control"
-                            rows="4"
-                            placeholder="The text of the article:"
                             formControlName="article"
-                            required></textarea>
+                            name="article"
+                            placeholder="The text of the article:"
+                            required
+                            rows="4"></textarea>
                     <span class="validationError"
 
                     ></span>
                     <p class="help-block text-danger"></p>
                 </div>
                 <!-- image input -->
-                <input accept=".jpg, .png, .gif, .tiff"
-                       required
-                       name="image"
-                       type="file"
+                <input (change)="onFileSelect($event)"
+                       accept=".jpg, .png, .gif, .tiff"
                        class="form-control-file"
                        formControlName="image"
-                       (change)="onFileSelect($event)">
+                       name="image"
+                       required
+                       type="file">
                 <span class="validationError"
                 >Image is required</span>
                 <div></div>
                 <br>
-                <button pButton
-                        label="Create article"
-                        class="ui-button-raised"
+                <button (click)="onSubmit()"
+                        [validationControl]="inputForm"
                         appFormSubmitValidationMsg
-                        (click)="onSubmit()"
-                        [validationControl]="inputForm"></button>
+                        class="ui-button-raised"
+                        label="Create article"
+                        pButton></button>
             </form>
         </div>
     </div>
@@ -64,7 +64,7 @@
                 <div class="blog_main_inner">
                     <div class="blog_main_item">
                         <div class="blog_img mx-auto text-center">
-                            <img class="img-thumbnail mx-auto d-block" alt=""/>
+                            <img alt="" class="img-thumbnail mx-auto d-block"/>
                             <div class="blog_date">
                                 <h4>29</h4>
                                 <h5>October, 2017</h5>
@@ -74,8 +74,8 @@
                             <a><h4>Headline</h4></a>
                             <p>Article.</p>
                             <form method="POST">
-                                <input type="hidden" name="deleteBlog"/>
-                                <button type="submit" class="btn btn-danger pull-right">Delete Blog</button>
+                                <input name="deleteBlog" type="hidden"/>
+                                <button class="btn btn-danger pull-right" type="submit">Delete Blog</button>
                             </form>
                             <a class="btn-port  page-scroll">Next news</a>
                             <div>
@@ -86,8 +86,8 @@
                                             <em>30/12/2013
                                                 - 07:37</em>
                                             <form method="POST">
-                                                <input type="hidden" name="deleteComment"/>
-                                                <button type="submit" class="btn btn-danger pull-right">Delete Comment
+                                                <input name="deleteComment" type="hidden"/>
+                                                <button class="btn btn-danger pull-right" type="submit">Delete Comment
                                                 </button>
                                             </form>
                                             <div></div>
