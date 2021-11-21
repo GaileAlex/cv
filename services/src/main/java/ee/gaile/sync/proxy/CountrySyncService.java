@@ -39,7 +39,6 @@ public class CountrySyncService implements SyncService {
         List<ProxyEntity> proxyEntities = proxyRepository.findAllWhereCountryUnknown();
 
         if (proxyEntities.isEmpty()) {
-            log.info("Proxy country sync. Size lists is null.");
             return;
         }
 
@@ -52,7 +51,7 @@ public class CountrySyncService implements SyncService {
                 try {
                     ResponseEntity<String> listResponseEntity = restTemplate
                             .exchange(IP_INFO_URL + proxyEntity.getIpAddress(), HttpMethod.GET, null,
-                                    new ParameterizedTypeReference<String>() {
+                                    new ParameterizedTypeReference<>() {
                                     });
                     String[] st = Objects.requireNonNull(listResponseEntity.getBody()).split("\",\\n");
 
