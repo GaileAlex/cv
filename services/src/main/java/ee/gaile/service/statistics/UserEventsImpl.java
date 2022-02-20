@@ -25,9 +25,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserEventsImpl implements UserEvents {
     private static final String USER_ID = "userId";
+    private static final long FIVE_MINUTE = 300000L;
 
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticEventRepository visitStatisticEventRepository;
+    private final UserStatisticsServiceImpl userStatisticsService;
 
     @Override
     public void setUserEvent(HttpServletRequest request) {
@@ -78,6 +80,11 @@ public class UserEventsImpl implements UserEvents {
             return;
         }
         long between = Duration.between(user.getLastEvent(), LocalDateTime.now()).toMillis();
+
+        if (between > FIVE_MINUTE) {
+            userStatisticsService.setStatistics(request);
+            return;
+        }
 
         user.setLastEvent(LocalDateTime.now());
 
