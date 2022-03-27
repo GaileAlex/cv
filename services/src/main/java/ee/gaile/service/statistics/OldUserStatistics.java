@@ -26,6 +26,7 @@ import java.util.Optional;
 @Transactional
 @AllArgsConstructor
 public class OldUserStatistics implements Statistics {
+    private static final String UNDEFINED = "undefined";
     private final VisitStatisticsRepository visitStatisticsRepository;
     private final VisitStatisticIpRepository visitStatisticIpRepository;
     private final VisitStatisticVisitDateRepository visitDateRepository;
@@ -45,16 +46,16 @@ public class OldUserStatistics implements Statistics {
                     .setLastEvent(LocalDateTime.now())
                     .setTotalVisits(oldUser.getTotalVisits() + 1L);
 
-            if (!request.getHeader("userCity").equals("undefined")) {
+            if (!UNDEFINED.equals(request.getHeader("userCity"))) {
                 oldUser.setUserCity(request.getHeader("userCity"));
             }
-            if (!request.getHeader("userCountry").equals("undefined")) {
+            if (!UNDEFINED.equals(request.getHeader("userCountry"))) {
                 oldUser.setUserLocation(request.getHeader("userCountry"));
             }
 
             visitStatisticsRepository.save(oldUser);
 
-            if (!request.getHeader("userIP").equals("undefined")) {
+            if (!UNDEFINED.equals(request.getHeader("userIP"))) {
                 VisitStatisticUserIpEntity oldUserIp = new VisitStatisticUserIpEntity();
                 oldUserIp.setUserIp(request.getHeader("userIP"));
                 oldUserIp.setVisitStatistics(oldUser);
