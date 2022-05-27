@@ -23,7 +23,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Service
 @RequiredArgsConstructor
 public class ProxyListService implements SyncService {
-    private static final int THREAD_POOL = 80;
+    private static final int THREAD_POOL = 120;
     private static final int ALLOWABLE_PROXY = 120;
     private static final int NUMBER_UNANSWERED_CHECKS = 50;
 

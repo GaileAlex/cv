@@ -24,7 +24,7 @@ public class ProxyCheckSyncService {
     private static final String FILE_URL = "http://ipv4.ikoula.testdebit.info/10M.iso";
     private static final String GOOGLE_URL = "http://www.google.com";
     private static final Double FILE_SIZE = 10_000_000.0;
-    private static final Integer TIMEOUT = 60_000;
+    private static final Integer TIMEOUT = 120_000;
 
     private final ProxyRepository proxyRepository;
 
