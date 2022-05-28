@@ -1,5 +1,6 @@
 package ee.gaile.service.blog;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ee.gaile.entity.blog.BlogEntity;
 import ee.gaile.entity.blog.CommentEntity;
 import ee.gaile.models.blog.BlogWrapper;
@@ -7,7 +8,6 @@ import ee.gaile.models.blog.CommentWrapper;
 import ee.gaile.repository.blog.BlogRepository;
 import ee.gaile.repository.blog.CommentsRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ import java.util.*;
 public class BlogServiceImpl implements BlogService {
     private final BlogRepository blogRepository;
     private final CommentsRepository commentsRepository;
-    private final ModelMapper modelMapper = new ModelMapper();
+    private final ObjectMapper modelMapper;
 
     @Override
     public List<BlogWrapper> findAllBlogs() {
@@ -64,7 +64,7 @@ public class BlogServiceImpl implements BlogService {
      * @return - BlogWrapper
      */
     private BlogWrapper toDto(BlogEntity blog) {
-        BlogWrapper blogWrapper = modelMapper.map(blog, BlogWrapper.class);
+        BlogWrapper blogWrapper = modelMapper.convertValue(blog, BlogWrapper.class);
         blogWrapper.setImage("data:image/png;base64," + Base64.getEncoder().encodeToString(blog.getImage()));
 
         return blogWrapper;
