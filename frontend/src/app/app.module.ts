@@ -112,7 +112,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatInputModule,
         MatNativeDateModule,
         ReactiveFormsModule,
-        RouterModule.forRoot(routes),
+        RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
         NgbModule,
         LightboxModule,
         StickyNavModule,
