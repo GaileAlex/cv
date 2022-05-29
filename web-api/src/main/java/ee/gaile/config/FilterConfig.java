@@ -1,6 +1,5 @@
 package ee.gaile.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.RequestContextFilter;
 
@@ -12,7 +11,6 @@ import java.io.IOException;
 /**
  * @author Aleksei Gaile 28-May-22
  */
-@Slf4j
 @Component
 public class FilterConfig extends RequestContextFilter {
 
@@ -24,7 +22,6 @@ public class FilterConfig extends RequestContextFilter {
             throws IOException, ServletException {
         String userId = request.getHeader("userId");
         if (ADMIN_ID.equals(userId)) {
-            log.info("admin");
             return;
         }
 
