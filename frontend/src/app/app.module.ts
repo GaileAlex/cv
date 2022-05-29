@@ -22,13 +22,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { defineLocale, enGbLocale, ruLocale } from 'ngx-bootstrap/chronos';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatNativeDateModule
-} from '@angular/material';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
@@ -59,6 +52,11 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { ErrorModalComponent } from "./components/error-modal/error-modal.component";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatNativeDateModule } from "@angular/material/core";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
