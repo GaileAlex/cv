@@ -74,9 +74,9 @@ public class UserEventsImpl implements UserEvents {
     private void setEvent(HttpServletRequest request, String sessionId) {
         Optional<VisitStatisticsEntity> visitStatisticsByNameOptional =
                 visitStatisticsRepository.findBySessionId(sessionId);
-        VisitStatisticsEntity user = visitStatisticsByNameOptional.orElseThrow(NullPointerException::new);
+        VisitStatisticsEntity user = visitStatisticsByNameOptional.orElse(null);
 
-        if (user.getLastEvent() == null) {
+        if (user == null || user.getLastEvent() == null) {
             return;
         }
         long between = Duration.between(user.getLastEvent(), LocalDateTime.now()).toMillis();
