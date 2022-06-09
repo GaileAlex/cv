@@ -42,7 +42,9 @@
       "job-3": "<h4>\"АРТ-БАНК\" </h4>\n <h4 class=\"subheading\">Java Developer</h4>",
       "job-3.description": "<br>\n - Удаленная работа<br><br>\n - Разработка с \"нуля\" приложения для управления тарификацией и тарификации транзакций.<br><br>\n - Работа на проектах банка ВТБ<br><br>\n- Стек проектов:<br>\n Java 11, Spring Boot, Kafka, Hibernate / JPA, Ehcache, PostgreSQL, Liquibase, Flyway, Docker, Maven.<br><br> - Создание архитектуры<br>- Разработка нового функционала приложения<br>- Разработка Rest - сервисов<br>- SQL - запросы к базам данных.<br>- Интеграционные и юнит-тесты с использованием junit, mockito.<br>- Создание библиотек к Spring проектам<br>- Помощь и обучение других разработчиков<br><br>",
       "job-4": "<h4>\"ALIDI Group\" </h4>\n <h4 class=\"subheading\">Java Developer</h4>",
-      "job-4.description": "<br>\n - Удаленная работа<br><br>\n - Разработка и поддержка корпоративного продукта - alidi.ru.<br><br>- Стек проекта:<br>Java 11, Spring Boot, Redis, Ehcache, Hibernate / JPA, PostgreSQL, Elasticsearch, Flyway, Docker, Maven, Apache Tomcat.<br><br> - Общение с бизнес-командой и группой тестирования.<br>- Онбординг новых разработчиков<br>- Разработка нового функционала<br>- Написание кода SQL и поддержка базы данных.<br><br>"
+      "job-4.description": "<br>\n - Удаленная работа<br><br>\n - Разработка и поддержка корпоративного продукта - alidi.ru.<br><br>- Стек проекта:<br>Java 11, Spring Boot, Redis, Ehcache, Hibernate / JPA, PostgreSQL, Elasticsearch, Flyway, Docker, Maven, Apache Tomcat.<br><br> - Общение с бизнес-командой и группой тестирования.<br>- Онбординг новых разработчиков<br>- Разработка нового функционала<br>- Написание кода SQL и поддержка базы данных.<br><br>",
+      "job-5": "<h4>\"Gamesys\" </h4>\n <h4 class=\"subheading\">Software Engineer</h4>",
+      "job-5.description": "<br>\n - <br><br>"
     },
     "education": {
       "education": "Образование",

@@ -42,7 +42,9 @@
       "job-3": "<h4>\"ART-BANK\" </h4>\n <h4 class=\"subheading\">Java Developer</h4>",
       "job-3.description": "<br>\n - Remote work<br><br>\n - Development \"from scratch\" of an application for managing tariffs and billing of transactions.<br><br>\n - Work on VTB Bank projects<br><br>- Project stack:<br>Java 11, Spring Boot, Kafka, Hibernate / JPA, Ehcache, PostgreSQL, Liquibase, Flyway, Docker, Maven.<br><br> - Creation of architecture<br>- Development of new functionality of the application<br>- Development of Rest - services<br>- SQL - queries to databases.<br>- Integration and unit tests using junit, mockito.<br>- Creation of libraries for Spring projects<br>- Help and training of other developers<br><br>",
       "job-4": "<h4>\"ALIDI Group\" </h4>\n <h4 class=\"subheading\">Java Developer</h4>",
-      "job-4.description": "<br>\n - Remote work<br><br>\n - Development and support of an enterprise product - alidi.ru.<br><br>- Project stack:<br>Java 11, Spring Boot, Redis, Ehcache, Hibernate / JPA, PostgreSQL, Elasticsearch, Flyway, Docker, Maven, Apache Tomcat.<br><br> - Communicating with business and testing team<br>- Onboard new developers<br>- Developing new functionality<br>- Writing SQL code and maintaining database.<br><br>"
+      "job-4.description": "<br>\n - Remote work<br><br>\n - Development and support of an enterprise product - alidi.ru.<br><br>- Project stack:<br>Java 11, Spring Boot, Redis, Ehcache, Hibernate / JPA, PostgreSQL, Elasticsearch, Flyway, Docker, Maven, Apache Tomcat.<br><br> - Communicating with business and testing team<br>- Onboard new developers<br>- Developing new functionality<br>- Writing SQL code and maintaining database.<br><br>",
+      "job-5": "<h4>\"Gamesys\" </h4>\n <h4 class=\"subheading\">Software Engineer</h4>",
+      "job-5.description": "<br>\n - <br><br>"
     },
     "education": {
       "education": "Education",
