@@ -12,23 +12,27 @@ export class ProxyListComponent {
     total: number;
     page = 0;
     pageSize = 10;
+    padding = '100px';
 
     constructor(private proxyService: ProxyService) {
         window.scrollTo(0, 0);
 
-        this.proxyService.findAll(this.pageSize, this.page).subscribe(data => {
-            this.proxyList = data.proxyLists;
-            this.total = data.total;
-        }, error => {
-            this.proxyList = error;
-        });
-
+        this.findAllProxies(this.pageSize, this.page)
     }
 
     changePage(event) {
-        this.proxyService.findAll(this.pageSize, event.pageIndex).subscribe(data => {
+        this.findAllProxies(this.pageSize, event.pageIndex)
+    }
+
+    findAllProxies(pageSize, pageIndex) {
+        this.proxyService.findAll(pageSize, pageIndex).subscribe(data => {
             this.proxyList = data.proxyLists;
             this.total = data.total;
+            if (this.proxyList.length < 5) {
+                this.padding = '200px';
+            } else {
+                this.padding = '100px';
+            }
         }, error => {
             this.proxyList = error;
         });

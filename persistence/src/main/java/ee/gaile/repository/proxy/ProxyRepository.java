@@ -20,7 +20,7 @@ public interface ProxyRepository extends JpaRepository<ProxyEntity, Long> {
             " where speed > 0 ", nativeQuery = true)
     Long getTotalAliveProxies();
 
-    @Query(value = "with data as (select id from proxy_list where speed > 0 limit 100)" +
+    @Query(value = "with data as (select id from proxy_list where speed > 0)" +
             " select count(id) from data", nativeQuery = true)
     Long getTotalAliveProxiesLimit();
 
