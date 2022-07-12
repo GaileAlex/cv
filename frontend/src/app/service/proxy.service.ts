@@ -19,5 +19,9 @@ export class ProxyService {
         return this.http.get<ProxyList>(this.PROXY_URL + `/list` + '/' + pageSize + '/' + page);
     }
 
+    public start(): any  {
+        return this.http.post(this.PROXY_URL, {}).subscribe((result) => {
+        });;
+    }
 
 }

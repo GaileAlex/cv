@@ -5,6 +5,7 @@ import ee.gaile.models.proxy.Proxy;
 import ee.gaile.models.proxy.ProxyListWrapper;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.service.utils.MapperUtils;
+import ee.gaile.sync.SyncStartService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ProxyServiceImpl implements ProxyService {
     private final ProxyRepository proxyRepository;
+
+    private final SyncStartService syncStartService;
     private final MapperUtils mapperUtils;
 
     public ProxyListWrapper getProxy(Integer pageSize, Integer page) {
@@ -31,6 +34,10 @@ public class ProxyServiceImpl implements ProxyService {
         responseWrapper.setTotal(proxyRepository.getTotalAliveProxiesLimit());
 
         return responseWrapper;
+    }
+
+    public void start(){
+        syncStartService.syncProxy();
     }
 
 }

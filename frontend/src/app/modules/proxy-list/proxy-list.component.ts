@@ -37,4 +37,8 @@ export class ProxyListComponent {
             this.proxyList = error;
         });
     }
+
+    start(){
+        this.proxyService.start();
+    }
 }

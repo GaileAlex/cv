@@ -25,7 +25,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ProxyListService implements SyncService {
     private static final int THREAD_POOL = 200;
     private static final int ALLOWABLE_PROXY = 100;
-    private static final int NUMBER_UNANSWERED_CHECKS = 50;
+    private static final int NUMBER_UNANSWERED_CHECKS = 10;
 
     private final ProxyRepository proxyRepository;
     private final NewProxyService newProxyService;

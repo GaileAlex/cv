@@ -16,4 +16,6 @@ public interface ProxyService {
      */
     ProxyListWrapper getProxy(Integer pageSize, Integer page);
 
+    void start();
+
 }

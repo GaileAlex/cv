@@ -7,10 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 
@@ -31,6 +28,13 @@ public class ProxyController {
     public ResponseEntity<ProxyListWrapper> getGraphData(@PathVariable(value = "pageSize") Integer pageSize,
                                                          @PathVariable(value = "page") Integer page) {
         return new ResponseEntity<>(proxyService.getProxy(pageSize, page), HttpStatus.OK);
+    }
+
+    @PostMapping()
+    @Operation(summary = "Start synchronize proxies")
+    public ResponseEntity<Void> start() {
+        proxyService.start();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
