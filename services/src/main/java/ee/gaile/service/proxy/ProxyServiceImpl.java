@@ -24,6 +24,7 @@ public class ProxyServiceImpl implements ProxyService {
     private final ProxyRepository proxyRepository;
 
     private final SyncStartService syncStartService;
+
     private final MapperUtils mapperUtils;
 
     public ProxyListWrapper getProxy(Integer pageSize, Integer page) {

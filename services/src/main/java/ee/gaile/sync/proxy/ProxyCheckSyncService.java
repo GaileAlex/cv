@@ -22,9 +22,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ProxyCheckSyncService {
     private static final String FILE_URL = "http://ipv4.ikoula.testdebit.info/10M.iso";
-    private static final String GOOGLE_URL = "http://www.google.com";
+    private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 10_000_000.0;
-    private static final Integer TIMEOUT = 120_000;
+    private static final Integer TIMEOUT = 60_000;
 
     private final ProxyRepository proxyRepository;
 
@@ -70,7 +70,7 @@ public class ProxyCheckSyncService {
 
             proxyRepository.save(proxyEntity);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             double uptime = getUptime(proxyEntity);
             proxyEntity.setUptime(uptime);
             proxyEntity.setSpeed(0.0);
@@ -133,10 +133,7 @@ public class ProxyCheckSyncService {
 
     private boolean checkInternetConnection() {
         try {
-            URL url = new URL(GOOGLE_URL);
-            URLConnection connection = url.openConnection();
-            connection.connect();
-            return true;
+            return InetAddress.getByName(GOOGLE_URL).getHostName().equals(GOOGLE_URL);
         } catch (IOException e) {
             return false;
         }
