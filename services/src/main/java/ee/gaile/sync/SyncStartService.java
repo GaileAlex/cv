@@ -37,6 +37,10 @@ public class SyncStartService {
         proxyListService.sync();
     }
 
+    public void manualSyncProxy() {
+        proxyListService.sync();
+    }
+
     /**
      * Starts synchronization of unknown proxy countries
      */

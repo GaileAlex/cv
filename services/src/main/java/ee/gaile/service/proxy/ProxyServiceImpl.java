@@ -37,7 +37,7 @@ public class ProxyServiceImpl implements ProxyService {
     }
 
     public void start(){
-        syncStartService.syncProxy();
+        syncStartService.manualSyncProxy();
     }
 
 }
