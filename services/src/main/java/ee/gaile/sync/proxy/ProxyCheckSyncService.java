@@ -63,7 +63,7 @@ public class ProxyCheckSyncService {
             socksConnection.disconnect();
             inputStream.close();
 
-            proxyEntity.setSpeed(checkSpeed(startFile, LocalDateTime.now(), proxyEntity.getId()));
+            proxyEntity.setSpeed(checkSpeed(startFile, LocalDateTime.now()));
             proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
             double uptime = getUptime(proxyEntity);
             proxyEntity.setUptime(uptime);
@@ -120,7 +120,7 @@ public class ProxyCheckSyncService {
      * @param now   - download end time
      * @return Double - file download speed
      */
-    private Double checkSpeed(LocalDateTime start, LocalDateTime now, Long id) {
+    private Double checkSpeed(LocalDateTime start, LocalDateTime now) {
         long duration = Duration.between(start.toLocalTime(), now).toMillis();
         double speed = FILE_SIZE / duration;
 
