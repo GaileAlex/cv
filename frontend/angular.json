@@ -26,7 +26,7 @@
               "src/assets",
               "src/.htaccess",
               "src/.well-known/pki-validation/5D399DAAE57B52052B78076EC45D88E4.txt",
-              "src/assets/1M.iso"
+              "src/assets/10M.iso"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",

@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Service
 @AllArgsConstructor
 public class ProxyCheckSyncService {
-    private static final String FILE_URL = "http://ipv4.ikoula.testdebit.info/10M.iso";
+    private static final String FILE_URL = "http://gaile.ml/assets/1M.iso";
     private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 10_000_000.0;
     private static final Integer TIMEOUT = 60_000;
@@ -36,6 +36,7 @@ public class ProxyCheckSyncService {
     @SuppressWarnings("StatementWithEmptyBody")
     public void checkProxy(ProxyEntity proxyEntity) {
         if (!checkInternetConnection()) {
+            log.warn("Internet connection lost");
             return;
         }
 
@@ -124,8 +125,7 @@ public class ProxyCheckSyncService {
         double speed = FILE_SIZE / duration;
 
         if (Double.isInfinite(speed)) {
-            log.info("proxy speed is infinite. ID is {}", id);
-            return 0.0;
+            return 50000.0;
         }
 
         return speed;
