@@ -36,7 +36,6 @@ public class ProxyCheckSyncService {
     @SuppressWarnings("StatementWithEmptyBody")
     public void checkProxy(ProxyEntity proxyEntity) {
         if (!checkInternetConnection()) {
-            log.warn("Internet connection lost");
             return;
         }
 

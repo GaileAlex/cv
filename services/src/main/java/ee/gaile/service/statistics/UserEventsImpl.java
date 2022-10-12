@@ -50,7 +50,7 @@ public class UserEventsImpl implements UserEvents {
         Optional<VisitStatisticsEntity> visitStatistics =
                 visitStatisticsRepository.findBySessionId(request.getHeader(USER_ID));
 
-        VisitStatisticsEntity user = visitStatistics.orElseThrow(NullPointerException::new);
+        VisitStatisticsEntity user = visitStatistics.orElse(new VisitStatisticsEntity());
 
         LocalDateTime userEntry = user.getLastVisit();
         LocalDateTime userOut = LocalDateTime.now();

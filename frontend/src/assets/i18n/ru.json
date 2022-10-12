@@ -42,7 +42,7 @@
       "job-3": "<h4>\"АРТ-БАНК\" </h4>\n <h4 class=\"subheading\">Java Developer</h4>",
       "job-3.description": "<br>\n - Удаленная работа<br><br>\n - Разработка с \"нуля\" приложения для управления тарификацией и тарификации транзакций.<br><br>\n - Работа на проектах банка ВТБ<br><br>\n- Стек проектов:<br>\n Java 11, Spring Boot, Kafka, Hibernate / JPA, Ehcache, PostgreSQL, Liquibase, Flyway, Docker, Maven, Redis, Ehcache, Elasticsearch, Apache Tomcat.<br><br>- Взаимодействие с бизнес-командой и командой тестирования<br> - Создание архитектуры<br>- Разработка нового функционала приложения<br>- Разработка Rest - сервисов<br>- SQL - запросы к базам данных.<br>- Интеграционные и юнит-тесты с использованием junit, mockito.<br>- Создание библиотек к Spring проектам<br>- Помощь и обучение других разработчиков<br><br>",
       "job-5": "<h4>\"Gamesys\" </h4>\n <h4 class=\"subheading\">Software Engineer</h4>",
-      "job-5.description": "<br>\n - <br><br>"
+      "job-5.description": "<br> - Стек проектов:<br>Java 8 - 11, Spring Boot, Spring, PostgreSQL, Liquibase, Docker, Maven, Gradle, Splunk, GoCD, Kubernetes, Terraform, SoapUI.<br><br> - Разпаботка нового функционала.<br>- Решение текущих задач в различном технологическом стеке.<br>- Поддержка текущей функциональности.<br>- SQL - запросы к базам данных.<br>- Интеграционное и Unit - тестирование с использованием junit, mockito<br><br>"
     },
     "education": {
       "education": "Образование",
