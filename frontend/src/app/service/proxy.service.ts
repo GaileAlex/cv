@@ -19,9 +19,14 @@ export class ProxyService {
         return this.http.get<ProxyList>(this.PROXY_URL + `/list` + '/' + pageSize + '/' + page);
     }
 
-    public start(): any  {
+    public startChecking(): any  {
         return this.http.post(this.PROXY_URL, {}).subscribe((result) => {
-        });;
+        });
+    }
+
+    public addProxy(): any  {
+        return this.http.post(this.PROXY_URL +`/add-new`, {}).subscribe((result) => {
+        });
     }
 
 }

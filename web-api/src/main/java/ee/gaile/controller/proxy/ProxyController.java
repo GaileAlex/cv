@@ -2,6 +2,7 @@ package ee.gaile.controller.proxy;
 
 import ee.gaile.models.proxy.ProxyListWrapper;
 import ee.gaile.service.proxy.ProxyService;
+import ee.gaile.sync.proxy.NewProxyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
 @Tag(name = "ProxyController", description = "Controller for getting proxies")
 public class ProxyController {
     private final ProxyService proxyService;
+    private final NewProxyService newProxyService;
 
     @GetMapping(path = "/list/{pageSize}/{page}")
     @Operation(summary = "Service for displaying a list of proxies")
@@ -32,8 +34,15 @@ public class ProxyController {
 
     @PostMapping()
     @Operation(summary = "Start synchronize proxies")
-    public ResponseEntity<Void> start() {
+    public ResponseEntity<Void> startChecking() {
         proxyService.start();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/add-new")
+    @Operation(summary = "Add new proxies")
+    public ResponseEntity<Void> setNewProxy() {
+        newProxyService.setNewProxy();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -38,7 +38,11 @@ export class ProxyListComponent {
         });
     }
 
-    start(){
-        this.proxyService.start();
+    startChecking() {
+        this.proxyService.startChecking();
+    }
+
+    addProxy() {
+        this.proxyService.addProxy();
     }
 }

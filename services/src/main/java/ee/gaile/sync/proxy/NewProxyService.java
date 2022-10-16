@@ -71,7 +71,7 @@ public class NewProxyService {
                     }
                 }
             } catch (IOException | NumberFormatException e) {
-                log.error("Site connection error {} ", proxySite.getUrl());
+                log.warn("Site connection error {} ", proxySite.getUrl());
             }
         }
 
