@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../../../models/blog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogAdminService } from '../../../service/blog-admin.service';
 
@@ -11,10 +11,10 @@ import { BlogAdminService } from '../../../service/blog-admin.service';
 })
 export class BlogAdminComponent implements OnInit {
     blog: Blog;
-    inputForm: FormGroup;
+    inputForm: UntypedFormGroup;
     image: File;
 
-    constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
+    constructor(private route: ActivatedRoute, private router: Router, private formBuilder: UntypedFormBuilder,
                 private blogAdminService: BlogAdminService) {
     }
 

@@ -4,7 +4,7 @@ import { Blog } from '../../../models/blog';
 import { Comment } from '../../../models/comment';
 import { BlogService } from '../../../service/blog.service';
 import { AuthService } from '../../../service/auth/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserDataService } from '../../../service/user-data.service';
 
 @Component({
@@ -15,13 +15,13 @@ import { UserDataService } from '../../../service/user-data.service';
 export class BlogArticleComponent implements OnInit {
     isLoggedIn: boolean;
     blog: Blog;
-    inputForm: FormGroup;
+    inputForm: UntypedFormGroup;
     comment: Comment;
     comments: Comment[];
     id = this.router.snapshot.params.id;
 
     constructor(private router: ActivatedRoute, private blogService: BlogService, private authService: AuthService,
-                private formBuilder: FormBuilder, private userDataService: UserDataService) {
+                private formBuilder: UntypedFormBuilder, private userDataService: UserDataService) {
     }
 
     ngOnInit() {
