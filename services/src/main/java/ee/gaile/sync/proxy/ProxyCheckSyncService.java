@@ -6,11 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.*;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Service for checking proxy for availability
@@ -21,7 +23,7 @@ import java.time.LocalDateTime;
 @Service
 @AllArgsConstructor
 public class ProxyCheckSyncService {
-    private static final String FILE_URL = "http://gaile.ml/assets/1M.iso";
+    private static final String FILE_URL = "https://gaile.ml/assets/10M.iso";
     private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 10_000_000.0;
     private static final Integer TIMEOUT = 60_000;
@@ -33,7 +35,6 @@ public class ProxyCheckSyncService {
      *
      * @param proxyEntity - proxy
      */
-    @SuppressWarnings("StatementWithEmptyBody")
     public void checkProxy(ProxyEntity proxyEntity) {
         if (!checkInternetConnection()) {
             return;
@@ -43,26 +44,23 @@ public class ProxyCheckSyncService {
                 new InetSocketAddress(proxyEntity.getIpAddress(), proxyEntity.getPort()));
 
         try {
-            URL fileUrl = new URL(FILE_URL);
             LocalDateTime startConnection = LocalDateTime.now();
 
-            HttpURLConnection socksConnection = (HttpURLConnection) fileUrl.openConnection(socksProxy);
+            URLConnection socksConnection = new URL(FILE_URL)
+                    .openConnection(socksProxy);
             socksConnection.setConnectTimeout(TIMEOUT);
             socksConnection.setReadTimeout(TIMEOUT);
-            socksConnection.getResponseCode();
 
             proxyEntity.setResponse(Duration.between(startConnection.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
 
-            LocalDateTime startFile = LocalDateTime.now();
+            Instant startFile = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
             InputStream inputStream = socksConnection.getInputStream();
 
-            byte[] buffer = new byte[8 * 1024];
-            while ((inputStream.read(buffer)) != -1) ;
+            socksConnection.getInputStream();
 
-            socksConnection.disconnect();
             inputStream.close();
 
-            proxyEntity.setSpeed(checkSpeed(startFile, LocalDateTime.now()));
+            proxyEntity.setSpeed(checkSpeed(startFile));
             proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
             double uptime = getUptime(proxyEntity);
             proxyEntity.setUptime(uptime);
@@ -71,21 +69,25 @@ public class ProxyCheckSyncService {
             proxyRepository.save(proxyEntity);
 
         } catch (Exception e) {
-            double uptime = getUptime(proxyEntity);
-            proxyEntity.setUptime(uptime);
-            proxyEntity.setSpeed(0.0);
-            proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
-
-            if (proxyEntity.getNumberUnansweredChecks() != null) {
-                proxyEntity.setNumberUnansweredChecks(proxyEntity.getNumberUnansweredChecks() + 1);
-            } else {
-                proxyEntity.setNumberUnansweredChecks(1);
-            }
-
-            proxyEntity.setLastChecked(LocalDateTime.now());
-
-            proxyRepository.save(proxyEntity);
+            saveUnansweredCheck(proxyEntity);
         }
+    }
+
+    private void saveUnansweredCheck(ProxyEntity proxyEntity) {
+        double uptime = getUptime(proxyEntity);
+        proxyEntity.setUptime(uptime);
+        proxyEntity.setSpeed(0.0);
+        proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
+
+        if (proxyEntity.getNumberUnansweredChecks() != null) {
+            proxyEntity.setNumberUnansweredChecks(proxyEntity.getNumberUnansweredChecks() + 1);
+        } else {
+            proxyEntity.setNumberUnansweredChecks(1);
+        }
+
+        proxyEntity.setLastChecked(LocalDateTime.now());
+
+        proxyRepository.save(proxyEntity);
     }
 
     /**
@@ -96,7 +98,7 @@ public class ProxyCheckSyncService {
      */
     private Double getUptime(ProxyEntity proxyEntity) {
         Integer numberChecks = proxyEntity.getNumberChecks();
-        Integer numberUnansweredChecks;
+        int numberUnansweredChecks;
         if (proxyEntity.getNumberUnansweredChecks() == null) {
             numberUnansweredChecks = 0;
         } else {
@@ -116,11 +118,11 @@ public class ProxyCheckSyncService {
      * Sets the download speed of the file
      *
      * @param start -download start time
-     * @param now   - download end time
      * @return Double - file download speed
      */
-    private Double checkSpeed(LocalDateTime start, LocalDateTime now) {
-        long duration = Duration.between(start.toLocalTime(), now).toMillis();
+    private Double checkSpeed(Instant start) {
+        Instant now = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
+        long duration = ChronoUnit.MILLIS.between(start, now);
         double speed = FILE_SIZE / duration;
 
         if (Double.isInfinite(speed)) {
