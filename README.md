@@ -7,7 +7,7 @@
 Portfolio website, the following technologies used Spring boot, Spring Security, Angular, Hibernate, PostgreSQL, Docker,
 Liquibase, Maven.
 
-URL - https://gaile.ml
+URL - https://gaile.ee
 
 ## Prerequisites
 
