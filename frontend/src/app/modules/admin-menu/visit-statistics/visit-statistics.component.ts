@@ -97,7 +97,7 @@ export class VisitStatisticsComponent implements OnInit {
 
     sendRequest(pageIndex) {
         let date = new Date();
-        date.setMonth(date.getMonth() - 1);
+        date.setMonth(date.getMonth() - 2);
         const fromDate = new Date(date.getFullYear(), date.getMonth(), 1);
         let toDate = new Date();
         this.statisticsService.findAll(this.formatDate(fromDate), this.formatDate(toDate), this.pageSize, pageIndex).subscribe(data => {
