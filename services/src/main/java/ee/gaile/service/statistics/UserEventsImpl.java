@@ -58,6 +58,7 @@ public class UserEventsImpl implements UserEvents {
         try {
             long between = Duration.between(userEntry, userOut).toMillis();
             user.setTotalTimeOnSite(user.getTotalTimeOnSite() + between);
+            visitStatisticsRepository.save(user);
         } catch (NullPointerException e) {
             log.warn("userEntry is null");
         }
