@@ -55,12 +55,11 @@ public class UserEventsImpl implements UserEvents {
         LocalDateTime userEntry = user.getLastVisit();
         LocalDateTime userOut = LocalDateTime.now();
 
-        long between = Duration.between(userEntry, userOut).toMillis();
-
         try {
+            long between = Duration.between(userEntry, userOut).toMillis();
             user.setTotalTimeOnSite(user.getTotalTimeOnSite() + between);
         } catch (NullPointerException e) {
-            user.setTotalTimeOnSite(between);
+            log.warn("userEntry is null");
         }
 
     }
