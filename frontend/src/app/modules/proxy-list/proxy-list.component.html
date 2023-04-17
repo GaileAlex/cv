@@ -36,8 +36,8 @@
                            [pageSize]="pageSize"
                            [showFirstLastButtons]="true">
             </mat-paginator>
-            <p-button label="Add proxy" (click)="addProxy()"></p-button>
-            <p-button label="Start checking" (click)="startChecking()"></p-button>
+            <p-button *ngIf="getUserRole()=='ROLE_ADMIN'" label="Add proxy" (click)="addProxy()"></p-button>
+            <p-button *ngIf="getUserRole()=='ROLE_ADMIN'" label="Start checking" (click)="startChecking()"></p-button>
         </div>
     </div>
 </div>

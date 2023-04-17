@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProxyService } from "../../service/proxy.service";
 import { ProxyLists } from "../../models/proxyLists";
+import { UserDataService } from "../../service/user-data.service";
 
 @Component({
     selector: 'app-proxy-list',
@@ -14,7 +15,8 @@ export class ProxyListComponent {
     pageSize = 10;
     padding = '100px';
 
-    constructor(private proxyService: ProxyService) {
+    constructor(private proxyService: ProxyService,
+                private userDataService: UserDataService) {
         window.scrollTo(0, 0);
 
         this.findAllProxies(this.pageSize, this.page)
@@ -44,5 +46,9 @@ export class ProxyListComponent {
 
     addProxy() {
         this.proxyService.addProxy();
+    }
+
+    getUserRole() {
+        return this.userDataService.getUserRole();
     }
 }
