@@ -23,9 +23,9 @@ import java.time.temporal.ChronoUnit;
 @Service
 @AllArgsConstructor
 public class ProxyCheckSyncService {
-    private static final String FILE_URL = "https://gaile.ee/assets/10M.iso";
+    private static final String FILE_URL = "https://gaile.ee/assets/1M.iso";
     private static final String GOOGLE_URL = "google.com";
-    private static final Double FILE_SIZE = 10_000_000.0;
+    private static final Double FILE_SIZE = 1_000_000.0;
     private static final Integer TIMEOUT = 60_000;
 
     private final ProxyRepository proxyRepository;
@@ -36,10 +36,6 @@ public class ProxyCheckSyncService {
      * @param proxyEntity - proxy
      */
     public void checkProxy(ProxyEntity proxyEntity) {
-        if (!checkInternetConnection()) {
-            return;
-        }
-
         Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
                 new InetSocketAddress(proxyEntity.getIpAddress(), proxyEntity.getPort()));
 
