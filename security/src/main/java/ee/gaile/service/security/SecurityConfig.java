@@ -53,6 +53,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), loginService))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+/*        http
+                .csrf().disable()
+                .requestCache().disable()
+                .httpBasic().disable()
+                .logout().disable()
+                .authorizeRequests()
+                .antMatchers(NO_SECURITY_RESOURCE_PATTERNS).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilter(headerAuthFilter())
+                .addFilter(paramAuthFilter())
+                .exceptionHandling()
+                .accessDeniedHandler(jsonAccessDeniedHandler())
+                .authenticationEntryPoint(jsonAuthenticationEntryPoint());*/
+
     }
 
     @Bean
