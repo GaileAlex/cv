@@ -54,6 +54,11 @@ public class ProxyEntity {
     @JsonIgnore
     private LocalDateTime firstChecked;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "last_successful_check")
+    @JsonIgnore
+    private LocalDateTime lastSuccessfulCheck;
+
     @Column(name = "number_checks")
     @JsonIgnore
     private Integer numberChecks;

@@ -61,6 +61,7 @@ public class ProxyCheckSyncService {
             double uptime = getUptime(proxyEntity);
             proxyEntity.setUptime(uptime);
             proxyEntity.setLastChecked(LocalDateTime.now());
+            proxyEntity.setLastSuccessfulCheck(LocalDateTime.now());
 
             proxyRepository.save(proxyEntity);
 

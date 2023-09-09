@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -26,6 +27,7 @@ public class ProxyListService implements SyncService {
     private static final int THREAD_POOL = 50;
     private static final int ALLOWABLE_PROXY = 150;
     private static final int NUMBER_UNANSWERED_CHECKS = 10;
+    private static final int ONE_MONTH = 30;
 
     private final ProxyRepository proxyRepository;
     private final NewProxyService newProxyService;
@@ -74,7 +76,9 @@ public class ProxyListService implements SyncService {
             proxyRepository.save(proxyEntity);
         }
 
-        if (proxyEntity.getUptime() == 0 && proxyEntity.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS) {
+        if (proxyEntity.getUptime() == 0 && proxyEntity.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
+                Objects.nonNull( proxyEntity.getLastSuccessfulCheck()) &&
+                proxyEntity.getLastSuccessfulCheck().isAfter(proxyEntity.getLastSuccessfulCheck().plusDays(ONE_MONTH))) {
             proxyRepository.delete(proxyEntity);
             return false;
         }
