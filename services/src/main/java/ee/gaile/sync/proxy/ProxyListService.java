@@ -77,8 +77,10 @@ public class ProxyListService implements SyncService {
         }
 
         if (proxyEntity.getUptime() == 0 && proxyEntity.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
-                Objects.nonNull( proxyEntity.getLastSuccessfulCheck()) &&
-                proxyEntity.getLastSuccessfulCheck().isAfter(proxyEntity.getLastSuccessfulCheck().plusDays(ONE_MONTH))) {
+                Objects.nonNull(proxyEntity.getLastSuccessfulCheck()) &&
+                        proxyEntity.getLastSuccessfulCheck()
+                                .isAfter(proxyEntity.getLastSuccessfulCheck().plusDays(ONE_MONTH)) &&
+                        proxyEntity.getUptime() < 5) {
             proxyRepository.delete(proxyEntity);
             return false;
         }
