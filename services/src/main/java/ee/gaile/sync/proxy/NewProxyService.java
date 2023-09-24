@@ -34,6 +34,7 @@ public class NewProxyService {
      */
     public void setNewProxy() {
         List<ProxyEntity> proxyEntities = new ArrayList<>();
+        int siteConnectionError = 0;
 
         List<ProxySiteEntity> proxySites = proxySitesRepository.findAll();
 
@@ -72,6 +73,7 @@ public class NewProxyService {
                 }
             } catch (IOException | NumberFormatException e) {
                 log.warn("Site connection error {} ", proxySite.getUrl());
+                siteConnectionError = siteConnectionError + 1;
             }
         }
 
@@ -85,6 +87,7 @@ public class NewProxyService {
             }
         }
 
+        log.warn("Total site connection errors {} ", siteConnectionError);
         log.info("Proxy saved - {}", counter);
     }
 
