@@ -36,6 +36,10 @@ public class ProxyCheckSyncService {
      * @param proxyEntity - proxy
      */
     public void checkProxy(ProxyEntity proxyEntity) {
+        if (!checkInternetConnection()) {
+            return;
+        }
+
         Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
                 new InetSocketAddress(proxyEntity.getIpAddress(), proxyEntity.getPort()));
 
