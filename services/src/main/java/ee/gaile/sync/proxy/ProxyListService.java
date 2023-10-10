@@ -84,6 +84,7 @@ public class ProxyListService implements SyncService {
                                 proxyEntity.getLastSuccessfulCheck().plusDays(ONE_MONTH)) > ONE_MONTH &&
                         proxyEntity.getUptime() < 5) {
             proxyRepository.delete(proxyEntity);
+
             return false;
         }
 
