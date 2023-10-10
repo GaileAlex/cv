@@ -15,6 +15,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 /**
  * Proxy list sync service
  *
@@ -78,8 +80,8 @@ public class ProxyListService implements SyncService {
 
         if (proxyEntity.getUptime() == 0 && proxyEntity.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
                 Objects.nonNull(proxyEntity.getLastSuccessfulCheck()) &&
-                        proxyEntity.getLastSuccessfulCheck()
-                                .isAfter(proxyEntity.getLastSuccessfulCheck().plusDays(ONE_MONTH)) &&
+                        DAYS.between(proxyEntity.getLastSuccessfulCheck(),
+                                proxyEntity.getLastSuccessfulCheck().plusDays(ONE_MONTH)) > ONE_MONTH &&
                         proxyEntity.getUptime() < 5) {
             proxyRepository.delete(proxyEntity);
             return false;
