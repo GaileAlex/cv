@@ -1,6 +1,10 @@
 <app-menu></app-menu>
 
 <div class="blog_main_area p_100 text-center">
+    <div class="flex justify-content-center">
+        <h3 class="">Enter date range</h3>
+        <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [numberOfMonths]="3" [readonlyInput]="false" (ngModelChange)="sendRequest(0)"></p-calendar>
+    </div>
     <div class="container">
         <div>
             <canvas [chartType]="'line'"
@@ -11,6 +15,8 @@
                     baseChart></canvas>
         </div>
     </div>
+
+
 
     <div class="container">
         <h3 class="p_100_top  p_50_bottom">Site visit statistics</h3>

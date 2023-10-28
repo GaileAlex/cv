@@ -9,6 +9,7 @@ import { VisitStatisticsTables } from "../../../models/visitStatisticsTables";
     styleUrls: ['./visit-statistics.component.css']
 })
 export class VisitStatisticsComponent implements OnInit {
+    rangeDates: Date[] | undefined;
     newUsers: number[] = [];
     totalVisits: number[] = [];
     dates: Date[] = [];
@@ -98,9 +99,18 @@ export class VisitStatisticsComponent implements OnInit {
     sendRequest(pageIndex) {
         let date = new Date();
         date.setMonth(date.getMonth() - 2);
-        const fromDate = new Date(date.getFullYear(), date.getMonth(), 1);
-        let toDate = new Date();
-        this.statisticsService.findAll(this.formatDate(fromDate), this.formatDate(toDate), this.pageSize, pageIndex).subscribe(data => {
+        let fromDate: Date;
+        let toDate: Date;
+        if (!this.rangeDates || this.rangeDates[1] === null) {
+            fromDate = new Date(date.getFullYear(), date.getMonth(), 1);
+            toDate = new Date();
+        } else {
+            fromDate = this.rangeDates[0];
+            toDate = this.rangeDates[1];
+        }
+
+        this.statisticsService.findAll(this.formatDate(fromDate), this.formatDate(toDate),
+            this.pageSize, pageIndex).subscribe(data => {
             data.newUsers.forEach((c) => {
                 this.newUsers.push(c);
             });
@@ -113,7 +123,6 @@ export class VisitStatisticsComponent implements OnInit {
             this.visitStatisticsTables.forEach((c) => c.totalTimeOnSite = this.msToTime(c.totalTimeOnSite))
         });
     }
-
 
 }
 
