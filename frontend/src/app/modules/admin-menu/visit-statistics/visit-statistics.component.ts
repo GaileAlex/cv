@@ -111,6 +111,8 @@ export class VisitStatisticsComponent implements OnInit {
 
         this.statisticsService.findAll(this.formatDate(fromDate), this.formatDate(toDate),
             this.pageSize, pageIndex).subscribe(data => {
+            this.newUsers.length = 0;
+            this.totalVisits.length = 0;
             data.newUsers.forEach((c) => {
                 this.newUsers.push(c);
             });

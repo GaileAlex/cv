@@ -3,7 +3,9 @@
 <div class="blog_main_area p_100 text-center">
     <div class="flex justify-content-center">
         <h3 class="">Enter date range</h3>
-        <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [numberOfMonths]="3" [readonlyInput]="false" (ngModelChange)="sendRequest(0)"></p-calendar>
+        <p-calendar [(ngModel)]="rangeDates" selectionMode="range"
+                    [numberOfMonths]="3" [showIcon]="true" dateFormat="dd.mm.yy"
+                    [readonlyInput]="false" (ngModelChange)="sendRequest(0)"></p-calendar>
     </div>
     <div class="container">
         <div>
@@ -15,9 +17,6 @@
                     baseChart></canvas>
         </div>
     </div>
-
-
-
     <div class="container">
         <h3 class="p_100_top  p_50_bottom">Site visit statistics</h3>
         <table class="table table-striped">
@@ -46,7 +45,6 @@
             </tr>
             </tbody>
         </table>
-
         <div class="d-flex justify-content-between p-2">
             <mat-paginator (page)="changePage($event)"
                            [length]="total"
