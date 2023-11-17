@@ -49,10 +49,10 @@ public class NewProxyService {
                         .referrer("https://www.google.com")
                         .timeout(10000).get();
 
-                proxyEntities.addAll(addProxyByIpAndPort(doc));
+                proxyEntities.addAll(addProxyOnSeparatedIpAndPort(doc));
 
                 if (proxyEntities.isEmpty()) {
-                    proxyEntities.addAll(addProxyOnSeparatedIpAndPort(doc));
+                    proxyEntities.addAll(addProxyByIpAndPort(doc));
                 }
                 if (proxyEntities.isEmpty()) {
                     log.warn("No proxies received from the site - {} ", proxySite.getUrl());

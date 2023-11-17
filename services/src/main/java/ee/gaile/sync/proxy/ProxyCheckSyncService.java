@@ -40,8 +40,14 @@ public class ProxyCheckSyncService {
             return;
         }
 
-        Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,
-                new InetSocketAddress(proxyEntity.getIpAddress(), proxyEntity.getPort()));
+        Proxy socksProxy;
+        try {
+            socksProxy = new Proxy(Proxy.Type.SOCKS,
+                    new InetSocketAddress(proxyEntity.getIpAddress(), proxyEntity.getPort()));
+        } catch (IllegalArgumentException e) {
+            proxyRepository.delete(proxyEntity);
+            return;
+        }
 
         try {
             LocalDateTime startConnection = LocalDateTime.now();
