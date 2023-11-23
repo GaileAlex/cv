@@ -2,7 +2,7 @@ package ee.gaile.service.blog;
 
 import ee.gaile.entity.blog.BlogEntity;
 import ee.gaile.repository.blog.BlogRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author Aleksei Gaile
  */
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AdminBlogServiceImpl implements AdminBlogService {
     private final BlogRepository blogRepository;
 

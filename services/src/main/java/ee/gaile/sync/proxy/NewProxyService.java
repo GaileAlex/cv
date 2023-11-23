@@ -4,7 +4,7 @@ import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.entity.proxy.ProxySiteEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.repository.proxy.ProxySitesRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class NewProxyService {
     private final ProxyRepository proxyRepository;
     private final ProxySitesRepository proxySitesRepository;

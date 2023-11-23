@@ -4,7 +4,7 @@ import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.models.statistics.VisitStatisticsGraph;
 import ee.gaile.models.statistics.VisitStatisticsTable;
 import ee.gaile.repository.statistic.VisitStatisticsGraphRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class StatisticsServiceImpl implements StatisticsService {
     private final VisitStatisticsGraphRepository visitStatisticsGraphRepository;
 

@@ -5,7 +5,7 @@ import ee.gaile.entity.statistics.VisitStatisticsEntity;
 import ee.gaile.repository.statistic.VisitStatisticIpRepository;
 import ee.gaile.repository.statistic.VisitStatisticVisitDateRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OldUserStatistics implements Statistics {
     private static final String UNDEFINED = "undefined";
     private final VisitStatisticsRepository visitStatisticsRepository;

@@ -6,7 +6,7 @@ import ee.gaile.models.proxy.ProxyListWrapper;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.service.utils.MapperUtils;
 import ee.gaile.sync.SyncStartService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ProxyServiceImpl implements ProxyService {
     private final ProxyRepository proxyRepository;
 

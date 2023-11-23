@@ -2,7 +2,7 @@ package ee.gaile.sync.proxy;
 
 import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ import java.time.temporal.ChronoUnit;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ProxyCheckSyncService {
     private static final String FILE_URL = "https://gaile.ee/assets/1M.iso";
     private static final String GOOGLE_URL = "google.com";

@@ -12,7 +12,7 @@ import ee.gaile.service.security.request.SignupRequest;
 import ee.gaile.service.security.response.MessageResponse;
 import ee.gaile.service.security.settings.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final LoginService loginService;
     private final UserRepository userRepository;
