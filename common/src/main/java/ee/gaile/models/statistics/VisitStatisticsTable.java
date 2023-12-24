@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 @Setter
 public class VisitStatisticsTable {
 
+    private Long id;
+
     private String userLocation;
 
     private LocalDateTime firstVisit;

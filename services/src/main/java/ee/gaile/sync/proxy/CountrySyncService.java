@@ -1,18 +1,22 @@
 package ee.gaile.sync.proxy;
 
 import ee.gaile.entity.proxy.ProxyEntity;
+import ee.gaile.entity.statistics.VisitStatisticsEntity;
+import ee.gaile.models.statistics.VisitStatisticsTable;
 import ee.gaile.repository.proxy.ProxyRepository;
+import ee.gaile.repository.statistic.VisitStatisticsGraphRepository;
+import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import ee.gaile.sync.SyncService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 /**
  * Service for determining unknown countries from a proxy
@@ -27,6 +31,8 @@ public class CountrySyncService implements SyncService {
 
     private final ProxyRepository proxyRepository;
     private final RestTemplate restTemplate;
+    private final VisitStatisticsGraphRepository visitStatisticsGraphRepository;
+    private final VisitStatisticsRepository visitStatisticsRepository;
 
     /**
      * Sets the proxy country
@@ -37,6 +43,7 @@ public class CountrySyncService implements SyncService {
     @Override
     public void sync() {
         List<ProxyEntity> proxyEntities = proxyRepository.findAllWhereCountryUnknown();
+        updateCityToVisitStatistic();
 
         if (proxyEntities.isEmpty()) {
             return;
@@ -49,16 +56,9 @@ public class CountrySyncService implements SyncService {
         for (ProxyEntity proxyEntity : proxyEntities) {
             if (proxyEntity.getCountry().equals("unknown")) {
                 try {
-                    ResponseEntity<String> listResponseEntity = restTemplate
-                            .exchange(IP_INFO_URL + proxyEntity.getIpAddress(), HttpMethod.GET, null,
-                                    new ParameterizedTypeReference<>() {
-                                    });
-                    String[] st = Objects.requireNonNull(listResponseEntity.getBody()).split("\",\\n");
-
-                    String country = st[3].split(": \"")[1] + " " + st[2].split(": \"")[1];
-                    proxyEntity.setCountry(country);
+                    Map<String, String> ipInfo = getIpInfoByIp(proxyEntity.getIpAddress());
+                    proxyEntity.setCountry(ipInfo.get("country") + " " + ipInfo.get("city"));
                     proxyRepository.save(proxyEntity);
-
                 } catch (Exception e) {
                     log.info("proxy set country error for {} {}", proxyEntity.getIpAddress(), proxyEntity.getPort());
                     returnIfRequestIsBlocked++;
@@ -69,4 +69,37 @@ public class CountrySyncService implements SyncService {
             }
         }
     }
+
+    public void updateCityToVisitStatistic() {
+        List<VisitStatisticsTable> tableList = visitStatisticsGraphRepository.updateCityToVisitStatistic();
+
+        if (tableList.isEmpty()){
+            return;
+        }
+
+        log.info("Start visit statistic sync. Size lists is {} ", tableList.size());
+
+        tableList.forEach(c -> {
+            VisitStatisticsEntity entity = visitStatisticsRepository.findById(c.getId()).get();
+            try {
+                Map<String, String> ipInfo = getIpInfoByIp(c.getUserIp());
+                entity.setUserCity(ipInfo.get("city"));
+                entity.setUserLocation(ipInfo.get("country"));
+                visitStatisticsRepository.save(entity);
+            } catch (Exception e) {
+                log.info("proxy set country error for {}", c.getUserIp());
+            }
+        });
+    }
+
+    public Map<String, String> getIpInfoByIp(String ipAddress) {
+        RequestEntity<Void> request = RequestEntity.get(IP_INFO_URL + ipAddress.replace("\"", ""))
+                .accept(MediaType.APPLICATION_JSON).build();
+        ParameterizedTypeReference<Map<String, String>> responseType =
+                new ParameterizedTypeReference<>() {
+                };
+
+        return restTemplate.exchange(request, responseType).getBody();
+    }
+
 }
