@@ -10,7 +10,6 @@ import ee.gaile.sync.SyncService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -94,7 +93,7 @@ public class CountrySyncService implements SyncService {
 
     public Map<String, String> getIpInfoByIp(String ipAddress) {
         RequestEntity<Void> request = RequestEntity.get(IP_INFO_URL + ipAddress.replace("\"", ""))
-                .accept(MediaType.APPLICATION_JSON).build();
+               .build();
         ParameterizedTypeReference<Map<String, String>> responseType =
                 new ParameterizedTypeReference<>() {
                 };
