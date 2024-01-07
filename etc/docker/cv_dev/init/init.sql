@@ -1,3 +1,8 @@
-create database "test-db"
+create
+database "test-db"
     with owner cv;
-CREATE USER cv WITH ENCRYPTED PASSWORD 'pass';
+
+DROP ROLE IF EXISTS cv;
+
+CREATE
+USER cv WITH ENCRYPTED PASSWORD 'pass';
