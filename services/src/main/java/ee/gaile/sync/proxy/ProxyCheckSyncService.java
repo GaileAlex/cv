@@ -62,7 +62,8 @@ public class ProxyCheckSyncService {
             Instant startFile = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
             InputStream inputStream = socksConnection.getInputStream();
 
-            socksConnection.getInputStream();
+            byte[] buffer = new byte[8 * 1024];
+            while ((inputStream.read(buffer)) != -1) ;
 
             inputStream.close();
 
