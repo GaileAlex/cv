@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/proxy/list/**").permitAll()
                 .antMatchers(HttpMethod.POST, API_V1_PREFIX + "/statistic/user").permitAll()
                 .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/statistic/graph/**").permitAll()
+                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/statistic/file/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
                 .antMatchers(HttpMethod.POST, LOGOUT_URL).permitAll()

@@ -3,6 +3,7 @@ package ee.gaile.service.security;
 
 import ee.gaile.service.security.settings.ApiErrorType;
 import ee.gaile.service.security.settings.ApiErrorUtil;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,7 +40,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         UsernamePasswordAuthenticationToken authentication;
         try {
             authentication = loginService.validateToken(header.substring(TOKEN_TYPE.length() + 1), req);
-        } catch (io.jsonwebtoken.ExpiredJwtException e) {
+        } catch (ExpiredJwtException e) {
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             res.setContentType("application/json");
             res.getOutputStream().println(ApiErrorUtil.convertErrorToJSON(ApiErrorType.ACCESS_TOKEN_EXPIRED));
