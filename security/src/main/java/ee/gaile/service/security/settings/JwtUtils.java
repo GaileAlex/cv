@@ -21,7 +21,7 @@ public class JwtUtils {
     private String jwtSecret;
 
     @Value("${security.jwt.token.live.minutes}")
-    private int JWT_EXPIRATION;
+    private int jwtExpiration;
 
     public static final String TOKEN_TYPE = "Bearer";
     public static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
@@ -34,7 +34,7 @@ public class JwtUtils {
         LocalDateTime currentTime = LocalDateTime.now(ZoneId.systemDefault());
 
         // Get expiration data
-        LocalDateTime expDateTime = currentTime.plusMinutes(JWT_EXPIRATION);
+        LocalDateTime expDateTime = currentTime.plusMinutes(jwtExpiration);
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -55,7 +55,7 @@ public class JwtUtils {
         LocalDateTime currentTime = LocalDateTime.now(ZoneId.systemDefault());
 
         // Get expiration data
-        LocalDateTime expDateTime = currentTime.plusMinutes(JWT_EXPIRATION);
+        LocalDateTime expDateTime = currentTime.plusMinutes(jwtExpiration);
 
         return Jwts.builder()
                 .setClaims(claims)

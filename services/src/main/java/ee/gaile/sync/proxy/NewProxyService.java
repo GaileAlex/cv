@@ -107,7 +107,7 @@ public class NewProxyService {
                     proxyEntity.setIpAddress(ip);
                     continue;
                 }
-                if (Objects.nonNull(proxyEntity.getIpAddress()) && !ip.equals("")) {
+                if (Objects.nonNull(proxyEntity.getIpAddress()) && !ip.isEmpty()) {
                     proxyEntity.setPort(Integer.valueOf(ip));
                     proxyEntity.setProtocol("SOCKS5");
                     proxyEntity.setCountry("unknown");
