@@ -79,7 +79,6 @@ public class ProxyCheckSyncService {
         } catch (Exception e) {
             saveUnansweredCheck(proxyEntity);
         }
-
     }
 
     private void saveUnansweredCheck(ProxyEntity proxyEntity) {
