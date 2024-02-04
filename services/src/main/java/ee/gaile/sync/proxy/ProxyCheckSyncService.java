@@ -4,12 +4,15 @@ import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.*;
-import java.time.Duration;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -30,6 +33,7 @@ public class ProxyCheckSyncService {
     private static final Integer TIMEOUT = 60_000;
 
     private final ProxyRepository proxyRepository;
+    private final RestTemplate restTemplate;
 
     /**
      * Checks the proxy list for the ability to connect and download the file
@@ -52,27 +56,16 @@ public class ProxyCheckSyncService {
             return;
         }
 
-        HttpURLConnection socksConnection;
-
         try {
-            socksConnection = (HttpURLConnection) new URL(FILE_URL).openConnection(socksProxy);
-            socksConnection.setRequestMethod("GET");
-            socksConnection.setConnectTimeout(TIMEOUT);
-            socksConnection.setReadTimeout(TIMEOUT);
-        } catch (IOException e) {
-            log.warn("URLConnection problem");
-            return;
-        }
-
-        try (InputStream inputStream = socksConnection.getInputStream()) {
-            LocalDateTime startConnection = LocalDateTime.now();
-
-            proxyEntity.setResponse(Duration.between(startConnection.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
-
             Instant startFile = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
 
-            byte[] buffer = new byte[8 * 1024];
-            while ((inputStream.read(buffer)) != -1) ;
+            SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+            requestFactory.setProxy(socksProxy);
+            requestFactory.setConnectTimeout(TIMEOUT);
+            requestFactory.setReadTimeout(TIMEOUT);
+            restTemplate.setRequestFactory(requestFactory);
+
+            restTemplate.exchange(FILE_URL, HttpMethod.GET, null, byte[].class);
 
             proxyEntity.setSpeed(checkSpeed(startFile));
             proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
@@ -83,11 +76,10 @@ public class ProxyCheckSyncService {
 
             proxyRepository.save(proxyEntity);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             saveUnansweredCheck(proxyEntity);
-        } finally {
-            socksConnection.disconnect();
         }
+
     }
 
     private void saveUnansweredCheck(ProxyEntity proxyEntity) {
