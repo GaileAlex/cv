@@ -23,11 +23,11 @@ public class RestExceptionHandler {
         String message = e.getMessage();
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode objectNode = mapper.createObjectNode();
-        LOG.error("the following error occurred {}, {}", message, e);
+        LOG.error("The following error occurred: message - {}, exception - {}", message, e);
 
-        if (e instanceof ResponseStatusException) {
-            objectNode.put(MESSAGE, ((ResponseStatusException) e).getReason());
-            return ResponseEntity.status(((ResponseStatusException) e).getStatus())
+        if (e instanceof ResponseStatusException ex) {
+            objectNode.put(MESSAGE, (ex).getReason());
+            return ResponseEntity.status((ex).getStatusCode())
                     .body(objectNode);
         }
 

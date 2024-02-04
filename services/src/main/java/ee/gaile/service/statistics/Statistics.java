@@ -3,8 +3,8 @@ package ee.gaile.service.statistics;
 import ee.gaile.entity.statistics.VisitStatisticVisitDateEntity;
 import ee.gaile.entity.statistics.VisitStatisticsEntity;
 import ee.gaile.repository.statistic.VisitStatisticVisitDateRepository;
+import jakarta.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Map;
 

@@ -1,6 +1,6 @@
 package ee.gaile.service.statistics;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author Aleksei Gaile 19-Sep-21

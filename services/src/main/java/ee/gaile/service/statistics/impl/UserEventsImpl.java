@@ -5,12 +5,12 @@ import ee.gaile.entity.statistics.VisitStatisticsEventsEntity;
 import ee.gaile.repository.statistic.VisitStatisticEventRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import ee.gaile.service.statistics.UserEvents;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Optional;

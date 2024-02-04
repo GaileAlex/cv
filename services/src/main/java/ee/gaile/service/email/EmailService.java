@@ -1,6 +1,6 @@
 package ee.gaile.service.email;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author Aleksei Gaile 18-Sep-21

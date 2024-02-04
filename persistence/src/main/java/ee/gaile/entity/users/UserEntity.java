@@ -1,11 +1,10 @@
 package ee.gaile.entity.users;
 
 import ee.gaile.enums.EnumRoles;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 @Setter
 @Getter

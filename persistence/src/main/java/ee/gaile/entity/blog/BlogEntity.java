@@ -1,12 +1,11 @@
 package ee.gaile.entity.blog;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,7 +27,6 @@ public class BlogEntity {
     @Column(name = "blog_article", length = 10485760)
     private String article;
 
-    @Type(type = "org.hibernate.type.BinaryType")
     @Column(name = "blog_image")
     private byte[] image;
 

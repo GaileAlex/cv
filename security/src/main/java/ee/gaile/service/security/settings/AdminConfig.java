@@ -4,11 +4,10 @@ import ee.gaile.entity.users.UserEntity;
 import ee.gaile.enums.EnumRoles;
 import ee.gaile.service.security.SecurityConfig;
 import ee.gaile.service.security.UserRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 @Component
 @RequiredArgsConstructor
