@@ -42,9 +42,6 @@ public class ProxyEntity {
     @Column(name = "uptime")
     private Double uptime;
 
-    @Column(name = "response")
-    private Long response;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "last_checked")
     private LocalDateTime lastChecked;

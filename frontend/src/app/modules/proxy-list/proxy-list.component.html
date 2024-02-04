@@ -12,7 +12,6 @@
                 <th scope="col">Country</th>
                 <th scope="col">Speed</th>
                 <th scope="col">Uptime</th>
-                <th scope="col">Response</th>
                 <th scope="col">Last checked</th>
             </tr>
             </thead>
@@ -24,7 +23,6 @@
                 <td>{{ proxy.country }}</td>
                 <td>{{ proxy.speed | number:'1.0-0' }}  kB/s</td>
                 <td>{{ proxy.uptime | number:'1.0-0' }}  %</td>
-                <td>{{ proxy.response | number }} ms</td>
                 <td>{{ proxy.lastChecked | date : "HH:mm dd-MM-yy" }}</td>
             </tr>
             </tbody>

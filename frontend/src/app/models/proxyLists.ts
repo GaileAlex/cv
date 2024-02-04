@@ -7,7 +7,6 @@ export class ProxyLists {
     anonymity: string;
     speed: string;
     uptime: string;
-    response: string;
     lastChecked: Date;
     firstChecked: Date;
     numberChecks: string;

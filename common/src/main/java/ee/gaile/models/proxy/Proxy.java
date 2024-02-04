@@ -29,8 +29,6 @@ public class Proxy {
 
     private Double uptime;
 
-    private Long response;
-
     private LocalDateTime lastChecked;
 
     @JsonIgnore
