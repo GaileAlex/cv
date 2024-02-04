@@ -1,9 +1,10 @@
-package ee.gaile.service.statistics;
+package ee.gaile.service.statistics.impl;
 
 import ee.gaile.models.statistics.VisitStatisticGraph;
 import ee.gaile.models.statistics.VisitStatisticsGraph;
 import ee.gaile.models.statistics.VisitStatisticsTable;
 import ee.gaile.repository.statistic.VisitStatisticsGraphRepository;
+import ee.gaile.service.statistics.StatisticsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,10 +1,11 @@
-package ee.gaile.service.statistics;
+package ee.gaile.service.statistics.impl;
 
 import ee.gaile.entity.statistics.VisitStatisticUserIpEntity;
 import ee.gaile.entity.statistics.VisitStatisticsEntity;
 import ee.gaile.repository.statistic.VisitStatisticIpRepository;
 import ee.gaile.repository.statistic.VisitStatisticVisitDateRepository;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
+import ee.gaile.service.statistics.Statistics;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

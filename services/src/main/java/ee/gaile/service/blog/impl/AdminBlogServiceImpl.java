@@ -1,7 +1,8 @@
-package ee.gaile.service.blog;
+package ee.gaile.service.blog.impl;
 
 import ee.gaile.entity.blog.BlogEntity;
 import ee.gaile.repository.blog.BlogRepository;
+import ee.gaile.service.blog.AdminBlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

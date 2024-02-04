@@ -1,4 +1,4 @@
-package ee.gaile.service.user;
+package ee.gaile.service.user.impl;
 
 import ee.gaile.entity.statistics.VisitStatisticsEntity;
 import ee.gaile.entity.users.UserEntity;
@@ -12,6 +12,7 @@ import ee.gaile.service.security.request.SignupRequest;
 import ee.gaile.service.security.response.MessageResponse;
 import ee.gaile.service.security.settings.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
+import ee.gaile.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

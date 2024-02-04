@@ -1,5 +1,6 @@
-package ee.gaile.service.email;
+package ee.gaile.service.email.impl;
 
+import ee.gaile.service.email.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Component
 @RequiredArgsConstructor
-public class EmailServiceImpl {
+public class EmailServiceImpl implements EmailService {
     private static final String SUBJECT = "new user";
     private static final String TEXT_COUNTRY = "New user noticed from ";
     private static final String TEXT_ID = " user ID - ";

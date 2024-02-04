@@ -18,8 +18,6 @@ import static ee.gaile.service.security.LoginService.*;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String API_V1_PREFIX = "/api/v1";
-
     private final LoginService loginService;
 
     public SecurityConfig(LoginService loginService) {
@@ -41,15 +39,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/proxy/list/**").permitAll()
-                .antMatchers(HttpMethod.POST, API_V1_PREFIX + "/statistic/user").permitAll()
-                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/statistic/graph/**").permitAll()
-                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/statistic/file/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/proxy/list/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/statistic/user").permitAll()
+                .antMatchers(HttpMethod.GET, "/statistic/graph/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/statistic/file/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
                 .antMatchers(HttpMethod.POST, LOGOUT_URL).permitAll()
                 .antMatchers(HttpMethod.POST, AUTH_REFRESH_URL).permitAll()
-                .antMatchers(HttpMethod.GET, API_V1_PREFIX + "/blog/comments")
+                .antMatchers(HttpMethod.GET,  "/blog/comments")
                 .authenticated()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), loginService))

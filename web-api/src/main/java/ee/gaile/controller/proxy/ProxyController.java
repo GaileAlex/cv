@@ -10,15 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
-
 /**
  * REST service controller to get proxy list table data
  *
  * @author Aleksei Gaile
  */
 @RestController
-@RequestMapping(path = API_V1_PREFIX + "/proxy")
+@RequestMapping(path = "/proxy")
 @RequiredArgsConstructor
 @Tag(name = "ProxyController", description = "Controller for getting proxies")
 public class ProxyController {

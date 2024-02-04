@@ -19,15 +19,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
-
 /**
  * REST service controller for receiving and sending site visit data
  *
  * @author Aleksei Gaile
  */
 @RestController
-@RequestMapping(path = API_V1_PREFIX + "/statistic")
+@RequestMapping(path = "/statistic")
 @RequiredArgsConstructor
 @Tag(name = "StatisticsController", description = "Controller for working with site visit statistics")
 public class StatisticsController {

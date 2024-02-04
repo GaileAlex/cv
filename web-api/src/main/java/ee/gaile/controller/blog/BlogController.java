@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
-
 /**
  * REST service controller for fetching blog data and saving article comments
  *
  * @author Aleksei Gaile
  */
 @RestController
-@RequestMapping(API_V1_PREFIX + "/blog")
+@RequestMapping("/blog")
 @RequiredArgsConstructor
 @Tag(name = "BlogController", description = "Blogging controller")
 public class BlogController {

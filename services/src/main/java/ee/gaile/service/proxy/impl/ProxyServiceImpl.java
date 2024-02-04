@@ -1,9 +1,10 @@
-package ee.gaile.service.proxy;
+package ee.gaile.service.proxy.impl;
 
 import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.models.proxy.Proxy;
 import ee.gaile.models.proxy.ProxyListWrapper;
 import ee.gaile.repository.proxy.ProxyRepository;
+import ee.gaile.service.proxy.ProxyService;
 import ee.gaile.service.utils.MapperUtils;
 import ee.gaile.sync.SyncStartService;
 import lombok.RequiredArgsConstructor;

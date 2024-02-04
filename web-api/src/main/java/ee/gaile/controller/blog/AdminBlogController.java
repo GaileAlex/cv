@@ -12,15 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-import static ee.gaile.service.security.SecurityConfig.API_V1_PREFIX;
-
 /**
  * REST service controller for saving new blog posts
  *
  * @author Aleksei Gaile
  */
 @RestController
-@RequestMapping(API_V1_PREFIX + "/admin-blog")
+@RequestMapping("/admin-blog")
 @RequiredArgsConstructor
 @Tag(name = "AdminBlogController", description = "Controller for saving blogs")
 public class AdminBlogController {

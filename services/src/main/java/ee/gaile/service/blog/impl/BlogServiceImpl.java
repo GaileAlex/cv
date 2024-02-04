@@ -1,4 +1,4 @@
-package ee.gaile.service.blog;
+package ee.gaile.service.blog.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ee.gaile.entity.blog.BlogEntity;
@@ -7,6 +7,7 @@ import ee.gaile.models.blog.BlogWrapper;
 import ee.gaile.models.blog.CommentWrapper;
 import ee.gaile.repository.blog.BlogRepository;
 import ee.gaile.repository.blog.CommentsRepository;
+import ee.gaile.service.blog.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,6 +1,7 @@
-package ee.gaile.service.statistics;
+package ee.gaile.service.statistics.impl;
 
-import ee.gaile.service.email.EmailServiceImpl;
+import ee.gaile.service.email.EmailService;
+import ee.gaile.service.statistics.UserStatisticsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +23,7 @@ import java.util.Map;
 public class UserStatisticsServiceImpl implements UserStatisticsService {
     private final UndefinedUserStatistics undefinedUserStatistics;
     private final OldUserStatistics oldUserStatistics;
-    private final EmailServiceImpl emailService;
+    private final EmailService emailService;
 
     @Value("${mail.enable}")
     private boolean isMailEnable;
