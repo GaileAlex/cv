@@ -6,7 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.*;
 import java.time.Duration;
 import java.time.Instant;
@@ -37,10 +38,12 @@ public class ProxyCheckSyncService {
      */
     public void checkProxy(ProxyEntity proxyEntity) {
         if (!checkInternetConnection()) {
+            proxyRepository.save(proxyEntity);
             return;
         }
 
         Proxy socksProxy;
+
         try {
             socksProxy = new Proxy(Proxy.Type.SOCKS,
                     new InetSocketAddress(proxyEntity.getIpAddress(), proxyEntity.getPort()));
@@ -49,23 +52,27 @@ public class ProxyCheckSyncService {
             return;
         }
 
-        try {
-            LocalDateTime startConnection = LocalDateTime.now();
+        HttpURLConnection socksConnection;
 
-            URLConnection socksConnection = new URL(FILE_URL)
-                    .openConnection(socksProxy);
+        try {
+            socksConnection = (HttpURLConnection) new URL(FILE_URL).openConnection(socksProxy);
+            socksConnection.setRequestMethod("GET");
             socksConnection.setConnectTimeout(TIMEOUT);
             socksConnection.setReadTimeout(TIMEOUT);
+        } catch (IOException e) {
+            log.warn("URLConnection problem");
+            return;
+        }
+
+        try (InputStream inputStream = socksConnection.getInputStream()) {
+            LocalDateTime startConnection = LocalDateTime.now();
 
             proxyEntity.setResponse(Duration.between(startConnection.toLocalTime(), LocalDateTime.now().toLocalTime()).toMillis());
 
             Instant startFile = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
-            InputStream inputStream = socksConnection.getInputStream();
 
             byte[] buffer = new byte[8 * 1024];
             while ((inputStream.read(buffer)) != -1) ;
-
-            inputStream.close();
 
             proxyEntity.setSpeed(checkSpeed(startFile));
             proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
@@ -76,8 +83,10 @@ public class ProxyCheckSyncService {
 
             proxyRepository.save(proxyEntity);
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             saveUnansweredCheck(proxyEntity);
+        } finally {
+            socksConnection.disconnect();
         }
     }
 

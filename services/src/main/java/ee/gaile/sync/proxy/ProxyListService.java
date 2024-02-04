@@ -75,7 +75,6 @@ public class ProxyListService implements SyncService {
             proxyEntity.setNumberChecks(0);
             proxyEntity.setNumberUnansweredChecks(0);
             proxyEntity.setUptime(0.0);
-            proxyRepository.save(proxyEntity);
         }
 
         if (proxyEntity.getUptime() == 0 && proxyEntity.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||

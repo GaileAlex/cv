@@ -16,7 +16,6 @@
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMdd-HHmmssSSS</maven.build.timestamp.format>
-        <postgresql.version>42.2.9</postgresql.version>
     </properties>
 
     <dependencies>
@@ -34,7 +33,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.4.2</version>
+            <version>42.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,7 +43,7 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>4.14.0</version>
+            <version>4.24.0</version>
         </dependency>
     </dependencies>
 

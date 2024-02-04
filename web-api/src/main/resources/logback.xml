@@ -37,7 +37,7 @@
         <appender-ref ref="ERROR-FILE"/>
     </logger>
 
-    <logger name="org.hibernate" level="OFF">
+    <logger name="org.hibernate.engine.jdbc.spi.SqlExceptionHelper" level="OFF">
     </logger>
 
 </Configuration>
