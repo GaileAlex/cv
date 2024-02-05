@@ -22,7 +22,7 @@ public class FilterConfig extends RequestContextFilter {
                                  FilterChain filterChain)
             throws IOException, ServletException {
         String userId = request.getHeader("userId");
-        if (ADMIN_ID.equals(userId) && !request.getRequestURI().equals("/api/auth/login")) {
+        if (ADMIN_ID.equals(userId) && !request.getRequestURI().equals("/api/v1/api/auth/login")) {
             return;
         }
 

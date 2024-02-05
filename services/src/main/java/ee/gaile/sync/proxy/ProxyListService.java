@@ -18,8 +18,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
- * Proxy list sync service
- *
  * @author Aleksei Gaile
  */
 @Slf4j

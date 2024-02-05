@@ -36,9 +36,11 @@ public class ProxyCheckSyncService {
     private final RestTemplate restTemplate;
 
     /**
-     * Checks the proxy list for the ability to connect and download the file
-     *
-     * @param proxyEntity - proxy
+     * Checks the proxy and updates the database accordingly.
+     * If internet connection is not available, the proxy is saved to the database.
+     * If the proxy is invalid, it is deleted from the database.
+     * If the check fails, the unanswered check is saved to the database.
+     * @param proxyEntity The proxy entity to be checked
      */
     public void checkProxy(ProxyEntity proxyEntity) {
         if (!checkInternetConnection()) {
@@ -81,6 +83,12 @@ public class ProxyCheckSyncService {
         }
     }
 
+    /**
+     * Updates the proxyEntity with the latest uptime, speed, and check counts, and saves it to the repository.
+     * Increments the number of unanswered checks if applicable.
+     *
+     * @param proxyEntity the ProxyEntity to be updated and saved
+     */
     private void saveUnansweredCheck(ProxyEntity proxyEntity) {
         double uptime = getUptime(proxyEntity);
         proxyEntity.setUptime(uptime);
@@ -99,10 +107,10 @@ public class ProxyCheckSyncService {
     }
 
     /**
-     * Set uptime
+     * Calculate the uptime percentage based on the number of checks and unanswered checks.
      *
-     * @param proxyEntity - proxy
-     * @return Double - uptime
+     * @param proxyEntity the ProxyEntity containing the number of checks and unanswered checks
+     * @return the uptime percentage
      */
     private Double getUptime(ProxyEntity proxyEntity) {
         Integer numberChecks = proxyEntity.getNumberChecks();
@@ -123,10 +131,10 @@ public class ProxyCheckSyncService {
     }
 
     /**
-     * Sets the download speed of the file
+     * Calculates the speed of a process based on the duration since the start time.
      *
-     * @param start -download start time
-     * @return Double - file download speed
+     * @param start the start time of the process
+     * @return the speed of the process
      */
     private Double checkSpeed(Instant start) {
         Instant now = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
@@ -140,6 +148,10 @@ public class ProxyCheckSyncService {
         return speed;
     }
 
+    /**
+     * Check internet connection by trying to resolve Google's URL.
+     * @return true if internet connection is available, false otherwise.
+     */
     private boolean checkInternetConnection() {
         try {
             return InetAddress.getByName(GOOGLE_URL).getHostName().equals(GOOGLE_URL);
