@@ -7,6 +7,7 @@ import ee.gaile.service.security.settings.ApiErrorType;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
 import ee.gaile.service.security.settings.JwtUtils;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
@@ -70,7 +71,7 @@ public class LoginService {
             authDTO.setAccessToken(jwtUtils.generateJwtToken(claims));
             authDTO.setRefreshToken(jwtUtils.createRefreshToken(claims));
             return authDTO;
-        } catch (io.jsonwebtoken.ExpiredJwtException e) {
+        } catch (ExpiredJwtException e) {
             throw new ApiErrorException(HttpStatus.FORBIDDEN, ApiErrorType.REFRESH_TOKEN_EXPIRED);
         } catch (Exception e) {
             throw new ApiErrorException(HttpStatus.FORBIDDEN, ApiErrorType.INVALID_REFRESH_TOKEN);

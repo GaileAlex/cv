@@ -18,12 +18,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import static ee.gaile.service.security.LoginService.*;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig{
-
     private final LoginService loginService;
-
     public SecurityConfig(LoginService loginService) {
         this.loginService = loginService;
     }
@@ -44,15 +42,12 @@ public class SecurityConfig{
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/proxy/list/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/statistic/user").permitAll()
-                .requestMatchers(HttpMethod.GET, "/statistic/graph/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/statistic/file/**").permitAll()
+                .requestMatchers( "/statistic/**","/proxy/list/**","/blog/**").permitAll()
                 .requestMatchers("/").permitAll()
                 .requestMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
                 .requestMatchers(HttpMethod.POST, LOGOUT_URL).permitAll()
                 .requestMatchers(HttpMethod.POST, AUTH_REFRESH_URL).permitAll()
-                .requestMatchers(HttpMethod.GET,  "/blog/comments")
+                .anyRequest()
                 .authenticated()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager, loginService));
