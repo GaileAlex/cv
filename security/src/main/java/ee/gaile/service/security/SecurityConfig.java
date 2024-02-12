@@ -20,8 +20,9 @@ import static ee.gaile.service.security.LoginService.*;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
     private final LoginService loginService;
+
     public SecurityConfig(LoginService loginService) {
         this.loginService = loginService;
     }
@@ -42,7 +43,8 @@ public class SecurityConfig{
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers( "/statistic/**","/proxy/list/**","/blog/**").permitAll()
+                .requestMatchers("/statistic/**", "/proxy/list/**", "/blog/**",
+                        "/api/auth/login", "/api/auth/register").permitAll()
                 .requestMatchers("/").permitAll()
                 .requestMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
                 .requestMatchers(HttpMethod.POST, LOGOUT_URL).permitAll()
