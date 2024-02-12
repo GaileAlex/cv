@@ -1,7 +1,9 @@
 package ee.gaile.service.security.settings;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+@Getter
 public class ApiErrorException extends RuntimeException {
 
     private final HttpStatus status;
@@ -13,19 +15,6 @@ public class ApiErrorException extends RuntimeException {
         this.status = status;
         this.message = error.getMessage();
         this.code = error.getCode();
-    }
-
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
     }
 
 }

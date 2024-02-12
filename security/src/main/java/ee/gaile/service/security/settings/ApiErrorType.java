@@ -1,5 +1,8 @@
 package ee.gaile.service.security.settings;
 
+import lombok.Getter;
+
+@Getter
 public enum ApiErrorType {
 
     ACCESS_TOKEN_EXPIRED("access_token_expired", "Access token expired"),
@@ -15,14 +18,6 @@ public enum ApiErrorType {
     ApiErrorType(String code, String message) {
         this.code = code;
         this.message = message;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
 }
