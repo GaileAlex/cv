@@ -1,9 +1,9 @@
 package ee.gaile.service.security;
 
-import ee.gaile.service.security.request.LoginRequest;
-import ee.gaile.service.security.request.SignupRequest;
-import ee.gaile.service.security.settings.ApiErrorException;
-import ee.gaile.service.security.settings.ApiErrorType;
+import ee.gaile.service.security.settings.LoginRequest;
+import ee.gaile.models.auth.request.SignupRequest;
+import ee.gaile.apiexeption.ApiErrorException;
+import ee.gaile.apiexeption.ApiErrorType;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
 import ee.gaile.service.security.settings.JwtUtils;
 import io.jsonwebtoken.Claims;

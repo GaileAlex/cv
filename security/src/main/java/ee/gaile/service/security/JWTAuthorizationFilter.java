@@ -1,8 +1,8 @@
 package ee.gaile.service.security;
 
 
-import ee.gaile.service.security.settings.ApiErrorType;
-import ee.gaile.service.security.settings.ApiErrorUtil;
+import ee.gaile.apiexeption.ApiErrorType;
+import ee.gaile.apiexeption.ApiErrorUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,9 +1,9 @@
 package ee.gaile.service.user;
 
-import ee.gaile.service.security.request.LoginRequest;
-import ee.gaile.service.security.request.SignupRequest;
-import ee.gaile.service.security.response.MessageResponse;
-import ee.gaile.service.security.settings.ApiErrorException;
+import ee.gaile.service.security.settings.LoginRequest;
+import ee.gaile.models.auth.request.SignupRequest;
+import ee.gaile.models.auth.response.MessageResponse;
+import ee.gaile.apiexeption.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;

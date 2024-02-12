@@ -1,4 +1,4 @@
-package ee.gaile.service.security.response;
+package ee.gaile.models.auth.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

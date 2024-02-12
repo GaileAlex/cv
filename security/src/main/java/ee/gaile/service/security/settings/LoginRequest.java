@@ -1,6 +1,6 @@
-package ee.gaile.service.security.request;
+package ee.gaile.service.security.settings;
 
-import ee.gaile.service.security.settings.AuthRefreshDTO;
+import ee.gaile.models.auth.request.SignupRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

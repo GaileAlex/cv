@@ -1,4 +1,4 @@
-package ee.gaile.service.security.settings;
+package ee.gaile.apiexeption;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;

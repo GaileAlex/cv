@@ -1,4 +1,4 @@
-package ee.gaile.service.security.settings;
+package ee.gaile.apiexeption;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

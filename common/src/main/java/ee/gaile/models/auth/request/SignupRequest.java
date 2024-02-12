@@ -1,4 +1,4 @@
-package ee.gaile.service.security.request;
+package ee.gaile.models.auth.request;
 
 import lombok.Builder;
 import lombok.Getter;

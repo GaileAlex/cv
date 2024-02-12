@@ -1,4 +1,4 @@
-package ee.gaile;
+package ee.gaile.apiexeption;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
