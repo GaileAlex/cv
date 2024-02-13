@@ -1,17 +1,17 @@
 package ee.gaile.service.user.impl;
 
+import ee.gaile.apiexeption.ApiErrorException;
 import ee.gaile.entity.statistics.VisitStatisticsEntity;
 import ee.gaile.entity.users.UserEntity;
 import ee.gaile.enums.EnumRoles;
+import ee.gaile.models.auth.request.SignupRequest;
+import ee.gaile.models.auth.response.MessageResponse;
 import ee.gaile.repository.statistic.VisitStatisticsRepository;
 import ee.gaile.service.security.LoginService;
 import ee.gaile.service.security.UserDetailsImpl;
 import ee.gaile.service.security.UserRepository;
-import ee.gaile.service.security.settings.LoginRequest;
-import ee.gaile.models.auth.request.SignupRequest;
-import ee.gaile.models.auth.response.MessageResponse;
-import ee.gaile.apiexeption.ApiErrorException;
 import ee.gaile.service.security.settings.AuthRefreshDTO;
+import ee.gaile.service.security.settings.LoginRequest;
 import ee.gaile.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * User access service
@@ -64,7 +63,7 @@ public class UserServiceImpl implements UserService {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         List<String> role = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority).distinct().collect(Collectors.toList());
+                .map(GrantedAuthority::getAuthority).distinct().toList();
 
         SignupRequest userDTO = SignupRequest.builder()
                 .username(signupRequest.getUsername())
