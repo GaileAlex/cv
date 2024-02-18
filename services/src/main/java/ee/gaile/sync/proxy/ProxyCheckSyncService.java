@@ -7,12 +7,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.net.Socket;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -33,13 +35,13 @@ public class ProxyCheckSyncService {
     private static final Integer TIMEOUT = 60_000;
 
     private final ProxyRepository proxyRepository;
-    private final RestTemplate restTemplate;
 
     /**
      * Checks the proxy and updates the database accordingly.
      * If internet connection is not available, the proxy is saved to the database.
      * If the proxy is invalid, it is deleted from the database.
      * If the check fails, the unanswered check is saved to the database.
+     *
      * @param proxyEntity The proxy entity to be checked
      */
     public void checkProxy(ProxyEntity proxyEntity) {
@@ -61,11 +63,7 @@ public class ProxyCheckSyncService {
         try {
             Instant startFile = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
 
-            SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-            requestFactory.setProxy(socksProxy);
-            requestFactory.setConnectTimeout(TIMEOUT);
-            requestFactory.setReadTimeout(TIMEOUT);
-            restTemplate.setRequestFactory(requestFactory);
+            RestTemplate restTemplate = getRestTemplate(socksProxy);
 
             restTemplate.exchange(FILE_URL, HttpMethod.GET, null, byte[].class);
 
@@ -77,8 +75,7 @@ public class ProxyCheckSyncService {
             proxyEntity.setLastSuccessfulCheck(LocalDateTime.now());
 
             proxyRepository.save(proxyEntity);
-
-        } catch (Exception e) {
+        } catch (ResourceAccessException e) {
             saveUnansweredCheck(proxyEntity);
         }
     }
@@ -150,14 +147,34 @@ public class ProxyCheckSyncService {
 
     /**
      * Check internet connection by trying to resolve Google's URL.
+     *
      * @return true if internet connection is available, false otherwise.
      */
     private boolean checkInternetConnection() {
-        try {
-            return InetAddress.getByName(GOOGLE_URL).getHostName().equals(GOOGLE_URL);
+        try (Socket socket = new Socket()) {
+            InetSocketAddress socketAddress = new InetSocketAddress(GOOGLE_URL, 80);
+            socket.connect(socketAddress, 1000);
+            return true;
         } catch (IOException e) {
             return false;
         }
+    }
+
+    /**
+     * Creates a new RestTemplate with a specified SOCKS proxy and timeout settings.
+     *
+     * @param socksProxy the SOCKS proxy to be used
+     * @return a RestTemplate with the specified proxy and timeout settings
+     */
+    private RestTemplate getRestTemplate(Proxy socksProxy) {
+        RestTemplate restTemplate = new RestTemplate();
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setProxy(socksProxy);
+        requestFactory.setConnectTimeout(Duration.ofSeconds(TIMEOUT));
+        requestFactory.setReadTimeout(Duration.ofSeconds(TIMEOUT));
+        restTemplate.setRequestFactory(requestFactory);
+
+        return restTemplate;
     }
 
 }

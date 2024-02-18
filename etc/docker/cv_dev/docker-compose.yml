@@ -16,7 +16,6 @@ services:
     volumes:
       - dev-data:/var/lib/postgresql/data:rw
       - ./scripts:/scripts
-      - ./init:/docker-entrypoint-initdb.d
 
 volumes:
   dev-data:

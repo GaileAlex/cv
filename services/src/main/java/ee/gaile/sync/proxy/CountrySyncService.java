@@ -27,6 +27,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CountrySyncService implements SyncService {
     private static final String IP_INFO_URL = "http://ipinfo.io/";
+    private static final String IP_INFO_URL_ALTERNATIVE = "http://ip-api.com/json/";
 
     private final ProxyRepository proxyRepository;
     private final RestTemplate restTemplate;
@@ -72,7 +73,7 @@ public class CountrySyncService implements SyncService {
     public void updateCityToVisitStatistic() {
         List<VisitStatisticsTable> tableList = visitStatisticsGraphRepository.updateCityToVisitStatistic();
 
-        if (tableList.isEmpty()){
+        if (tableList.isEmpty()) {
             return;
         }
 
@@ -92,8 +93,16 @@ public class CountrySyncService implements SyncService {
     }
 
     public Map<String, String> getIpInfoByIp(String ipAddress) {
-        RequestEntity<Void> request = RequestEntity.get(IP_INFO_URL + ipAddress.replace("\"", ""))
-               .build();
+        try {
+            return getIpInfo(ipAddress, IP_INFO_URL);
+        } catch (Exception e) {
+            return getIpInfo(ipAddress, IP_INFO_URL_ALTERNATIVE);
+        }
+    }
+
+    public Map<String, String> getIpInfo(String ipAddress, String ipInfoUrl) {
+        RequestEntity<Void> request = RequestEntity.get(ipInfoUrl + ipAddress.replace("\"", ""))
+                .build();
         ParameterizedTypeReference<Map<String, String>> responseType =
                 new ParameterizedTypeReference<>() {
                 };
