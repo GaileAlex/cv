@@ -32,7 +32,7 @@ public class ProxyCheckSyncService {
     private static final String FILE_URL = "https://gaile.ee/api/v1/statistic/file";
     private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 1_000_000.0;
-    private static final Integer TIMEOUT = 60_000;
+    private static final Integer TIMEOUT = 60;
 
     private final ProxyRepository proxyRepository;
 
