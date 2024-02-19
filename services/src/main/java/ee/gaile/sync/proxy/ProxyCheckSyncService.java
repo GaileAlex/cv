@@ -4,10 +4,13 @@ import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -32,9 +35,10 @@ public class ProxyCheckSyncService {
     private static final String FILE_URL = "https://gaile.ee/api/v1/statistic/file";
     private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 1_000_000.0;
-    private static final Integer TIMEOUT = 60;
+    private static final Integer TIMEOUT = 5;
 
     private final ProxyRepository proxyRepository;
+    private final RestTemplate restTemplate;
 
     /**
      * Checks the proxy and updates the database accordingly.
@@ -63,9 +67,7 @@ public class ProxyCheckSyncService {
         try {
             Instant startFile = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
 
-            RestTemplate restTemplate = getRestTemplate(socksProxy);
-
-            restTemplate.exchange(FILE_URL, HttpMethod.GET, null, byte[].class);
+            requestToUrl(socksProxy);
 
             proxyEntity.setSpeed(checkSpeed(startFile));
             proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
@@ -77,6 +79,8 @@ public class ProxyCheckSyncService {
             proxyRepository.save(proxyEntity);
         } catch (ResourceAccessException e) {
             saveUnansweredCheck(proxyEntity);
+        } catch (RestClientException e) {
+            log.warn("time out exception");
         }
     }
 
@@ -161,20 +165,21 @@ public class ProxyCheckSyncService {
     }
 
     /**
-     * Creates a new RestTemplate with a specified SOCKS proxy and timeout settings.
+     * Makes a GET request to a file URL with specified headers using a RestTemplate set up with a specified SOCKS proxy.
      *
      * @param socksProxy the SOCKS proxy to be used
-     * @return a RestTemplate with the specified proxy and timeout settings
      */
-    private RestTemplate getRestTemplate(Proxy socksProxy) {
-        RestTemplate restTemplate = new RestTemplate();
+    private void requestToUrl(Proxy socksProxy) {
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         requestFactory.setProxy(socksProxy);
-        requestFactory.setConnectTimeout(Duration.ofSeconds(TIMEOUT));
-        requestFactory.setReadTimeout(Duration.ofSeconds(TIMEOUT));
+        requestFactory.setConnectTimeout(Duration.ofMinutes(TIMEOUT));
+        requestFactory.setReadTimeout(Duration.ofMinutes(TIMEOUT));
         restTemplate.setRequestFactory(requestFactory);
 
-        return restTemplate;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+
+        restTemplate.exchange(FILE_URL, HttpMethod.GET, null, byte[].class, headers);
     }
 
 }
