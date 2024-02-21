@@ -9,7 +9,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -77,10 +76,8 @@ public class ProxyCheckSyncService {
             proxyEntity.setLastSuccessfulCheck(LocalDateTime.now());
 
             proxyRepository.save(proxyEntity);
-        } catch (ResourceAccessException e) {
-            saveUnansweredCheck(proxyEntity);
         } catch (RestClientException e) {
-            log.warn("time out exception");
+            saveUnansweredCheck(proxyEntity);
         }
     }
 
