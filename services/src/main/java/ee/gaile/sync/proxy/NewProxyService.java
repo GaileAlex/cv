@@ -70,6 +70,12 @@ public class NewProxyService {
         log.info("Proxy saved - {}", counter);
     }
 
+    /**
+     * Adds proxy by IP and port from the given document.
+     *
+     * @param  doc   the document to extract proxy information from
+     * @return      a list of ProxyEntity objects containing the extracted proxy information
+     */
     private List<ProxyEntity> addProxyByIpAndPort(Document doc) {
         List<ProxyEntity> proxyEntities = new ArrayList<>();
 
@@ -90,6 +96,12 @@ public class NewProxyService {
         return proxyEntities;
     }
 
+    /**
+     * Adds proxies with separated IP and port from the given Document.
+     *
+     * @param  doc	the Document to extract proxies from
+     * @return     	a list of ProxyEntity objects containing separated IP and port proxies
+     */
     private List<ProxyEntity> addProxyOnSeparatedIpAndPort(Document doc) {
         List<ProxyEntity> proxyEntities = new ArrayList<>();
         Elements table = doc.select("table");
@@ -121,6 +133,12 @@ public class NewProxyService {
         return proxyEntities;
     }
 
+    /**
+     * Save a list of proxy entities to the database, ignoring any existing proxies.
+     *
+     * @param  proxyEntities  the list of proxy entities to save
+     * @return                the number of successfully saved proxy entities
+     */
     private int saveProxies(List<ProxyEntity> proxyEntities) {
         int count = 0;
 

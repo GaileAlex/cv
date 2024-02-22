@@ -27,19 +27,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CountrySyncService implements SyncService {
     private static final String IP_INFO_URL = "http://ipinfo.io/";
-    private static final String IP_INFO_URL_ALTERNATIVE = "http://ip-api.com/json/";
+    private static final String IP_INFO_URL_ALTERNATIVE = "https://freeipapi.com/api/json/";
 
     private final ProxyRepository proxyRepository;
     private final RestTemplate restTemplate;
     private final VisitStatisticsGraphRepository visitStatisticsGraphRepository;
     private final VisitStatisticsRepository visitStatisticsRepository;
 
-    /**
-     * Sets the proxy country
-     * <p>
-     * A ban is possible if the number of requests is exceeded.
-     * Proxy check is interrupted after ten rejections
-     */
     @Override
     public void sync() {
         List<ProxyEntity> proxyEntities = proxyRepository.findAllWhereCountryUnknown();
@@ -70,6 +64,9 @@ public class CountrySyncService implements SyncService {
         }
     }
 
+    /**
+     * Update city to visit statistic.
+     */
     public void updateCityToVisitStatistic() {
         List<VisitStatisticsTable> tableList = visitStatisticsGraphRepository.updateCityToVisitStatistic();
 
@@ -92,14 +89,32 @@ public class CountrySyncService implements SyncService {
         });
     }
 
+    /**
+     * Retrieves IP information by IP address.
+     *
+     * @param  ipAddress  the IP address to retrieve information for
+     * @return            a map containing the IP information
+     */
     public Map<String, String> getIpInfoByIp(String ipAddress) {
         try {
             return getIpInfo(ipAddress, IP_INFO_URL);
         } catch (Exception e) {
-            return getIpInfo(ipAddress, IP_INFO_URL_ALTERNATIVE);
+            Map<String, String> ipInfo = getIpInfo(ipAddress, IP_INFO_URL_ALTERNATIVE);
+            if (ipInfo.get("countryCode") != null && ipInfo.get("cityName") != null) {
+                ipInfo.put("city", ipInfo.get("cityName"));
+                ipInfo.put("country", ipInfo.get("countryCode"));
+            }
+            return ipInfo;
         }
     }
 
+    /**
+     * Retrieves IP information from the specified URL.
+     *
+     * @param  ipAddress   the IP address to look up
+     * @param  ipInfoUrl   the URL for retrieving IP information
+     * @return             a map containing the retrieved IP information
+     */
     public Map<String, String> getIpInfo(String ipAddress, String ipInfoUrl) {
         RequestEntity<Void> request = RequestEntity.get(ipInfoUrl + ipAddress.replace("\"", ""))
                 .build();
