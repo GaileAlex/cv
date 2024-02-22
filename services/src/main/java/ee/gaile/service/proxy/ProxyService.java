@@ -16,6 +16,10 @@ public interface ProxyService {
      */
     ProxyListWrapper getProxy(Integer pageSize, Integer page);
 
+    /**
+     * A method to start the service.
+     *
+     */
     void start();
 
 }
