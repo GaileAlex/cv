@@ -6,9 +6,13 @@ import ee.gaile.sync.proxy.NewProxyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * REST service controller to get proxy list table data
@@ -42,6 +46,13 @@ public class ProxyController {
     public ResponseEntity<Void> setNewProxy() {
         newProxyService.setNewProxy();
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/file")
+    public ResponseEntity<byte[]> getFile() throws IOException {
+        InputStream in = getClass()
+                .getResourceAsStream("/1M.iso");
+        return new ResponseEntity<>(IOUtils.toByteArray(in), HttpStatus.OK);
     }
 
 }

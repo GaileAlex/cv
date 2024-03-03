@@ -8,15 +8,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
 
 /**
@@ -76,13 +73,6 @@ public class StatisticsController {
         ACCESS_LOG.info("user left date is {}", request.getHeader("dateOut"));
 
         userEvents.setUserTotalTimeOnSite(request);
-    }
-
-    @GetMapping(path = "/file")
-    public ResponseEntity<byte[]> getFile() throws IOException {
-        InputStream in = getClass()
-                .getResourceAsStream("/1M.iso");
-        return new ResponseEntity<>(IOUtils.toByteArray(in), HttpStatus.OK);
     }
 
 }
