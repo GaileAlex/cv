@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/statistic/**", "/proxy/list/**", "/blog/**",
+                .requestMatchers("/statistic/**", "/proxy/list/**", "/proxy/file/**", "/blog/**",
                         "/api/auth/login", "/api/auth/register").permitAll()
                 .requestMatchers("/").permitAll()
                 .requestMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
