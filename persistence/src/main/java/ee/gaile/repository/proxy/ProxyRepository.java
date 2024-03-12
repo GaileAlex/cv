@@ -25,7 +25,7 @@ public interface ProxyRepository extends JpaRepository<ProxyEntity, Long> {
     Long getTotalAliveProxiesLimit();
 
     @Query(value = "select * from proxy_list " +
-            " where country = 'unknown' and uptime > 0", nativeQuery = true)
+            " where country = 'unknown' and uptime > 0 and uptime >= 25", nativeQuery = true)
     List<ProxyEntity> findAllWhereCountryUnknown();
 
     @Query(value = "select * from proxy_list " +
