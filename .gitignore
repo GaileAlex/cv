@@ -27,3 +27,4 @@
 /common/common.iml
 /web-api/.error/
 /common/target/
+/web-api/src/main/resources/application-upd.properties
