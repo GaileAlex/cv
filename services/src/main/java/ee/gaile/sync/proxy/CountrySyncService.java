@@ -30,7 +30,6 @@ public class CountrySyncService implements SyncService {
     private static final String IP_INFO_URL_ALTERNATIVE = "https://freeipapi.com/api/json/";
 
     private final ProxyRepository proxyRepository;
-    private final RestTemplate restTemplate;
     private final VisitStatisticsGraphRepository visitStatisticsGraphRepository;
     private final VisitStatisticsRepository visitStatisticsRepository;
 
@@ -92,8 +91,8 @@ public class CountrySyncService implements SyncService {
     /**
      * Retrieves IP information by IP address.
      *
-     * @param  ipAddress  the IP address to retrieve information for
-     * @return            a map containing the IP information
+     * @param ipAddress the IP address to retrieve information for
+     * @return a map containing the IP information
      */
     public Map<String, String> getIpInfoByIp(String ipAddress) {
         try {
@@ -111,9 +110,9 @@ public class CountrySyncService implements SyncService {
     /**
      * Retrieves IP information from the specified URL.
      *
-     * @param  ipAddress   the IP address to look up
-     * @param  ipInfoUrl   the URL for retrieving IP information
-     * @return             a map containing the retrieved IP information
+     * @param ipAddress the IP address to look up
+     * @param ipInfoUrl the URL for retrieving IP information
+     * @return a map containing the retrieved IP information
      */
     public Map<String, String> getIpInfo(String ipAddress, String ipInfoUrl) {
         RequestEntity<Void> request = RequestEntity.get(ipInfoUrl + ipAddress.replace("\"", ""))
@@ -121,6 +120,7 @@ public class CountrySyncService implements SyncService {
         ParameterizedTypeReference<Map<String, String>> responseType =
                 new ParameterizedTypeReference<>() {
                 };
+        RestTemplate restTemplate = new RestTemplate();
 
         return restTemplate.exchange(request, responseType).getBody();
     }
