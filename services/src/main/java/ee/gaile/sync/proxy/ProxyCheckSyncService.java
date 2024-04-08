@@ -4,9 +4,7 @@ import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -173,10 +171,7 @@ public class ProxyCheckSyncService {
         requestFactory.setReadTimeout(Duration.ofMinutes(TIMEOUT));
         restTemplate.setRequestFactory(requestFactory);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-
-        restTemplate.exchange(FILE_URL, HttpMethod.GET, null, byte[].class, headers);
+        restTemplate.exchange(FILE_URL, HttpMethod.GET, null, byte[].class);
     }
 
 }
