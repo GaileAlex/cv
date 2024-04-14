@@ -41,7 +41,12 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogWrapper findBlogById(Long blogId) {
         BlogEntity blog = blogRepository.findBlogById(blogId);
-        if (blog.getComments() != null) {
+
+        if (Objects.isNull(blog)) {
+            return new BlogWrapper();
+        }
+
+        if (Objects.nonNull(blog.getComments())) {
             blog.getComments().sort(Comparator.comparing(CommentEntity::getDate).reversed());
         }
 
