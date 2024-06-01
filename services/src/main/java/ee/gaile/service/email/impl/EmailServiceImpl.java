@@ -30,11 +30,15 @@ public class EmailServiceImpl implements EmailService {
      * @param request - user country, ID
      */
     public void sendSimpleMessage(HttpServletRequest request) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(username);
-        message.setTo(username);
-        message.setSubject(SUBJECT);
-        message.setText(TEXT_COUNTRY + request.getHeader("userCountry") + TEXT_ID + request.getHeader("userId"));
-        emailSender.send(message);
+        if (!request.getHeader("userId").equals("undefined")) {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(username);
+            message.setTo(username);
+            message.setSubject(SUBJECT);
+            message.setText(TEXT_COUNTRY + request.getHeader("userCountry") + TEXT_ID + request.getHeader("userId"));
+
+            emailSender.send(message);
+        }
     }
+
 }
