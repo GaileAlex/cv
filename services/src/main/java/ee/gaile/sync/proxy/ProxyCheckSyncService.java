@@ -47,7 +47,7 @@ public class ProxyCheckSyncService {
      */
     public void checkProxy(ProxyEntity proxyEntity) {
         if (!checkInternetConnection()) {
-            proxyRepository.save(proxyEntity);
+            proxyRepository.saveAndFlush(proxyEntity);
             return;
         }
 
@@ -99,7 +99,7 @@ public class ProxyCheckSyncService {
 
         proxyEntity.setLastChecked(LocalDateTime.now());
 
-        proxyRepository.save(proxyEntity);
+        proxyRepository.saveAndFlush(proxyEntity);
     }
 
     /**

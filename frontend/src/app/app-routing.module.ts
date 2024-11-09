@@ -10,11 +10,13 @@ import { BlogAdminComponent } from './modules/admin-menu/blog-admin/blog-admin.c
 import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/visit-statistics.component';
 import { ProxyListComponent } from "./modules/proxy-list/proxy-list.component";
 import { BlogArticleComponent } from "./modules/blog/blog-article/blog-article.component";
+import { StudyEnglishComponent } from "./modules/study-english/study-english.component";
 
 
 export const routes: Routes = [
     {path: '', component: StartPageComponent},
     {path: 'proxy-list', component: ProxyListComponent},
+    {path: 'study-english', component: StudyEnglishComponent},
     {path: 'blog', component: BlogListComponent},
     {path: 'article/:id', component: BlogArticleComponent},
     {path: 'login', component: LoginComponent},

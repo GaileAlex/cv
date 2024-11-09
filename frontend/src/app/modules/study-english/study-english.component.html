@@ -1,0 +1,26 @@
+<app-menu></app-menu>
+
+<div class="text-center p_150_top">
+    <div class="container">
+        <h3 class="p_50_bottom">Упражнения на перевод с русского на английский язык</h3>
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th scope="row">{{ englishSentence?.sentence }}</th>
+            </tr>
+            <tr>
+                <th class="backdrop-filter" #sentenceTranslate scope="row" (click)="onBlur(sentenceTranslate)">
+                    {{ englishSentence?.sentenceTranslate }}
+                </th>
+            </tr>
+            </tbody>
+        </table>
+        <p-button class="p_100" label="next sentence" (click)="nextSentence()"></p-button>
+    </div>
+</div>
+
+<div [ngStyle]="{'padding-top': padding}"></div>
+<app-footer></app-footer>
+
+
+

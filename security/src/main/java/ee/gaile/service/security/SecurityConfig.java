@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/statistic/**", "/proxy/list/**", "/proxy/file/**", "/blog/**",
+                .requestMatchers("/statistic/**", "/proxy/list/**", "/proxy/file/**", "/blog/**", "/english/**",
                         "/api/auth/login", "/api/auth/register").permitAll()
                 .requestMatchers("/").permitAll()
                 .requestMatchers(HttpMethod.POST, LOGIN_URL).permitAll()

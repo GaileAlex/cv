@@ -57,6 +57,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatNativeDateModule } from "@angular/material/core";
+import { StudyEnglishComponent } from "./modules/study-english/study-english.component";
 
 defineLocale('ru', ruLocale);
 defineLocale('en', enGbLocale);
@@ -81,6 +82,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         BlogAdminComponent,
         VisitStatisticsComponent,
         ProxyListComponent,
+        StudyEnglishComponent,
         ErrorModalComponent,
     ],
     imports: [

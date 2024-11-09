@@ -63,7 +63,6 @@ public class UserEventsImpl implements UserEvents {
         } catch (NullPointerException e) {
             log.warn("userEntry is null");
         }
-
     }
 
     /**
