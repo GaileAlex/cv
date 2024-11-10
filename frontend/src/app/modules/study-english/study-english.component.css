@@ -6,6 +6,10 @@ th.mat-header-cell {
     border: 1px solid #000000;
 }
 
+th {
+    font-size: 17px;
+}
+
 td.mat-cell {
     border: 1px solid #000000;
 }
