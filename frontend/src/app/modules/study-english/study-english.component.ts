@@ -25,15 +25,13 @@ export class StudyEnglishComponent {
             menuIcon.classList.remove('backdrop-filter');
             this.isBlur = false;
         } else {
-            this.renderer.addClass(this.sentenceTranslate.nativeElement, 'backdrop-filter');
-            this.isBlur = true;
+            this.addBlur();
         }
-
     }
 
     nextSentence() {
         this.getData();
-        this.renderer.addClass(this.sentenceTranslate.nativeElement, 'backdrop-filter');
+        this.addBlur();
         return this.englishSentence;
     }
 
@@ -41,6 +39,11 @@ export class StudyEnglishComponent {
         this.englishService.findOne().subscribe(data => {
             this.englishSentence = data;
         })
+    }
+
+    addBlur() {
+        this.renderer.addClass(this.sentenceTranslate.nativeElement, 'backdrop-filter');
+        this.isBlur = true;
     }
 
 }

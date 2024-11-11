@@ -67,7 +67,10 @@ public class EnglishServiceImpl implements EnglishService {
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
+            
+            con.disconnect();
             in.close();
+
             return response.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
