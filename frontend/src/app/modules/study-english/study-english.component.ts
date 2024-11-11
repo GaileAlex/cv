@@ -12,6 +12,7 @@ export class StudyEnglishComponent {
     text: string;
     translate: string;
     padding = '100px';
+    isBlur = true;
     englishSentence: EnglishSentence
 
     constructor(private englishService: EnglishService, private renderer: Renderer2) {
@@ -20,7 +21,14 @@ export class StudyEnglishComponent {
     }
 
     onBlur(menuIcon: HTMLElement) {
-        menuIcon.classList.remove('backdrop-filter');
+        if (this.isBlur) {
+            menuIcon.classList.remove('backdrop-filter');
+            this.isBlur = false;
+        } else {
+            this.renderer.addClass(this.sentenceTranslate.nativeElement, 'backdrop-filter');
+            this.isBlur = true;
+        }
+
     }
 
     nextSentence() {
