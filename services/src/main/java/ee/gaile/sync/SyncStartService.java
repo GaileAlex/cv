@@ -19,7 +19,10 @@ import org.springframework.stereotype.Service;
 public class SyncStartService {
     private final ProxyListService proxyListService;
     private final CountrySyncService countrySyncService;
+    private final SyncService englishServiceSync;
 
+    @Value("${english.list.scheduled.run}")
+    private boolean isRunEnglish;
     @Value("${proxy.list.scheduled.run}")
     private boolean isRunProxy;
     @Value("${proxy.country.scheduled.run}")
@@ -35,6 +38,15 @@ public class SyncStartService {
             return;
         }
         proxyListService.sync();
+    }
+
+    @Scheduled(cron = "${english.list.scheduled}")
+    public void syncEnglish() {
+        if (!isRunEnglish) {
+            log.info("English list sync disable");
+            return;
+        }
+        englishServiceSync.sync();
     }
 
     public void manualSyncProxy() {

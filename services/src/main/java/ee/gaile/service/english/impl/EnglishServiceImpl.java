@@ -52,7 +52,8 @@ public class EnglishServiceImpl implements EnglishService {
         return content;
     }
 
-    private String translate(String text) {
+    @Override
+    public String translate(String text) {
         try {
             String urlStr = GOOGLE_URL_API +
                     "?q=" + URLEncoder.encode(text, StandardCharsets.UTF_8) +
@@ -67,7 +68,7 @@ public class EnglishServiceImpl implements EnglishService {
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
-            
+
             con.disconnect();
             in.close();
 
