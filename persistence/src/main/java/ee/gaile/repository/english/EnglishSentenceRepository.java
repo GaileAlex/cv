@@ -14,11 +14,12 @@ import java.util.List;
 public interface EnglishSentenceRepository extends JpaRepository<EnglishSentenceEntity, Long> {
 
     @Query(value = "select * from english_sentences " +
+            " where sentence_translate is not null and sentence_translate not ilike '%DOCTYPE%' " +
             " order by random() limit 1", nativeQuery = true)
     EnglishSentenceEntity findByRandom();
 
     @Query(value = "select * from english_sentences " +
-            " where sentence_translate is null limit 1000", nativeQuery = true)
+            " where sentence_translate is null or sentence_translate ilike'%DOCTYPE%' limit 500", nativeQuery = true)
     List<EnglishSentenceEntity> findAllLimit();
 
 }

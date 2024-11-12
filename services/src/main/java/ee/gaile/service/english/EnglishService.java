@@ -9,6 +9,4 @@ public interface EnglishService {
 
     EnglishSentence getSentence();
 
-    String translate(String text);
-
 }
