@@ -667,10 +667,6 @@ div.validationError {
     padding-bottom: 50px;
 }
 
-.backdrop-filter {
-    filter: blur(5px);
-}
-
 .p_100 {
     padding-top: 100px;
 }

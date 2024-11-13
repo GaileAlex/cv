@@ -22,6 +22,10 @@ table.table.table-striped {
     min-width: 500px !important;
     table-layout: fixed;
     overflow-wrap: break-word;
+}
 
+
+.backdrop-filter {
+    filter: blur(12px);
 }
 
