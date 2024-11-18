@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -99,7 +100,12 @@ public class ProxyCheckSyncService {
 
         proxyEntity.setLastChecked(LocalDateTime.now());
 
-        proxyRepository.saveAndFlush(proxyEntity);
+        try {
+            proxyRepository.saveAndFlush(proxyEntity);
+        } catch (CannotCreateTransactionException ignored) {
+            // ignore
+        }
+
     }
 
     /**

@@ -17,7 +17,7 @@
     "button.more": "Узнать больше",
     "about": {
       "me": "Обо мне",
-      "description": "У меня более 5 лет опыта разработки и предоставления масштабируемых, безопасных и надежных решений для различных областей промышленности с использованием методологий Java, Spring Boot, микросервисов и Agile.<br><br>Участвовал в проектах в разных доменных областях и разработал множество технических решений. Успешный опыт запуска новых проектов и их реализации для клиентов.<br><br>Из них было несколько проектов с обработкой данных, где я создавал различные отчеты, данные для графиков и т.д., в том числе с Big Data используя Spark.<br>Также я работал над проектами банка, разрабатывал «с нуля» приложения для управления тарифами и тарификации транзакций и другие.<br>Работал над проектами в ритейле, разрабатывал систему лояльности.<br>На последнем месте работы выполнял задачи по обновлению проектов с устаревшего стека на новый, переписывал часть кода в проектах при замене уже неподдерживаемых зависимостей, также выполнял инфраструктурные задачи. Разрабатывал проект по управлению настройками игр, поддерживал и развивал проекты в платежах.<br><br>Работал в следующих направлениях:<br>. Finance<br>. Banking<br>. Retail<br>. iGaming<br><br>Технический стек:<br>. Java 8, Java 11, Java 17<br>. Spring Boot, Spring<br>. Hibernate<br>. Microservices<br>. RDBMS - PostgreSQL, MySql<br>. NoSQL - MongoDB, Cassandra, Elasticsearch<br>. GIT, GITLAB, IntelliJ<br>. Docker, Kubernetes, GoCD<br>. Jira, Confluence, Agile Scrum, Kanban<br>. Angular, React"
+      "description": "У меня более 5 лет опыта разработки и предоставления масштабируемых, безопасных и надежных решений для различных областей промышленности с использованием методологий Java, Spring Boot, микросервисов и Agile.<br><br>Работал в следующих направлениях:<br>. Finance<br>. Banking<br>. Retail<br>. iGaming<br><br>Технический стек:<br>. Java 8, Java 11, Java 17<br>. Spring Boot, Spring<br>. Hibernate<br>. Microservices<br>. RDBMS - PostgreSQL, MySql<br>. NoSQL - MongoDB, Cassandra, Elasticsearch<br>. GIT, GITLAB, IntelliJ<br>. Docker, Kubernetes, GoCD<br>. Jira, Confluence, Agile Scrum, Kanban<br>. Angular, React"
     },
     "portfolio": {
       "portfolio": "Портфолио",
@@ -26,13 +26,7 @@
       "button.app": "Разработка приложений",
       "button.goto": "Перейти на сайт",
       "button.view": "Смотреть",
-      "button.download": "Скачать",
-      "description1": "Создание сайта. Практика 2018 г.",
-      "description2": "Разработка поисковой системы. 2019 г.",
-      "description3": "Игра \"Учимся считать\". 2018 г.",
-      "description4": "Разработка автоматизированного тестового скрипта.<br>\n\n Графическая часть - JavaFX, данные хранятся в файле data.csv, а также в базе MySQL,\n есть возможность переключения между вариантами хранения данных.",
-      "description5": "Тестовое задание \"Crypto Portfolio\".<br>\n  Spring boot, Thymeleaf, PostgreSQL, Json. 2019 г.",
-      "description6": "GoSwift - приложение для отслеживание живой очереди на границе Эстонии. Вы\n можете\n задать свои условия по очереди автомашин или времени ожидания, при достижении которых приложение\n подаст вам сигнал. Приложение собирает данные с сайта https://www.estonianborder.eu/.\n Используется библиотека Jsoup. Создано с помощью JavaFx.<br> 2018 г."
+      "button.download": "Скачать"
     },
     "experience": {
       "experience": "Опыт",

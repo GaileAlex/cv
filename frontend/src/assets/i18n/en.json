@@ -17,7 +17,7 @@
     "button.more": "Learn More",
     "about": {
       "me": "About Me",
-      "description": "I have over 5+ years of experience in developing and delivering scalable, secure, and reliable solutions for various industry domains using Java, Spring Boot, Microservices, and Agile methodologies.<br><br>I have participated in projects in different domain areas and have developed many technical solutions. Successful experience in launching new projects and implementing them for clients.<br><br>There were several projects with data processing, where I created various reports, data for graphs, etc., including Big Data using Spark.<br>I also worked on bank projects, developing an application for managing tariffs from scratch.<br>Worked on projects in retail, and developed a loyalty system.<br>At my last job, I performed tasks to update projects from an outdated stack to a new stack, rewrote some of the code in projects when replacing unsupported dependencies, and performed infrastructure tasks. Developed a project to manage game settings, and supported and developed projects in payments.<br><br>Domains Worked for:<br>. Finance<br>. Banking<br>. Retail<br>. iGaming<br><br>Tech stack: <br>. Java 8, Java 11, Java 17 <br>. Spring Boot, Spring<br>. Hibernate<br>. Microservices<br>. RDBMS - PostgreSQL, MySql<br>. NoSQL - MongoDB, Cassandra, Elasticsearch<br>. GIT, GITLAB, IntelliJ<br>. Docker, Kubernetes<br>, GoCD<br>. Jira, Confluence, Agile Scrum, Kanban <br>. Angular, React"
+      "description": "I have over 5+ years of experience in developing and delivering scalable, secure, and reliable solutions for various industry domains using Java, Spring Boot, Microservices, and Agile methodologies.<br><br>Domains I have worked on:<br>. Finance<br>. Banking<br>. Retail<br>. iGaming<br><br>Tech stack: <br>. Java 8, Java 11, Java 17 <br>. Spring Boot, Spring<br>. Hibernate<br>. Microservices<br>. RDBMS - PostgreSQL, MySql<br>. NoSQL - MongoDB, Cassandra, Elasticsearch<br>. GIT, GITLAB, IntelliJ<br>. Docker, Kubernetes<br>, GoCD<br>. Jira, Confluence, Agile Scrum, Kanban <br>. Angular, React"
     },
     "portfolio": {
       "portfolio": "Portfolio",
@@ -26,13 +26,7 @@
       "button.app": "App Development",
       "button.goto": "Go To The Site",
       "button.view": "View",
-      "button.download": "Download",
-      "description1": "Website creation. Practice 2018.",
-      "description2": "Creating a search engine. 2019 г.",
-      "description3": "\"Learning to Count\" game. 2018.",
-      "description4": "Development of an automated test script.<br>\n\n The graphic part is JavaFX, data is stored in the data.csv file, as well as in the MySQL\n database,\n it is possible to switch between data storage options.<br>2019.",
-      "description5": "Test task \"Crypto Portfolio\".<br>Spring boot, Thymeleaf, PostgreSQL, Json.\n <br>2019",
-      "description6": "GoSwift - application for tracking the live queue on the border of Estonia.\n You can\n specify your conditions in the queue of vehicles or waiting time, at which point the application\n will give you a signal. The application collects data from the site\n https://www.estonianborder.eu/. The Jsoup library is used. Created by JavaFx.<br> 2018."
+      "button.download": "Download"
     },
     "experience": {
       "experience": "Experience",
