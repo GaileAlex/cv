@@ -1,6 +1,7 @@
 package ee.gaile.sync.proxy;
 
 import ee.gaile.repository.proxy.ProxyRepository;
+import ee.gaile.service.mapper.ProxyMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
@@ -36,6 +37,7 @@ public class ProxyCheckSyncService {
 
     private final ProxyRepository proxyRepository;
     private final RestTemplate restTemplate;
+    private final ProxyMapper proxyMapper;
 
     /**
      * Checks the proxy and updates the database accordingly.
@@ -73,7 +75,7 @@ public class ProxyCheckSyncService {
             proxy.setLastChecked(LocalDateTime.now());
             proxy.setLastSuccessfulCheck(LocalDateTime.now());
 
-            proxyRepository.save(proxyRepository.findById(proxy.getId()).get());
+            proxyRepository.save(proxyMapper.mapToProxyEntity(proxy));
         } catch (RestClientException e) {
             saveUnansweredCheck(proxy);
         }
@@ -100,7 +102,7 @@ public class ProxyCheckSyncService {
         proxy.setLastChecked(LocalDateTime.now());
 
         try {
-            proxyRepository.saveAndFlush(proxyRepository.findById(proxy.getId()).get());
+            proxyRepository.save(proxyMapper.mapToProxyEntity(proxy));
         } catch (CannotCreateTransactionException ignored) {
             // ignore
         }

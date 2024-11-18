@@ -10,8 +10,12 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProxyMapper {
 
-    List<Proxy> map(List<ProxyEntity> proxyEntity);
+    List<Proxy> mapToProxies(List<ProxyEntity> proxyEntity);
 
-    Proxy map(ProxyEntity proxyEntity);
+    Proxy mapToProxy(ProxyEntity proxyEntity);
+
+    List<ProxyEntity> mapToProxyEntities(List<Proxy> proxy);
+
+    ProxyEntity mapToProxyEntity(Proxy proxy);
 
 }
