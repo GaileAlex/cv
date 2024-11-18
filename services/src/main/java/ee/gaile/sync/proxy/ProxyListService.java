@@ -1,7 +1,9 @@
 package ee.gaile.sync.proxy;
 
 import ee.gaile.entity.proxy.ProxyEntity;
+import ee.gaile.models.proxy.Proxy;
 import ee.gaile.repository.proxy.ProxyRepository;
+import ee.gaile.service.mapper.ProxyMapper;
 import ee.gaile.sync.SyncService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,7 @@ public class ProxyListService implements SyncService {
     private final ProxyRepository proxyRepository;
     private final NewProxyService newProxyService;
     private final ProxyCheckSyncService proxyCheckSyncService;
+    private final ProxyMapper proxyMapper;
 
     private ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL,
             new CustomizableThreadFactory("proxy-sync-"));
@@ -49,13 +52,14 @@ public class ProxyListService implements SyncService {
         }
 
         List<ProxyEntity> proxyEntities = proxyRepository.findAllOrderByRandom();
+        List<Proxy> proxies = proxyMapper.map(proxyEntities);
 
         log.info("Start proxy list sync. Size lists is {}, in total there were {}, thread pool {}",
                 proxyEntities.size(), aliveProxies, ((ThreadPoolExecutor) proxyListsExecutor).getCorePoolSize());
 
-        proxyEntities.forEach(proxyList -> proxyListsExecutor.execute(() -> {
-            if (doFirstCheck(proxyList)) {
-                proxyCheckSyncService.checkProxy(proxyList);
+        proxies.forEach(proxy -> proxyListsExecutor.execute(() -> {
+            if (doFirstCheck(proxy)) {
+                proxyCheckSyncService.checkProxy(proxy);
             }
         }));
     }
@@ -63,23 +67,24 @@ public class ProxyListService implements SyncService {
     /**
      * Sets the first check and removes inactive proxies
      *
-     * @param proxyEntity - proxy list
+     * @param proxy - proxy
      * @return boolean
      */
-    private boolean doFirstCheck(ProxyEntity proxyEntity) {
-        if (proxyEntity.getFirstChecked() == null) {
-            proxyEntity.setFirstChecked(LocalDateTime.now());
-            proxyEntity.setAnonymity("High anonymity");
-            proxyEntity.setNumberChecks(0);
-            proxyEntity.setNumberUnansweredChecks(0);
-            proxyEntity.setUptime(0.0);
+    private boolean doFirstCheck(Proxy proxy) {
+        if (proxy.getFirstChecked() == null) {
+            proxy.setFirstChecked(LocalDateTime.now());
+            proxy.setAnonymity("High anonymity");
+            proxy.setNumberChecks(0);
+            proxy.setNumberUnansweredChecks(0);
+            proxy.setUptime(0.0);
         }
 
-        if (proxyEntity.getUptime() == 0 && proxyEntity.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
-                Objects.nonNull(proxyEntity.getLastSuccessfulCheck()) &&
-                        DAYS.between(proxyEntity.getLastSuccessfulCheck(), LocalDateTime.now()) > ONE_MONTH &&
-                        proxyEntity.getUptime() < 5) {
-            proxyRepository.delete(proxyEntity);
+        if (proxy.getUptime() == 0 && proxy.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
+                Objects.nonNull(proxy.getLastSuccessfulCheck()) &&
+                        DAYS.between(proxy.getLastSuccessfulCheck(), LocalDateTime.now()) > ONE_MONTH &&
+                        proxy.getUptime() < 5) {
+
+            proxyRepository.delete(proxyRepository.findById(proxy.getId()).get());
 
             return false;
         }

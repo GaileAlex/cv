@@ -1,6 +1,5 @@
 package ee.gaile.sync.proxy;
 
-import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,11 +43,11 @@ public class ProxyCheckSyncService {
      * If the proxy is invalid, it is deleted from the database.
      * If the check fails, the unanswered check is saved to the database.
      *
-     * @param proxyEntity The proxy entity to be checked
+     * @param proxy The proxy  to be checked
      */
-    public void checkProxy(ProxyEntity proxyEntity) {
+    public void checkProxy(ee.gaile.models.proxy.Proxy proxy) {
         if (!checkInternetConnection()) {
-            proxyRepository.saveAndFlush(proxyEntity);
+            proxyRepository.saveAndFlush(proxyRepository.findById(proxy.getId()).get());
             return;
         }
 
@@ -56,9 +55,9 @@ public class ProxyCheckSyncService {
 
         try {
             socksProxy = new Proxy(Proxy.Type.SOCKS,
-                    new InetSocketAddress(proxyEntity.getIpAddress(), proxyEntity.getPort()));
+                    new InetSocketAddress(proxy.getIpAddress(), proxy.getPort()));
         } catch (IllegalArgumentException e) {
-            proxyRepository.delete(proxyEntity);
+            proxyRepository.delete(proxyRepository.findById(proxy.getId()).get());
             return;
         }
 
@@ -67,16 +66,16 @@ public class ProxyCheckSyncService {
 
             requestToUrl(socksProxy);
 
-            proxyEntity.setSpeed(checkSpeed(startFile));
-            proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
-            double uptime = getUptime(proxyEntity);
-            proxyEntity.setUptime(uptime);
-            proxyEntity.setLastChecked(LocalDateTime.now());
-            proxyEntity.setLastSuccessfulCheck(LocalDateTime.now());
+            proxy.setSpeed(checkSpeed(startFile));
+            proxy.setNumberChecks(proxy.getNumberChecks() + 1);
+            double uptime = getUptime(proxy);
+            proxy.setUptime(uptime);
+            proxy.setLastChecked(LocalDateTime.now());
+            proxy.setLastSuccessfulCheck(LocalDateTime.now());
 
-            proxyRepository.save(proxyEntity);
+            proxyRepository.save(proxyRepository.findById(proxy.getId()).get());
         } catch (RestClientException e) {
-            saveUnansweredCheck(proxyEntity);
+            saveUnansweredCheck(proxy);
         }
     }
 
@@ -84,24 +83,24 @@ public class ProxyCheckSyncService {
      * Updates the proxyEntity with the latest uptime, speed, and check counts, and saves it to the repository.
      * Increments the number of unanswered checks if applicable.
      *
-     * @param proxyEntity the ProxyEntity to be updated and saved
+     * @param proxy the ProxyEntity to be updated and saved
      */
-    private void saveUnansweredCheck(ProxyEntity proxyEntity) {
-        double uptime = getUptime(proxyEntity);
-        proxyEntity.setUptime(uptime);
-        proxyEntity.setSpeed(0.0);
-        proxyEntity.setNumberChecks(proxyEntity.getNumberChecks() + 1);
+    private void saveUnansweredCheck(ee.gaile.models.proxy.Proxy proxy) {
+        double uptime = getUptime(proxy);
+        proxy.setUptime(uptime);
+        proxy.setSpeed(0.0);
+        proxy.setNumberChecks(proxy.getNumberChecks() + 1);
 
-        if (proxyEntity.getNumberUnansweredChecks() != null) {
-            proxyEntity.setNumberUnansweredChecks(proxyEntity.getNumberUnansweredChecks() + 1);
+        if (proxy.getNumberUnansweredChecks() != null) {
+            proxy.setNumberUnansweredChecks(proxy.getNumberUnansweredChecks() + 1);
         } else {
-            proxyEntity.setNumberUnansweredChecks(1);
+            proxy.setNumberUnansweredChecks(1);
         }
 
-        proxyEntity.setLastChecked(LocalDateTime.now());
+        proxy.setLastChecked(LocalDateTime.now());
 
         try {
-            proxyRepository.saveAndFlush(proxyEntity);
+            proxyRepository.saveAndFlush(proxyRepository.findById(proxy.getId()).get());
         } catch (CannotCreateTransactionException ignored) {
             // ignore
         }
@@ -111,16 +110,16 @@ public class ProxyCheckSyncService {
     /**
      * Calculate the uptime percentage based on the number of checks and unanswered checks.
      *
-     * @param proxyEntity the ProxyEntity containing the number of checks and unanswered checks
+     * @param proxy the Proxy containing the number of checks and unanswered checks
      * @return the uptime percentage
      */
-    private Double getUptime(ProxyEntity proxyEntity) {
-        Integer numberChecks = proxyEntity.getNumberChecks();
+    private Double getUptime(ee.gaile.models.proxy.Proxy proxy) {
+        Integer numberChecks = proxy.getNumberChecks();
         int numberUnansweredChecks;
-        if (proxyEntity.getNumberUnansweredChecks() == null) {
+        if (proxy.getNumberUnansweredChecks() == null) {
             numberUnansweredChecks = 0;
         } else {
-            numberUnansweredChecks = proxyEntity.getNumberUnansweredChecks();
+            numberUnansweredChecks = proxy.getNumberUnansweredChecks();
         }
 
         double numberChecksValue = 100.0 * ((double) numberUnansweredChecks / (double) numberChecks);

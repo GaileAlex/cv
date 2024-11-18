@@ -39,4 +39,8 @@ public class Proxy {
 
     @JsonIgnore
     private Integer numberUnansweredChecks;
+
+    @JsonIgnore
+    private LocalDateTime lastSuccessfulCheck;
+
 }
