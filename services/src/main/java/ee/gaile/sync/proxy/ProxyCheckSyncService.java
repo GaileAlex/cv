@@ -49,7 +49,7 @@ public class ProxyCheckSyncService {
      */
     public void checkProxy(ee.gaile.models.proxy.Proxy proxy) {
         if (!checkInternetConnection()) {
-            proxyRepository.saveAndFlush(proxyRepository.findById(proxy.getId()).get());
+            proxyRepository.saveAndFlush(proxyMapper.mapToProxyEntity(proxy));
             return;
         }
 
@@ -59,7 +59,7 @@ public class ProxyCheckSyncService {
             socksProxy = new Proxy(Proxy.Type.SOCKS,
                     new InetSocketAddress(proxy.getIpAddress(), proxy.getPort()));
         } catch (IllegalArgumentException e) {
-            proxyRepository.delete(proxyRepository.findById(proxy.getId()).get());
+            proxyRepository.deleteById(proxy.getId());
             return;
         }
 

@@ -84,7 +84,7 @@ public class ProxyListService implements SyncService {
                         DAYS.between(proxy.getLastSuccessfulCheck(), LocalDateTime.now()) > ONE_MONTH &&
                         proxy.getUptime() < 5) {
 
-            proxyRepository.delete(proxyRepository.findById(proxy.getId()).get());
+            proxyRepository.deleteById(proxy.getId());
 
             return false;
         }
