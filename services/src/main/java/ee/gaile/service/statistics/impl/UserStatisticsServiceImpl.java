@@ -35,7 +35,7 @@ public class UserStatisticsServiceImpl implements UserStatisticsService {
             emailService.sendSimpleMessage(request);
         }
 
-        if (request.getHeader("userId") != null || request.getHeader("userId").equals("undefined")) {
+        if (request.getHeader("userId") != null && request.getHeader("userId").equals("undefined")) {
             return undefinedUserStatistics.setUserStatistics(request);
         }
 

@@ -35,6 +35,9 @@ public class UserEventsImpl implements UserEvents {
     @Override
     public void setUserEvent(HttpServletRequest request) {
         String sessionId;
+        if (request.getHeader(USER_ID) == null) {
+            return;
+        }
         if (!request.getHeader(USER_ID).equals("undefined")) {
             sessionId = request.getHeader(USER_ID);
         } else if (!request.getHeader("sessionStorageUserId").equals("undefined")) {
