@@ -17,7 +17,7 @@
     "button.more": "Узнать больше",
     "about": {
       "me": "Обо мне",
-      "description": "У меня более 5 лет опыта разработки и предоставления масштабируемых, безопасных и надежных решений для различных областей промышленности с использованием методологий Java, Spring Boot, микросервисов и Agile.<br><br>Работал в следующих направлениях:<br>. Finance<br>. Banking<br>. Retail<br>. iGaming<br><br>Технический стек:<br>. Java 8, Java 11, Java 17<br>. Spring Boot, Spring<br>. Hibernate<br>. Microservices<br>. RDBMS - PostgreSQL, MySql<br>. NoSQL - MongoDB, Cassandra, Elasticsearch<br>. GIT, GITLAB, IntelliJ<br>. Docker, Kubernetes, GoCD<br>. Jira, Confluence, Agile Scrum, Kanban<br>. Angular, React"
+      "description": "У меня более 6 лет опыта разработки и предоставления масштабируемых, безопасных и надежных решений для различных областей промышленности с использованием методологий Java, Spring Boot, микросервисов и Agile.<br><br>Работал в следующих направлениях:<br>. Finance<br>. Banking<br>. Retail<br>. iGaming<br><br>Технический стек:<br>. Java 8, Java 11, Java 17<br>. Spring Boot, Spring<br>. Hibernate<br>. Microservices<br>. RDBMS - PostgreSQL, MySql<br>. NoSQL - MongoDB, Cassandra, Elasticsearch<br>. GIT, GITLAB, IntelliJ<br>. Docker, Kubernetes, GoCD<br>. Jira, Confluence, Agile Scrum, Kanban<br>. Angular, React"
     },
     "portfolio": {
       "portfolio": "Портфолио",
