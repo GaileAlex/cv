@@ -27,7 +27,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @RequiredArgsConstructor
 public class ProxyListService implements SyncService {
     private static final int THREAD_POOL = 90;
-    private static final int ALLOWABLE_PROXY = 100;
+    private static final int ALLOWABLE_PROXY = 150;
     private static final int NUMBER_UNANSWERED_CHECKS = 10;
     private static final int ONE_MONTH = 30;
 

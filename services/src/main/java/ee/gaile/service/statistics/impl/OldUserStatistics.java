@@ -37,6 +37,10 @@ public class OldUserStatistics implements Statistics {
     public Map<String, String> setUserStatistics(HttpServletRequest request) {
         Map<String, String> response = new HashMap<>();
 
+        if (request.getHeader("userId") == null) {
+            return new HashMap<>();
+        }
+
         Optional<VisitStatisticsEntity> visitStatisticsByNameOptional =
                 visitStatisticsRepository.findBySessionId(request.getHeader("userId"));
 
