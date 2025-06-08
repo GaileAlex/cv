@@ -1,6 +1,7 @@
 package ee.gaile.sync;
 
 import ee.gaile.sync.proxy.CountrySyncService;
+import ee.gaile.sync.proxy.NewProxyService;
 import ee.gaile.sync.proxy.ProxyListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +21,25 @@ public class SyncStartService {
     private final ProxyListService proxyListService;
     private final CountrySyncService countrySyncService;
     private final SyncService englishServiceSync;
+    private final NewProxyService newProxyService;
 
     @Value("${english.list.scheduled.run}")
     private boolean isRunEnglish;
     @Value("${proxy.list.scheduled.run}")
     private boolean isRunProxy;
+    @Value("${proxy.new.list.scheduled.run}")
+    private boolean isRunNewProxy;
     @Value("${proxy.country.scheduled.run}")
     private boolean isRunCheckCountry;
+
+    @Scheduled(cron = "${proxy.new.list.scheduled}")
+    public void syncNewProxy() {
+        if (!isRunProxy) {
+            log.info("Scheduled proxy list sync disable");
+            return;
+        }
+        newProxyService.sync();
+    }
 
     /**
      * Starts syncing proxy list

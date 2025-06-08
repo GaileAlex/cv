@@ -44,7 +44,7 @@ public class ProxyController {
     @PostMapping(path = "/add-new")
     @Operation(summary = "Add new proxies")
     public ResponseEntity<Void> setNewProxy() {
-        newProxyService.setNewProxy();
+        newProxyService.sync();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

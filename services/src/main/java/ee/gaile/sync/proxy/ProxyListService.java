@@ -27,12 +27,10 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @RequiredArgsConstructor
 public class ProxyListService implements SyncService {
     private static final int THREAD_POOL = 90;
-    private static final int ALLOWABLE_PROXY = 150;
     private static final int NUMBER_UNANSWERED_CHECKS = 10;
     private static final int ONE_MONTH = 30;
 
     private final ProxyRepository proxyRepository;
-    private final NewProxyService newProxyService;
     private final ProxyCheckSyncService proxyCheckSyncService;
     private final ProxyMapper proxyMapper;
 
@@ -47,9 +45,6 @@ public class ProxyListService implements SyncService {
         checkActiveThreadPool();
 
         long aliveProxies = proxyRepository.getTotalAliveProxies();
-        if (aliveProxies < ALLOWABLE_PROXY) {
-            newProxyService.setNewProxy();
-        }
 
         List<ProxyEntity> proxyEntities = proxyRepository.findAllOrderByRandom();
         List<Proxy> proxies = proxyMapper.mapToProxies(proxyEntities);

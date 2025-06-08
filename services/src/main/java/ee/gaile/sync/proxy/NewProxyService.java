@@ -4,6 +4,7 @@ import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.entity.proxy.ProxySiteEntity;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.repository.proxy.ProxySitesRepository;
+import ee.gaile.sync.SyncService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -27,14 +28,14 @@ import java.util.regex.Pattern;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class NewProxyService {
+public class NewProxyService implements SyncService {
     private final ProxyRepository proxyRepository;
     private final ProxySitesRepository proxySitesRepository;
 
     /**
      * Searches for new proxies on sites, adds to the database
      */
-    public void setNewProxy() {
+    public void sync() {
         int siteConnectionError = 0;
         int counter = 0;
 
