@@ -34,8 +34,8 @@ public class SyncStartService {
 
     @Scheduled(cron = "${proxy.new.list.scheduled}")
     public void syncNewProxy() {
-        if (!isRunProxy) {
-            log.info("Scheduled proxy list sync disable");
+        if (!isRunNewProxy) {
+            log.info("Scheduled new proxy list sync disable");
             return;
         }
         newProxyService.sync();

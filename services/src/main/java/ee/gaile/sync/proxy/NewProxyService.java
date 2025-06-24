@@ -84,10 +84,10 @@ public class NewProxyService implements SyncService {
         Matcher m = p.matcher(doc.toString());
 
         while (m.find()) {
-            String[] adress = m.group(0).split(":");
+            String[] address = m.group(0).split(":");
             ProxyEntity proxyEntity = new ProxyEntity();
-            proxyEntity.setIpAddress(adress[0]);
-            proxyEntity.setPort(Integer.valueOf(adress[1]));
+            proxyEntity.setIpAddress(address[0]);
+            proxyEntity.setPort(Integer.valueOf(address[1]));
             proxyEntity.setProtocol("SOCKS5");
             proxyEntity.setCountry("unknown");
 
