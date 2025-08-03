@@ -1,7 +1,6 @@
 package ee.gaile.sync;
 
 import ee.gaile.sync.proxy.CountrySyncService;
-import ee.gaile.sync.proxy.NewProxyService;
 import ee.gaile.sync.proxy.ProxyListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
