@@ -21,25 +21,13 @@ public class SyncStartService {
     private final ProxyListService proxyListService;
     private final CountrySyncService countrySyncService;
     private final SyncService englishServiceSync;
-    private final NewProxyService newProxyService;
 
     @Value("${english.list.scheduled.run}")
     private boolean isRunEnglish;
     @Value("${proxy.list.scheduled.run}")
     private boolean isRunProxy;
-    @Value("${proxy.new.list.scheduled.run}")
-    private boolean isRunNewProxy;
     @Value("${proxy.country.scheduled.run}")
     private boolean isRunCheckCountry;
-
-    @Scheduled(cron = "${proxy.new.list.scheduled}")
-    public void syncNewProxy() {
-        if (!isRunNewProxy) {
-            log.info("Scheduled new proxy list sync disable");
-            return;
-        }
-        newProxyService.sync();
-    }
 
     /**
      * Starts syncing proxy list
