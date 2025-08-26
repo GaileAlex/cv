@@ -4,18 +4,23 @@ import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.service.mapper.ProxyMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.DefaultHttpRequestRetryStrategy;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.core5.http.HttpHost;
+import org.apache.hc.core5.util.TimeValue;
+import org.apache.hc.core5.util.Timeout;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.CannotCreateTransactionException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.net.Socket;
-import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -33,10 +38,9 @@ public class ProxyCheckSyncService {
     private static final String FILE_URL = "https://gaile.ee/api/v1/proxy/file";
     private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 1_000_000.0;
-    private static final Integer TIMEOUT = 3;
+    private static final Integer TIMEOUT = 10;
 
     private final ProxyRepository proxyRepository;
-    private final RestTemplate restTemplate;
     private final ProxyMapper proxyMapper;
 
     /**
@@ -53,11 +57,10 @@ public class ProxyCheckSyncService {
             return;
         }
 
-        Proxy socksProxy;
+        HttpHost socksProxy ;
 
         try {
-            socksProxy = new Proxy(Proxy.Type.SOCKS,
-                    new InetSocketAddress(proxy.getIpAddress(), proxy.getPort()));
+            socksProxy =  new HttpHost(proxy.getIpAddress(), proxy.getPort());
         } catch (IllegalArgumentException e) {
             proxyRepository.deleteById(proxy.getId());
             return;
@@ -76,7 +79,7 @@ public class ProxyCheckSyncService {
             proxy.setLastSuccessfulCheck(LocalDateTime.now());
 
             proxyRepository.save(proxyMapper.mapToProxyEntity(proxy));
-        } catch (RestClientException e) {
+        } catch (Exception e) {
             saveUnansweredCheck(proxy);
         }
     }
@@ -171,12 +174,25 @@ public class ProxyCheckSyncService {
      *
      * @param socksProxy the SOCKS proxy to be used
      */
-    private void requestToUrl(Proxy socksProxy) {
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        requestFactory.setProxy(socksProxy);
-        requestFactory.setConnectTimeout(Duration.ofMinutes(TIMEOUT));
-        requestFactory.setReadTimeout(Duration.ofMinutes(TIMEOUT));
-        restTemplate.setRequestFactory(requestFactory);
+    private void requestToUrl(HttpHost socksProxy) {
+        PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
+        connManager.setMaxTotal(200);
+        connManager.setDefaultMaxPerRoute(100);
+
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectionRequestTimeout(Timeout.ofSeconds(TIMEOUT))
+                .setResponseTimeout(Timeout.ofSeconds(TIMEOUT))
+                .build();
+
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setConnectionManager(connManager)
+                .setDefaultRequestConfig(requestConfig)
+                .setRetryStrategy(new DefaultHttpRequestRetryStrategy(1, TimeValue.ofSeconds(3)))
+                .setProxy(socksProxy)
+                .build();
+
+        RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(httpClient));
+
 
         restTemplate.exchange(FILE_URL, HttpMethod.GET, null, byte[].class);
     }
