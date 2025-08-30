@@ -187,7 +187,7 @@ public class ProxyCheckSyncService {
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setConnectionManager(connManager)
                 .setDefaultRequestConfig(requestConfig)
-                .setRetryStrategy(new DefaultHttpRequestRetryStrategy(1, TimeValue.ofSeconds(3)))
+                .setRetryStrategy(new DefaultHttpRequestRetryStrategy(0, TimeValue.ZERO_MILLISECONDS))
                 .setProxy(socksProxy)
                 .build();
 
