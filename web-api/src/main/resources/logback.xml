@@ -8,6 +8,13 @@
     <logger name="org.springframework.http.converter" level="ERROR"/>
     <logger name="org.springframework.web.context.request.async" level="OFF"/>
     <logger name="io.github.bonigarcia" level="WARN"/>
+    <logger name="io.netty.handler.ssl.SslHandler" level="ERROR"/>
+    <logger name="reactor.netty.http.client.HttpClientConnect" level="ERROR"/>
+    <logger name="io.netty.handler.ssl.NotSslRecordException" level="OFF"/>
+    <logger name="io.netty.handler.codec.DecoderException" level="ERROR"/>
+    <logger name="reactor.netty.channel.FluxReceive" level="ERROR"/>
+    <logger name="org.openqa.selenium.devtools.CdpVersionFinder" level="ERROR"/>
+    <logger name="org.openqa.selenium.chromium.ChromiumDriver" level="ERROR"/>
 
     <property name="log.folder" value="./.logs"/>
 

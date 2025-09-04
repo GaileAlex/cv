@@ -46,7 +46,7 @@ public class NewProxyService {
         List<ProxySiteEntity> proxySites = proxySitesRepository.findAll();
 
         for (ProxySiteEntity proxySite : proxySites) {
-            WebDriverManager.chromedriver().setup();
+            WebDriverManager.chromedriver().avoidFallback().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--headless=new");
             options.addArguments("--no-sandbox");
@@ -154,14 +154,11 @@ public class NewProxyService {
      */
     private int saveProxies(List<ProxyEntity> proxyEntities) {
         int count = 0;
-
-        for (ProxyEntity proxyEntity : proxyEntities) {
-            try {
-                proxyRepository.save(proxyEntity);
-                count++;
-            } catch (Exception ignored) {
-                // Ignore the error of adding an existing proxy to the database
-            }
+        try {
+            proxyRepository.saveAll(proxyEntities);
+            count++;
+        } catch (Exception ignored) {
+            count--;
         }
 
         return count;

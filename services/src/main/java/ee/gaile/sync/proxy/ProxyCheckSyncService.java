@@ -1,5 +1,6 @@
 package ee.gaile.sync.proxy;
 
+import ee.gaile.models.proxy.Proxy;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.service.mapper.ProxyMapper;
 import lombok.RequiredArgsConstructor;
@@ -13,18 +14,29 @@ import org.apache.hc.core5.http.HttpHost;
 import org.apache.hc.core5.util.TimeValue;
 import org.apache.hc.core5.util.Timeout;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.web.client.RestTemplate;
+import reactor.core.Disposable;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.netty.http.client.HttpClient;
+import reactor.netty.resources.ConnectionProvider;
+import reactor.netty.transport.ProxyProvider;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Service for checking proxy for availability
@@ -39,49 +51,49 @@ public class ProxyCheckSyncService {
     private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 1_000_000.0;
     private static final Integer TIMEOUT = 10;
+    private final Object lock = new Object();
+    private Disposable currentSubscription;
+    private Queue<Proxy> currentQueue;
 
     private final ProxyRepository proxyRepository;
     private final ProxyMapper proxyMapper;
 
-    /**
-     * Checks the proxy and updates the database accordingly.
-     * If internet connection is not available, the proxy is saved to the database.
-     * If the proxy is invalid, it is deleted from the database.
-     * If the check fails, the unanswered check is saved to the database.
-     *
-     * @param proxy The proxy  to be checked
-     */
-    public void checkProxy(ee.gaile.models.proxy.Proxy proxy) {
-        if (!checkInternetConnection()) {
-            proxyRepository.saveAndFlush(proxyMapper.mapToProxyEntity(proxy));
-            return;
-        }
+    public Mono<Void> checkProxyAsync(Proxy proxy) {
+        Instant start = Instant.now();
 
-        HttpHost socksProxy ;
+        HttpClient httpClient = HttpClient
+                .create(ConnectionProvider.newConnection())
+                .proxy(spec -> spec.type(ProxyProvider.Proxy.SOCKS5)
+                        .host(proxy.getIpAddress())
+                        .port(proxy.getPort()))
+                .responseTimeout(Duration.ofSeconds(TIMEOUT));
 
-        try {
-            socksProxy =  new HttpHost(proxy.getIpAddress(), proxy.getPort());
-        } catch (IllegalArgumentException e) {
-            proxyRepository.deleteById(proxy.getId());
-            return;
-        }
-
-        try {
-            Instant startFile = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
-
-            requestToUrl(socksProxy);
-
-            proxy.setSpeed(checkSpeed(startFile));
-            proxy.setNumberChecks(proxy.getNumberChecks() + 1);
-            double uptime = getUptime(proxy);
-            proxy.setUptime(uptime);
-            proxy.setLastChecked(LocalDateTime.now());
-            proxy.setLastSuccessfulCheck(LocalDateTime.now());
-
-            proxyRepository.save(proxyMapper.mapToProxyEntity(proxy));
-        } catch (Exception e) {
-            saveUnansweredCheck(proxy);
-        }
+        return httpClient
+                .get()
+                .uri(FILE_URL)
+                .responseSingle((resp, body) -> {
+                    if (resp.status().code() == HttpStatus.OK.value()) {
+                        return body.asByteArray();
+                    } else {
+                        return Mono.error(new RuntimeException("HTTP error " + resp.status()));
+                    }
+                })
+                .map(bytes -> {
+                    double speed = checkSpeed(start);
+                    proxy.setSpeed(speed);
+                    proxy.setNumberChecks(proxy.getNumberChecks() + 1);
+                    proxy.setUptime(getUptime(proxy));
+                    proxy.setLastChecked(LocalDateTime.now());
+                    proxy.setLastSuccessfulCheck(LocalDateTime.now());
+                    proxyRepository.save(proxyMapper.mapToProxyEntity(proxy));
+                //    log.info("✅ OK {}:{} → {} bytes, speed={}", proxy.getIpAddress(), proxy.getPort(), bytes.length, speed);
+                    return proxy;
+                })
+                .onErrorResume(e -> {
+                    saveUnansweredCheck(proxy);
+                    return Mono.empty();
+                })
+                .then();
     }
 
     /**
@@ -170,31 +182,33 @@ public class ProxyCheckSyncService {
     }
 
     /**
-     * Makes a GET request to a file URL with specified headers using a RestTemplate set up with a specified SOCKS proxy.
-     *
-     * @param socksProxy the SOCKS proxy to be used
+     * Проверяет список прокси асинхронно с параллельностью 200.
+     * Если предыдущая проверка ещё идёт — она прерывается.
      */
-    private void requestToUrl(HttpHost socksProxy) {
-        PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
-        connManager.setMaxTotal(200);
-        connManager.setDefaultMaxPerRoute(100);
+    public void checkAllAsync(List<Proxy> proxies) {
+        if (!checkInternetConnection()) {
+            proxyRepository.saveAll(proxyMapper.mapToProxyEntities(proxies));
+            return;
+        }
+        synchronized (lock) {
+            if (currentSubscription != null && !currentSubscription.isDisposed()) {
+                currentSubscription.dispose();
+                log.info("Previous launch interrupted, remaining proxies: {}", currentQueue.size());
+            }
 
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectionRequestTimeout(Timeout.ofSeconds(TIMEOUT))
-                .setResponseTimeout(Timeout.ofSeconds(TIMEOUT))
-                .build();
+            currentQueue = new ConcurrentLinkedQueue<>(proxies);
 
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setConnectionManager(connManager)
-                .setDefaultRequestConfig(requestConfig)
-                .setRetryStrategy(new DefaultHttpRequestRetryStrategy(0, TimeValue.ZERO_MILLISECONDS))
-                .setProxy(socksProxy)
-                .build();
-
-        RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(httpClient));
-
-
-        restTemplate.exchange(FILE_URL, HttpMethod.GET, null, byte[].class);
+            currentSubscription = Flux.fromIterable(currentQueue)
+                    .flatMap(proxy ->
+                            checkProxyAsync(proxy)
+                                    .doFinally(signal -> currentQueue.remove(proxy)), 200)
+                    .subscribe(
+                            proxy -> {
+                            },
+                            err -> log.error("Error checking proxy", err),
+                            () -> log.info("Checking all proxies completed")
+                    );
+        }
     }
 
 }

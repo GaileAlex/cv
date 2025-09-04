@@ -11,6 +11,7 @@ import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
@@ -26,8 +27,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @Service
 @RequiredArgsConstructor
 public class ProxyListService implements SyncService {
-    private static final int THREAD_POOL = 200;
-    private static final int ALLOWABLE_PROXY = 200;
+    private static final int ALLOWABLE_PROXY = 100;
     private static final int NUMBER_UNANSWERED_CHECKS = 10;
     private static final int ONE_MONTH = 30;
 
@@ -36,16 +36,11 @@ public class ProxyListService implements SyncService {
     private final ProxyCheckSyncService proxyCheckSyncService;
     private final ProxyMapper proxyMapper;
 
-    private ExecutorService proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL,
-            new CustomizableThreadFactory("proxy-sync-"));
-
     /**
      * The start of the proxy check service
      */
     @Override
     public void sync() {
-        checkActiveThreadPool();
-
         long aliveProxies = proxyRepository.getTotalAliveProxies();
         if (aliveProxies < ALLOWABLE_PROXY) {
             newProxyService.setNewProxy();
@@ -53,15 +48,18 @@ public class ProxyListService implements SyncService {
 
         List<ProxyEntity> proxyEntities = proxyRepository.findAllOrderByRandom();
         List<Proxy> proxies = proxyMapper.mapToProxies(proxyEntities);
+        List<Proxy> proxiesForCheck = new ArrayList<>();
 
-        log.info("Start proxy list sync. Size lists is {}, in total there were {}, thread pool {}",
-                proxyEntities.size(), aliveProxies, ((ThreadPoolExecutor) proxyListsExecutor).getCorePoolSize());
+        log.info("Start proxy list sync. Size lists is {}, in total there were {}",
+                proxyEntities.size(), aliveProxies);
 
-        proxies.forEach(proxy -> proxyListsExecutor.execute(() -> {
+        proxies.forEach(proxy -> {
             if (doFirstCheck(proxy)) {
-                proxyCheckSyncService.checkProxy(proxy);
+                proxiesForCheck.add(proxy);
             }
-        }));
+        });
+
+        proxyCheckSyncService.checkAllAsync(proxiesForCheck);
     }
 
     /**
@@ -79,7 +77,7 @@ public class ProxyListService implements SyncService {
             proxy.setUptime(0.0);
         }
 
-        if (proxy.getUptime() == 0 && proxy.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
+        if (proxy.getPort() > 65535 || proxy.getUptime() == 0 && proxy.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
                 Objects.nonNull(proxy.getLastSuccessfulCheck()) &&
                         DAYS.between(proxy.getLastSuccessfulCheck(), LocalDateTime.now()) > ONE_MONTH &&
                         proxy.getUptime() < 5) {
@@ -90,19 +88,6 @@ public class ProxyListService implements SyncService {
         }
 
         return true;
-    }
-
-    /**
-     * Checks the end of the previous schedule
-     */
-    private void checkActiveThreadPool() {
-        int activeThreadPool = ((ThreadPoolExecutor) proxyListsExecutor).getActiveCount();
-        if (activeThreadPool > 0) {
-            log.warn("The previous sync is incomplete, canceled. Unfinished tasks - {}", activeThreadPool);
-            proxyListsExecutor.shutdownNow();
-            proxyListsExecutor = Executors.newFixedThreadPool(THREAD_POOL,
-                    new CustomizableThreadFactory("proxy-sync-"));
-        }
     }
 
 }
