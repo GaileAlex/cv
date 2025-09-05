@@ -32,4 +32,6 @@ public interface ProxyRepository extends JpaRepository<ProxyEntity, Long> {
             " order by random()", nativeQuery = true)
     List<ProxyEntity> findAllOrderByRandom();
 
+    boolean existsByIpAddressAndPort(String ipAddress, Integer port);
+
 }

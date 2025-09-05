@@ -153,15 +153,12 @@ public class NewProxyService {
      * @return the number of successfully saved proxy entities
      */
     private int saveProxies(List<ProxyEntity> proxyEntities) {
-        int count = 0;
-        try {
-            proxyRepository.saveAll(proxyEntities);
-            count++;
-        } catch (Exception ignored) {
-            count--;
-        }
+        List<ProxyEntity> newEntities = proxyEntities.stream()
+                .filter(e -> !proxyRepository.existsByIpAddressAndPort(e.getIpAddress(), e.getPort()))
+                .toList();
+        proxyRepository.saveAll(newEntities);
 
-        return count;
+        return newEntities.size();
     }
 
 }
