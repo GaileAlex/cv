@@ -18,8 +18,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,9 +43,9 @@ public class NewProxyService {
     @Async
     public void setNewProxy() {
         int siteConnectionError = 0;
-        int counter = 0;
 
         List<ProxySiteEntity> proxySites = proxySitesRepository.findAll();
+        Set<ProxyEntity> proxyEntities = new HashSet<>();
 
         for (ProxySiteEntity proxySite : proxySites) {
             WebDriverManager.chromedriver().avoidFallback().setup();
@@ -54,23 +56,22 @@ public class NewProxyService {
 
             WebDriver driver = new ChromeDriver(options);
 
-            List<ProxyEntity> proxyEntities = new ArrayList<>();
             try {
                 driver.get(proxySite.getUrl());
                 String renderedHtml = driver.getPageSource();
                 Document doc = Jsoup.parse(renderedHtml);
 
-                proxyEntities.addAll(addProxyOnSeparatedIpAndPort(doc));
+                List<ProxyEntity> newProxy = addProxyOnSeparatedIpAndPort(doc);
 
-                if (proxyEntities.isEmpty()) {
+                if (newProxy.isEmpty()) {
                     proxyEntities.addAll(addProxyByIpAndPort(doc));
+                } else {
+                    proxyEntities.addAll(newProxy);
                 }
                 if (proxyEntities.isEmpty()) {
                     log.warn("No proxies received from the site - {} ", proxySite.getUrl());
                     continue;
                 }
-
-                counter += saveProxies(proxyEntities);
 
             } catch (Exception e) {
                 log.warn("Site connection error - {} ", proxySite.getUrl());
@@ -79,6 +80,7 @@ public class NewProxyService {
                 driver.quit();
             }
         }
+        int counter = saveProxies(proxyEntities);
         log.warn("Total site connection errors {} ", siteConnectionError);
         log.info("Proxy saved - {}", counter);
     }
@@ -152,7 +154,7 @@ public class NewProxyService {
      * @param proxyEntities the list of proxy entities to save
      * @return the number of successfully saved proxy entities
      */
-    private int saveProxies(List<ProxyEntity> proxyEntities) {
+    private int saveProxies(Set<ProxyEntity> proxyEntities) {
         List<ProxyEntity> newEntities = proxyEntities.stream()
                 .filter(e -> !proxyRepository.existsByIpAddressAndPort(e.getIpAddress(), e.getPort()))
                 .toList();

@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -62,4 +63,17 @@ public class ProxyEntity {
     @Column(name = "number_unanswered_checks")
     @JsonIgnore
     private Integer numberUnansweredChecks;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ProxyEntity that = (ProxyEntity) o;
+        return Objects.equals(ipAddress, that.ipAddress) && Objects.equals(port, that.port);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ipAddress, port);
+    }
+
 }
