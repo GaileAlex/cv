@@ -121,6 +121,8 @@ public class NewProxyService {
         List<ProxyEntity> proxyEntities = new ArrayList<>();
         Elements table = doc.select("table");
         Elements rows = table.select("tr");
+        Elements rowsTd = table.select("td");
+        rows.addAll(rowsTd);
 
         for (int i = 0; i < rows.size(); i++) {
             Element row = rows.get(i);
@@ -134,7 +136,7 @@ public class NewProxyService {
                     proxyEntity.setIpAddress(ip);
                     continue;
                 }
-                if (Objects.nonNull(proxyEntity.getIpAddress()) && !ip.isEmpty()) {
+                if (Objects.nonNull(proxyEntity.getIpAddress()) && !ip.isEmpty() && ip.matches("-?\\d+")) {
                     proxyEntity.setPort(Integer.valueOf(ip));
                     proxyEntity.setProtocol("SOCKS5");
                     proxyEntity.setCountry("unknown");
