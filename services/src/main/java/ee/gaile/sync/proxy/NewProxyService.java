@@ -72,7 +72,7 @@ public class NewProxyService {
 
                 counter += saveProxies(proxyEntities);
 
-            } catch (NumberFormatException e) {
+            } catch (Exception e) {
                 log.warn("Site connection error - {} ", proxySite.getUrl());
                 siteConnectionError = siteConnectionError + 1;
             } finally {
