@@ -55,7 +55,45 @@ public class ProxyCheckSyncService {
     private final ProxyRepository proxyRepository;
     private final ProxyMapper proxyMapper;
 
-    public Mono<Void> checkProxyAsync(Proxy proxy) {
+    /**
+     * Проверяет список прокси асинхронно с параллельностью 200.
+     * Если предыдущая проверка ещё идёт — она прерывается.
+     */
+    public void checkAllAsync(List<Proxy> proxies) {
+        if (!checkInternetConnection()) {
+            proxyRepository.saveAll(proxyMapper.mapToProxyEntities(proxies));
+            return;
+        }
+
+        synchronized (lock) {
+            if (currentSubscription != null && !currentSubscription.isDisposed()) {
+                currentSubscription.dispose();
+                log.info("Previous launch interrupted, remaining proxies: {}", currentQueue.size());
+            }
+
+            List<Proxy> proxiesForCheck = new ArrayList<>();
+            proxies.forEach(proxy -> {
+                if (doFirstCheck(proxy)) {
+                    proxiesForCheck.add(proxy);
+                }
+            });
+
+            currentQueue = new ConcurrentLinkedQueue<>(proxiesForCheck);
+
+            currentSubscription = Flux.fromIterable(currentQueue)
+                    .flatMap(proxy ->
+                            checkProxyAsync(proxy)
+                                    .doFinally(signal -> currentQueue.remove(proxy)), THREAD_POOL)
+                    .subscribe(
+                            proxy -> {
+                            },
+                            err -> log.error("Error checking proxy", err),
+                            () -> log.info("Checking all proxies completed")
+                    );
+        }
+    }
+
+    private Mono<Void> checkProxyAsync(Proxy proxy) {
         Instant start = Instant.now();
 
         HttpClient httpClient = HttpClient
@@ -175,45 +213,6 @@ public class ProxyCheckSyncService {
             return false;
         }
     }
-
-    /**
-     * Проверяет список прокси асинхронно с параллельностью 200.
-     * Если предыдущая проверка ещё идёт — она прерывается.
-     */
-    public void checkAllAsync(List<Proxy> proxies) {
-        if (!checkInternetConnection()) {
-            proxyRepository.saveAll(proxyMapper.mapToProxyEntities(proxies));
-            return;
-        }
-
-        synchronized (lock) {
-            if (currentSubscription != null && !currentSubscription.isDisposed()) {
-                currentSubscription.dispose();
-                log.info("Previous launch interrupted, remaining proxies: {}", currentQueue.size());
-            }
-
-            List<Proxy> proxiesForCheck = new ArrayList<>();
-            proxies.forEach(proxy -> {
-                if (doFirstCheck(proxy)) {
-                    proxiesForCheck.add(proxy);
-                }
-            });
-
-            currentQueue = new ConcurrentLinkedQueue<>(proxiesForCheck);
-
-            currentSubscription = Flux.fromIterable(currentQueue)
-                    .flatMap(proxy ->
-                            checkProxyAsync(proxy)
-                                    .doFinally(signal -> currentQueue.remove(proxy)), THREAD_POOL)
-                    .subscribe(
-                            proxy -> {
-                            },
-                            err -> log.error("Error checking proxy", err),
-                            () -> log.info("Checking all proxies completed")
-                    );
-        }
-    }
-
 
     /**
      * Sets the first check and removes inactive proxies
