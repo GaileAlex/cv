@@ -14,7 +14,6 @@ import org.jsoup.select.Elements;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,7 +39,6 @@ public class NewProxyService {
     /**
      * Searches for new proxies on sites, adds to the database
      */
-    @Async
     public void setNewProxy() {
         int siteConnectionError = 0;
 

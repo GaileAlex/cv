@@ -40,6 +40,7 @@ public class ProxyCheckSyncService {
     private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 1_000_000.0;
     private static final Integer TIMEOUT = 10;
+    private static final int THREAD_POOL = 500;
     private final Object lock = new Object();
     private Disposable currentSubscription;
     private Queue<Proxy> currentQueue;
@@ -146,7 +147,7 @@ public class ProxyCheckSyncService {
     private Double checkSpeed(Instant start) {
         Instant now = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
         long duration = ChronoUnit.MILLIS.between(start, now);
-        double speed = FILE_SIZE / duration;
+        double speed = FILE_SIZE / duration / 0.8;
 
         if (Double.isInfinite(speed)) {
             return 50000.0;
@@ -190,7 +191,7 @@ public class ProxyCheckSyncService {
             currentSubscription = Flux.fromIterable(currentQueue)
                     .flatMap(proxy ->
                             checkProxyAsync(proxy)
-                                    .doFinally(signal -> currentQueue.remove(proxy)), 200)
+                                    .doFinally(signal -> currentQueue.remove(proxy)), THREAD_POOL)
                     .subscribe(
                             proxy -> {
                             },
