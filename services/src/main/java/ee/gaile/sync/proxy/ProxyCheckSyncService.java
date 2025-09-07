@@ -11,6 +11,7 @@ import org.springframework.transaction.CannotCreateTransactionException;
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.resources.ConnectionProvider;
 import reactor.netty.transport.ProxyProvider;
@@ -68,7 +69,7 @@ public class ProxyCheckSyncService {
                         return Mono.error(new RuntimeException("HTTP error " + resp.status()));
                     }
                 })
-                .map(bytes -> {
+                .flatMap(bytes -> Mono.fromRunnable(() -> {
                     double speed = checkSpeed(start);
                     proxy.setSpeed(speed);
                     proxy.setNumberChecks(proxy.getNumberChecks() + 1);
@@ -76,13 +77,11 @@ public class ProxyCheckSyncService {
                     proxy.setLastChecked(LocalDateTime.now());
                     proxy.setLastSuccessfulCheck(LocalDateTime.now());
                     proxyRepository.save(proxyMapper.mapToProxyEntity(proxy));
-                //    log.info("✅ OK {}:{} → {} bytes, speed={}", proxy.getIpAddress(), proxy.getPort(), bytes.length, speed);
-                    return proxy;
-                })
-                .onErrorResume(e -> {
+                    //    log.info("✅ OK {}:{} → {} bytes, speed={}", proxy.getIpAddress(), proxy.getPort(), bytes.length, speed);
+                }).subscribeOn(Schedulers.boundedElastic()))
+                .onErrorResume(e -> Mono.fromRunnable(() -> {
                     saveUnansweredCheck(proxy);
-                    return Mono.empty();
-                })
+                }).subscribeOn(Schedulers.boundedElastic()))
                 .then();
     }
 
