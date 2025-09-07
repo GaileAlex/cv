@@ -24,9 +24,13 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * Service for checking proxy for availability
@@ -42,6 +46,8 @@ public class ProxyCheckSyncService {
     private static final Double FILE_SIZE = 1_000_000.0;
     private static final Integer TIMEOUT = 10;
     private static final int THREAD_POOL = 500;
+    private static final int NUMBER_UNANSWERED_CHECKS = 10;
+    private static final int ONE_MONTH = 30;
     private final Object lock = new Object();
     private Disposable currentSubscription;
     private Queue<Proxy> currentQueue;
@@ -179,13 +185,21 @@ public class ProxyCheckSyncService {
             proxyRepository.saveAll(proxyMapper.mapToProxyEntities(proxies));
             return;
         }
+
         synchronized (lock) {
             if (currentSubscription != null && !currentSubscription.isDisposed()) {
                 currentSubscription.dispose();
                 log.info("Previous launch interrupted, remaining proxies: {}", currentQueue.size());
             }
 
-            currentQueue = new ConcurrentLinkedQueue<>(proxies);
+            List<Proxy> proxiesForCheck = new ArrayList<>();
+            proxies.forEach(proxy -> {
+                if (doFirstCheck(proxy)) {
+                    proxiesForCheck.add(proxy);
+                }
+            });
+
+            currentQueue = new ConcurrentLinkedQueue<>(proxiesForCheck);
 
             currentSubscription = Flux.fromIterable(currentQueue)
                     .flatMap(proxy ->
@@ -198,6 +212,35 @@ public class ProxyCheckSyncService {
                             () -> log.info("Checking all proxies completed")
                     );
         }
+    }
+
+
+    /**
+     * Sets the first check and removes inactive proxies
+     *
+     * @param proxy - proxy
+     * @return boolean
+     */
+    private boolean doFirstCheck(Proxy proxy) {
+        if (proxy.getFirstChecked() == null) {
+            proxy.setFirstChecked(LocalDateTime.now());
+            proxy.setAnonymity("High anonymity");
+            proxy.setNumberChecks(0);
+            proxy.setNumberUnansweredChecks(0);
+            proxy.setUptime(0.0);
+        }
+
+        if (proxy.getPort() > 65535 || proxy.getUptime() == 0 && proxy.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
+                Objects.nonNull(proxy.getLastSuccessfulCheck()) &&
+                        DAYS.between(proxy.getLastSuccessfulCheck(), LocalDateTime.now()) > ONE_MONTH &&
+                        proxy.getUptime() < 5) {
+
+            proxyRepository.deleteById(proxy.getId());
+
+            return false;
+        }
+
+        return true;
     }
 
 }
