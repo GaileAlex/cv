@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/statistic/**", "/proxy/list/**", "/proxy/file/**", "/blog/**", "/english/**",
-                        "/api/auth/login", "/api/auth/register").permitAll()
+                        "/api/auth/login", "/api/auth/register", "/api/chat/generate").permitAll()
                 .requestMatchers("/").permitAll()
                 .requestMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
                 .requestMatchers(HttpMethod.POST, LOGOUT_URL).permitAll()

@@ -1,0 +1,50 @@
+<app-menu></app-menu>
+
+<div class="text-center p_100_top">
+    <h2>Голосовой чат с моделью</h2>
+
+    <div>
+        <p-dropdown
+                [options]="languageOptions"
+                [(ngModel)]="languageOptions[0]"
+                optionLabel="name"
+                optionValue="code"
+                placeholder="Язык:"
+                class="w-full md:w-56"
+                (onChange)="updateLangAndVoices($event)"></p-dropdown>
+    </div>
+
+    <div class="p_50">
+        <p-dropdown
+                [options]="voiceOptions"
+                [(ngModel)]="selectedVoiceIndex"
+                placeholder="Голос:"
+                class="w-full md:w-56"
+        ></p-dropdown>
+    </div>
+
+    <!-- Ввод текста -->
+    <div class="text-center p_50">
+        <div class="container">
+            <textarea class="text-center p_50" [(ngModel)]="promptText" rows="3"
+                      placeholder="Введите запрос или нажмите 🎤"></textarea>
+        </div>
+    </div>
+
+    <!-- Кнопки управления -->
+        <button pButton  style="margin-right: 5px"  label="📨 Отправить" (click)="sendPrompt()"></button >
+        <button pButton  style="margin-right: 5px" label="🎤 Говорить" (click)="startVoice()"></button >
+        <button pButton  style="margin-right: 5px" label="⏹️ Остановить запись" (click)="stopVoiceInput()"></button >
+        <button pButton  style="margin-right: 5px" label="🔇 Остановить озвучку" (click)="stopSpeaking()"></button >
+        <button pButton   label="🗑️ Очистить чат" (click)="clearChat()"></button >
+
+    <!-- История чата -->
+    <div class="history" id="chatHistory">
+        <div *ngFor="let entry of chatHistory" [ngClass]="entry.role">
+            <span>{{ entry.role === 'user' ? '🧑: ' : '🤖: ' }}</span>
+            <span [innerHTML]="formatText(entry.text) "></span>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

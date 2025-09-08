@@ -11,6 +11,7 @@ import { VisitStatisticsComponent } from './modules/admin-menu/visit-statistics/
 import { ProxyListComponent } from "./modules/proxy-list/proxy-list.component";
 import { BlogArticleComponent } from "./modules/blog/blog-article/blog-article.component";
 import { StudyEnglishComponent } from "./modules/study-english/study-english.component";
+import { ChatComponent } from "./modules/chat/chat.component";
 
 
 export const routes: Routes = [
@@ -18,6 +19,7 @@ export const routes: Routes = [
     {path: 'proxy-list', component: ProxyListComponent},
     {path: 'study-english', component: StudyEnglishComponent},
     {path: 'blog', component: BlogListComponent},
+    {path: 'chat', component: ChatComponent},
     {path: 'article/:id', component: BlogArticleComponent},
     {path: 'login', component: LoginComponent},
     {path: 'registration', component: RegistrationComponent},

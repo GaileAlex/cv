@@ -20,6 +20,7 @@
 /web-api/.logs/
 /Dockerfile
 /docker-compose.yml
+/entrypoint.sh
 /frontend/default.conf
 /frontend/Dockerfile
 /web-api/src/main/resources/proxy/

@@ -32,6 +32,7 @@
     "font-awesome": "^4.7.0",
     "ini": "^2.0.0",
     "jquery": "^3.5.1",
+    "marked": "^16.2.1",
     "moment": "^2.29.4",
     "ng2-charts": "^3.0.0-beta.8",
     "ng2-sticky-nav": "^9.0.1",
