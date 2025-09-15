@@ -51,7 +51,7 @@ public class ProxyController {
     @GetMapping(path = "/file")
     public ResponseEntity<byte[]> getFile() throws IOException {
         InputStream in = getClass()
-                .getResourceAsStream("/1M.iso");
+                .getResourceAsStream("/10kb.iso");
         return new ResponseEntity<>(IOUtils.toByteArray(in), HttpStatus.OK);
     }
 

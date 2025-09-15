@@ -43,8 +43,8 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class ProxyCheckSyncService {
     private static final String FILE_URL = "https://gaile.ee/api/v1/proxy/file";
     private static final String GOOGLE_URL = "google.com";
-    private static final Double FILE_SIZE = 1_000_000.0;
-    private static final Integer TIMEOUT = 10;
+    private static final Double FILE_SIZE = 10_000.0;
+    private static final Integer TIMEOUT = 5;
     private static final int THREAD_POOL = 500;
     private static final int NUMBER_UNANSWERED_CHECKS = 10;
     private static final int ONE_MONTH = 30;
@@ -54,21 +54,23 @@ public class ProxyCheckSyncService {
 
     private final ProxyRepository proxyRepository;
     private final ProxyMapper proxyMapper;
+    private final ConnectionProvider connectionProvider;
 
     /**
      * Проверяет список прокси асинхронно с параллельностью 200.
      * Если предыдущая проверка ещё идёт — она прерывается.
      */
     public void checkAllAsync(List<Proxy> proxies) {
-        if (!checkInternetConnection()) {
-            proxyRepository.saveAll(proxyMapper.mapToProxyEntities(proxies));
-            return;
-        }
-
         synchronized (lock) {
             if (currentSubscription != null && !currentSubscription.isDisposed()) {
                 currentSubscription.dispose();
                 log.info("Previous launch interrupted, remaining proxies: {}", currentQueue.size());
+            }
+
+            if (!checkInternetConnection()) {
+                log.warn("Internet connection is not available");
+                proxyRepository.saveAll(proxyMapper.mapToProxyEntities(proxies));
+                return;
             }
 
             List<Proxy> proxiesForCheck = new ArrayList<>();
@@ -77,6 +79,8 @@ public class ProxyCheckSyncService {
                     proxiesForCheck.add(proxy);
                 }
             });
+
+            log.info("Records removed from database - {}", proxies.size() - proxiesForCheck.size());
 
             currentQueue = new ConcurrentLinkedQueue<>(proxiesForCheck);
 
@@ -94,10 +98,8 @@ public class ProxyCheckSyncService {
     }
 
     private Mono<Void> checkProxyAsync(Proxy proxy) {
-        Instant start = Instant.now();
-
         HttpClient httpClient = HttpClient
-                .create(ConnectionProvider.newConnection())
+                .create(connectionProvider)
                 .proxy(spec -> spec.type(ProxyProvider.Proxy.SOCKS5)
                         .host(proxy.getIpAddress())
                         .port(proxy.getPort()))
@@ -107,14 +109,17 @@ public class ProxyCheckSyncService {
                 .get()
                 .uri(FILE_URL)
                 .responseSingle((resp, body) -> {
-                    if (resp.status().code() == HttpStatus.OK.value()) {
-                        return body.asByteArray();
-                    } else {
+                    if (resp.status().code() != HttpStatus.OK.value()) {
                         return Mono.error(new RuntimeException("HTTP error " + resp.status()));
                     }
+
+                    Instant downloadStart = Instant.now();
+
+                    return body.asByteArray()
+                            .map(bytes -> downloadStart);
                 })
-                .flatMap(bytes -> Mono.fromRunnable(() -> {
-                    double speed = checkSpeed(start);
+                .flatMap(downloadStart -> Mono.fromRunnable(() -> {
+                    double speed = checkSpeed(downloadStart);
                     proxy.setSpeed(speed);
                     proxy.setNumberChecks(proxy.getNumberChecks() + 1);
                     proxy.setUptime(getUptime(proxy));
@@ -189,14 +194,11 @@ public class ProxyCheckSyncService {
      */
     private Double checkSpeed(Instant start) {
         Instant now = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
-        long duration = ChronoUnit.MILLIS.between(start, now);
-        double speed = FILE_SIZE / duration / 0.8;
+        long duration = ChronoUnit.MICROS.between(start, now);
 
-        if (Double.isInfinite(speed)) {
-            return 50000.0;
-        }
+        double bytesPerSecond =  FILE_SIZE / duration * 1_000_000;
 
-        return speed;
+        return bytesPerSecond / 1024.0;
     }
 
     /**
