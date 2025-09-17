@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from "../../service/chat.service";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { marked } from "marked";
-import {SplitButtonModule} from 'primeng/splitbutton';
+import { StatisticsService } from "../../service/statistics.service";
 
 interface ChatEntry {
     role: 'user' | 'bot';
@@ -34,7 +34,7 @@ export class ChatComponent implements OnInit {
     voiceOptions: { label: string, value: number }[] = [];
 
 
-    constructor(private chatService: ChatService, private sanitizer: DomSanitizer) {
+    constructor(private chatService: ChatService, private sanitizer: DomSanitizer, private statisticsService: StatisticsService) {
     }
 
     ngOnInit(): void {
@@ -117,6 +117,7 @@ export class ChatComponent implements OnInit {
     }
 
     sendPrompt(): void {
+        this.statisticsService.sentEvent("sendPrompt")
         if (!this.promptText.trim()) return;
 
         const userMessage = this.promptText; // сохраняем чистый текст

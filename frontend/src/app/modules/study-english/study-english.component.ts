@@ -1,6 +1,7 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { EnglishService } from "../../service/english.service";
 import { EnglishSentence } from "../../models/englishSentence";
+import { StatisticsService } from "../../service/statistics.service";
 
 @Component({
     selector: 'app-study-english',
@@ -15,7 +16,7 @@ export class StudyEnglishComponent {
     isBlur = true;
     englishSentence: EnglishSentence
 
-    constructor(private englishService: EnglishService, private renderer: Renderer2) {
+    constructor(private englishService: EnglishService, private renderer: Renderer2, private statisticsService: StatisticsService) {
         window.scrollTo(0, 0);
         this.getData();
     }
@@ -32,6 +33,7 @@ export class StudyEnglishComponent {
     nextSentence() {
         this.getData();
         this.addBlur();
+        this.statisticsService.sentEvent("nextSentence")
         return this.englishSentence;
     }
 
