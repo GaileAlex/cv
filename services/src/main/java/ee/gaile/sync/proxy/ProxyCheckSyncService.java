@@ -64,46 +64,47 @@ public class ProxyCheckSyncService {
      */
     public void checkAllAsync() {
         if (!starting.compareAndSet(false, true)) {
-            log.info("Previous launch is not finished, remaining proxies: {}", currentQueue.size());
+            Integer size = currentQueue == null ? 0 : currentQueue.size();
+            log.info("Previous launch is not finished, remaining proxies: {}", size);
             return;
         }
-        try {
-            long aliveProxies = proxyRepository.getTotalAliveProxies();
-            if (aliveProxies < ALLOWABLE_PROXY) {
-                newProxyService.setNewProxy();
-            }
-
-            List<ProxyEntity> proxyEntities = proxyRepository.findAllOrderByRandom();
-            List<Proxy> proxies = proxyMapper.mapToProxies(proxyEntities);
-
-            log.info("Start proxy list sync. Size lists is {}, in total there were {}",
-                    proxies.size(), aliveProxies);
-
-            if (!checkInternetConnection()) {
-                log.warn("Internet connection is not available");
-                proxyRepository.saveAll(proxyMapper.mapToProxyEntities(proxies));
-                return;
-            }
-
-            List<Proxy> proxiesForCheck = doFirstCheck(proxies);
-
-            log.info("Records removed from database - {}", proxies.size() - proxiesForCheck.size());
-
-            currentQueue = new ConcurrentLinkedQueue<>(proxiesForCheck);
-
-            Flux.fromIterable(currentQueue)
-                    .flatMap(proxy ->
-                            checkProxyAsync(proxy)
-                                    .doFinally(signal -> currentQueue.remove(proxy)), THREAD_POOL)
-                    .subscribe(
-                            proxy -> {
-                            },
-                            err -> log.error("Error checking proxy", err),
-                            () -> log.info("Checking all proxies completed")
-                    );
-        } finally {
-            starting.set(false);
+        long aliveProxies = proxyRepository.getTotalAliveProxies();
+        if (aliveProxies < ALLOWABLE_PROXY) {
+            log.info("New proxies are needed");
+            newProxyService.setNewProxy();
         }
+
+        List<ProxyEntity> proxyEntities = proxyRepository.findAllOrderByRandom();
+        List<Proxy> proxies = proxyMapper.mapToProxies(proxyEntities);
+
+        log.info("Start proxy list sync. Size lists is {}, in total there were {}",
+                proxies.size(), aliveProxies);
+
+        if (!checkInternetConnection()) {
+            log.warn("Internet connection is not available");
+            proxyRepository.saveAll(proxyMapper.mapToProxyEntities(proxies));
+            return;
+        }
+
+        List<Proxy> proxiesForCheck = doFirstCheck(proxies);
+
+        log.info("Records removed from database - {}", proxies.size() - proxiesForCheck.size());
+
+        currentQueue = new ConcurrentLinkedQueue<>(proxiesForCheck);
+
+        Flux.fromIterable(currentQueue)
+                .flatMap(proxy ->
+                        checkProxyAsync(proxy)
+                                .doFinally(signal -> currentQueue.remove(proxy)), THREAD_POOL)
+                .subscribe(
+                        proxy -> {
+                        },
+                        err -> log.error("Error checking proxy", err),
+                        () -> {
+                            log.info("Checking all proxies completed");
+                            starting.set(false);
+                        }
+                );
     }
 
     private Mono<Void> checkProxyAsync(Proxy proxy) {
