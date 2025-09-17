@@ -250,7 +250,7 @@ public class ProxyCheckSyncService {
         });
 
         if (!proxiesForRemove.isEmpty()) {
-            proxyRepository.deleteAll(proxyMapper.mapToProxyEntities(proxiesForRemove));
+            proxyRepository.deleteAllInBatch(proxyMapper.mapToProxyEntities(proxiesForRemove));
         }
 
         return proxiesForCheck;
