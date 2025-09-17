@@ -60,12 +60,15 @@ public class ProxyCheckSyncService {
      * Проверяет список прокси асинхронно с параллельностью 200.
      * Если предыдущая проверка ещё идёт — она прерывается.
      */
-    public void checkAllAsync(List<Proxy> proxies) {
+    public void checkAllAsync(List<Proxy> proxies, long aliveProxies) {
         synchronized (lock) {
             if (currentSubscription != null && !currentSubscription.isDisposed()) {
-                currentSubscription.dispose();
-                log.info("Previous launch interrupted, remaining proxies: {}", currentQueue.size());
+                log.info("Previous launch is not finished, remaining proxies: {}", currentQueue.size());
+                return;
             }
+
+            log.info("Start proxy list sync. Size lists is {}, in total there were {}",
+                    proxies.size(), aliveProxies);
 
             if (!checkInternetConnection()) {
                 log.warn("Internet connection is not available");
@@ -73,12 +76,7 @@ public class ProxyCheckSyncService {
                 return;
             }
 
-            List<Proxy> proxiesForCheck = new ArrayList<>();
-            proxies.forEach(proxy -> {
-                if (doFirstCheck(proxy)) {
-                    proxiesForCheck.add(proxy);
-                }
-            });
+            List<Proxy> proxiesForCheck = doFirstCheck(proxies);
 
             log.info("Records removed from database - {}", proxies.size() - proxiesForCheck.size());
 
@@ -196,7 +194,7 @@ public class ProxyCheckSyncService {
         Instant now = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
         long duration = ChronoUnit.MICROS.between(start, now);
 
-        double bytesPerSecond =  FILE_SIZE / duration * 1_000_000;
+        double bytesPerSecond = FILE_SIZE / duration * 1_000_000;
 
         return bytesPerSecond / 1024.0;
     }
@@ -216,32 +214,34 @@ public class ProxyCheckSyncService {
         }
     }
 
-    /**
-     * Sets the first check and removes inactive proxies
-     *
-     * @param proxy - proxy
-     * @return boolean
-     */
-    private boolean doFirstCheck(Proxy proxy) {
-        if (proxy.getFirstChecked() == null) {
-            proxy.setFirstChecked(LocalDateTime.now());
-            proxy.setAnonymity("High anonymity");
-            proxy.setNumberChecks(0);
-            proxy.setNumberUnansweredChecks(0);
-            proxy.setUptime(0.0);
+    private List<Proxy> doFirstCheck(List<Proxy> proxies) {
+        List<Proxy> proxiesForCheck = new ArrayList<>();
+        List<Proxy> proxiesForRemove = new ArrayList<>();
+        proxies.forEach(proxy -> {
+            if (proxy.getFirstChecked() == null) {
+                proxy.setFirstChecked(LocalDateTime.now());
+                proxy.setAnonymity("High anonymity");
+                proxy.setNumberChecks(0);
+                proxy.setNumberUnansweredChecks(0);
+                proxy.setUptime(0.0);
+            }
+
+            if (proxy.getPort() > 65535 || proxy.getUptime() == 0 && proxy.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
+                    Objects.nonNull(proxy.getLastSuccessfulCheck()) &&
+                            DAYS.between(proxy.getLastSuccessfulCheck(), LocalDateTime.now()) > ONE_MONTH &&
+                            proxy.getUptime() < 5) {
+
+                proxiesForRemove.add(proxy);
+            } else {
+                proxiesForCheck.add(proxy);
+            }
+        });
+
+        if (!proxiesForRemove.isEmpty()) {
+            proxyRepository.deleteAll(proxyMapper.mapToProxyEntities(proxiesForRemove));
         }
 
-        if (proxy.getPort() > 65535 || proxy.getUptime() == 0 && proxy.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
-                Objects.nonNull(proxy.getLastSuccessfulCheck()) &&
-                        DAYS.between(proxy.getLastSuccessfulCheck(), LocalDateTime.now()) > ONE_MONTH &&
-                        proxy.getUptime() < 5) {
-
-            proxyRepository.deleteById(proxy.getId());
-
-            return false;
-        }
-
-        return true;
+        return proxiesForCheck;
     }
 
 }

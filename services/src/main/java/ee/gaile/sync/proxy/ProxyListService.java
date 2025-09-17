@@ -38,10 +38,7 @@ public class ProxyListService implements SyncService {
         List<ProxyEntity> proxyEntities = proxyRepository.findAllOrderByRandom();
         List<Proxy> proxies = proxyMapper.mapToProxies(proxyEntities);
 
-        log.info("Start proxy list sync. Size lists is {}, in total there were {}",
-                proxyEntities.size(), aliveProxies);
-
-        proxyCheckSyncService.checkAllAsync(proxies);
+        proxyCheckSyncService.checkAllAsync(proxies, aliveProxies);
     }
 
 }
