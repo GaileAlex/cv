@@ -1,5 +1,6 @@
 package ee.gaile.sync.proxy;
 
+import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.models.proxy.Proxy;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.service.mapper.ProxyMapper;
@@ -48,9 +49,12 @@ public class ProxyCheckSyncService {
     private static final int THREAD_POOL = 500;
     private static final int NUMBER_UNANSWERED_CHECKS = 10;
     private static final int ONE_MONTH = 30;
+    private final Object lock = new Object();
+    private static final int ALLOWABLE_PROXY = 100;
     private Disposable currentSubscription;
     private Queue<Proxy> currentQueue;
 
+    private final NewProxyService newProxyService;
     private final ProxyRepository proxyRepository;
     private final ProxyMapper proxyMapper;
     private final ConnectionProvider connectionProvider;
@@ -59,37 +63,47 @@ public class ProxyCheckSyncService {
      * Проверяет список прокси асинхронно с параллельностью 200.
      * Если предыдущая проверка ещё идёт — она прерывается.
      */
-    public void checkAllAsync(List<Proxy> proxies, long aliveProxies) {
-        if (currentSubscription != null && !currentSubscription.isDisposed()) {
-            log.info("Previous launch is not finished, remaining proxies: {}", currentQueue.size());
-            return;
+    public void checkAllAsync() {
+        synchronized (lock) {
+            if (currentSubscription != null && !currentSubscription.isDisposed()) {
+                log.info("Previous launch is not finished, remaining proxies: {}", currentQueue.size());
+                return;
+            }
+
+            long aliveProxies = proxyRepository.getTotalAliveProxies();
+            if (aliveProxies < ALLOWABLE_PROXY) {
+                newProxyService.setNewProxy();
+            }
+
+            List<ProxyEntity> proxyEntities = proxyRepository.findAllOrderByRandom();
+            List<Proxy> proxies = proxyMapper.mapToProxies(proxyEntities);
+
+            log.info("Start proxy list sync. Size lists is {}, in total there were {}",
+                    proxies.size(), aliveProxies);
+
+            if (!checkInternetConnection()) {
+                log.warn("Internet connection is not available");
+                proxyRepository.saveAll(proxyMapper.mapToProxyEntities(proxies));
+                return;
+            }
+
+            List<Proxy> proxiesForCheck = doFirstCheck(proxies);
+
+            log.info("Records removed from database - {}", proxies.size() - proxiesForCheck.size());
+
+            currentQueue = new ConcurrentLinkedQueue<>(proxiesForCheck);
+
+            currentSubscription = Flux.fromIterable(currentQueue)
+                    .flatMap(proxy ->
+                            checkProxyAsync(proxy)
+                                    .doFinally(signal -> currentQueue.remove(proxy)), THREAD_POOL)
+                    .subscribe(
+                            proxy -> {
+                            },
+                            err -> log.error("Error checking proxy", err),
+                            () -> log.info("Checking all proxies completed")
+                    );
         }
-
-        log.info("Start proxy list sync. Size lists is {}, in total there were {}",
-                proxies.size(), aliveProxies);
-
-        if (!checkInternetConnection()) {
-            log.warn("Internet connection is not available");
-            proxyRepository.saveAll(proxyMapper.mapToProxyEntities(proxies));
-            return;
-        }
-
-        List<Proxy> proxiesForCheck = doFirstCheck(proxies);
-
-        log.info("Records removed from database - {}", proxies.size() - proxiesForCheck.size());
-
-        currentQueue = new ConcurrentLinkedQueue<>(proxiesForCheck);
-
-        currentSubscription = Flux.fromIterable(currentQueue)
-                .flatMap(proxy ->
-                        checkProxyAsync(proxy)
-                                .doFinally(signal -> currentQueue.remove(proxy)), THREAD_POOL)
-                .subscribe(
-                        proxy -> {
-                        },
-                        err -> log.error("Error checking proxy", err),
-                        () -> log.info("Checking all proxies completed")
-                );
     }
 
     private Mono<Void> checkProxyAsync(Proxy proxy) {
