@@ -248,11 +248,12 @@ public class ProxyCheckSyncService {
                 proxy.setUptime(0.0);
             }
 
-            if (proxy.getPort() > 65535 || proxy.getUptime() == 0 && proxy.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS ||
-                    Objects.nonNull(proxy.getLastSuccessfulCheck()) &&
-                            DAYS.between(proxy.getLastSuccessfulCheck(), LocalDateTime.now()) > ONE_MONTH &&
-                            proxy.getUptime() < 5) {
-
+            if (proxy.getPort() > 65535
+                    || proxy.getUptime() == 0
+                    && proxy.getNumberUnansweredChecks() > NUMBER_UNANSWERED_CHECKS
+                    || Objects.nonNull(proxy.getLastSuccessfulCheck())
+                    && DAYS.between(proxy.getLastSuccessfulCheck(), LocalDateTime.now()) > ONE_MONTH
+                    && proxy.getUptime() < 5) {
                 proxiesForRemove.add(proxy);
             } else {
                 proxiesForCheck.add(proxy);
