@@ -45,8 +45,8 @@ public class ProxyCheckSyncService {
     private static final String FILE_URL = "https://gaile.ee/api/v1/proxy/file";
     private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 10_000.0;
-    private static final Integer TIMEOUT = 5;
-    private static final int THREAD_POOL = 500;
+    private static final Integer TIMEOUT = 10;
+    private static final int THREAD_POOL = 250;
     private static final int NUMBER_UNANSWERED_CHECKS = 10;
     private static final int ONE_MONTH = 30;
     private static final int ALLOWABLE_PROXY = 100;
@@ -113,6 +113,16 @@ public class ProxyCheckSyncService {
                 .proxy(spec -> spec.type(ProxyProvider.Proxy.SOCKS5)
                         .host(proxy.getIpAddress())
                         .port(proxy.getPort()))
+                .headers(h -> {
+                    h.add("User-Agent",
+                            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                                    "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                                    "Chrome/124.0.0.0 Safari/537.36");
+                    h.add("Accept",
+                            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+                    h.add("Accept-Language", "en-US,en;q=0.9,ru;q=0.8");
+                    h.add("Accept-Encoding", "gzip, deflate, br");
+                })
                 .responseTimeout(Duration.ofSeconds(TIMEOUT));
 
         return httpClient
