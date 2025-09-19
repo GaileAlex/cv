@@ -4,9 +4,9 @@ import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.models.proxy.Proxy;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.service.mapper.ProxyMapper;
+import io.netty.resolver.NoopAddressResolverGroup;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.CannotCreateTransactionException;
 import reactor.core.publisher.Flux;
@@ -42,10 +42,10 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @Service
 @RequiredArgsConstructor
 public class ProxyCheckSyncService {
-    private static final String FILE_URL = "https://gaile.ee/api/v1/proxy/file";
+    private static final String FILE_URL = "https://84.52.54.93/api/v1/proxy/file";
     private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 10_000.0;
-    private static final Integer TIMEOUT = 10;
+    private static final Integer TIMEOUT = 30;
     private static final int THREAD_POOL = 250;
     private static final int NUMBER_UNANSWERED_CHECKS = 10;
     private static final int ONE_MONTH = 30;
@@ -122,6 +122,7 @@ public class ProxyCheckSyncService {
                             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
                     h.add("Accept-Language", "en-US,en;q=0.9,ru;q=0.8");
                     h.add("Accept-Encoding", "gzip, deflate, br");
+                    h.add("Connection", "close");
                 })
                 .responseTimeout(Duration.ofSeconds(TIMEOUT));
 
@@ -129,7 +130,8 @@ public class ProxyCheckSyncService {
                 .get()
                 .uri(FILE_URL)
                 .responseSingle((resp, body) -> {
-                    if (resp.status().code() != HttpStatus.OK.value()) {
+                    int code = resp.status().code();
+                    if (code < 200 || code >= 400) {
                         return Mono.error(new RuntimeException("HTTP error " + resp.status()));
                     }
 
