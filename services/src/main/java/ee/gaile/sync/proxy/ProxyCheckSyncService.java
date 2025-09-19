@@ -4,7 +4,6 @@ import ee.gaile.entity.proxy.ProxyEntity;
 import ee.gaile.models.proxy.Proxy;
 import ee.gaile.repository.proxy.ProxyRepository;
 import ee.gaile.service.mapper.ProxyMapper;
-import io.netty.resolver.NoopAddressResolverGroup;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -261,7 +260,14 @@ public class ProxyCheckSyncService {
         });
 
         if (!proxiesForRemove.isEmpty()) {
-            proxyRepository.deleteAllInBatch(proxyMapper.mapToProxyEntities(proxiesForRemove));
+            List<ProxyEntity> entities = proxyMapper.mapToProxyEntities(proxiesForRemove);
+
+            for (int i = 0; i < entities.size(); i += 65000) {
+                int end = Math.min(i + 65000, entities.size());
+                List<ProxyEntity> subList = entities.subList(i, end);
+
+                proxyRepository.deleteAllInBatch(subList);
+            }
         }
 
         return proxiesForCheck;
