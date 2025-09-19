@@ -148,9 +148,7 @@ public class ProxyCheckSyncService {
                     proxyRepository.save(proxyMapper.mapToProxyEntity(proxy));
                     //    log.info("✅ OK {}:{} → {} bytes, speed={}", proxy.getIpAddress(), proxy.getPort(), bytes.length, speed);
                 }).subscribeOn(Schedulers.boundedElastic()))
-                .onErrorResume(e -> Mono.fromRunnable(() -> {
-                    saveUnansweredCheck(proxy);
-                }).subscribeOn(Schedulers.boundedElastic()))
+                .onErrorResume(e -> Mono.fromRunnable(() -> saveUnansweredCheck(proxy)).subscribeOn(Schedulers.boundedElastic()))
                 .then();
     }
 
