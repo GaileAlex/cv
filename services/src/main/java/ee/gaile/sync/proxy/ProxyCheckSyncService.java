@@ -41,7 +41,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @Service
 @RequiredArgsConstructor
 public class ProxyCheckSyncService {
-    private static final String FILE_URL = "https://84.52.54.93/api/v1/proxy/file";
+    private static final String FILE_URL = "https://gaile.ee/api/v1/proxy/file";
     private static final String GOOGLE_URL = "google.com";
     private static final Double FILE_SIZE = 10_000.0;
     private static final Integer TIMEOUT = 30;
