@@ -48,7 +48,7 @@ public class ProxyCheckSyncService {
     private static final int THREAD_POOL = 250;
     private static final int NUMBER_UNANSWERED_CHECKS = 10;
     private static final int ONE_MONTH = 30;
-    private static final int ALLOWABLE_PROXY = 100;
+    private static final int ALLOWABLE_PROXY = 150;
     private Queue<Proxy> currentQueue;
     private final AtomicBoolean starting = new AtomicBoolean(false);
 
