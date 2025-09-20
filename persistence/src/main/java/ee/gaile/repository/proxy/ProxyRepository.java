@@ -12,20 +12,20 @@ import java.util.List;
 public interface ProxyRepository extends JpaRepository<ProxyEntity, Long> {
 
     @Query(value = "select * from proxy_list " +
-            " where speed > 0 and uptime >= 25 " +
+            " where speed > 0 " +
             " order by speed desc limit :pageSize offset :page ", nativeQuery = true)
     List<ProxyEntity> findWithPaging(@Param("pageSize") Integer pageSize, @Param("page") Integer page);
 
     @Query(value = "select count(id) from proxy_list " +
-            " where speed > 0 and uptime >= 25 ", nativeQuery = true)
+            " where speed > 0", nativeQuery = true)
     Long getTotalAliveProxies();
 
-    @Query(value = "with data as (select id from proxy_list where speed > 0 and uptime >= 25)" +
+    @Query(value = "with data as (select id from proxy_list where speed > 0)" +
             " select count(id) from data", nativeQuery = true)
     Long getTotalAliveProxiesLimit();
 
     @Query(value = "select * from proxy_list " +
-            " where country = 'unknown' and uptime > 0 and uptime >= 25", nativeQuery = true)
+            " where country = 'unknown' and uptime > 0", nativeQuery = true)
     List<ProxyEntity> findAllWhereCountryUnknown();
 
     @Query(value = "select * from proxy_list " +
