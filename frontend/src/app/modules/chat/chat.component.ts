@@ -232,6 +232,7 @@ export class ChatComponent implements OnInit {
 
     clearChat(): void {
         this.chatHistory = [];
+        this.selectedSessionId = null;
     }
 
     formatText(text: string): SafeHtml {
