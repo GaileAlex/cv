@@ -3,7 +3,6 @@
 <div class="text-center p_100_top">
     <h2>Голосовой чат с моделью</h2>
 
-    <!-- Выбор сессии -->
     <div class="p_50">
         <p-dropdown
                 [options]="sessions"
@@ -16,7 +15,6 @@
         </p-dropdown>
     </div>
 
-    <!-- Выбор языка -->
     <div class="p_50">
         <p-dropdown
                 [options]="languageOptions"
@@ -29,7 +27,6 @@
         </p-dropdown>
     </div>
 
-    <!-- Выбор голоса -->
     <div class="p_50">
         <p-dropdown
                 [options]="voiceOptions"
@@ -39,7 +36,6 @@
         </p-dropdown>
     </div>
 
-    <!-- Ввод текста -->
     <div class="text-center p_50">
         <div class="container">
             <textarea
@@ -51,7 +47,6 @@
         </div>
     </div>
 
-    <!-- Кнопки управления -->
     <div class="p_50">
         <button pButton style="margin-right: 5px" label="📨 Отправить" (click)="sendPrompt()"></button>
         <button pButton style="margin-right: 5px" label="🎤 Говорить" (click)="startVoice()"></button>
@@ -60,7 +55,6 @@
         <button pButton label="🗑️ Очистить чат" (click)="clearChat()"></button>
     </div>
 
-    <!-- История чата -->
     <div class="history" id="chatHistory">
         <div *ngFor="let entry of chatHistory" [ngClass]="entry.role">
             <span>{{ entry.role === 'user' ? '🧑: ' : '🤖: ' }}</span>

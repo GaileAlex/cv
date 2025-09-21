@@ -29,11 +29,8 @@ public class ChatService {
     @Value("${ollama.url}")
     private String ollamaUrl;
 
-    private static final String CHAT_DESCRIPTION = "Create a short description of this chat in up to 100 characters using this phrase - ";
+    private static final String CHAT_DESCRIPTION = "Create a short description of this chat in no more than 10 words using this phrase - ";
 
-    /**
-     * Отправить запрос в Ollama, сохранить сообщение пользователя и ответ модели
-     */
     @Transactional
     public String chat(String username,
                        String sessionId,

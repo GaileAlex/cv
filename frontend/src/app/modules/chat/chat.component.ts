@@ -56,7 +56,6 @@ export class ChatComponent implements OnInit {
         this.initSpeechRecognition();
     }
 
-    /** Получаем список всех сессий пользователя */
     loadSessions(): void {
         this.chatService.getSessionsHistory(this.userName).subscribe({
             next: sessionsMap => {
@@ -93,8 +92,6 @@ export class ChatComponent implements OnInit {
             error: err => console.error('Failed to load chat history', err)
         });
     }
-
-    // ===== голос, синтез речи, распознавание =====
 
     initVoices(): void {
         this.updateVoices();
@@ -159,8 +156,6 @@ export class ChatComponent implements OnInit {
         if (this.voices.length) this.selectedVoiceIndex = this.voices.length - 1;
     }
 
-    // ===== работа с сообщениями =====
-
     sendPrompt(): void {
         if (!this.promptText.trim()) return;
         const userMessage = this.promptText;
@@ -221,9 +216,7 @@ export class ChatComponent implements OnInit {
         if (!this.synth) return;
         this.synth.cancel();
 
-        // Немного ждем, чтобы движок очистил очередь
         setTimeout(() => {
-            // Проверка, что синтезатор готов к новым озвучкам
             if (!this.synth.speaking && !this.synth.pending) {
                 console.log('Synth ready for next utterance');
             }
