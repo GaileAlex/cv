@@ -6,7 +6,7 @@ import { StatisticsService } from "../../service/statistics.service";
 import { UserDataService } from "../../service/user-data.service";
 
 interface ChatEntry {
-    role: 'user' | 'bot'; // здесь 'bot', а не 'assistant'
+    role: 'user' | 'bot';
     text: string;
 }
 
@@ -16,16 +16,22 @@ interface ChatEntry {
     styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-    userName: string = '';
-    promptText: string = '';
+
+    userName = '';
+    sessions: { id: string; description: string }[] = [];
+    selectedSessionId: string | null = null;
+
+    promptText = '';
     chatHistory: ChatEntry[] = [];
-    selectedLang: string = 'en-US';
+
+    selectedLang = 'en-US';
     voices: SpeechSynthesisVoice[] = [];
-    selectedVoiceIndex: number = 0;
+    selectedVoiceIndex = 0;
     synth = window.speechSynthesis;
     recognition: any = null;
     isRecognizing = false;
     restartTimer: any = null;
+
     languageOptions = [
         {name: 'English (US)', code: 'en-US'},
         {name: 'English (UK)', code: 'en-GB'},
@@ -33,7 +39,6 @@ export class ChatComponent implements OnInit {
         {name: 'Français', code: 'fr-FR'},
         {name: 'Deutsch', code: 'de-DE'}
     ];
-
     voiceOptions: { label: string, value: number }[] = [];
 
     constructor(
@@ -46,16 +51,40 @@ export class ChatComponent implements OnInit {
 
     ngOnInit(): void {
         this.userName = this.userDataService.getUserName();
-
-        this.loadHistory();
+        this.loadSessions();
         this.initVoices();
         this.initSpeechRecognition();
     }
 
-    // загружаем историю чата с бэка
+    /** Получаем список всех сессий пользователя */
+    loadSessions(): void {
+        this.chatService.getSessionsHistory(this.userName).subscribe({
+            next: sessionsMap => {
+                this.sessions = Object.entries(sessionsMap).map(([id, description]) => ({ id, description }));
+            },
+            error: err => console.error('Failed to load sessions', err)
+        });
+    }
+
+    onSelectSession(session: {id: string, description: string}): void {
+        if (session.id === 'null') {
+            this.selectedSessionId = null; // спец. обработка
+            this.chatHistory = [{
+                role: 'bot',
+                text: session.description
+            }];
+        } else {
+            this.selectedSessionId = session.id;
+            this.loadHistory();
+        }
+    }
+
+    /** Загружаем историю сообщений выбранной сессии */
     loadHistory(): void {
-        this.chatService.getHistory(this.userName).subscribe({
-            next: (history: any[]) => {
+        if (!this.selectedSessionId) return;
+        console.log("this.selectedSessionId", this.selectedSessionId);
+        this.chatService.getHistory(this.selectedSessionId).subscribe({
+            next: history => {
                 this.chatHistory = history.map(m => ({
                     role: m.role === 'user' ? 'user' : 'bot',
                     text: m.content
@@ -64,6 +93,8 @@ export class ChatComponent implements OnInit {
             error: err => console.error('Failed to load chat history', err)
         });
     }
+
+    // ===== голос, синтез речи, распознавание =====
 
     initVoices(): void {
         this.updateVoices();
@@ -75,7 +106,6 @@ export class ChatComponent implements OnInit {
     initSpeechRecognition(): void {
         const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         if (!SR) return;
-
         this.recognition = new SR();
         this.recognition.interimResults = false;
         this.recognition.continuous = true;
@@ -129,24 +159,26 @@ export class ChatComponent implements OnInit {
         if (this.voices.length) this.selectedVoiceIndex = this.voices.length - 1;
     }
 
+    // ===== работа с сообщениями =====
+
     sendPrompt(): void {
         if (!this.promptText.trim()) return;
         const userMessage = this.promptText;
         this.promptText = '';
 
-        // добавляем сообщение пользователя в UI
         this.appendToHistory('user', userMessage);
 
-        this.chatService.sendMessage(this.userName, userMessage).subscribe({
-            next: (reply: string) => {
-                this.appendToHistory('assistant', reply);
-                this.speakText(reply);
-            },
-            error: err => {
-                console.error(err);
-                this.appendToHistory('assistant', '[Ошибка сервера]');
-            }
-        });
+        this.chatService.sendMessage(this.userName, this.selectedSessionId, userMessage)
+            .subscribe({
+                next: (reply: string) => {
+                    this.appendToHistory('assistant', reply);
+                    this.speakText(reply);
+                },
+                error: err => {
+                    console.error(err);
+                    this.appendToHistory('assistant', '[Ошибка сервера]');
+                }
+            });
     }
 
     appendToHistory(role: 'user' | 'assistant', text: string): void {

@@ -24,18 +24,24 @@ public class ChatController {
 
     private final ChatService chatService;
 
-    @PostMapping("/{username}")
+    @PostMapping("/{username}/{sessionId}")
     public ResponseEntity<String> sendMessage(
             @PathVariable String username,
+            @PathVariable String sessionId,
             @RequestBody Map<String, String> message)  {
 
-        String answer = chatService.chat(username, message);
+        String answer = chatService.chat(username, sessionId, message);
         return ResponseEntity.ok(answer);
     }
 
-    @GetMapping("/{username}/history")
-    public ResponseEntity<List<ChatMessageEntity>> getHistory(@PathVariable String username) {
-        return ResponseEntity.ok(chatService.getHistory(username));
+    @GetMapping("/{sessionId}/history")
+    public ResponseEntity<List<ChatMessageEntity>> getHistory(@PathVariable String sessionId) {
+        return ResponseEntity.ok(chatService.getHistory(sessionId));
+    }
+
+    @GetMapping("/{username}/sessions")
+    public ResponseEntity<Map<String, String>> getSessionsHistory(@PathVariable String username) {
+        return ResponseEntity.ok(chatService.getSessionsHistory(username));
     }
 
 }

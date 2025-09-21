@@ -14,8 +14,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,30 +29,83 @@ public class ChatService {
     @Value("${ollama.url}")
     private String ollamaUrl;
 
+    private static final String CHAT_DESCRIPTION = "Create a short description of this chat in up to 100 characters using this phrase - ";
+
     /**
      * Отправить запрос в Ollama, сохранить сообщение пользователя и ответ модели
      */
     @Transactional
-    public String chat(String username, Map<String, String> message) {
+    public String chat(String username,
+                       String sessionId,
+                       Map<String, String> message) {
+
         String userMessage = message.get("message");
         if (userMessage == null) {
             userMessage = "";
         }
 
+        if (sessionId == null || sessionId.equals("null") || sessionId.isBlank()) {
+            sessionId = UUID.randomUUID().toString();
+        }
+
+        boolean hasDescription = repo.existsBySessionIdAndSessionDescriptionIsNotNull(sessionId);
+
         ChatMessageEntity userMsg = new ChatMessageEntity();
         userMsg.setUserName(username);
+        userMsg.setSessionId(sessionId);
+        if (!hasDescription) {
+            userMsg.setSessionDescription(getAnswerFromOllama(CHAT_DESCRIPTION + userMessage));
+        }
         userMsg.setRole("user");
         userMsg.setContent(userMessage);
         userMsg.setCreatedAt(LocalDateTime.now());
         repo.save(userMsg);
 
-        List<ChatMessageEntity> history = repo.findByUserNameOrderByCreatedAtAsc(username);
+        List<ChatMessageEntity> history = repo.findBySessionIdOrderByCreatedAtAsc(sessionId);
+
         StringBuilder prompt = new StringBuilder();
         for (ChatMessageEntity m : history) {
             prompt.append(m.getRole()).append(": ").append(m.getContent()).append("\n");
         }
         prompt.append("assistant:");
 
+        String answer = getAnswerFromOllama(prompt.toString());
+
+        ChatMessageEntity assistantMsg = new ChatMessageEntity();
+        assistantMsg.setUserName(username);
+        assistantMsg.setSessionId(sessionId);
+        if (!hasDescription) {
+            assistantMsg.setSessionDescription(userMsg.getSessionDescription());
+        }
+        assistantMsg.setRole("assistant");
+        assistantMsg.setContent(answer);
+        assistantMsg.setCreatedAt(LocalDateTime.now());
+        repo.save(assistantMsg);
+
+        return answer;
+    }
+
+    @Transactional(readOnly = true)
+    public List<ChatMessageEntity> getHistory(String sessionId) {
+        if (sessionId == null || sessionId.isBlank()) {
+            throw new IllegalArgumentException("sessionId is required");
+        }
+
+        return repo.findBySessionIdOrderByCreatedAtAsc(sessionId);
+    }
+
+    public Map<String, String> getSessionsHistory(String username) {
+        Map<String, String> sessions = new LinkedHashMap<>();
+        List<Object[]> rows = repo.findSessionsWithDescription(username);
+        for (Object[] row : rows) {
+            String sessionId = (String) row[0];
+            String description = (String) row[1];
+            sessions.put(sessionId, description);
+        }
+        return sessions;
+    }
+
+    private String getAnswerFromOllama(String prompt) {
         Map<String, Object> body = new HashMap<>();
         body.put("system", SystemInstruction.SYSTEM_INSTRUCTION);
         body.put("model", "llama3:8b");
@@ -58,7 +113,7 @@ public class ChatService {
         body.put("top_p", 0.9);
         body.put("num_ctx", 8192);
         body.put("stream", false);
-        body.put("prompt", prompt.toString());
+        body.put("prompt", prompt);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -69,31 +124,12 @@ public class ChatService {
             ResponseEntity<Map> response =
                     restTemplate.postForEntity(ollamaUrl, request, Map.class);
             answer = (String) response.getBody().get("response");
-            ;
             if (answer == null) answer = "";
         } catch (Exception e) {
             answer = "Ошибка вызова модели: " + e.getMessage();
         }
 
-        // сохраняем ответ модели
-        ChatMessageEntity assistantMsg = new ChatMessageEntity();
-        assistantMsg.setUserName(username);
-        assistantMsg.setRole("assistant");
-        assistantMsg.setContent(answer);
-        assistantMsg.setCreatedAt(LocalDateTime.now());
-        repo.save(assistantMsg);
-
         return answer;
     }
 
-    /**
-     * Получить всю историю разговора
-     */
-    @Transactional(readOnly = true)
-    public List<ChatMessageEntity> getHistory(String username) {
-        if (username == null || username.isBlank()) {
-            throw new IllegalArgumentException("sessionId is required");
-        }
-        return repo.findByUserNameOrderByCreatedAtAsc(username);
-    }
 }

@@ -13,15 +13,20 @@ export class ChatService {
     constructor(private http: HttpClient) {
     }
 
-    sendMessage(userName: string, message: string): Observable<string> {
+    sendMessage(userName: string, sessionId: string, message: string): Observable<string> {
         return this.http.post(
-            `${ this.apiUrl }/api/chat/${ userName }`,
+            `${ this.apiUrl }/api/chat/${ userName }/${ sessionId }`,
             {message},
-            {responseType: 'text'}    // 👈 ключевой момент
+            {responseType: 'text'}
         );
     }
 
-    getHistory(userName: string): Observable<any[]> {
-        return this.http.get<any[]>(`${ this.apiUrl }/api/chat/${ userName }/history`);
+    getHistory(sessionId: string): Observable<any[]> {
+        return this.http.get<any[]>(`${ this.apiUrl }/api/chat/${ sessionId }/history`);
     }
+
+    getSessionsHistory(userName: string): Observable<Record<string, string>> {
+        return this.http.get<Record<string, string>>(`${ this.apiUrl }/api/chat/${ userName }/sessions`);
+    }
+
 }

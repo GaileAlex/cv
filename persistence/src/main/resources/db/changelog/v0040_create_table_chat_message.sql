@@ -3,11 +3,13 @@
 
 CREATE TABLE public.chat_message
 (
-    id         bigint      NOT NULL GENERATED ALWAYS AS IDENTITY,
-    user_name varchar(50) NOT NULL,
-    role       varchar(20) NOT NULL,
-    content    text,
-    created_at timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id                  bigint      NOT NULL GENERATED ALWAYS AS IDENTITY,
+    user_name           varchar(50) NOT NULL,
+    session_id          varchar(50) NOT NULL,
+    session_description varchar(500),
+    role                varchar(20) NOT NULL,
+    content             text,
+    created_at          timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 
