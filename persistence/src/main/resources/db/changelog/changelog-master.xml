@@ -41,5 +41,6 @@
     <include file="v0037_add_column_last_successful_check_to_proxy_list.sql" relativeToChangelogFile="true"/>
     <include file="v0038_remove_column_response_from_proxy_list.sql" relativeToChangelogFile="true"/>
     <include file="v0039_create_table_english_sentence.sql" relativeToChangelogFile="true"/>
+    <include file="v0040_create_table_chat_message.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

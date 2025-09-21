@@ -3,9 +3,10 @@ import { ChatService } from "../../service/chat.service";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { marked } from "marked";
 import { StatisticsService } from "../../service/statistics.service";
+import { UserDataService } from "../../service/user-data.service";
 
 interface ChatEntry {
-    role: 'user' | 'bot';
+    role: 'user' | 'bot'; // здесь 'bot', а не 'assistant'
     text: string;
 }
 
@@ -15,6 +16,7 @@ interface ChatEntry {
     styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+    userName: string = '';
     promptText: string = '';
     chatHistory: ChatEntry[] = [];
     selectedLang: string = 'en-US';
@@ -25,160 +27,143 @@ export class ChatComponent implements OnInit {
     isRecognizing = false;
     restartTimer: any = null;
     languageOptions = [
-        { name: 'English (US)', code: 'en-US' },
-        { name: 'English (UK)', code: 'en-GB' },
-        { name: 'Русский', code: 'ru-RU' },
-        { name: 'Français', code: 'fr-FR' },
-        { name: 'Deutsch', code: 'de-DE' }
+        {name: 'English (US)', code: 'en-US'},
+        {name: 'English (UK)', code: 'en-GB'},
+        {name: 'Русский', code: 'ru-RU'},
+        {name: 'Français', code: 'fr-FR'},
+        {name: 'Deutsch', code: 'de-DE'}
     ];
+
     voiceOptions: { label: string, value: number }[] = [];
 
-
-    constructor(private chatService: ChatService, private sanitizer: DomSanitizer, private statisticsService: StatisticsService) {
+    constructor(
+        private chatService: ChatService,
+        private sanitizer: DomSanitizer,
+        private statisticsService: StatisticsService,
+        private userDataService: UserDataService
+    ) {
     }
 
     ngOnInit(): void {
-        this.updateVoices();
+        this.userName = this.userDataService.getUserName();
 
+        this.loadHistory();
+        this.initVoices();
+        this.initSpeechRecognition();
+    }
+
+    // загружаем историю чата с бэка
+    loadHistory(): void {
+        this.chatService.getHistory(this.userName).subscribe({
+            next: (history: any[]) => {
+                this.chatHistory = history.map(m => ({
+                    role: m.role === 'user' ? 'user' : 'bot',
+                    text: m.content
+                }));
+            },
+            error: err => console.error('Failed to load chat history', err)
+        });
+    }
+
+    initVoices(): void {
+        this.updateVoices();
         if ('speechSynthesis' in window) {
             window.speechSynthesis.onvoiceschanged = () => this.updateVoices();
         }
-
-        const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-        if (SR) {
-            this.recognition = new SR();
-            this.recognition.interimResults = false;
-            this.recognition.continuous = true;
-            this.recognition.maxAlternatives = 1;
-
-            this.recognition.onresult = (event: any) => {
-                let finalTranscript = '';
-                for (let i = event.resultIndex; i < event.results.length; ++i) {
-                    if (event.results[i].isFinal) {
-                        finalTranscript += event.results[i][0].transcript;
-                    }
-                }
-                if (finalTranscript) {
-                    this.promptText = finalTranscript;
-                    this.stopVoiceInput();
-                    this.sendPrompt();
-                }
-            };
-
-            this.recognition.onerror = (event: any) => {
-                console.error('Speech recognition error:', event.error);
-            };
-
-            this.recognition.onspeechstart = () => {
-                if (this.restartTimer) {
-                    clearTimeout(this.restartTimer);
-                    this.restartTimer = null;
-                }
-            };
-
-            this.recognition.onend = () => {
-                if (this.isRecognizing && !this.restartTimer) {
-                    this.restartTimer = setTimeout(() => {
-                        this.restartTimer = null;
-                        try {
-                            this.recognition.start();
-                        } catch {
-                        }
-                    }, 500);
-                }
-            };
-        }
     }
 
-    updateLangAndVoices(event: any) {
+    initSpeechRecognition(): void {
+        const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (!SR) return;
+
+        this.recognition = new SR();
+        this.recognition.interimResults = false;
+        this.recognition.continuous = true;
+        this.recognition.maxAlternatives = 1;
+
+        this.recognition.onresult = (event: any) => {
+            let finalTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                if (event.results[i].isFinal) finalTranscript += event.results[i][0].transcript;
+            }
+            if (finalTranscript) {
+                this.promptText = finalTranscript;
+                this.stopVoiceInput();
+                this.sendPrompt();
+            }
+        };
+
+        this.recognition.onerror = (event: any) => console.error('Speech recognition error', event.error);
+        this.recognition.onspeechstart = () => {
+            if (this.restartTimer) clearTimeout(this.restartTimer);
+        };
+        this.recognition.onend = () => {
+            if (this.isRecognizing && !this.restartTimer) {
+                this.restartTimer = setTimeout(() => {
+                    this.restartTimer = null;
+                    try {
+                        this.recognition.start();
+                    } catch {
+                    }
+                }, 500);
+            }
+        };
+    }
+
+    updateLangAndVoices(event: any): void {
         this.selectedLang = event.value.code;
         this.updateVoices();
     }
 
     updateVoices(): void {
         const allVoices = this.synth.getVoices();
-
         if (!allVoices.length) {
             setTimeout(() => this.updateVoices(), 100);
             return;
         }
-
         this.voices = allVoices.filter(v => v.lang === this.selectedLang);
-
-        // создаём массив для p-dropdown
         this.voiceOptions = this.voices.map((v, i) => ({
             label: v.name + (v.default ? ' (по умолчанию)' : ''),
             value: i
         }));
-
-        if (this.voices.length > 0) {
-            this.selectedVoiceIndex = this.voices.length - 1;
-        }
+        if (this.voices.length) this.selectedVoiceIndex = this.voices.length - 1;
     }
 
     sendPrompt(): void {
-        this.statisticsService.sentEvent("sendPrompt")
         if (!this.promptText.trim()) return;
-
-        const userMessage = this.promptText; // сохраняем чистый текст
+        const userMessage = this.promptText;
         this.promptText = '';
 
-        // добавляем сообщение пользователя в историю
+        // добавляем сообщение пользователя в UI
         this.appendToHistory('user', userMessage);
 
-        const body = {
-            model: 'openchat',
-            prompt: this.buildConversationPrompt(userMessage),
-            stream: false
-        };
-
-        this.chatService.generate(body).subscribe({
-            next: (data: any) => {
-                const reply = data.response.trim();
-                this.appendToHistory('bot', reply);
-
-                // читаем вслух **исходный текст**, без разметки
+        this.chatService.sendMessage(this.userName, userMessage).subscribe({
+            next: (reply: string) => {
+                this.appendToHistory('assistant', reply);
                 this.speakText(reply);
             },
-            error: (err) => {
+            error: err => {
                 console.error(err);
-                this.appendToHistory('bot', '[Ошибка сервера]');
+                this.appendToHistory('assistant', '[Ошибка сервера]');
             }
         });
     }
 
-
-    appendToHistory(role: 'user' | 'bot', text: string): void {
-        this.chatHistory.push({role, text});
+    appendToHistory(role: 'user' | 'assistant', text: string): void {
+        const chatRole: 'user' | 'bot' = role === 'assistant' ? 'bot' : 'user';
+        this.chatHistory.push({role: chatRole, text});
         setTimeout(() => {
-            const historyEl = document.getElementById('chatHistory');
-            if (historyEl) {
-                historyEl.scrollTop = historyEl.scrollHeight;
-            }
-        });
-    }
-
-    buildConversationPrompt(newPrompt: string): string {
-        const historyText = this.chatHistory
-            .map(entry => (entry.role === 'user' ? 'User: ' : 'Assistant: ') + entry.text)
-            .join('\n');
-        return historyText ? historyText + '\nUser: ' + newPrompt + '\nAssistant:'
-            : 'User: ' + newPrompt + '\nAssistant:';
+            const el = document.getElementById('chatHistory');
+            if (el) el.scrollTop = el.scrollHeight;
+        }, 0);
     }
 
     speakText(text: string): void {
         if (!this.voices.length) this.updateVoices();
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = this.selectedLang;
-        if (this.voices[this.selectedVoiceIndex]) {
-            utterance.voice = this.voices[this.selectedVoiceIndex];
-        }
-
-        // Обработка ошибок
-        utterance.onerror = (event) => {
-            console.error('SpeechSynthesisUtterance error:', event.error);
-        };
-
+        if (this.voices[this.selectedVoiceIndex]) utterance.voice = this.voices[this.selectedVoiceIndex];
+        utterance.onerror = (e) => console.error('SpeechSynthesisUtterance error', e);
         this.synth.speak(utterance);
     }
 
@@ -202,7 +187,6 @@ export class ChatComponent implements OnInit {
 
     stopSpeaking(): void {
         if (!this.synth) return;
-        // Прерываем текущие озвучки
         this.synth.cancel();
 
         // Немного ждем, чтобы движок очистил очередь
@@ -222,4 +206,5 @@ export class ChatComponent implements OnInit {
         const result = marked.parse(text) as string;
         return this.sanitizer.bypassSecurityTrustHtml(result);
     }
+
 }

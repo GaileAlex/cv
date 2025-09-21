@@ -3,31 +3,25 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from "../../environments/environment";
 
-interface GenerateRequest {
-    model: string;
-    prompt: string;
-    stream: boolean;
-}
-
-interface GenerateResponse {
-    response: string;
-}
-
 @Injectable({
     providedIn: 'root'
 })
 export class ChatService {
 
-    private readonly apiUrl: string;
+    private readonly apiUrl = environment.apiUrl;
 
     constructor(private http: HttpClient) {
-        this.apiUrl = environment.apiUrl;
     }
 
-    generate(request: GenerateRequest): Observable<GenerateResponse> {
-        console.log("request - " +request);
-        console.log(request);
-        return this.http.post<GenerateResponse>(this.apiUrl + '/api/chat/generate', request);
+    sendMessage(userName: string, message: string): Observable<string> {
+        return this.http.post(
+            `${ this.apiUrl }/api/chat/${ userName }`,
+            {message},
+            {responseType: 'text'}    // 👈 ключевой момент
+        );
     }
 
+    getHistory(userName: string): Observable<any[]> {
+        return this.http.get<any[]>(`${ this.apiUrl }/api/chat/${ userName }/history`);
+    }
 }
