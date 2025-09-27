@@ -28,19 +28,16 @@ export class ChatComponent implements OnInit {
     voices: SpeechSynthesisVoice[] = [];
     selectedVoiceIndex = 0;
     synth = window.speechSynthesis;
+
     recognition: any = null;
     isRecognizing = false;
-    restartTimer: any = null;
-
     collectedTranscript = '';
 
     languageOptions = [
-        {name: 'English (US)', code: 'en-US'},
-        {name: 'English (UK)', code: 'en-GB'},
         {name: 'Русский', code: 'ru-RU'},
-        {name: 'Français', code: 'fr-FR'},
-        {name: 'Deutsch', code: 'de-DE'}
+        {name: 'English (US)', code: 'en-US'}
     ];
+
     voiceOptions: { label: string, value: number }[] = [];
 
     constructor(
@@ -48,8 +45,7 @@ export class ChatComponent implements OnInit {
         private sanitizer: DomSanitizer,
         private statisticsService: StatisticsService,
         private userDataService: UserDataService
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this.userName = this.userDataService.getUserName();
@@ -97,40 +93,6 @@ export class ChatComponent implements OnInit {
         }
     }
 
-    /** --- изменённый блок распознавания --- */
-    initSpeechRecognition(): void {
-        const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-        if (!SR) return;
-        this.recognition = new SR();
-        this.recognition.interimResults = false; // только финальные результаты
-        this.recognition.continuous = true;
-        this.recognition.maxAlternatives = 1;
-
-        this.recognition.onresult = (event: any) => {
-            for (let i = event.resultIndex; i < event.results.length; i++) {
-                if (event.results[i].isFinal) {
-                    this.collectedTranscript += event.results[i][0].transcript + ' ';
-                }
-            }
-        };
-
-        this.recognition.onerror = (event: any) => console.error('Speech recognition error', event.error);
-
-        this.recognition.onspeechstart = () => {
-            if (this.restartTimer) clearTimeout(this.restartTimer);
-        };
-
-        this.recognition.onend = () => {
-            if (this.isRecognizing) {
-                try {
-                    this.recognition.start();
-                } catch (e) {
-                    console.error('Restart failed', e);
-                }
-            }
-        };
-    }
-
     updateLangAndVoices(event: any): void {
         this.selectedLang = event.value.code;
         this.updateVoices();
@@ -154,33 +116,9 @@ export class ChatComponent implements OnInit {
         if (!this.promptText.trim()) return;
         const userMessage = this.promptText;
         this.promptText = '';
-
         this.appendToHistory('user', userMessage);
 
         this.chatService.sendMessage(this.userName, this.selectedSessionId, userMessage)
-            .subscribe({
-                next: (reply: ChatMessage) => {
-                    this.appendToHistory('assistant', reply.message);
-                    this.speakText(reply.message);
-                    this.selectedSessionId = reply.sessionId;
-                },
-                error: err => {
-                    console.error(err);
-                    this.appendToHistory('assistant', '[Ошибка сервера]');
-                }
-            });
-    }
-
-    /** --- отправляем накопленный текст только при остановке --- */
-    private sendCollectedTranscript(): void {
-        const text = this.collectedTranscript.trim();
-        if (!text) return;
-        this.collectedTranscript = '';
-        this.promptText = '';
-
-        this.appendToHistory('user', text);
-
-        this.chatService.sendMessage(this.userName, this.selectedSessionId, text)
             .subscribe({
                 next: (reply: ChatMessage) => {
                     this.appendToHistory('assistant', reply.message);
@@ -221,45 +159,6 @@ export class ChatComponent implements OnInit {
             .trim();
     }
 
-    startVoice(): void {
-        if (!this.recognition) return alert('Распознавание речи не поддерживается.');
-        if (this.isRecognizing) return;
-
-        try {
-            this.recognition.abort();
-        } catch {
-        }
-
-        this.collectedTranscript = '';
-        this.recognition.lang = this.selectedLang;
-
-        try {
-            this.recognition.start();
-            this.isRecognizing = true;
-        } catch (e) {
-            console.error('Failed to start recognition:', e);
-            setTimeout(() => {
-                try {
-                    this.recognition.start();
-                    this.isRecognizing = true;
-                } catch (err) {
-                    console.error(err);
-                }
-            }, 200);
-        }
-    }
-
-    stopVoiceInput(): void {
-        if (!this.recognition || !this.isRecognizing) return;
-        this.isRecognizing = false;
-        if (this.restartTimer) {
-            clearTimeout(this.restartTimer);
-            this.restartTimer = null;
-        }
-        this.recognition.stop();
-        this.sendCollectedTranscript();
-    }
-
     stopSpeaking(): void {
         if (!this.synth) return;
         this.synth.cancel();
@@ -275,4 +174,83 @@ export class ChatComponent implements OnInit {
         return this.sanitizer.bypassSecurityTrustHtml(result);
     }
 
+    /** --- Исправленный SpeechRecognition --- */
+    initSpeechRecognition(): void {
+        const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (!SR) return;
+
+        this.recognition = new SR();
+        this.recognition.continuous = true;
+        this.recognition.interimResults = true; // теперь собираем промежуточные результаты
+        this.recognition.maxAlternatives = 1;
+        this.recognition.lang = this.selectedLang;
+
+        this.recognition.onresult = (event: any) => {
+            let interimTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                if (event.results[i].isFinal) {
+                    this.collectedTranscript += event.results[i][0].transcript + ' ';
+                } else {
+                    interimTranscript += event.results[i][0].transcript;
+                }
+            }
+            // показываем пользователю текущий текст
+            this.promptText = this.collectedTranscript + interimTranscript;
+        };
+
+        this.recognition.onerror = (event: any) => {
+            console.error('Speech recognition error', event.error);
+        };
+
+        this.recognition.onend = () => {
+            if (this.isRecognizing) {
+                // автоматический рестарт, если нужно
+                try { this.recognition.start(); } catch {}
+            }
+        };
+    }
+
+    startVoice(): void {
+        if (!this.recognition || this.isRecognizing) return;
+        this.collectedTranscript = '';
+        try {
+            this.recognition.start();
+            this.isRecognizing = true;
+        } catch (e) {
+            console.error('Failed to start recognition:', e);
+        }
+    }
+
+    stopVoiceInput(): void {
+        if (!this.recognition || !this.isRecognizing) return;
+        this.isRecognizing = false;
+        this.recognition.stop();
+        // небольшая задержка, чтобы onresult успел собрать финальный текст
+        setTimeout(() => this.sendCollectedTranscript(), 150);
+    }
+
+    private sendCollectedTranscript(): void {
+        const text = this.collectedTranscript.trim();
+        console.log('Collected text:', text);
+        if (!text) return;
+
+        // Очищаем для следующей записи
+        this.collectedTranscript = '';
+        this.promptText = ''; // это поле просто для отображения, не для API
+
+        // Отправляем на API
+        this.appendToHistory('user', text);
+        this.chatService.sendMessage(this.userName, this.selectedSessionId, text)
+            .subscribe({
+                next: (reply: ChatMessage) => {
+                    this.appendToHistory('assistant', reply.message);
+                    this.speakText(reply.message);
+                    this.selectedSessionId = reply.sessionId;
+                },
+                error: err => {
+                    console.error(err);
+                    this.appendToHistory('assistant', '[Ошибка сервера]');
+                }
+            });
+    }
 }
