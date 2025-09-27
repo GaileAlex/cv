@@ -50,7 +50,8 @@ export class ChatComponent implements OnInit {
         private sanitizer: DomSanitizer,
         private statisticsService: StatisticsService,
         private userDataService: UserDataService
-    ) {}
+    ) {
+    }
 
     ngOnInit(): void {
         this.userName = this.userDataService.getUserName();
@@ -62,16 +63,16 @@ export class ChatComponent implements OnInit {
     loadSessions(): void {
         this.chatService.getSessionsHistory(this.userName).subscribe({
             next: sessionsMap => {
-                this.sessions = Object.entries(sessionsMap).map(([id, description]) => ({ id, description }));
+                this.sessions = Object.entries(sessionsMap).map(([id, description]) => ({id, description}));
             },
             error: err => console.error('Failed to load sessions', err)
         });
     }
 
-    onSelectSession(session: {id: string, description: string}): void {
+    onSelectSession(session: { id: string, description: string }): void {
         if (session.id === 'null') {
             this.selectedSessionId = null;
-            this.chatHistory = [{ role: 'bot', text: session.description }];
+            this.chatHistory = [{role: 'bot', text: session.description}];
         } else {
             this.selectedSessionId = session.id;
             this.loadHistory();
@@ -122,13 +123,12 @@ export class ChatComponent implements OnInit {
         };
 
         this.recognition.onend = () => {
-            if (this.isRecognizing && !this.restartTimer) {
-                this.restartTimer = setTimeout(() => {
-                    this.restartTimer = null;
-                    try {
-                        this.recognition.start();
-                    } catch {}
-                }, 500);
+            if (this.isRecognizing) {
+                try {
+                    this.recognition.start();
+                } catch (e) {
+                    console.error('Restart failed', e);
+                }
             }
         };
     }
@@ -211,7 +211,7 @@ export class ChatComponent implements OnInit {
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = this.selectedLang;
         if (this.voices[this.selectedVoiceIndex]) utterance.voice = this.voices[this.selectedVoiceIndex];
-        utterance.onerror = (e) => console.error('SpeechSynthesisUtterance error', e);
+        utterance.onerror = (e) => console.log('SpeechSynthesisUtterance error', e);
         this.synth.speak(utterance);
     }
 
@@ -226,10 +226,30 @@ export class ChatComponent implements OnInit {
     startVoice(): void {
         if (!this.recognition) return alert('Распознавание речи не поддерживается.');
         if (this.isRecognizing) return;
-        this.collectedTranscript = '';  // очищаем перед новым набором
+
+        try {
+            this.recognition.abort(); // прерываем любые старые попытки
+        } catch {
+        }
+
+        this.collectedTranscript = '';
         this.recognition.lang = this.selectedLang;
-        this.recognition.start();
-        this.isRecognizing = true;
+
+        try {
+            this.recognition.start();
+            this.isRecognizing = true;
+        } catch (e) {
+            console.error('Failed to start recognition:', e);
+            // иногда помогает перезапустить через setTimeout
+            setTimeout(() => {
+                try {
+                    this.recognition.start();
+                    this.isRecognizing = true;
+                } catch (err) {
+                    console.error(err);
+                }
+            }, 200);
+        }
     }
 
     stopVoiceInput(): void {
