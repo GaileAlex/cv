@@ -194,8 +194,6 @@ export class ChatComponent implements OnInit {
                     interimTranscript += event.results[i][0].transcript;
                 }
             }
-            // показываем пользователю текущий текст
-            this.promptText = this.collectedTranscript + interimTranscript;
         };
 
         this.recognition.onerror = (event: any) => {
