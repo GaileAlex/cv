@@ -1,6 +1,7 @@
 package ee.gaile.service.chat;
 
 import ee.gaile.entity.chat.ChatMessageEntity;
+import ee.gaile.models.chat.ChatMessage;
 import ee.gaile.repository.chat.ChatMessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,9 +33,9 @@ public class ChatService {
     private static final String CHAT_DESCRIPTION = "Create a short description of this chat in no more than 10 words using this phrase - ";
 
     @Transactional
-    public String chat(String username,
-                       String sessionId,
-                       Map<String, String> message) {
+    public ChatMessage chat(String username,
+                            String sessionId,
+                            Map<String, String> message) {
 
         String userMessage = message.get("message");
         if (userMessage == null) {
@@ -79,7 +80,7 @@ public class ChatService {
         assistantMsg.setCreatedAt(LocalDateTime.now());
         repo.save(assistantMsg);
 
-        return answer;
+        return new ChatMessage(sessionId, userMessage, answer);
     }
 
     @Transactional(readOnly = true)

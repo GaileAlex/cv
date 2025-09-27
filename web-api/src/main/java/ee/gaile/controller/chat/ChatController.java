@@ -1,6 +1,7 @@
 package ee.gaile.controller.chat;
 
 import ee.gaile.entity.chat.ChatMessageEntity;
+import ee.gaile.models.chat.ChatMessage;
 import ee.gaile.service.chat.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +26,12 @@ public class ChatController {
     private final ChatService chatService;
 
     @PostMapping("/{username}/{sessionId}")
-    public ResponseEntity<String> sendMessage(
+    public ResponseEntity<ChatMessage> sendMessage(
             @PathVariable String username,
             @PathVariable String sessionId,
             @RequestBody Map<String, String> message)  {
 
-        String answer = chatService.chat(username, sessionId, message);
+        ChatMessage answer = chatService.chat(username, sessionId, message);
         return ResponseEntity.ok(answer);
     }
 

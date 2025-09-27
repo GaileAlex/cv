@@ -4,6 +4,7 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { marked } from "marked";
 import { StatisticsService } from "../../service/statistics.service";
 import { UserDataService } from "../../service/user-data.service";
+import { ChatMessage } from '../../models/chatMessage';
 
 interface ChatEntry {
     role: 'user' | 'bot';
@@ -160,9 +161,10 @@ export class ChatComponent implements OnInit {
 
         this.chatService.sendMessage(this.userName, this.selectedSessionId, userMessage)
             .subscribe({
-                next: (reply: string) => {
-                    this.appendToHistory('assistant', reply);
-                    this.speakText(reply);
+                next: (reply: ChatMessage) => {
+                    this.appendToHistory('assistant', reply.message);
+                    this.speakText(reply.message);
+                    this.selectedSessionId = reply.sessionId;
                 },
                 error: err => {
                     console.error(err);
@@ -182,9 +184,10 @@ export class ChatComponent implements OnInit {
 
         this.chatService.sendMessage(this.userName, this.selectedSessionId, text)
             .subscribe({
-                next: (reply: string) => {
-                    this.appendToHistory('assistant', reply);
-                    this.speakText(reply);
+                next: (reply: ChatMessage) => {
+                    this.appendToHistory('assistant', reply.message);
+                    this.speakText(reply.message);
+                    this.selectedSessionId = reply.sessionId;
                 },
                 error: err => {
                     console.error(err);
@@ -213,7 +216,6 @@ export class ChatComponent implements OnInit {
     }
 
     private stripMarkdown(md: string): string {
-        // самый простой способ – удалить все HTML-теги и markdown-звёздочки
         return md
             .replace(/[*_`]/g, '')        // убираем * _ `
             .replace(/<[^>]+>/g, '')      // убираем любые HTML-теги

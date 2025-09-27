@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from "../../environments/environment";
+import { ChatMessage } from "../models/chatMessage";
 
 @Injectable({
     providedIn: 'root'
@@ -13,11 +14,9 @@ export class ChatService {
     constructor(private http: HttpClient) {
     }
 
-    sendMessage(userName: string, sessionId: string, message: string): Observable<string> {
-        return this.http.post(
-            `${ this.apiUrl }/api/chat/${ userName }/${ sessionId }`,
-            {message},
-            {responseType: 'text'}
+    sendMessage(userName: string, sessionId: string, message: string): Observable<ChatMessage> {
+        return this.http.post<ChatMessage>(
+            `${ this.apiUrl }/api/chat/${ userName }/${ sessionId }`, {message}
         );
     }
 
