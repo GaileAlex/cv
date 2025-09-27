@@ -10,7 +10,6 @@ interface ChatEntry {
     role: 'user' | 'bot';
     text: string;
 }
-
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
@@ -33,7 +32,6 @@ export class ChatComponent implements OnInit {
     isRecognizing = false;
     restartTimer: any = null;
 
-    /** ← новая переменная для накопления итогового текста */
     collectedTranscript = '';
 
     languageOptions = [
@@ -217,9 +215,9 @@ export class ChatComponent implements OnInit {
 
     private stripMarkdown(md: string): string {
         return md
-            .replace(/[*_`]/g, '')        // убираем * _ `
-            .replace(/<[^>]+>/g, '')      // убираем любые HTML-теги
-            .replace(/\[(.*?)\]\(.*?\)/g, '$1') // [text](link) -> text
+            .replace(/[*_`]/g, '')
+            .replace(/<[^>]+>/g, '')
+            .replace(/\[(.*?)\]\(.*?\)/g, '$1')
             .trim();
     }
 
@@ -228,7 +226,7 @@ export class ChatComponent implements OnInit {
         if (this.isRecognizing) return;
 
         try {
-            this.recognition.abort(); // прерываем любые старые попытки
+            this.recognition.abort();
         } catch {
         }
 
@@ -240,7 +238,6 @@ export class ChatComponent implements OnInit {
             this.isRecognizing = true;
         } catch (e) {
             console.error('Failed to start recognition:', e);
-            // иногда помогает перезапустить через setTimeout
             setTimeout(() => {
                 try {
                     this.recognition.start();
@@ -260,7 +257,6 @@ export class ChatComponent implements OnInit {
             this.restartTimer = null;
         }
         this.recognition.stop();
-        // ← теперь, когда пользователь остановил запись — отправляем накопленный текст
         this.sendCollectedTranscript();
     }
 
@@ -278,4 +274,5 @@ export class ChatComponent implements OnInit {
         const result = marked.parse(text) as string;
         return this.sanitizer.bypassSecurityTrustHtml(result);
     }
+
 }
