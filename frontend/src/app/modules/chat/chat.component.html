@@ -49,8 +49,21 @@
 
     <div class="p_50">
         <button pButton style="margin-right: 5px" label="📨 Отправить" (click)="sendPrompt()"></button>
-        <button pButton style="margin-right: 5px" label="🎤 Говорить" (click)="startVoice()"></button>
-        <button pButton style="margin-right: 5px" label="⏹️ Остановить запись" (click)="stopVoiceInput()"></button>
+        <button *ngIf="!isRecognizing"
+                pButton
+                style="margin-right: 5px"
+                class="p-button-success"
+                label="🎤 Говорить"
+                (click)="startVoice()">
+        </button>
+
+        <button *ngIf="isRecognizing"
+                pButton
+                style="margin-right: 5px"
+                class="p-button-danger"
+                label="⏹️ Остановить запись"
+                (click)="stopVoiceInput()">
+        </button>
         <button pButton style="margin-right: 5px" label="🔇 Остановить озвучку" (click)="stopSpeaking()"></button>
         <button pButton label="🗑️ Очистить чат" (click)="clearChat()"></button>
     </div>

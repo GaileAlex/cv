@@ -32,6 +32,9 @@ export class ChatComponent implements OnInit {
     isRecognizing = false;
     restartTimer: any = null;
 
+    /** ← новая переменная для накопления итогового текста */
+    collectedTranscript = '';
+
     languageOptions = [
         {name: 'English (US)', code: 'en-US'},
         {name: 'English (UK)', code: 'en-GB'},
@@ -46,8 +49,7 @@ export class ChatComponent implements OnInit {
         private sanitizer: DomSanitizer,
         private statisticsService: StatisticsService,
         private userDataService: UserDataService
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this.userName = this.userDataService.getUserName();
@@ -67,21 +69,16 @@ export class ChatComponent implements OnInit {
 
     onSelectSession(session: {id: string, description: string}): void {
         if (session.id === 'null') {
-            this.selectedSessionId = null; // спец. обработка
-            this.chatHistory = [{
-                role: 'bot',
-                text: session.description
-            }];
+            this.selectedSessionId = null;
+            this.chatHistory = [{ role: 'bot', text: session.description }];
         } else {
             this.selectedSessionId = session.id;
             this.loadHistory();
         }
     }
 
-    /** Загружаем историю сообщений выбранной сессии */
     loadHistory(): void {
         if (!this.selectedSessionId) return;
-        console.log("this.selectedSessionId", this.selectedSessionId);
         this.chatService.getHistory(this.selectedSessionId).subscribe({
             next: history => {
                 this.chatHistory = history.map(m => ({
@@ -100,38 +97,36 @@ export class ChatComponent implements OnInit {
         }
     }
 
+    /** --- изменённый блок распознавания --- */
     initSpeechRecognition(): void {
         const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         if (!SR) return;
         this.recognition = new SR();
-        this.recognition.interimResults = false;
+        this.recognition.interimResults = false; // только финальные результаты
         this.recognition.continuous = true;
         this.recognition.maxAlternatives = 1;
 
         this.recognition.onresult = (event: any) => {
-            let finalTranscript = '';
             for (let i = event.resultIndex; i < event.results.length; i++) {
-                if (event.results[i].isFinal) finalTranscript += event.results[i][0].transcript;
-            }
-            if (finalTranscript) {
-                this.promptText = finalTranscript;
-                this.stopVoiceInput();
-                this.sendPrompt();
+                if (event.results[i].isFinal) {
+                    this.collectedTranscript += event.results[i][0].transcript + ' ';
+                }
             }
         };
 
         this.recognition.onerror = (event: any) => console.error('Speech recognition error', event.error);
+
         this.recognition.onspeechstart = () => {
             if (this.restartTimer) clearTimeout(this.restartTimer);
         };
+
         this.recognition.onend = () => {
             if (this.isRecognizing && !this.restartTimer) {
                 this.restartTimer = setTimeout(() => {
                     this.restartTimer = null;
                     try {
                         this.recognition.start();
-                    } catch {
-                    }
+                    } catch {}
                 }, 500);
             }
         };
@@ -176,6 +171,28 @@ export class ChatComponent implements OnInit {
             });
     }
 
+    /** --- отправляем накопленный текст только при остановке --- */
+    private sendCollectedTranscript(): void {
+        const text = this.collectedTranscript.trim();
+        if (!text) return;
+        this.collectedTranscript = '';
+        this.promptText = '';
+
+        this.appendToHistory('user', text);
+
+        this.chatService.sendMessage(this.userName, this.selectedSessionId, text)
+            .subscribe({
+                next: (reply: string) => {
+                    this.appendToHistory('assistant', reply);
+                    this.speakText(reply);
+                },
+                error: err => {
+                    console.error(err);
+                    this.appendToHistory('assistant', '[Ошибка сервера]');
+                }
+            });
+    }
+
     appendToHistory(role: 'user' | 'assistant', text: string): void {
         const chatRole: 'user' | 'bot' = role === 'assistant' ? 'bot' : 'user';
         this.chatHistory.push({role: chatRole, text});
@@ -186,6 +203,7 @@ export class ChatComponent implements OnInit {
     }
 
     speakText(text: string): void {
+        text = this.stripMarkdown(text);
         if (!this.voices.length) this.updateVoices();
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = this.selectedLang;
@@ -194,9 +212,19 @@ export class ChatComponent implements OnInit {
         this.synth.speak(utterance);
     }
 
+    private stripMarkdown(md: string): string {
+        // самый простой способ – удалить все HTML-теги и markdown-звёздочки
+        return md
+            .replace(/[*_`]/g, '')        // убираем * _ `
+            .replace(/<[^>]+>/g, '')      // убираем любые HTML-теги
+            .replace(/\[(.*?)\]\(.*?\)/g, '$1') // [text](link) -> text
+            .trim();
+    }
+
     startVoice(): void {
         if (!this.recognition) return alert('Распознавание речи не поддерживается.');
         if (this.isRecognizing) return;
+        this.collectedTranscript = '';  // очищаем перед новым набором
         this.recognition.lang = this.selectedLang;
         this.recognition.start();
         this.isRecognizing = true;
@@ -210,17 +238,13 @@ export class ChatComponent implements OnInit {
             this.restartTimer = null;
         }
         this.recognition.stop();
+        // ← теперь, когда пользователь остановил запись — отправляем накопленный текст
+        this.sendCollectedTranscript();
     }
 
     stopSpeaking(): void {
         if (!this.synth) return;
         this.synth.cancel();
-
-        setTimeout(() => {
-            if (!this.synth.speaking && !this.synth.pending) {
-                console.log('Synth ready for next utterance');
-            }
-        }, 50);
     }
 
     clearChat(): void {
@@ -232,5 +256,4 @@ export class ChatComponent implements OnInit {
         const result = marked.parse(text) as string;
         return this.sanitizer.bypassSecurityTrustHtml(result);
     }
-
 }
